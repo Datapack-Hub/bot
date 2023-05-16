@@ -26,7 +26,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="This question would be more fitting inside of a Help Channel!",
-            description="Hey there, it seems like someone here found your question to be more fitting in one of our help channels! Help channels are the perfect place for asking questions which can then be answered by anyone and our experienced helpers!\nFor Resource Pack-related help, visit <#1051227454980755546>. \nIf you're facing difficulties with your datapack, go to <#1051225367807000706>.\nCheck out <#935570290317086841> for tips on asking questions efficiently."
+            description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#1051227454980755546> or <#1051225367807000706> if you require assistance.\nCheck out <#935570290317086841>  for tips on asking questions efficiently."
                               )
         
         embed.set_author(
@@ -37,7 +37,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
         )
 
         embed.set_footer(
-            text="If you feel this function was used unfitting/inappropriate on purpose, please contact a staff member."
+            text="If you feel this function was misused, please contact staff."
         )
         await inter.target.reply(embed=embed)
 
