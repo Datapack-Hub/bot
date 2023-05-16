@@ -24,7 +24,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
         embed = disnake.Embed(
             color = disnake.Color.orange(), 
             title="This question would be more fitting inside of a Help Channel!",
-            description="Help channels are our way of handeling datapack development related questions like yours, which is why you are recieving this message! Once you send a message/create a post there, every person in this server will be able to help you, including our experienced Helpers which you can ping (after some time of course, don't be impatient) if nobody else seems to know how to help you.\nIf you need help regarding Resource Packs, head to <#1051227454980755546> and if you are experiencing struggles developing your datapack <#1051225367807000706>! If you haven't already check out <#935570290317086841> which has some tips for asking your questions in the most efficent way!"
+            description="Hey there, it seems like someone here found your question to be more fitting in one of our help channels! Help channels are the perfect place for asking questions which can then be answered by anyone and our experienced helpers!\nFor Resource Pack-related help, visit <#1051227454980755546>. \nIf you're facing difficulties with your datapack, go to <#1051225367807000706>.\nCheck out <#935570290317086841> for tips on asking questions efficiently."
                               )
         
         embed.set_author(
