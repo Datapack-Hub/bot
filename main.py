@@ -1,4 +1,6 @@
 import disnake
+import requests
+from bs4 import BeautifulSoup
 from disnake.ext import commands
 from bot_token import token
 
@@ -9,9 +11,24 @@ bot = commands.Bot(
 )
 
 logs_channel = 1108080080711852042
+description = ""
+
+def get_command_data(command):
+    request = requests.get('https://minecraft.fandom.com/wiki/Commands/' + command)
+    request = BeautifulSoup(request.content, 'html.parser')
+    global description_v2
+    description_v2 = "This command does not exist! Make sure to check spelling before trying again."
+
+    if not "There is currently no text in this page. You can" in str(request.text):
+        h2s = request.find_all('h2')
+        for h2 in h2s:
+            if "Syntax" in h2.text:
+                dl = h2.find_next("dl")
+                description_v2 = str(dl).replace("<dl>","").replace("<dd>","").replace("</dl>","").replace("</dd>","").replace("<code>","`").replace("</code>","`").replace("&lt;","<").replace("&gt;",">")
+                print(description_v2)
+
 
 # MESSAGE COMMANDS
-
 
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
@@ -46,11 +63,14 @@ async def claim(inter: disnake.MessageCommandInteraction):
             color=disnake.Colour.orange(),
             title=("**Redirect to Help Channel**"),
             description=(
-                "<@"
-                + str(inter.user.id)
-                + "> redirected a message by <@"
-                + str(inter.target.author.id)
-                + ">! \nMessage Link: <#"
+                str(inter.user.name)
+                + "#"
+                + str(inter.user.discriminator)
+                + " redirected a message by "
+                + str(inter.user.name)
+                + "#"
+                + str(inter.user.discriminator)
+                + "! \nMessage Link: <#"
                 + str(inter.channel.id)
                 + ">"
             ),
@@ -69,8 +89,9 @@ async def claim(inter: disnake.MessageCommandInteraction):
             color=disnake.Colour.orange(),
             title=("**Redirect to Help Channel**"),
             description=(
-                "<@"
-                + str(inter.user.id)
+                str(inter.user.name)
+                + "#"
+                + str(inter.user.discriminator)
                 + "> tried redirecting a message by <@"
                 + str(inter.target.author.id)
                 + ">! \nMessage Link: <#"
@@ -80,6 +101,40 @@ async def claim(inter: disnake.MessageCommandInteraction):
         )
         channel = bot.get_channel(logs_channel)
         await channel.send(embed=embed)
+
+# SLASH COMMANDS
+
+#/syntax
+
+@bot.slash_command(title="syntax",description="Shows the correct syntax of any minecraft command")
+async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
+    
+    get_command_data(command)
+
+    embed = disnake.Embed(
+        title = command.title() + " Syntax",
+        description=description_v2,
+        color=disnake.Colour.orange(),
+    )
+
+    await inter.response.send_message(embed=embed)
+
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/syntax` Command**"),
+        description=(
+            str(inter.user.name)
+            + "#"
+            + str(inter.user.discriminator)
+            + " looked up the following command: `"
+            + str(command)
+            + "`"
+        ),
+    )
+    channel = bot.get_channel(logs_channel)
+    await channel.send(embed=embed)
+
 
 
 # ON STARTUP
