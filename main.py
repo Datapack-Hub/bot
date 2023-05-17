@@ -26,9 +26,9 @@ async def claim(inter: disnake.MessageCommandInteraction):
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="This question would be more fitting inside of a Help Channel!",
-            description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#1051227454980755546> or <#1051225367807000706> if you require assistance.\nCheck out <#935570290317086841>  for tips on asking questions efficiently."
-                              )
-        
+            description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#1051227454980755546> or <#1051225367807000706> if you require assistance.\nCheck out <#935570290317086841>  for tips on asking questions efficiently.",
+        )
+
         embed.set_author(
             name=(
                 "Requested by " + inter.author.name + "#" + inter.author.discriminator
@@ -85,7 +85,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
 # ON STARTUP
 @bot.event
 async def on_ready():
-    embed = disnake.Embed(color=disnake.Colour.green(), title=("**Bot started**"))
+    embed = disnake.Embed(color=disnake.Colour.green(), title="**Bot started**")
     print(f"Logged in as {bot.user}")
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
