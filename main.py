@@ -24,11 +24,12 @@ async def claim(inter: disnake.MessageCommandInteraction):
             embed = disnake.Embed(
                 color=disnake.Color.orange(),
                 title="This question would be more fitting inside of a Help Channel!",
-                description="""It seems like someone here found your question to be more fitting in our 
-    help channels! \nHelp channels are the perfect place to ask questions and to be 
-    answered by anyone including our experienced helpers!\nVisit <#1051227454980755546> 
-    or <#1051225367807000706> if you require assistance.\nCheck out 
-    <#935570290317086841> for tips on asking questions efficiently.""",
+                description="""It seems like someone here found your question to be 
+                more fitting in our help channels! \nHelp channels are the perfect 
+                place to ask questions and to be answered by anyone including our 
+                experienced helpers!\nVisit <#1051227454980755546> or 
+                <#1051225367807000706> if you require assistance.\nCheck out 
+                <#935570290317086841> for tips on asking questions efficiently.""",
             )
 
             embed.set_author(
@@ -72,36 +73,39 @@ async def claim(inter: disnake.MessageCommandInteraction):
                 ephemeral=True,
             )
 
-			# Logging
+            # Logging
             embed = disnake.Embed(
-				color = disnake.Colour.orange(),
-				title = ("**Redirect to Help Channel**"),
-				description=(
-					str(inter.user.name)
-					+ "#"
-					+ str(inter.user.discriminator)
-					+ "> tried redirecting a message by <@"
-					+ str(inter.target.author.id)
-					+ "> \nMessage Link: <#"
-					+ str(inter.channel.id)
-					+ ">"
-				),
-			)
+                color=disnake.Colour.orange(),
+                title=("**Redirect to Help Channel**"),
+                description=(
+                    str(inter.user.name)
+                    + "#"
+                    + str(inter.user.discriminator)
+                    + "> tried redirecting a message by <@"
+                    + str(inter.target.author.id)
+                    + "> \nMessage Link: <#"
+                    + str(inter.channel.id)
+                    + ">"
+                ),
+            )
             channel = bot.get_channel(logs_channel)
             await channel.send(embed=embed)
     else:
-        await inter.response.send_message("You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!", ephemeral=True)
-		# Logging
+        await inter.response.send_message(
+            "You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!",
+            ephemeral=True,
+        )
+        # Logging
         embed = disnake.Embed(
-			color = disnake.Colour.orange(),
-			title = ("**Redirect to Help Channel**"),
-			description=(
-				str(inter.user.name)
-				+ "#"
-				+ str(inter.user.discriminator)
-				+ " tried using this in a different server lol"
-			)
-		)
+            color=disnake.Colour.orange(),
+            title=("**Redirect to Help Channel**"),
+            description=(
+                str(inter.user.name)
+                + "#"
+                + str(inter.user.discriminator)
+                + " tried using this in a different server lol"
+            ),
+        )
         channel = bot.get_channel(logs_channel)
         await channel.send(embed=embed)
 
