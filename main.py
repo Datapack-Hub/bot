@@ -21,7 +21,7 @@ description = ""
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
 	redi_ban_role = bot.get_guild(935560260725379143).get_role(1108093399053111387)
-	if inter.guild == 935560260725379143:
+	if inter.guild.id == 935560260725379143:
 		if redi_ban_role not in inter.author.roles:
 			embed = disnake.Embed(
 				color = disnake.Color.orange(),
