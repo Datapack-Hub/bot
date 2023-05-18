@@ -7,9 +7,7 @@ from markdownify import markdownify as md
 
 intents = disnake.Intents.all()
 
-bot = commands.Bot(
-    command_prefix="?", intents=intents, test_guilds=[935560260725379143]
-)
+bot = commands.Bot(command_prefix="?", intents=intents)
 
 logs_channel = 1108080080711852042
 description = ""
@@ -21,63 +19,81 @@ description = ""
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
     redi_ban_role = bot.get_guild(935560260725379143).get_role(1108093399053111387)
-    if redi_ban_role not in inter.author.roles:
-        await inter.response.send_message(
-            "Notified <@"
-            + str(inter.target.author.id)
-            + ">! Abusing this command will result in punishment.",
-            ephemeral=True,
-        )
-        embed = disnake.Embed(
-            color=disnake.Color.orange(),
-            title="This question would be more fitting inside of a Help Channel!",
-            description="""It seems like someone here found your question to be more 
-            fitting in our help channels! \nHelp channels are the perfect place to ask 
-            questions and to be answered by anyone including our experienced helpers!\n
-            Visit <#1051227454980755546> or <#1051225367807000706> if you require 
-            assistance. \nCheck out <#935570290317086841> for tips on asking questions 
-            efficiently.""",
-        )
+    if inter.guild.id == 935560260725379143:
+        if redi_ban_role not in inter.author.roles:
+            embed = disnake.Embed(
+                color=disnake.Color.orange(),
+                title="This question would be more fitting inside of a Help Channel!",
+                description="""It seems like someone here found your question to be more fitting in our 
+    help channels! \nHelp channels are the perfect place to ask questions and to be 
+    answered by anyone including our experienced helpers!\nVisit <#1051227454980755546> 
+    or <#1051225367807000706> if you require assistance.\nCheck out 
+    <#935570290317086841> for tips on asking questions efficiently.""",
+            )
 
-        embed.set_author(
-            name=(
-                "Requested by " + inter.author.name + "#" + inter.author.discriminator
-            ),
-            icon_url=inter.author.display_avatar,
-        )
+            embed.set_author(
+                name=(
+                    "Requested by "
+                    + inter.author.name
+                    + "#"
+                    + inter.author.discriminator
+                ),
+                icon_url=inter.author.display_avatar,
+            )
 
-        embed.set_footer(
-            text="If you feel this function was misused, please contact staff."
-        )
-        await inter.target.reply(embed=embed)
+            embed.set_footer(
+                text="If you feel this function was misused, please contact staff."
+            )
+            await inter.target.reply(embed=embed)
 
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**Redirect to Help Channel**"),
-            description=(
-                str(inter.user.name)
-                + "#"
-                + str(inter.user.discriminator)
-                + " redirected a message by "
-                + str(inter.user.name)
-                + "#"
-                + str(inter.user.discriminator)
-                + "! \nMessage Link: <#"
-                + str(inter.channel.id)
-                + ">"
-            ),
-        )
-        channel = bot.get_channel(logs_channel)
-        await channel.send(embed=embed)
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**Redirect to Help Channel**"),
+                description=(
+                    str(inter.user.name)
+                    + "#"
+                    + str(inter.user.discriminator)
+                    + " redirected a message by "
+                    + str(inter.user.name)
+                    + "#"
+                    + str(inter.user.discriminator)
+                    + "! \nMessage Link: <#"
+                    + str(inter.channel.id)
+                    + ">"
+                ),
+            )
+            channel = bot.get_channel(logs_channel)
+            await channel.send(embed=embed)
 
+        else:
+            await inter.response.send_message(
+                "You are blacklisted from doing this. If you believe this is a mistake please contact a staff member.",
+                ephemeral=True,
+            )
+
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**Redirect to Help Channel**"),
+                description=(
+                    str(inter.user.name)
+                    + "#"
+                    + str(inter.user.discriminator)
+                    + "> tried redirecting a message by <@"
+                    + str(inter.target.author.id)
+                    + ">! \nMessage Link: <#"
+                    + str(inter.channel.id)
+                    + ">"
+                ),
+            )
+            channel = bot.get_channel(logs_channel)
+            await channel.send(embed=embed)
     else:
         await inter.response.send_message(
-            """You are blacklisted from doing this. If you believe this is a mistake 
-            please contact a staff member.""",
+            "You can only use this in the [Datapack Hub discord server](https://dsc.gg/datapack)!",
             ephemeral=True,
         )
-
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
@@ -86,11 +102,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
                 str(inter.user.name)
                 + "#"
                 + str(inter.user.discriminator)
-                + "> tried redirecting a message by <@"
-                + str(inter.target.author.id)
-                + ">! \nMessage Link: <#"
-                + str(inter.channel.id)
-                + ">"
+                + " tried using this in a different server lol"
             ),
         )
         channel = bot.get_channel(logs_channel)
