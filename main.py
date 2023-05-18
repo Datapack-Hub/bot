@@ -144,10 +144,10 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
 
 #/folderstructure
 @bot.slash_command()
-async def folderstructure(inter,description="Shows the folderstructure for resourcepacks"):
+async def folderstructure(inter):
 	pass
 
-@folderstructure.sub_command()
+@folderstructure.sub_command(description="Shows the folderstructure for resourcepacks")
 async def resourcepack(inter: disnake.ApplicationCommandInteraction):
 	embed = disnake.Embed(
 		title = "Resourcepack Folderstructure",
@@ -170,7 +170,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
 	await channel.send(embed=embed)
 
  
-@folderstructure.sub_command()
+@folderstructure.sub_command(description="Shows the folderstructure for datapacks")
 async def datapack(inter: disnake.ApplicationCommandInteraction):
 	embed = disnake.Embed(
 		title = "Datapack Folderstructure",
