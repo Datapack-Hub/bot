@@ -177,30 +177,30 @@ async def folderstructure(inter):
 async def resourcepack(inter: disnake.ApplicationCommandInteraction):
     embed = disnake.Embed(
         title="Resourcepack Folderstructure",
-        description="""```\n
-        .\n
-        ├── pack.mcmeta\n
-        ├── pack.png\n
-        └── assets\n    
-            ├── icons\n    
-            ├── minecraft\n    
-            │   ├── sounds.json\n    
-            │   ├── blockstates\n    
-            │   ├── font\n    
-            │   ├── gpu_warnlist.json\n    
-            │   ├── icons\n    
-            │   ├── lang\n    
-            │   ├── models\n    
-            │   ├── particles\n    
-            │   ├── resourcepacks\n    
-            │   ├── shaders\n    
-            │   ├── sounds\n    
-            │   ├── texts\n    
-            │   └── textures\n    
-            ├── pack.mcmeta\n    
-            └── realms\n        
-                ├── lang\n        
-                └── textures\n
+        description="""```
+        .
+        ├── pack.mcmeta
+        ├── pack.png
+        └── assets    
+            ├── icons    
+            ├── minecraft    
+            │   ├── sounds.json    
+            │   ├── blockstates    
+            │   ├── font    
+            │   ├── gpu_warnlist.json    
+            │   ├── icons    
+            │   ├── lang    
+            │   ├── models    
+            │   ├── particles    
+            │   ├── resourcepacks    
+            │   ├── shaders    
+            │   ├── sounds    
+            │   ├── texts    
+            │   └── textures    
+            ├── pack.mcmeta    
+            └── realms        
+                ├── lang        
+                └── textures
         ```""",
         color=disnake.Colour.orange(),
     )
@@ -225,45 +225,45 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     embed = disnake.Embed(
         title="Datapack Folderstructure",
         description="""```
-        \n\n.\n
-        ├── pack.mcmeta\n
-        ├── pack.png\n
-        └── data\n
-            ├── <namespace>\n
-            ├── advancements\n    
-            ├── functions\n    
-            ├── item_modifiers\n    
-            ├── loot_tables\n    
-            ├── predicates\n    
-            ├── recipes\n    
-            ├── structures\n    
-            ├── chat_type\n    
-            ├── damage_type\n    
-            ├── tags \n    
-            │   ├── blocks\n    
-            │   ├── entity_types\n    
-            │   ├── fluids\n    
-            │   ├── functions\n    
-            │   ├── game_events\n    
-            │   ├── items\n    
-            │   ├── chat_type\n    
-            │   └── damage_type\n    
-            ├── dimension\n    
-            ├── dimension_type\n    
-            └── worldgen\n        
-                ├── biome\n        
-                ├── configured_carver\n        
-                ├── configured_feature\n        
-                ├── density_function\n        
-                ├── noise\n        
-                ├── noise_settings\n        
-                ├── placed_feature\n        
-                ├── processor_list\n        
-                ├── structure\n        
-                ├── structure_set\n        
-                ├── template_pool\n        
-                ├── world_preset\n        
-                └── flat_level_generator_preset\n
+        .
+        ├── pack.mcmeta
+        ├── pack.png
+        └── data
+            ├── <namespace>
+            ├── advancements    
+            ├── functions    
+            ├── item_modifiers    
+            ├── loot_tables    
+            ├── predicates    
+            ├── recipes    
+            ├── structures    
+            ├── chat_type    
+            ├── damage_type    
+            ├── tags     
+            │   ├── blocks    
+            │   ├── entity_types    
+            │   ├── fluids    
+            │   ├── functions    
+            │   ├── game_events    
+            │   ├── items    
+            │   ├── chat_type    
+            │   └── damage_type    
+            ├── dimension    
+            ├── dimension_type    
+            └── worldgen        
+                ├── biome        
+                ├── configured_carver        
+                ├── configured_feature        
+                ├── density_function        
+                ├── noise        
+                ├── noise_settings        
+                ├── placed_feature        
+                ├── processor_list        
+                ├── structure        
+                ├── structure_set        
+                ├── template_pool        
+                ├── world_preset        
+                └── flat_level_generator_preset
         ```""",
         color=disnake.Colour.orange(),
     )
