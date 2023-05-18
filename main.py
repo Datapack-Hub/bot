@@ -77,7 +77,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
 					+ str(inter.user.discriminator)
 					+ "> tried redirecting a message by <@"
 					+ str(inter.target.author.id)
-					+ ">! \nMessage Link: <#"
+					+ "> \nMessage Link: <#"
 					+ str(inter.channel.id)
 					+ ">"
 				),
@@ -85,7 +85,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
 			channel = bot.get_channel(logs_channel)
 			await channel.send(embed=embed)
 	else:
-		await inter.response.send_message("You can only use this in the [Datapack Hub discord server](https://dsc.gg/datapack)!", ephemeral=True)
+		await inter.response.send_message("You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!", ephemeral=True)
 		# Logging
 		embed = disnake.Embed(
 			color = disnake.Colour.orange(),
