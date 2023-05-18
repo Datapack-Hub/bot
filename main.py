@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from disnake.ext import commands
 from bot_token import token
 from markdownify import markdownify as md
+from enum import Enum
 
 intents = disnake.Intents.all()
 
@@ -140,6 +141,58 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
 	)
 	channel = bot.get_channel(logs_channel)
 	await channel.send(embed=embed)
+
+#/folderstructure
+@bot.slash_command()
+async def folderstructure(inter,description="Shows the folderstructure for resourcepacks"):
+	pass
+
+@folderstructure.sub_command()
+async def resourcepack(inter: disnake.ApplicationCommandInteraction):
+	embed = disnake.Embed(
+		title = "Resourcepack Folderstructure",
+		description="```\n.\n├── pack.mcmeta\n├── pack.png\n└── assets\n    ├── icons\n    ├── minecraft\n    │   ├── sounds.json\n    │   ├── blockstates\n    │   ├── font\n    │   ├── gpu_warnlist.json\n    │   ├── icons\n    │   ├── lang\n    │   ├── models\n    │   ├── particles\n    │   ├── resourcepacks\n    │   ├── shaders\n    │   ├── sounds\n    │   ├── texts\n    │   └── textures\n    ├── pack.mcmeta\n    └── realms\n        ├── lang\n        └── textures\n```",
+		color=disnake.Colour.orange(),
+	)
+	await inter.response.send_message(embed=embed)
+ 	# Logging
+	embed = disnake.Embed(
+		color = disnake.Colour.orange(),
+		title = ("**`/folderstructure` Command**"),
+		description=(
+			str(inter.user.name)
+			+ "#"
+			+ str(inter.user.discriminator)
+			+ " looked up the folderstructure of `resourcepacks`"
+		),
+	)
+	channel = bot.get_channel(logs_channel)
+	await channel.send(embed=embed)
+
+ 
+@folderstructure.sub_command()
+async def datapack(inter: disnake.ApplicationCommandInteraction):
+	embed = disnake.Embed(
+		title = "Datapack Folderstructure",
+		description="```\n\n.\n├── pack.mcmeta\n├── pack.png\n└── data\n    ├── <namespace>\n    ├── advancements\n    ├── functions\n    ├── item_modifiers\n    ├── loot_tables\n    ├── predicates\n    ├── recipes\n    ├── structures\n    ├── chat_type\n    ├── damage_type\n    ├── tags \n    │   ├── blocks\n    │   ├── entity_types\n    │   ├── fluids\n    │   ├── functions\n    │   ├── game_events\n    │   ├── items\n    │   ├── chat_type\n    │   └── damage_type\n    ├── dimension\n    ├── dimension_type\n    └── worldgen\n        ├── biome\n        ├── configured_carver\n        ├── configured_feature\n        ├── density_function\n        ├── noise\n        ├── noise_settings\n        ├── placed_feature\n        ├── processor_list\n        ├── structure\n        ├── structure_set\n        ├── template_pool\n        ├── world_preset\n        └── flat_level_generator_preset\n```",
+		color=disnake.Colour.orange(),
+	)
+	await inter.response.send_message(embed=embed)
+  	# Logging
+	embed = disnake.Embed(
+		color = disnake.Colour.orange(),
+		title = ("**`/folderstructure` Command**"),
+		description=(
+			str(inter.user.name)
+			+ "#"
+			+ str(inter.user.discriminator)
+			+ " looked up the folderstructure of `datapacks`"
+		),
+	)
+	channel = bot.get_channel(logs_channel)
+	await channel.send(embed=embed)
+
+    
 
 
 
