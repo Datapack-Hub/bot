@@ -175,7 +175,7 @@ async def folderstructure(inter):
 
 @folderstructure.sub_command(description="Shows the folderstructure for resourcepacks")
 async def resourcepack(inter: disnake.ApplicationCommandInteraction):
-    embed = disnake.Embed(
+	embed = disnake.Embed(
         title="Resourcepack Folderstructure",
         description="""```\n
         .\n
