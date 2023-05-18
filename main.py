@@ -141,10 +141,8 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
 
                 else:
                     dl = h2.find_next("dl").find_next("dl")
-                description_v2 = md(str(dl), convert=["code", "li"]).replace(
+                description_v2 = md(str(dl), convert=["code", "li","ul"]).replace(
                     "/wiki", "https://minecraft.fandom.com/wiki"
-                ).replace(
-                    "+","•"
                 )
                 print(description_v2)
 
