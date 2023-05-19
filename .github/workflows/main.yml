@@ -60,7 +60,7 @@ jobs:
         pip install ruff
     - name: Run ruff
       run: |
-        ruff . --exit-zero 
+        ruff . --fix --exit-zero 
       # --exit-zero so it doesn't yell
   bandit:
     runs-on: ubuntu-latest
