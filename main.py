@@ -7,7 +7,12 @@ from markdownify import markdownify as md
 
 intents = disnake.Intents.all()
 
-bot = commands.Bot(command_prefix="?", intents=intents)
+activity = disnake.Activity(
+    name="out for your commands",
+    type=disnake.ActivityType.watching,
+)
+
+bot = commands.Bot(command_prefix="?", intents=intents,activity=activity)
 
 logs_channel = 1108080080711852042
 description = ""
