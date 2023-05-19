@@ -314,6 +314,21 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         )
     await inter.response.send_message(embed=embed)
 
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/packformat` Command**"),
+        description=(
+            str(inter.user.name)
+            + "#"
+            + str(inter.user.discriminator)
+            + " looked up the packformat history of `resourcepacks`"
+        ),
+    )
+    channel = bot.get_channel(logs_channel)
+    await channel.send(embed=embed)
+    
+    
 @packformat.sub_command(description="Shows history of datapack pack formats")
 async def datapack(inter: disnake.ApplicationCommandInteraction):
     request = requests.get("https://minecraft.fandom.com/wiki/Pack_format")
@@ -335,6 +350,20 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
             description = description
         )
     await inter.response.send_message(embed=embed)
+    
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/packformat` Command**"),
+        description=(
+            str(inter.user.name)
+            + "#"
+            + str(inter.user.discriminator)
+            + " looked up the packformat history of `datapacks`"
+        ),
+    )
+    channel = bot.get_channel(logs_channel)
+    await channel.send(embed=embed)
     
 # ON STARTUP
 @bot.event
