@@ -286,7 +286,56 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
 
+# /packformat
 
+@bot.slash_command()
+async def packformat(inter):
+    pass
+
+@packformat.sub_command(description="Shows history of resourcepack pack formats")
+async def resourcepack(inter: disnake.ApplicationCommandInteraction):
+    request = requests.get("https://minecraft.fandom.com/wiki/Pack_format")
+    request = BeautifulSoup(request.content, "html.parser")
+    description = ""
+    trs = request.find_all("tr")
+    for tr in trs:
+        value = tr.find_next("td")
+        versions = value.find_next("td")
+        if value.find_previous('h2').text == "Resource Pack":
+            print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
+            description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) +"`\n"),strip=['a','td']).replace("[*verify*]",""))
+        else:
+            pass
+        
+    embed = disnake.Embed(
+            color = disnake.Color.orange(),
+            title = "Resourcepack Pack Format History",
+            description = description
+        )
+    await inter.response.send_message(embed=embed)
+
+@packformat.sub_command(description="Shows history of datapack pack formats")
+async def datapack(inter: disnake.ApplicationCommandInteraction):
+    request = requests.get("https://minecraft.fandom.com/wiki/Pack_format")
+    request = BeautifulSoup(request.content, "html.parser")
+    description = ""
+    trs = request.find_all("tr")
+    for tr in trs:
+        value = tr.find_next("td")
+        versions = value.find_next("td")
+        if value.find_previous('h2').text == "Data Pack":
+            print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
+            description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) +"`\n"),strip=['a','td']).replace("[*verify*]",""))
+        else:
+            pass
+        
+    embed = disnake.Embed(
+            color = disnake.Color.orange(),
+            title = "Datapack Pack Format History",
+            description = description
+        )
+    await inter.response.send_message(embed=embed)
+    
 # ON STARTUP
 @bot.event
 async def on_ready():
@@ -294,6 +343,5 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
-
 
 bot.run(token)
