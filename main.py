@@ -306,9 +306,16 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
     for tr in trs:
         value = tr.find_next("td")
         versions = value.find_next("td")
+        full_versions = versions.find_next("td")
+       # print (md(str(full_versions)))
+        if not "—" in md(str(full_versions)):
+            full_versions = (" (`" + str(full_versions) + "`)")
+        else:
+            full_versions = ""
+            
         if value.find_previous('h2').text == "Resource Pack":
-            print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
-            description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) +"`\n"),strip=['a','td']).replace("[*verify*]",""))
+         #   print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
+            description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) + "`" + full_versions +"\n"),strip=['a','td']).replace("[*verify*]",""))
         else:
             pass
         
@@ -344,12 +351,14 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         value = tr.find_next("td")
         versions = value.find_next("td")
         full_versions = versions.find_next("td")
-        if full_versions != "-":
-            full_versions = ("(`" + str(full_versions) + "`)")
+       # print (md(str(full_versions)))
+        if not "—" in md(str(full_versions)):
+            full_versions = (" (`" + str(full_versions) + "`)")
         else:
             full_versions = ""
+            
         if value.find_previous('h2').text == "Data Pack":
-            print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
+          #  print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
             description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) + "`" + full_versions +"\n"),strip=['a','td']).replace("[*verify*]",""))
         else:
             pass
