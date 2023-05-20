@@ -432,11 +432,11 @@ async def on_message(message):
             color=disnake.Colour.orange(),
             title=("**Community Creations Thread**"),
             description=(
-                + "Created a thread for "
-                + str(message.author.name)
+                "Created a thread for "
+                + message.author.name
                 + "#"
                 + str(message.author.discriminator)
-                + "'s message in <#935566919933755432>"
+                + "\'s message in <#935566919933755432>"
             ),
         )
         channel = bot.get_channel(logs_channel)
