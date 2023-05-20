@@ -20,7 +20,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3.5.2
-      with: ${{ github.head_ref }}
+      with: "${{ github.head_ref }}"
       
     - name: Setup Python
       uses: actions/setup-python@v4.6.0
@@ -39,6 +39,9 @@ jobs:
     - name: Run black
       run: |
         black .
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Apply formatting
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +65,9 @@ jobs:
     - name: Run ruff
       run: |
         ruff . --fix --exit-zero 
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Apply linting
       # --exit-zero so it doesn't yell
   bandit:
     runs-on: ubuntu-latest
@@ -86,7 +92,4 @@ jobs:
     - name: Run bandit
       run: |
         bandit . -r --exit-zero 
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply linting and fomatting
       # --exit-zero so it doesn't yell
