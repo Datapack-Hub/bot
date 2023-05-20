@@ -384,6 +384,37 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
     
+# OTHER EVENTS
+
+# ON MESSAGE
+@bot.event
+async def on_message(message):
+    cc_channel = bot.get_channel(935566919933755432)
+    if message.channel == cc_channel:
+        if message.author.nick:
+            await cc_channel.create_thread(
+                name = (message.author.nick + "'s Creation"),
+                message = message
+            )
+        else:
+            await cc_channel.create_thread(
+                name = (message.author.name + "'s Creation"),
+                message = message
+            )
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**Community Creations Thread**"),
+        description=(
+            + "Created a thread for ",
+            str(message.author.name)
+            + "#"
+            + str(message.author.discriminator)
+            + "'s message in <#935566919933755432>"
+        ),
+    )
+    channel = bot.get_channel(logs_channel)
+    await channel.send(embed=embed)
 # ON STARTUP
 @bot.event
 async def on_ready():
