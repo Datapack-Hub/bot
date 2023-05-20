@@ -426,20 +426,21 @@ async def on_message(message):
                 name = (message.author.name + "'s Creation"),
                 message = message
             )
-    # Logging
-    embed = disnake.Embed(
-        color=disnake.Colour.orange(),
-        title=("**Community Creations Thread**"),
-        description=(
-            + "Created a thread for ",
-            str(message.author.name)
-            + "#"
-            + str(message.author.discriminator)
-            + "'s message in <#935566919933755432>"
-        ),
-    )
-    channel = bot.get_channel(logs_channel)
-    await channel.send(embed=embed)
+            
+        # Logging
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Community Creations Thread**"),
+            description=(
+                + "Created a thread for ",
+                str(message.author.name)
+                + "#"
+                + str(message.author.discriminator)
+                + "'s message in <#935566919933755432>"
+            ),
+        )
+        channel = bot.get_channel(logs_channel)
+        await channel.send(embed=embed)
 
 # ON STARTUP
 @bot.event
