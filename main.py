@@ -12,7 +12,7 @@ activity = disnake.Activity(
     type=disnake.ActivityType.watching,
 )
 
-bot = commands.Bot(command_prefix="?", intents=intents,activity=activity)
+bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
 
 logs_channel = 1108080080711852042
 description = ""
@@ -24,78 +24,7 @@ description = ""
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
     redi_ban_role = bot.get_guild(935560260725379143).get_role(1108093399053111387)
-    if inter.guild.id == 935560260725379143:
-        if redi_ban_role not in inter.author.roles:
-            embed = disnake.Embed(
-                color=disnake.Color.orange(),
-                title="This question would be more fitting inside of a Help Channel!",
-                description="""It seems like someone here found your question to be 
-                more fitting in our help channels! \nHelp channels are the perfect 
-                place to ask questions and to be answered by anyone including our 
-                experienced helpers!\nVisit <#1051227454980755546> or 
-                <#1051225367807000706> if you require assistance.\nCheck out 
-                <#935570290317086841> for tips on asking questions efficiently.""",
-            )
-
-            embed.set_author(
-                name=(
-                    "Requested by "
-                    + inter.author.name
-                    + "#"
-                    + inter.author.discriminator
-                ),
-                icon_url=inter.author.display_avatar,
-            )
-
-            embed.set_footer(
-                text="If you feel this function was misused, please contact staff."
-            )
-            await inter.target.reply(embed=embed)
-
-            # Logging
-            embed = disnake.Embed(
-                color=disnake.Colour.orange(),
-                title=("**Redirect to Help Channel**"),
-                description=(
-                    str(inter.user.name)
-                    + "#"
-                    + str(inter.user.discriminator)
-                    + " redirected a message by "
-                    + str(inter.user.name)
-                    + "#"
-                    + str(inter.user.discriminator)
-                    + "! \nMessage Link: <#"
-                    + str(inter.channel.id)
-                    + ">"
-                ),
-            )
-            channel = bot.get_channel(logs_channel)
-            await channel.send(embed=embed)
-
-        else:
-            await inter.response.send_message(
-                "You are blacklisted from doing this. If you believe this is a mistake please contact a staff member.",
-                ephemeral=True,
-            )
-
-            # Logging
-            embed = disnake.Embed(
-                color=disnake.Colour.orange(),
-                title=("**Redirect to Help Channel**"),
-                description=(
-                    str(inter.user.name)
-                    + "#"
-                    + str(inter.user.discriminator)
-                    + "> tried redirecting a message by <@"
-                    + str(inter.target.author.id)
-                    + "> \nMessage Link: <#"
-                    + str(inter.channel.id)
-                    + ">"
-                ),
-            )
-            channel = bot.get_channel(logs_channel)
-            await channel.send(embed=embed)
-    else:
+    if inter.guild.id != 935560260725379143:
         await inter.response.send_message(
             "You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!",
             ephemeral=True,
@@ -113,6 +42,71 @@ async def claim(inter: disnake.MessageCommandInteraction):
         )
         channel = bot.get_channel(logs_channel)
         await channel.send(embed=embed)
+        return
+    if redi_ban_role in inter.author.roles:
+        await inter.response.send_message(
+            "You are blacklisted from doing this. If you believe this is a mistake please contact a staff member.",
+            ephemeral=True,
+        )
+
+        # Logging
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Redirect to Help Channel**"),
+            description=(
+                str(inter.user.name)
+                + "#"
+                + str(inter.user.discriminator)
+                + "> tried redirecting a message by <@"
+                + str(inter.target.author.id)
+                + "> \nMessage Link: <#"
+                + str(inter.channel.id)
+                + ">"
+            ),
+        )
+        channel = bot.get_channel(logs_channel)
+        await channel.send(embed=embed)
+        return
+    embed = disnake.Embed(
+        color=disnake.Color.orange(),
+        title="This question would be more fitting inside of a Help Channel!",
+        description="""It seems like someone here found your question to be 
+        more fitting in our help channels! \nHelp channels are the perfect 
+        place to ask questions and to be answered by anyone including our 
+        experienced helpers!\nVisit <#1051227454980755546> or 
+        <#1051225367807000706> if you require assistance.\nCheck out 
+        <#935570290317086841> for tips on asking questions efficiently.""",
+    )
+
+    embed.set_author(
+        name=("Requested by " + inter.author.name + "#" + inter.author.discriminator),
+        icon_url=inter.author.display_avatar,
+    )
+
+    embed.set_footer(
+        text="If you feel this function was misused, please contact staff."
+    )
+    await inter.target.reply(embed=embed)
+
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**Redirect to Help Channel**"),
+        description=(
+            str(inter.user.name)
+            + "#"
+            + str(inter.user.discriminator)
+            + " redirected a message by "
+            + str(inter.user.name)
+            + "#"
+            + str(inter.user.discriminator)
+            + "! \nMessage Link: <#"
+            + str(inter.channel.id)
+            + ">"
+        ),
+    )
+    channel = bot.get_channel(logs_channel)
+    await channel.send(embed=embed)
 
 
 # SLASH COMMANDS
@@ -124,7 +118,9 @@ async def claim(inter: disnake.MessageCommandInteraction):
     title="syntax", description="Shows the correct syntax of any minecraft command"
 )
 async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
-    request = requests.get("https://minecraft.fandom.com/wiki/commands/" + command)
+    request = requests.get(
+        f"https://minecraft.fandom.com/wiki/commands/{command}", timeout=5000
+    )
     request = BeautifulSoup(request.content, "html.parser")
     description_v2 = (
         "This command does not exist! Make sure to check spelling before trying again."
@@ -146,7 +142,7 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
 
                 else:
                     dl = h2.find_next("dl").find_next("dl")
-                description_v2 = md(str(dl), convert=["code", "li","ul"]).replace(
+                description_v2 = md(str(dl), convert=["code", "li", "ul"]).replace(
                     "/wiki", "https://minecraft.fandom.com/wiki"
                 )
                 print(description_v2)
@@ -291,15 +287,20 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
 
+
 # /packformat
+
 
 @bot.slash_command()
 async def packformat(inter):
     pass
 
+
 @packformat.sub_command(description="Shows history of resourcepack pack formats")
 async def resourcepack(inter: disnake.ApplicationCommandInteraction):
-    request = requests.get("https://minecraft.fandom.com/wiki/Pack_format")
+    request = requests.get(
+        "https://minecraft.fandom.com/wiki/Pack_format", timeout=5000
+    )
     request = BeautifulSoup(request.content, "html.parser")
     description = ""
     trs = request.find_all("tr")
@@ -307,23 +308,34 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         value = tr.find_next("td")
         versions = value.find_next("td")
         full_versions = versions.find_next("td")
-       # print (md(str(full_versions)))
-        if not "—" in md(str(full_versions)):
-            full_versions = (" (`" + str(full_versions) + "`)")
+        # print (md(str(full_versions)))
+        if "—" not in md(str(full_versions)):
+            full_versions = " (`" + str(full_versions) + "`)"
         else:
             full_versions = ""
-            
-        if value.find_previous('h2').text == "Resource Pack":
-         #   print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
-            description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) + "`" + full_versions +"\n"),strip=['a','td']).replace("[*verify*]",""))
+
+        if value.find_previous("h2").text == "Resource Pack":
+            #   print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
+            description += md(
+                (
+                    "Format: "
+                    + str(value)
+                    + "      Versions: `"
+                    + str(versions)
+                    + "`"
+                    + full_versions
+                    + "\n"
+                ),
+                strip=["a", "td"],
+            ).replace("[*verify*]", "")
         else:
             pass
-        
+
     embed = disnake.Embed(
-            color = disnake.Color.orange(),
-            title = "Resourcepack Pack Format History",
-            description = description
-        )
+        color=disnake.Color.orange(),
+        title="Resourcepack Pack Format History",
+        description=description,
+    )
     await inter.response.send_message(embed=embed)
 
     # Logging
@@ -339,11 +351,13 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
     )
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
-    
-    
+
+
 @packformat.sub_command(description="Shows history of datapack pack formats")
 async def datapack(inter: disnake.ApplicationCommandInteraction):
-    request = requests.get("https://minecraft.fandom.com/wiki/Pack_format")
+    request = requests.get(
+        "https://minecraft.fandom.com/wiki/Pack_format", timeout=5000
+    )
     request = BeautifulSoup(request.content, "html.parser")
     description = ""
     trs = request.find_all("tr")
@@ -351,25 +365,36 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         value = tr.find_next("td")
         versions = value.find_next("td")
         full_versions = versions.find_next("td")
-       # print (md(str(full_versions)))
-        if not "—" in md(str(full_versions)):
-            full_versions = (" (`" + str(full_versions) + "`)")
+        # print (md(str(full_versions)))
+        if "—" not in md(str(full_versions)):
+            full_versions = " (`" + str(full_versions) + "`)"
         else:
             full_versions = ""
-            
-        if value.find_previous('h2').text == "Data Pack":
-          #  print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
-            description += (md(("Format: "+ str(value) + "      Versions: `"+ str(versions) + "`" + full_versions +"\n"),strip=['a','td']).replace("[*verify*]",""))
+
+        if value.find_previous("h2").text == "Data Pack":
+            #  print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
+            description += md(
+                (
+                    "Format: "
+                    + str(value)
+                    + "      Versions: `"
+                    + str(versions)
+                    + "`"
+                    + full_versions
+                    + "\n"
+                ),
+                strip=["a", "td"],
+            ).replace("[*verify*]", "")
         else:
             pass
-        
+
     embed = disnake.Embed(
-            color = disnake.Color.orange(),
-            title = "Datapack Pack Format History",
-            description = description
-        )
+        color=disnake.Color.orange(),
+        title="Datapack Pack Format History",
+        description=description,
+    )
     await inter.response.send_message(embed=embed)
-    
+
     # Logging
     embed = disnake.Embed(
         color=disnake.Colour.orange(),
@@ -415,6 +440,7 @@ async def on_message(message):
     )
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
+
 # ON STARTUP
 @bot.event
 async def on_ready():
@@ -422,5 +448,6 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
+
 
 bot.run(token)
