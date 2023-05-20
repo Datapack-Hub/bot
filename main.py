@@ -408,8 +408,10 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     )
     channel = bot.get_channel(logs_channel)
     await channel.send(embed=embed)
-    
+
+
 # OTHER EVENTS
+
 
 # ON MESSAGE
 @bot.event
@@ -420,15 +422,13 @@ async def on_message(message):
     if message.channel == cc_channel:
         if message.author.nick:
             await cc_channel.create_thread(
-                name = (message.author.nick + "'s Creation"),
-                message = message
+                name=(message.author.nick + "'s Creation"), message=message
             )
         else:
             await cc_channel.create_thread(
-                name = (message.author.name + "'s Creation"),
-                message = message
+                name=(message.author.name + "'s Creation"), message=message
             )
-            
+
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
@@ -438,14 +438,14 @@ async def on_message(message):
                 + message.author.name
                 + "#"
                 + str(message.author.discriminator)
-                + "\'s message in <#935566919933755432>"
+                + "'s message in <#935566919933755432>"
             ),
         )
         channel = bot.get_channel(logs_channel)
         await channel.send(embed=embed)
     elif message.channel == intro_channel:
         await message.add_reaction("👋")
-        
+
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
@@ -455,7 +455,7 @@ async def on_message(message):
                 + message.author.name
                 + "#"
                 + str(message.author.discriminator)
-                + "\'s message in <#935566919933755432>"
+                + "'s message in <#935566919933755432>"
             ),
         )
         channel = bot.get_channel(logs_channel)
