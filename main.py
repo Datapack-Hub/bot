@@ -415,6 +415,8 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
 @bot.event
 async def on_message(message):
     cc_channel = bot.get_channel(935566919933755432)
+    intro_channel = bot.get_channel(936721793677414490)
+
     if message.channel == cc_channel:
         if message.author.nick:
             await cc_channel.create_thread(
@@ -441,6 +443,24 @@ async def on_message(message):
         )
         channel = bot.get_channel(logs_channel)
         await channel.send(embed=embed)
+    elif message.channel == intro_channel:
+        await message.add_reaction("👋")
+        
+        # Logging
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Intro Channel Reaction**"),
+            description=(
+                "Reacted with :wave: to "
+                + message.author.name
+                + "#"
+                + str(message.author.discriminator)
+                + "\'s message in <#935566919933755432>"
+            ),
+        )
+        channel = bot.get_channel(logs_channel)
+        await channel.send(embed=embed)
+
 
 # ON STARTUP
 @bot.event
