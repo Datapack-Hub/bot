@@ -21,14 +21,17 @@ description = ""
 # WEIRD ENUM STUFF
 invites = commands.option_enum(["datapack hub", "minecraft commands", "example"])
 
+
 # FUNCTIONS
 def get_log_channel():
     global channel
     channel = bot.get_channel(logs_channel)
-    
+
+
 # MESSAGE COMMANDS
 
-#redirect to help channel
+
+# redirect to help channel
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
     redi_ban_role = bot.get_guild(935560260725379143).get_role(1108093399053111387)
@@ -119,7 +122,8 @@ async def claim(inter: disnake.MessageCommandInteraction):
 
 # SLASH COMMANDS
 
-#/syntax
+
+# /syntax
 @bot.slash_command(
     title="syntax", description="Shows the correct syntax of any minecraft command"
 )
@@ -178,7 +182,7 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
     await channel.send(embed=embed)
 
 
-#/folderstructure
+# /folderstructure
 @bot.slash_command()
 async def folderstructure(inter):
     pass
@@ -293,26 +297,28 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     get_log_channel()
     await channel.send(embed=embed)
 
-#/invite
+
+# /invite
 @bot.slash_command(
-    title="invite", description="Shows discord invite for a discord server relevant to datapacks"
+    title="invite",
+    description="Shows discord invite for a discord server relevant to datapacks",
 )
-async def invite(inter: disnake.ApplicationCommandInteraction, invite:invites):
+async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
     if invite == "datapack hub":
         embed = disnake.Embed(
-        color=disnake.Colour.orange(),
-        title=("**Datapack Hub Invite**"),
-        description="Join Datapack Hub for help with your Datapacks and support regarding this bot using this link: https://dsc.gg/datapack",
-    )
-        
+            color=disnake.Colour.orange(),
+            title=("**Datapack Hub Invite**"),
+            description="Join Datapack Hub for help with your Datapacks and support regarding this bot using this link: https://dsc.gg/datapack",
+        )
+
     elif invite == "minecraft commands":
         embed = disnake.Embed(
-        color=disnake.Colour.orange(),
-        title=("**Minecraft Commands Invite**"),
-        description="Join Minecraft Commands for help with your Datapacks using this link: https://discord.gg/QAFXFtZ",
-    ) 
+            color=disnake.Colour.orange(),
+            title=("**Minecraft Commands Invite**"),
+            description="Join Minecraft Commands for help with your Datapacks using this link: https://discord.gg/QAFXFtZ",
+        )
     await inter.response.send_message(embed=embed)
-    
+
     # Logging
     embed = disnake.Embed(
         color=disnake.Colour.orange(),
@@ -328,7 +334,8 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite:invites):
     )
     get_log_channel()
     await channel.send(embed=embed)
-    
+
+
 # /packformat
 @bot.slash_command()
 async def packformat(inter):
@@ -450,6 +457,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
 
 
 # OTHER EVENTS
+
 
 # ON MESSAGE
 @bot.event
