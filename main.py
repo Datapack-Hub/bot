@@ -455,7 +455,7 @@ async def on_message(message):
                 + message.author.name
                 + "#"
                 + str(message.author.discriminator)
-                + "\'s message in <#935566919933755432>"
+                + "\'s message in <#1108080080711852042>"
             ),
         )
         channel = bot.get_channel(logs_channel)
