@@ -19,7 +19,7 @@ logs_channel = 1108080080711852042
 description = ""
 
 # WEIRD ENUM STUFF
-invites = commands.option_enum(["datapack hub", "minecraft commands", "example"])
+invites = commands.option_enum(["datapack hub", "minecraft commands", "shader labs"])
 
 
 # FUNCTIONS
@@ -317,8 +317,14 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
             title=("**Minecraft Commands Invite**"),
             description="Join Minecraft Commands for help with your Datapacks using this link: https://discord.gg/QAFXFtZ",
         )
-    await inter.response.send_message(embed=embed)
 
+    elif invite == "shader labs":
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**ShaderLABS Invite**"),
+            description="Join ShaderLABS for help regarding shaders using this link: https://discord.gg/RpzWN9S",
+        )
+    await inter.response.send_message(embed=embed)
     # Logging
     embed = disnake.Embed(
         color=disnake.Colour.orange(),
