@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from disnake.ext import commands
 from bot_token import token
 from markdownify import markdownify as md
+import enum
 
 intents = disnake.Intents.all()
 
@@ -17,10 +18,17 @@ bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
 logs_channel = 1108080080711852042
 description = ""
 
+# WEIRD ENUM STUFF
+invites = commands.option_enum(["datapack hub", "minecraft commands", "example"])
 
+# FUNCTIONS
+def get_log_channel():
+    global channel
+    channel = bot.get_channel(logs_channel)
+    
 # MESSAGE COMMANDS
 
-
+#redirect to help channel
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
     redi_ban_role = bot.get_guild(935560260725379143).get_role(1108093399053111387)
@@ -40,7 +48,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
                 + " tried using this in a different server lol"
             ),
         )
-        channel = bot.get_channel(logs_channel)
+        get_log_channel()
         await channel.send(embed=embed)
         return
     if redi_ban_role in inter.author.roles:
@@ -64,7 +72,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
                 + ">"
             ),
         )
-        channel = bot.get_channel(logs_channel)
+        get_log_channel()
         await channel.send(embed=embed)
         return
     embed = disnake.Embed(
@@ -105,15 +113,13 @@ async def claim(inter: disnake.MessageCommandInteraction):
             + ">"
         ),
     )
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
 
 # SLASH COMMANDS
 
-# /syntax
-
-
+#/syntax
 @bot.slash_command(
     title="syntax", description="Shows the correct syntax of any minecraft command"
 )
@@ -168,11 +174,11 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
             + "`"
         ),
     )
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
 
-# /folderstructure
+#/folderstructure
 @bot.slash_command()
 async def folderstructure(inter):
     pass
@@ -221,7 +227,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
             + " looked up the folderstructure of `resourcepacks`"
         ),
     )
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
 
@@ -284,13 +290,46 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
             + " looked up the folderstructure of `datapacks`"
         ),
     )
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
-
+#/invite
+@bot.slash_command(
+    title="invite", description="Shows discord invite for a discord server relevant to datapacks"
+)
+async def invite(inter: disnake.ApplicationCommandInteraction, invite:invites):
+    if invite == "datapack hub":
+        embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**Datapack Hub Invite**"),
+        description="Join Datapack Hub for help with your Datapacks and support regarding this bot using this link: https://dsc.gg/datapack",
+    )
+        
+    elif invite == "minecraft commands":
+        embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**Minecraft Commands Invite**"),
+        description="Join Minecraft Commands for help with your Datapacks using this link: https://discord.gg/QAFXFtZ",
+    ) 
+    await inter.response.send_message(embed=embed)
+    
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/invite` Command**"),
+        description=(
+            str(inter.user.name)
+            + "#"
+            + str(inter.user.discriminator)
+            + " looked up the invite of `"
+            + str(invite)
+            + "`"
+        ),
+    )
+    get_log_channel()
+    await channel.send(embed=embed)
+    
 # /packformat
-
-
 @bot.slash_command()
 async def packformat(inter):
     pass
@@ -349,7 +388,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
             + " looked up the packformat history of `resourcepacks`"
         ),
     )
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
 
@@ -406,12 +445,11 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
             + " looked up the packformat history of `datapacks`"
         ),
     )
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
 
 # OTHER EVENTS
-
 
 # ON MESSAGE
 @bot.event
@@ -441,7 +479,7 @@ async def on_message(message):
                 + "'s message in <#935566919933755432>"
             ),
         )
-        channel = bot.get_channel(logs_channel)
+        get_log_channel()
         await channel.send(embed=embed)
     elif message.channel == intro_channel:
         await message.add_reaction("👋")
@@ -459,7 +497,7 @@ async def on_message(message):
                 + "'s message in <#935566919933755432>"
             ),
         )
-        channel = bot.get_channel(logs_channel)
+        get_log_channel()
         await channel.send(embed=embed)
 
 
@@ -468,7 +506,7 @@ async def on_message(message):
 async def on_ready():
     embed = disnake.Embed(color=disnake.Colour.green(), title="**Bot started**")
     print(f"Logged in as {bot.user}")
-    channel = bot.get_channel(logs_channel)
+    get_log_channel()
     await channel.send(embed=embed)
 
 
