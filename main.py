@@ -147,14 +147,21 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
             bedrock_notice = ""
         for h2 in h2s:
             if "Syntax" in h2.text:
-                if not command == "execute":
+                if command.lower is not "execute" and not "trigger":
                     dl = h2.find_next("dl")
-
-                else:
+                elif command == "execute":
                     dl = h2.find_next("dl").find_next("dl")
-                description_v2 = md(str(dl), convert=["code", "li", "ul"]).replace(
+                elif command == "trigger":
+                    dl = "`trigger <objective>`\n   Adds `1` to the current value of `<objective>`.\n`trigger <objective> add <value>`\n    Adds `<value>` to the current value of `<objective>`.\n?`trigger <objective> set <value>`\n Sets the value of `<objective>` to `<value>`."
+                    
+                if command.lower is not "trigger":
+                    description_v2 = md(str(dl), convert=["code", "li", "ul"]).replace(
                     "/wiki", "https://minecraft.fandom.com/wiki"
                 )
+                else:
+                    description_v2 = dl
+
+
                 print(description_v2)
 
     embed = disnake.Embed(
@@ -507,14 +514,13 @@ async def on_message(message):
                 + message.author.name
                 + "#"
                 + str(message.author.discriminator)
-                + "'s message in <#1108080080711852042>"
-                + "'s message in <#935566919933755432>"
+                + "'s message in <#936721793677414490>"
             ),
         )
         get_log_channel()
         await channel.send(embed=embed)
-
-
+    
+            
 # ON STARTUP
 @bot.event
 async def on_ready():
