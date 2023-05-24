@@ -152,14 +152,13 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
                     dl = h2.find_next("dl").find_next("dl")
                 elif command == "trigger":
                     dl = "`trigger <objective>`\n   Adds `1` to the current value of `<objective>`.\n`trigger <objective> add <value>`\n    Adds `<value>` to the current value of `<objective>`.\n?`trigger <objective> set <value>`\n Sets the value of `<objective>` to `<value>`."
-                    
+
                 if command.lower is not "trigger":
                     description_v2 = md(str(dl), convert=["code", "li", "ul"]).replace(
-                    "/wiki", "https://minecraft.fandom.com/wiki"
-                )
+                        "/wiki", "https://minecraft.fandom.com/wiki"
+                    )
                 else:
                     description_v2 = dl
-
 
                 print(description_v2)
 
@@ -518,8 +517,8 @@ async def on_message(message):
         )
         get_log_channel()
         await channel.send(embed=embed)
-    
-            
+
+
 # ON STARTUP
 @bot.event
 async def on_ready():
