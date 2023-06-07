@@ -146,14 +146,14 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
             bedrock_notice = ""
         for h2 in h2s:
             if "Syntax" in h2.text:
-                if command.lower is not "execute" and not "trigger":
+                if command.lower != "execute" and not "trigger":
                     dl = h2.find_next("dl")
                 elif command == "execute":
                     dl = h2.find_next("dl").find_next("dl")
                 elif command == "trigger":
                     dl = "`trigger <objective>`\n   Adds `1` to the current value of `<objective>`.\n`trigger <objective> add <value>`\n    Adds `<value>` to the current value of `<objective>`.\n?`trigger <objective> set <value>`\n Sets the value of `<objective>` to `<value>`."
 
-                if command.lower is not "trigger":
+                if command.lower != "trigger":
                     description_v2 = md(str(dl), convert=["code", "li", "ul"]).replace(
                         "/wiki", "https://minecraft.fandom.com/wiki"
                     )
