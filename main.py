@@ -372,7 +372,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         else:
             full_versions = ""
 
-        if value.find_previous("h2").text == "Resource Pack":
+        if value.find_previous("h2").find_next("span").text == "Resources":
             #   print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
             description += md(
                 (
@@ -429,7 +429,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         else:
             full_versions = ""
 
-        if value.find_previous("h2").text == "Data Pack":
+        if value.find_previous("h2").find_next("span").text == "Data":
             #  print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
             description += md(
                 (
