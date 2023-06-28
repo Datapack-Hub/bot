@@ -31,6 +31,7 @@ def get_log_channel():
 
 # MESSAGE COMMANDS
 
+
 # redirect to help channel
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
@@ -78,7 +79,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
         get_log_channel()
         await channel.send(embed=embed)
         return
-    
+
     embed = disnake.Embed(
         color=disnake.Color.orange(),
         title="This question would be more fitting inside of a Help Channel!",
@@ -122,6 +123,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
 
 
 # SLASH COMMANDS
+
 
 # /syntax
 @bot.slash_command(
@@ -186,17 +188,18 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
     )
     get_log_channel()
     await channel.send(embed=embed)
-    
+
+
 # /resolve
-@bot.slash_command(
-    title="resolve", description="Marks question as resolved"
-)
+@bot.slash_command(title="resolve", description="Marks question as resolved")
 async def resolve(inter: disnake.ApplicationCommandInteraction):
     helper_role = bot.get_guild(935560260725379143).get_role(935561184806060073)
 
     try:
         channel = inter.channel.parent.id
-        if (inter.channel.owner.id == inter.author.id) or (helper_role in inter.author.roles):
+        if (inter.channel.owner.id == inter.author.id) or (
+            helper_role in inter.author.roles
+        ):
             if channel == 1051225367807000706 or 1051227454980755546:
                 resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
                 await inter.channel.add_tags(resolved_tag)
@@ -219,24 +222,24 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                 color=disnake.Color.orange(),
                 title="Resolve Help Channel",
                 description="Only the creator of this question and helpers can mark it as resolved",
-            )     
+            )
             await inter.response.send_message(embed=embed, ephemeral=True)
 
-    except: 
+    except:
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="Resolve Help Channel",
             description="You can only do this in one of our help channels",
         )
-        
+
         await inter.response.send_message(embed=embed)
 
-    
 
 # /folderstructure
 @bot.slash_command()
 async def folderstructure(inter):
     pass
+
 
 @folderstructure.sub_command(description="Shows the folderstructure for resourcepacks")
 async def resourcepack(inter: disnake.ApplicationCommandInteraction):
@@ -346,6 +349,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     )
     get_log_channel()
     await channel.send(embed=embed)
+
 
 # /invite
 @bot.slash_command(
@@ -512,6 +516,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
 
 
 # OTHER EVENTS
+
 
 # ON MESSAGE
 @bot.event
