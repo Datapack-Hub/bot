@@ -5,7 +5,6 @@ from disnake.ext import commands
 from bot_token import token
 from markdownify import markdownify as md
 import urllib.request
-from PIL import Image
 
 intents = disnake.Intents.all()
 
