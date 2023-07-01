@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from disnake.ext import commands
 from bot_token import token
 from markdownify import markdownify as md
-import urllib.request
 
 intents = disnake.Intents.all()
 
