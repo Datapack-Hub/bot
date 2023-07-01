@@ -123,7 +123,6 @@ async def claim(inter: disnake.MessageCommandInteraction):
 
 # SLASH COMMANDS
 
-
 # /syntax
 @bot.slash_command(
     title="syntax", description="Shows the correct syntax of any minecraft command"
@@ -231,7 +230,7 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
             description="You can only do this in one of our help channels",
         )
 
-        await inter.response.send_message(embed=embed)
+        await inter.response.send_message(embed=embed, ephemeral=True)
 
 
 # /folderstructure
