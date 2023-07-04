@@ -44,9 +44,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
             color=disnake.Colour.orange(),
             title=("**Redirect to Help Channel**"),
             description=(
-                str(inter.user.name)
-        
-                + " tried using this in a different server lol"
+                str(inter.user.name) + " tried using this in a different server lol"
             ),
         )
         get_log_channel()
@@ -64,7 +62,6 @@ async def claim(inter: disnake.MessageCommandInteraction):
             title=("**Redirect to Help Channel**"),
             description=(
                 str(inter.user.name)
-        
                 + "> tried redirecting a message by <@"
                 + str(inter.target.author.id)
                 + "> \nMessage Link: <#"
@@ -103,10 +100,8 @@ async def claim(inter: disnake.MessageCommandInteraction):
         title=("**Redirect to Help Channel**"),
         description=(
             str(inter.user.name)
-
             + " redirected a message by "
             + str(inter.user.name)
-
             + "! \nMessage Link: <#"
             + str(inter.channel.id)
             + ">"
@@ -174,7 +169,6 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
         title=("**`/syntax` Command**"),
         description=(
             str(inter.user.name)
-
             + " looked up the following command: `"
             + str(command)
             + "`"
@@ -272,9 +266,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         color=disnake.Colour.orange(),
         title=("**`/folderstructure` Command**"),
         description=(
-            str(inter.user.name)
-
-            + " looked up the folderstructure of `resourcepacks`"
+            str(inter.user.name) + " looked up the folderstructure of `resourcepacks`"
         ),
     )
     get_log_channel()
@@ -334,9 +326,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         color=disnake.Colour.orange(),
         title=("**`/folderstructure` Command**"),
         description=(
-            str(inter.user.name)
-
-            + " looked up the folderstructure of `datapacks`"
+            str(inter.user.name) + " looked up the folderstructure of `datapacks`"
         ),
     )
     get_log_channel()
@@ -375,11 +365,7 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
         color=disnake.Colour.orange(),
         title=("**`/invite` Command**"),
         description=(
-            str(inter.user.name)
-
-            + " looked up the invite of `"
-            + str(invite)
-            + "`"
+            str(inter.user.name) + " looked up the invite of `" + str(invite) + "`"
         ),
     )
     get_log_channel()
@@ -440,7 +426,6 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         title=("**`/packformat` Command**"),
         description=(
             str(inter.user.name)
-
             + " looked up the packformat history of `resourcepacks`"
         ),
     )
@@ -495,9 +480,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         color=disnake.Colour.orange(),
         title=("**`/packformat` Command**"),
         description=(
-            str(inter.user.name)
-
-            + " looked up the packformat history of `datapacks`"
+            str(inter.user.name) + " looked up the packformat history of `datapacks`"
         ),
     )
     get_log_channel()
@@ -530,7 +513,7 @@ async def on_message(message):
             description=(
                 "Created a thread for "
                 + message.author.name
-                    + str(message.author.discriminator)
+                + str(message.author.discriminator)
                 + "'s message in <#935566919933755432>"
             ),
         )
@@ -546,7 +529,7 @@ async def on_message(message):
             description=(
                 "Reacted with :wave: to "
                 + message.author.name
-                    + str(message.author.discriminator)
+                + str(message.author.discriminator)
                 + "'s message in <#936721793677414490>"
             ),
         )
