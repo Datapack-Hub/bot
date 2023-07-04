@@ -45,8 +45,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
             title=("**Redirect to Help Channel**"),
             description=(
                 str(inter.user.name)
-                + "#"
-                + str(inter.user.discriminator)
+        
                 + " tried using this in a different server lol"
             ),
         )
@@ -65,8 +64,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
             title=("**Redirect to Help Channel**"),
             description=(
                 str(inter.user.name)
-                + "#"
-                + str(inter.user.discriminator)
+        
                 + "> tried redirecting a message by <@"
                 + str(inter.target.author.id)
                 + "> \nMessage Link: <#"
@@ -105,12 +103,10 @@ async def claim(inter: disnake.MessageCommandInteraction):
         title=("**Redirect to Help Channel**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " redirected a message by "
             + str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + "! \nMessage Link: <#"
             + str(inter.channel.id)
             + ">"
@@ -178,8 +174,7 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
         title=("**`/syntax` Command**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " looked up the following command: `"
             + str(command)
             + "`"
@@ -278,8 +273,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         title=("**`/folderstructure` Command**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " looked up the folderstructure of `resourcepacks`"
         ),
     )
@@ -341,8 +335,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         title=("**`/folderstructure` Command**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " looked up the folderstructure of `datapacks`"
         ),
     )
@@ -383,8 +376,7 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
         title=("**`/invite` Command**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " looked up the invite of `"
             + str(invite)
             + "`"
@@ -448,8 +440,7 @@ async def resourcepack(inter: disnake.ApplicationCommandInteraction):
         title=("**`/packformat` Command**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " looked up the packformat history of `resourcepacks`"
         ),
     )
@@ -505,8 +496,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         title=("**`/packformat` Command**"),
         description=(
             str(inter.user.name)
-            + "#"
-            + str(inter.user.discriminator)
+
             + " looked up the packformat history of `datapacks`"
         ),
     )
@@ -540,8 +530,7 @@ async def on_message(message):
             description=(
                 "Created a thread for "
                 + message.author.name
-                + "#"
-                + str(message.author.discriminator)
+                    + str(message.author.discriminator)
                 + "'s message in <#935566919933755432>"
             ),
         )
@@ -557,8 +546,7 @@ async def on_message(message):
             description=(
                 "Reacted with :wave: to "
                 + message.author.name
-                + "#"
-                + str(message.author.discriminator)
+                    + str(message.author.discriminator)
                 + "'s message in <#936721793677414490>"
             ),
         )
