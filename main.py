@@ -154,6 +154,7 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
                     dl = "`trigger <objective>`\n   Adds `1` to the current value of `<objective>`.\n`trigger <objective> add <value>`\n    Adds `<value>` to the current value of `<objective>`.\n?`trigger <objective> set <value>`\n Sets the value of `<objective>` to `<value>`."
 
                 if command.lower != "trigger":
+                    dl = h2.find_next("dl")
                     description_v2 = md(str(dl), convert=["code", "li", "ul"]).replace(
                         "/wiki", "https://minecraft.fandom.com/wiki"
                     )
