@@ -122,6 +122,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
 
 # SLASH COMMANDS
 
+
 # /syntax
 @bot.slash_command(
     title="syntax", description="Shows the correct syntax of any minecraft command"
