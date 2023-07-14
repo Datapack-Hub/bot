@@ -88,7 +88,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
     )
 
     embed.set_author(
-        name=("Requested by " + inter.author.name + "#" + inter.author.discriminator),
+        name=("Requested by " + inter.author.name),
         icon_url=inter.author.display_avatar,
     )
 
@@ -117,7 +117,6 @@ async def claim(inter: disnake.MessageCommandInteraction):
 
 
 # SLASH COMMANDS
-
 
 # /syntax
 @bot.slash_command(
@@ -202,6 +201,17 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                     title="Resolve Help Channel",
                     description=":white_check_mark:   Marked this channel as resolved!",
                 )
+                    # Logging
+                embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**`/resolve` Command**"),
+                description=(
+                    str(inter.user.name)
+                    + " resolved a help channel`"
+                ),
+                )
+                get_log_channel()
+                await channel.send(embed=embed)
                 await inter.response.send_message(embed=embed)
             else:
                 embed = disnake.Embed(
@@ -300,7 +310,7 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
         ├── structures
         ├── chat_type
         ├── damage_type
-        │   ├── tags 
+        ├── tags 
         │   ├── blocks
         │   ├── entity_types
         │   ├── fluids
@@ -504,8 +514,82 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
     await channel.send(embed=embed)
 
 
-# OTHER EVENTS
+# /info
+@bot.slash_command()
+async def info(inter):
+    pass
 
+#/info logs
+@info.sub_command(description="Shows you how to access the minecraft logs")
+async def logs(inter: disnake.ApplicationCommandInteraction):
+    
+    embed = disnake.Embed(
+        color=disnake.Color.orange(),
+        title="Logs :wood:",
+        description="The logs are where Minecraft displays errors when something goes wrong and can thus help you gain information about why something isn't working for you! \nTo open the logs:\n 1. **Enable** logs in the Minecraft **Launcher** \n2. **Start** your **game** (or restart it if you already have an open instance) \n3. Enjoy **spotting errors** getting much **easier**!",
+    )
+    embed.set_image(url="https://media.discordapp.net/attachments/1129493191847071875/1129494068603396096/how-to-logs.png?width=1277&height=897")
+    await inter.response.send_message(embed=embed)
+
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/info` Command**"),
+        description=(
+            str(inter.user.name)
+            + " gained knowledge about `Logs`!"
+        ),
+    )
+    get_log_channel()
+    await channel.send(embed=embed)
+
+
+#/info me
+@info.sub_command(description="Shows some cool information about me (this bot)!")
+async def me(inter: disnake.ApplicationCommandInteraction):
+    
+    embed = disnake.Embed(
+        color=disnake.Color.orange(),
+        title="Datapack Helper <:datapackhelper:1129499893216579614>",
+        description="Woah, you are interested in me? :exploding_head: \nWell of course I would be too! :sunglasses: \nI am a (some would argue the greatest :fire:) bot to help you with everything datapacks! Wether you are looking for a simple template, forgot how to enable the logs or want to know which pack format is the latest, I got you covered! :cold_face: :hot_face:\nAll of this is made possible by the amazing team of Datapack Hub! :duck:",
+    )
+    await inter.response.send_message(embed=embed)
+
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/info` Command**"),
+        description=(
+            str(inter.user.name)
+            + " gained knowledge about `our really cool bot`!"
+        ),
+    )
+    get_log_channel()
+    await channel.send(embed=embed)
+    
+#/info editor
+@info.sub_command(description="Shows information about our editor of choice!")
+async def editor(inter: disnake.ApplicationCommandInteraction):
+    
+    embed = disnake.Embed(
+        color=disnake.Color.orange(),
+        title="Datapack Helper",
+        description="While you can make datapacks using any ordinary text editor, our prefered editor of choice is [VSCode](https://code.visualstudio.com/)! \nIt is aviable for Windows, Linux and MacOS (which means it runs on almost all devices) and has lots of great extensions which make the creation of datapacks a whole lot easier!\n\nOur favourite VSCode extensions are:\n[language-mcfunction](https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction) - Provides beautiful syntax highlighting for .mcfunction\n[Data-pack Helper Plus](https://marketplace.visualstudio.com/items?itemName=SPGoding.datapack-language-server) - Despite how \"datapack\" is spelled in the title, this adds some really helpful features like auto completion for commands!\n[NBT Viewer](https://marketplace.visualstudio.com/items?itemName=Misodee.vscode-nbt) - Allows you to view 3D models of your `.nbt` files, directly in VSCode!\n[Datapack Icons](https://marketplace.visualstudio.com/items?itemName=SuperAnt.mc-dp-icons) - Adds cool icons to datapack folders and files",
+    )
+    await inter.response.send_message(embed=embed)
+
+    # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.orange(),
+        title=("**`/info` Command**"),
+        description=(
+            str(inter.user.name)
+            + " gained knowledge about `vscode`!"
+        ),
+    )
+    get_log_channel()
+    await channel.send(embed=embed)
+# OTHER EVENTS
 
 # ON MESSAGE
 @bot.event
@@ -530,7 +614,6 @@ async def on_message(message):
             description=(
                 "Created a thread for "
                 + message.author.name
-                    + str(message.author.discriminator)
                 + "'s message in <#935566919933755432>"
             ),
         )
@@ -546,7 +629,6 @@ async def on_message(message):
             description=(
                 "Reacted with :wave: to "
                 + message.author.name
-                    + str(message.author.discriminator)
                 + "'s message in <#936721793677414490>"
             ),
         )
