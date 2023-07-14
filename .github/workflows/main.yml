@@ -65,7 +65,7 @@ jobs:
         pip install ruff
     - name: Run ruff
       run: |
-        ruff . --fix --exit-zero 
+        ruff . --fix --ignore E501
     - uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Apply linting
@@ -92,5 +92,5 @@ jobs:
         pip install bandit
     - name: Run bandit
       run: |
-        bandit . -r --exit-zero 
+        bandit . -r
       # --exit-zero so it doesn't yell
