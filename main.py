@@ -18,7 +18,18 @@ logs_channel = 1108080080711852042
 description = ""
 
 # WEIRD ENUM STUFF
-invites = commands.option_enum(["datapack hub", "minecraft commands", "shader labs", "bot", "smithed", "blockbench", "optifine", "fabric"])
+invites = commands.option_enum(
+    [
+        "datapack hub",
+        "minecraft commands",
+        "shader labs",
+        "bot",
+        "smithed",
+        "blockbench",
+        "optifine",
+        "fabric",
+    ]
+)
 
 
 # FUNCTIONS
@@ -152,8 +163,7 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
                     )
                 else:
                     description_v2 = dl
-                
-            
+
                 print(description_v2)
 
     embed = disnake.Embed(
@@ -161,10 +171,12 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
         description=description_v2,
         color=disnake.Colour.orange(),
     )
-    
+
     embed.set_footer(
-        text = ("Information borrowed from: minecraft.fandom.com/wiki/Commands/" + command)
+        text=(
+            "Information borrowed from: minecraft.fandom.com/wiki/Commands/" + command
         )
+    )
 
     await inter.response.send_message(embed=embed)
 
@@ -402,7 +414,7 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
             title=("**Fabric Invite**"),
             description="Join The Fabric Project for information/help regarding Fabric using this link: https://discord.gg/DtevV9NmaR",
         )
-    
+
     await inter.response.send_message(embed=embed)
     # Logging
     embed = disnake.Embed(
