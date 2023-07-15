@@ -18,7 +18,7 @@ logs_channel = 1108080080711852042
 description = ""
 
 # WEIRD ENUM STUFF
-invites = commands.option_enum(["datapack hub", "minecraft commands", "shader labs"])
+invites = commands.option_enum(["datapack hub", "minecraft commands", "shader labs", "bot", "smithed", "blockbench", "optifine", "fabric"])
 
 
 # FUNCTIONS
@@ -152,7 +152,8 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
                     )
                 else:
                     description_v2 = dl
-
+                
+            
                 print(description_v2)
 
     embed = disnake.Embed(
@@ -160,6 +161,10 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
         description=description_v2,
         color=disnake.Colour.orange(),
     )
+    
+    embed.set_footer(
+        text = ("Information borrowed from: minecraft.fandom.com/wiki/Commands/" + command)
+        )
 
     await inter.response.send_message(embed=embed)
 
@@ -358,15 +363,46 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**Minecraft Commands Invite**"),
-            description="Join Minecraft Commands for help with your Datapacks using this link: https://discord.gg/QAFXFtZ",
+            description="Join Minecraft Commands for help regarding your Datapacks using this link: https://discord.gg/QAFXFtZ",
         )
 
     elif invite == "shader labs":
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**ShaderLABS Invite**"),
-            description="Join ShaderLABS for help regarding shaders using this link: https://discord.gg/RpzWN9S",
+            description="Join ShaderLABS for help regarding shaders using this link: https://discord.gg/Ayav9YPQra",
         )
+    elif invite == "bot":
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Datapack Helper Invite**"),
+            description="Add the Datapack Helper bot to your server using this link: *COMING SOON*",
+        )
+    elif invite == "smithed":
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Smithed Invite**"),
+            description="Join Smithed for information/help regarding the smithed datapacking conventions using this link: https://smithed.dev/discord",
+        )
+    elif invite == "blockbench":
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Blockbench Invite**"),
+            description="Join Blockbench for help regarding modeling and Blockbench using this link: https://discord.gg/blockbench",
+        )
+    elif invite == "optifine":
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Optifine Invite**"),
+            description="Join Optifine for help regarding (problems with) Optifine using this link: https://discord.gg/optifine",
+        )
+    elif invite == "fabric":
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Fabric Invite**"),
+            description="Join The Fabric Project for information/help regarding Fabric using this link: https://discord.gg/DtevV9NmaR",
+        )
+    
     await inter.response.send_message(embed=embed)
     # Logging
     embed = disnake.Embed(
@@ -530,7 +566,7 @@ async def me(inter: disnake.ApplicationCommandInteraction):
     embed = disnake.Embed(
         color=disnake.Color.orange(),
         title="Datapack Helper <:datapackhelper:1129499893216579614>",
-        description="Woah, you are interested in me? :exploding_head: \nWell of course I would be too! :sunglasses: \nI am a (some would argue the greatest :fire:) bot to help you with everything datapacks! Wether you are looking for a simple template, forgot how to enable the logs or want to know which pack format is the latest, I got you covered! :cold_face: :hot_face:\nAll of this is made possible by the amazing team of Datapack Hub! :duck:",
+        description="Woah, you are interested in me? :exploding_head: \nWell of course, I would be too! :sunglasses: \nI am a (some would argue the greatest :fire:) bot to help you with everything datapacks! Wether you are looking for a simple template, forgot how to enable the logs or want to know which pack format is the latest, I got you covered! :cold_face: :hot_face:\nAll of this is made possible by the amazing team of Datapack Hub! :duck:",
     )
     await inter.response.send_message(embed=embed)
 
