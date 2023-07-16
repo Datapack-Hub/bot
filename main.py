@@ -1,3 +1,5 @@
+# invite link, don't share for now: https://discord.com/oauth2/authorize?client_id=1108074519308017734&scope=bot&permissions=517611048000
+
 import disnake
 import requests
 from bs4 import BeautifulSoup
@@ -19,7 +21,7 @@ description = ""
 
 # WEIRD ENUM STUFF
 invites = commands.option_enum(["datapack hub", "minecraft commands", "shader labs", "bot", "smithed", "blockbench", "optifine", "fabric"])
-
+infos = commands.option_enum(["logs", "me", "editor"])
 
 # FUNCTIONS
 def get_log_channel():
@@ -28,7 +30,6 @@ def get_log_channel():
 
 
 # MESSAGE COMMANDS
-
 
 # redirect to help channel
 @bot.message_command(name="Redirect to Help Channel")
@@ -532,78 +533,72 @@ async def datapack(inter: disnake.ApplicationCommandInteraction):
 
 
 # /info
-@bot.slash_command()
-async def info(inter):
-    pass
-
-
-# /info logs
-@info.sub_command(description="Shows you how to access the minecraft logs")
-async def logs(inter: disnake.ApplicationCommandInteraction):
-    embed = disnake.Embed(
-        color=disnake.Color.orange(),
-        title="Logs :wood:",
-        description="The logs are where Minecraft displays errors when something goes wrong and can thus help you gain information about why something isn't working for you! \nTo open the logs:\n 1. **Enable** logs in the Minecraft **Launcher** \n2. **Start** your **game** (or restart it if you already have an open instance) \n3. Enjoy **spotting errors** getting much **easier**!",
-    )
-    embed.set_image(
-        url="https://media.discordapp.net/attachments/1129493191847071875/1129494068603396096/how-to-logs.png?width=1277&height=897"
-    )
+@bot.slash_command(
+    title="info",
+    description="Gives you more information about an external feature to improve your datapacking experience",
+)
+async def info(inter: disnake.ApplicationCommandInteraction, info: infos):
+    if info == "logs":
+        embed = disnake.Embed(
+            color=disnake.Color.orange(),
+            title="Logs :wood:",
+            description="The logs are where Minecraft displays errors when something goes wrong and can thus help you gain information about why something isn't working for you! \nTo open the logs:\n 1. **Enable** logs in the Minecraft **Launcher** \n2. **Start** your **game** (or restart it if you already have an open instance) \n3. Enjoy **spotting errors** getting much **easier**!",
+        )
+        embed.set_image(
+            url="https://media.discordapp.net/attachments/1129493191847071875/1129494068603396096/how-to-logs.png?width=1277&height=897"
+        )
+        
+    elif info == "me":
+        embed = disnake.Embed(
+            color=disnake.Color.orange(),
+            title="Datapack Helper <:datapackhelper:1129499893216579614>",
+            description="Woah, you are interested in me? :exploding_head: \nWell of course, I would be too! :sunglasses: \nI am a (some would argue the greatest :fire:) bot to help you with everything datapacks! Wether you are looking for a simple template, forgot how to enable the logs or want to know which pack format is the latest, I got you covered! :cold_face: :hot_face:\nAll of this is made possible by the amazing team of Datapack Hub! :duck:",
+        )
+        
+    elif info == "editor":
+        embed = disnake.Embed(
+            color=disnake.Color.orange(),
+            title="Datapack Helper",
+            description='While you can make datapacks using any ordinary text editor, our prefered editor of choice is [VSCode](https://code.visualstudio.com/)! \nIt is aviable for Windows, Linux and MacOS (which means it runs on almost all devices) and has lots of great extensions which make the creation of datapacks a whole lot easier!\n\nOur favourite VSCode extensions are:\n[language-mcfunction](https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction) - Provides beautiful syntax highlighting for .mcfunction\n[Data-pack Helper Plus](https://marketplace.visualstudio.com/items?itemName=SPGoding.datapack-language-server) - Despite how "datapack" is spelled in the title, this adds some really helpful features like auto completion for commands!\n[NBT Viewer](https://marketplace.visualstudio.com/items?itemName=Misodee.vscode-nbt) - Allows you to view 3D models of your `.nbt` files, directly in VSCode!\n[Datapack Icons](https://marketplace.visualstudio.com/items?itemName=SuperAnt.mc-dp-icons) - Adds cool icons to datapack folders and files',
+        )
+        
     await inter.response.send_message(embed=embed)
-
-    # Logging
     embed = disnake.Embed(
         color=disnake.Colour.orange(),
         title=("**`/info` Command**"),
-        description=(str(inter.user.name) + " gained knowledge about `Logs`!"),
+        description=(str(inter.user.name) + " gained knowledge about `" + info + "`!"),
     )
     get_log_channel()
     await channel.send(embed=embed)
 
-
-# /info me
-@info.sub_command(description="Shows some cool information about me (this bot)!")
-async def me(inter: disnake.ApplicationCommandInteraction):
+# /suggest 
+@bot.slash_command(
+    title="suggest",
+    description="Suggest a new feature for the bot",
+)
+async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str):
     embed = disnake.Embed(
         color=disnake.Color.orange(),
-        title="Datapack Helper <:datapackhelper:1129499893216579614>",
-        description="Woah, you are interested in me? :exploding_head: \nWell of course, I would be too! :sunglasses: \nI am a (some would argue the greatest :fire:) bot to help you with everything datapacks! Wether you are looking for a simple template, forgot how to enable the logs or want to know which pack format is the latest, I got you covered! :cold_face: :hot_face:\nAll of this is made possible by the amazing team of Datapack Hub! :duck:",
-    )
+        title="Submitted Suggestion!",
+        description=("Sucessfully submitted your suggestion \"" + suggestion + "\"\nIf you're lucky (or it was just really good), you might see it in one of the next bot updates!")
+    )  
+    
     await inter.response.send_message(embed=embed)
-
-    # Logging
+    
     embed = disnake.Embed(
-        color=disnake.Colour.orange(),
-        title=("**`/info` Command**"),
-        description=(
-            str(inter.user.name) + " gained knowledge about `our really cool bot`!"
-        ),
+        color=disnake.Color.green(),
+        title="New Suggestion!",
+        description=suggestion
     )
-    get_log_channel()
+    
+    embed.set_author(
+        name=("Suggested by " + inter.user.name),
+        icon_url=inter.user.display_avatar,
+    )
+    channel = bot.get_channel(1129836163365085204)
     await channel.send(embed=embed)
-
-
-# /info editor
-@info.sub_command(description="Shows information about our editor of choice!")
-async def editor(inter: disnake.ApplicationCommandInteraction):
-    embed = disnake.Embed(
-        color=disnake.Color.orange(),
-        title="Datapack Helper",
-        description='While you can make datapacks using any ordinary text editor, our prefered editor of choice is [VSCode](https://code.visualstudio.com/)! \nIt is aviable for Windows, Linux and MacOS (which means it runs on almost all devices) and has lots of great extensions which make the creation of datapacks a whole lot easier!\n\nOur favourite VSCode extensions are:\n[language-mcfunction](https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction) - Provides beautiful syntax highlighting for .mcfunction\n[Data-pack Helper Plus](https://marketplace.visualstudio.com/items?itemName=SPGoding.datapack-language-server) - Despite how "datapack" is spelled in the title, this adds some really helpful features like auto completion for commands!\n[NBT Viewer](https://marketplace.visualstudio.com/items?itemName=Misodee.vscode-nbt) - Allows you to view 3D models of your `.nbt` files, directly in VSCode!\n[Datapack Icons](https://marketplace.visualstudio.com/items?itemName=SuperAnt.mc-dp-icons) - Adds cool icons to datapack folders and files',
-    )
-    await inter.response.send_message(embed=embed)
-
-    # Logging
-    embed = disnake.Embed(
-        color=disnake.Colour.orange(),
-        title=("**`/info` Command**"),
-        description=(str(inter.user.name) + " gained knowledge about `vscode`!"),
-    )
-    get_log_channel()
-    await channel.send(embed=embed)
-
 
 # OTHER EVENTS
-
 
 # ON MESSAGE
 @bot.event
