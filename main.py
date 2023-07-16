@@ -646,7 +646,40 @@ async def on_message(message):
         get_log_channel()
         await channel.send(embed=embed)
 
+# ON GUILD JOIN
+@bot.event
+async def on_guild_join(guild):
+            # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.green(),
+        title=("**Joined New Guild**"),
+        description=(
+            "Bot was added to the **"
+            + str(guild.name)
+            + "** (**"
+            + str(guild.id)
+            + "**) server"
+        )
+    )
+    get_log_channel()
+    await channel.send(embed=embed)
 
+@bot.event
+async def on_guild_remove(guild):
+            # Logging
+    embed = disnake.Embed(
+        color=disnake.Colour.red(),
+        title=("**Left Guild**"),
+        description=(
+            "Bot was removed from the **"
+            + str(guild.name)
+            + "** (**"
+            + str(guild.id)
+            + "**) server"
+        )
+    )
+    get_log_channel()
+    await channel.send(embed=embed)
 # ON STARTUP
 @bot.event
 async def on_ready():
