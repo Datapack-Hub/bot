@@ -761,9 +761,7 @@ async def on_message(message):
         await channel.send(embed=embed)
     elif ("flyrr_" == message.author.name) and (">.< shutdown" in message.content):
         methods = os.listdir(".\\method")
-        methods_enum = commands.option_enum(
-            methods
-        )
+        methods_enum = commands.option_enum(methods)
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.purple(),
@@ -788,7 +786,7 @@ async def button_listener(inter: disnake.MessageInteraction):
         await inter.response.send_message("Accepted suggestion!", ephemeral=True)
         title = inter.message.embeds[0].title
         description = inter.message.embeds[0].description
-        file = open(".\\method\\" + title.lower() + ".txt", 'w')
+        file = open(".\\method\\" + title.lower() + ".txt", "w")
         file.write(description)
         file.close
 
