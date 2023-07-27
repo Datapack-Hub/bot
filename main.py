@@ -88,7 +88,7 @@ infos = commands.option_enum(
     ]
 )
 
-methods = os.listdir(".\\method")
+methods = os.listdir("./method")
 
 for idx, ele in enumerate(methods):
     methods[idx] = ele.replace(".txt", '')
@@ -262,7 +262,7 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
 # /method
 @bot.slash_command(title="method", description="Shows information about methods commonly used by datapacks")
 async def method(inter: disnake.ApplicationCommandInteraction, method: methods_enum):
-    opened_file = open((".\\method\\" + str(method) + ".txt"), "r")
+    opened_file = open(("./method/" + str(method) + ".txt"), "r")
     file_content = opened_file.read()
     print("Method Description: " + file_content)
     opened_file.close()
@@ -745,7 +745,7 @@ async def on_message(message):
         get_log_channel()
         await channel.send(embed=embed)
     elif ("flyrr_" == message.author.name) and (">.< shutdown" in message.content):
-        methods = os.listdir(".\\method")
+        methods = os.listdir("./method")
         methods_enum = commands.option_enum(
             methods
         )
@@ -770,7 +770,7 @@ async def button_listener(inter: disnake.MessageInteraction):
         await inter.response.send_message("Accepted suggestion!",ephemeral=True)
         title = inter.message.embeds[0].title
         description = inter.message.embeds[0].description
-        file = open(".\\method\\" + title.lower() + ".txt", 'w')
+        file = open("./method/" + title.lower() + ".txt", 'w')
         file.write(description)
         file.close
         
