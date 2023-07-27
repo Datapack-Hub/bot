@@ -26,10 +26,31 @@ bot = commands.Bot(
 logs_channel = 1108080080711852042
 description = ""
 
+# WEIRD ENUM STUFF
+invites = commands.option_enum(
+    [
+        "datapack hub",
+        "minecraft commands",
+        "shader labs",
+        "bot",
+        "smithed",
+        "blockbench",
+        "optifine",
+        "fabric",
+    ]
+)
+
+infos = commands.option_enum(["logs", "me", "editor"])
+
+methods = os.listdir("./method")
+
+for idx, ele in enumerate(methods):
+    methods[idx] = ele.replace(".txt", "")
+
+methods_enum = commands.option_enum(methods)
+
 # CLASSES
-
-
-class MyModal(disnake.ui.Modal):
+class SubmitMethod(disnake.ui.Modal):
     def __init__(self) -> None:
         components = [
             disnake.ui.TextInput(
@@ -53,7 +74,7 @@ class MyModal(disnake.ui.Modal):
             title="Submit New Method", custom_id="submitmethod", components=components
         )
 
-    async def callback(self, inter: disnake.ModalInteraction) -> None:
+    async def callback(self, inter: disnake.ModalInteraction):
         method_name = inter.text_values["name"]
         method_content = inter.text_values["description"]
 
@@ -65,44 +86,83 @@ class MyModal(disnake.ui.Modal):
             label="Accept",
             custom_id="accept_method_button",
             style=disnake.ButtonStyle.green,
+            emoji="✅"
         )
         deny_button = disnake.ui.Button(
-            label="Deny", custom_id="deny_method_button", style=disnake.ButtonStyle.red
+            label="Deny", custom_id="deny_method_button", style=disnake.ButtonStyle.red, emoji="🚫"
+        )
+        edit_button = disnake.ui.Button(
+            label="Edit", custom_id="edit_method_button", style=disnake.ButtonStyle.secondary, emoji="✏️"
         )
 
         channel = bot.get_channel(1134048960244363294)
-        await channel.send(embed=embed, components=[accept_button, deny_button])
+        await channel.send(embed=embed, components=[accept_button, deny_button, edit_button])
 
         await inter.response.send_message(
             "Successfully submitted method suggestion!", ephemeral=True
         )
 
-    async def on_error(self, error: Exception, inter: disnake.ModalInteraction) -> None:
+    async def on_error(self, error: Exception, inter: disnake.ModalInteraction):
         await inter.response.send_message("Oops, something went wrong.", ephemeral=True)
+        
+class EditMethod(disnake.ui.Modal):
+    def __init__(self, id: int, title: str, description: str) -> None:
+        components = [
+            disnake.ui.TextInput(
+                label="Title",
+                placeholder="Title of method",
+                custom_id="name",
+                style=disnake.TextInputStyle.short,
+                min_length=5,
+                max_length=50,
+                value=title
+            ),
+            disnake.ui.TextInput(
+                label="Description",
+                placeholder="Description of method",
+                custom_id="description",
+                style=disnake.TextInputStyle.paragraph,
+                min_length=10,
+                max_length=1024,
+                value=description
+            ),
+        ]
+        super().__init__(
+            title="Edit Method", custom_id="submitmethod_"+str(id), components=components
+        )
 
+    async def callback(self, inter: disnake.ModalInteraction):
+        method_name = inter.text_values["name"]
+        method_content = inter.text_values["description"]
+        
+        msg_id = inter.custom_id.split("_")[1]
 
-# WEIRD ENUM STUFF
-invites = commands.option_enum(
-    [
-        "datapack hub",
-        "minecraft commands",
-        "shader labs",
-        "bot",
-        "smithed",
-        "blockbench",
-        "optifine",
-        "fabric",
-    ]
-)
+        embed = disnake.Embed(
+            title=method_name, description=method_content, color=disnake.Color.orange()
+        )
 
-infos = commands.option_enum(["logs", "me", "editor"])
+        accept_button = disnake.ui.Button(
+            label="Accept",
+            custom_id="accept_method_button",
+            style=disnake.ButtonStyle.green,
+            emoji="✅"
+        )
+        deny_button = disnake.ui.Button(
+            label="Deny", custom_id="deny_method_button", style=disnake.ButtonStyle.red, emoji="🚫"
+        )
+        edit_button = disnake.ui.Button(
+            label="Edit", custom_id="edit_method_button", style=disnake.ButtonStyle.secondary, emoji="✏️"
+        )
 
-methods = os.listdir("./method")
+        msg = bot.get_message(msg_id)
+        await msg.edit(embed=embed, components=[accept_button, deny_button, edit_button])
 
-for idx, ele in enumerate(methods):
-    methods[idx] = ele.replace(".txt", "")
+        await inter.response.send_message(
+            "Successfully edited method suggestion!", ephemeral=True
+        )
 
-methods_enum = commands.option_enum(methods)
+    async def on_error(self, error: Exception, inter: disnake.ModalInteraction):
+        await inter.response.send_message("Oops, something went wrong.", ephemeral=True)
 
 
 # FUNCTIONS
@@ -292,7 +352,7 @@ async def method(inter: disnake.ApplicationCommandInteraction, method: methods_e
     description="Submit a method to be usable by the `/method` command",
 )
 async def submitmethod(inter: disnake.CommandInteraction):
-    await inter.response.send_modal(modal=MyModal())
+    await inter.response.send_modal(modal=SubmitMethod())
 
 
 # /resolve
@@ -806,6 +866,9 @@ async def button_listener(inter: disnake.MessageInteraction):
         )
 
         await inter.message.edit(embed=embed, components=[])
+        
+    if inter.component.custom_id == "edit_method_button":
+        await inter.response.send_modal(EditMethod(inter.message.id,inter.message.embeds[0].title,inter.message.embeds[0].description))
 
 
 # ON GUILD JOIN
