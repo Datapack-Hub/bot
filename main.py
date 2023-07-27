@@ -788,7 +788,7 @@ async def button_listener(inter: disnake.MessageInteraction):
         await inter.response.send_message("Accepted suggestion!", ephemeral=True)
         title = inter.message.embeds[0].title
         description = inter.message.embeds[0].description
-        file = open(".\\method\\" + title.lower() + ".txt", 'w')
+        file = open("./method/" + title.lower() + ".txt", 'w')
         file.write(description)
         file.close
 
