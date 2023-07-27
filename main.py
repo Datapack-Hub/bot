@@ -112,7 +112,7 @@ class SubmitMethod(disnake.ui.Modal):
         )
 
     async def on_error(self, error: Exception, inter: disnake.ModalInteraction):
-        await inter.response.send_message("Oops, something went wrong.", ephemeral=True)
+        await inter.response.send_message(f"Oops, something went wrong.```\n{' '.join(error.args)}```", ephemeral=True)
 
 
 class EditMethod(disnake.ui.Modal):
@@ -182,7 +182,7 @@ class EditMethod(disnake.ui.Modal):
         )
 
     async def on_error(self, error: Exception, inter: disnake.ModalInteraction):
-        await inter.response.send_message("Oops, something went wrong.", ephemeral=True)
+        await inter.response.send_message(f"Oops, something went wrong.```\n{' '.join(error.args)}```", ephemeral=True)
 
 
 # FUNCTIONS
