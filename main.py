@@ -6,7 +6,9 @@ from bs4 import BeautifulSoup
 from disnake.ext import commands
 from bot_token import token
 from markdownify import markdownify as md
-
+import os
+import asyncio
+       
 intents = disnake.Intents.all()
 
 activity = disnake.Activity(
@@ -14,11 +16,56 @@ activity = disnake.Activity(
     type=disnake.ActivityType.watching,
 )
 
-bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
+bot = commands.Bot(command_prefix="?", intents=intents, activity=activity,test_guilds=[935560260725379143])
 
 logs_channel = 1108080080711852042
 description = ""
+    
+# CLASSES
 
+class MyModal(disnake.ui.Modal):
+    def __init__(self) -> None:
+        components=[
+            disnake.ui.TextInput(
+                label="Title",
+                placeholder="Title of method",
+                custom_id="name",
+                style=disnake.TextInputStyle.short,
+                min_length=5,
+                max_length=50,
+            ),
+            disnake.ui.TextInput(
+                label="Description",
+                placeholder="Description of method",
+                custom_id="description",
+                style=disnake.TextInputStyle.paragraph,
+                min_length=10,
+                max_length=1024,
+            ),
+        ]
+        super().__init__(title="Submit New Method", custom_id="submitmethod", components=components)
+
+    async def callback(self, inter: disnake.ModalInteraction) -> None:
+        method_name = inter.text_values["name"]
+        method_content = inter.text_values["description"]
+
+        embed = disnake.Embed(
+            title=method_name,
+            description=method_content,
+            color=disnake.Color.orange()
+            )
+        
+        accept_button = disnake.ui.Button(label="Accept", custom_id="accept_method_button", style=disnake.ButtonStyle.green)
+        deny_button = disnake.ui.Button(label="Deny", custom_id="deny_method_button", style=disnake.ButtonStyle.red)
+        
+        channel = bot.get_channel(1134048960244363294)
+        await channel.send(embed=embed,components=[accept_button,deny_button])
+
+        await inter.response.send_message("Successfully submitted method suggestion!",ephemeral=True)
+
+    async def on_error(self, error: Exception, inter: disnake.ModalInteraction) -> None:
+        await inter.response.send_message("Oops, something went wrong.", ephemeral=True)
+        
 # WEIRD ENUM STUFF
 invites = commands.option_enum(
     [
@@ -32,8 +79,23 @@ invites = commands.option_enum(
         "fabric",
     ]
 )
-infos = commands.option_enum(["logs", "me", "editor"])
 
+infos = commands.option_enum(
+    [
+        "logs",
+        "me",
+        "editor"
+    ]
+)
+
+methods = os.listdir(".\\method")
+
+for idx, ele in enumerate(methods):
+    methods[idx] = ele.replace(".txt", '')
+
+methods_enum = commands.option_enum(
+    methods
+)
 
 # FUNCTIONS
 def get_log_channel():
@@ -127,7 +189,6 @@ async def claim(inter: disnake.MessageCommandInteraction):
 
 # SLASH COMMANDS
 
-
 # /syntax
 @bot.slash_command(
     title="syntax", description="Shows the correct syntax of any minecraft command"
@@ -198,6 +259,27 @@ async def syntax(inter: disnake.ApplicationCommandInteraction, command: str):
     await channel.send(embed=embed)
 
 
+# /method
+@bot.slash_command(title="method", description="Shows information about methods commonly used by datapacks")
+async def method(inter: disnake.ApplicationCommandInteraction, method: methods_enum):
+    opened_file = open((".\\method\\" + str(method) + ".txt"), "r")
+    file_content = opened_file.read()
+    print("Method Description: " + file_content)
+    opened_file.close()
+    
+    embed = disnake.Embed(
+        title=method.title(),
+        description=file_content,
+        color=disnake.Colour.orange()
+    )
+    
+    await inter.response.send_message(embed=embed)
+
+# /submit-method
+@bot.slash_command(title="submitmethod", description="Submit a method to be usable by the `/method` command")
+async def submitmethod(inter: disnake.CommandInteraction):
+    await inter.response.send_modal(modal=MyModal())
+    
 # /resolve
 @bot.slash_command(title="resolve", description="Marks question as resolved")
 async def resolve(inter: disnake.ApplicationCommandInteraction):
@@ -662,7 +744,57 @@ async def on_message(message):
         )
         get_log_channel()
         await channel.send(embed=embed)
+    elif ("flyrr_" == message.author.name) and (">.< shutdown" in message.content):
+        methods = os.listdir(".\\method")
+        methods_enum = commands.option_enum(
+            methods
+        )
+        await message.reply("\*Bows down to you* \nWhatever your wish, master\n\*Shuts down*\nSee you soon, master >.<")
+        # Logging
+        embed = disnake.Embed(
+            color=disnake.Colour.purple(),
+            title=("**Magic** :sparkles:"),
+            description=(
+                "The bot was forced to shutdown by some strange magical power...\nNew Contents: `" + str(methods) +"`"
+            )
+        )
+        get_log_channel()
+        await channel.send(embed=embed)
+        await bot.close()
 
+# ON BUTTON CLICK
+
+@bot.listen("on_button_click")
+async def button_listener(inter: disnake.MessageInteraction):
+    if inter.component.custom_id == "accept_method_button":
+        await inter.response.send_message("Accepted suggestion!",ephemeral=True)
+        title = inter.message.embeds[0].title
+        description = inter.message.embeds[0].description
+        file = open(".\\method\\" + title.lower() + ".txt", 'w')
+        file.write(description)
+        file.close
+        
+        embed = disnake.Embed(
+            title=title,
+            description=description,
+            color=disnake.Color.green()
+            )
+        
+        await inter.message.edit(embed=embed,components=[])
+        
+    if inter.component.custom_id == "deny_method_button":
+        await inter.response.send_message("Denied suggestion!",ephemeral=True)
+        title = inter.message.embeds[0].title
+        description = inter.message.embeds[0].description
+        embed = disnake.Embed(
+            title=title,
+            description=description,
+            color=disnake.Color.red()
+            )
+        
+        await inter.message.edit(embed=embed,components=[])
+                      
+                                        
 # ON GUILD JOIN
 @bot.event
 async def on_guild_join(guild):
