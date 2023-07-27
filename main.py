@@ -795,10 +795,11 @@ async def button_listener(inter: disnake.MessageInteraction):
         await inter.message.edit(embed=embed,components=[])
                       
                                         
+
 # ON GUILD JOIN
 @bot.event
 async def on_guild_join(guild):
-            # Logging
+    # Logging
     embed = disnake.Embed(
         color=disnake.Colour.green(),
         title=("**Joined New Guild**"),
@@ -808,14 +809,15 @@ async def on_guild_join(guild):
             + "** (**"
             + str(guild.id)
             + "**) server"
-        )
+        ),
     )
     get_log_channel()
     await channel.send(embed=embed)
 
+
 @bot.event
 async def on_guild_remove(guild):
-            # Logging
+    # Logging
     embed = disnake.Embed(
         color=disnake.Colour.red(),
         title=("**Left Guild**"),
@@ -825,10 +827,12 @@ async def on_guild_remove(guild):
             + "** (**"
             + str(guild.id)
             + "**) server"
-        )
+        ),
     )
     get_log_channel()
     await channel.send(embed=embed)
+
+
 # ON STARTUP
 @bot.event
 async def on_ready():
