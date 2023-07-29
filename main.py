@@ -8,6 +8,7 @@ from bot_token import token
 from markdownify import markdownify as md
 import os
 import asyncio
+import variables
 
 intents = disnake.Intents.all()
 
@@ -20,10 +21,17 @@ bot = commands.Bot(
     command_prefix="?",
     intents=intents,
     activity=activity,
-    test_guilds=[935560260725379143],
+    test_guilds=variables.test_guilds,
 )
 
-logs_channel = 1108080080711852042
+logs_channel = variables.logs
+guild = variables.main_guild
+redirect_ban_role = variables.redirect_ban_role
+datapack_channel = variables.datapack_help_channel
+resourcepack_channel = variables.resourcepack_help_channel
+suggestion_channel = variables.suggestion_channel
+intro_channel = variables.intro_channel
+
 description = ""
 
 # WEIRD ENUM STUFF
@@ -93,7 +101,7 @@ class SubmitMethod(disnake.ui.Modal):
             label="Deny",
             custom_id="deny_method_button",
             style=disnake.ButtonStyle.red,
-            emoji="🗑️",
+            emoji="❌",
         )
         edit_button = disnake.ui.Button(
             label="Edit",
@@ -201,8 +209,8 @@ def get_log_channel():
 # redirect to help channel
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
-    redi_ban_role = bot.get_guild(935560260725379143).get_role(1108093399053111387)
-    if inter.guild.id != 935560260725379143:
+    redi_ban_role = bot.get_guild(guild).get_role(1108093399053111387)
+    if inter.guild.id != guild:
         await inter.response.send_message(
             "You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!",
             ephemeral=True,
@@ -244,12 +252,7 @@ async def claim(inter: disnake.MessageCommandInteraction):
     embed = disnake.Embed(
         color=disnake.Color.orange(),
         title="This question would be more fitting inside of a Help Channel!",
-        description="""It seems like someone here found your question to be 
-        more fitting in our help channels! \nHelp channels are the perfect 
-        place to ask questions and to be answered by anyone including our 
-        experienced helpers!\nVisit <#1051227454980755546> or 
-        <#1051225367807000706> if you require assistance.\nCheck out 
-        <#935570290317086841> for tips on asking questions efficiently.""",
+        description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#" + datapack_channel +"> or <\#" + resourcepack_channel + "> if you require assistance.\nCheck out <\#935570290317086841> for tips on asking questions efficiently.",
     )
 
     embed.set_author(
@@ -382,14 +385,14 @@ async def submitmethod(inter: disnake.CommandInteraction):
 # /resolve
 @bot.slash_command(title="resolve", description="Marks question as resolved")
 async def resolve(inter: disnake.ApplicationCommandInteraction):
-    helper_role = bot.get_guild(935560260725379143).get_role(935561184806060073)
+    helper_role = bot.get_guild(guild).get_role(redirect_ban_role)
 
     try:
         channel = inter.channel.parent.id
         if (inter.channel.owner.id == inter.author.id) or (
             helper_role in inter.author.roles
         ):
-            if channel == 1051225367807000706 or 1051227454980755546:
+            if channel == datapack_channel or resourcepack_channel:
                 resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
                 await inter.channel.add_tags(resolved_tag)
                 embed = disnake.Embed(
@@ -793,7 +796,7 @@ async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str)
         name=("Suggested by " + inter.user.name),
         icon_url=inter.user.display_avatar,
     )
-    channel = bot.get_channel(1129836163365085204)
+    channel = bot.get_channel(suggestion_channel)
     await channel.send(embed=embed)
 
 
@@ -803,32 +806,9 @@ async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str)
 # ON MESSAGE
 @bot.event
 async def on_message(message):
-    cc_channel = bot.get_channel(935566919933755432)
-    intro_channel = bot.get_channel(936721793677414490)
-
-    if message.channel == cc_channel:
-        if message.author.nick:
-            await cc_channel.create_thread(
-                name=(message.author.nick + "'s Creation"), message=message
-            )
-        else:
-            await cc_channel.create_thread(
-                name=(message.author.name + "'s Creation"), message=message
-            )
-
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**Community Creations Thread**"),
-            description=(
-                "Created a thread for "
-                + message.author.name
-                + "'s message in <#935566919933755432>"
-            ),
-        )
-        get_log_channel()
-        await channel.send(embed=embed)
-    elif message.channel == intro_channel:
+    intro_channel = bot.get_channel(intro_channel)
+    
+    if message.channel == intro_channel:
         await message.add_reaction("👋")
 
         # Logging
@@ -838,7 +818,7 @@ async def on_message(message):
             description=(
                 "Reacted with :wave: to "
                 + message.author.name
-                + "'s message in <#936721793677414490>"
+                + "'s message in <#" + intro_channel + ">"
             ),
         )
         get_log_channel()
