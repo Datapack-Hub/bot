@@ -252,7 +252,11 @@ async def claim(inter: disnake.MessageCommandInteraction):
     embed = disnake.Embed(
         color=disnake.Color.orange(),
         title="This question would be more fitting inside of a Help Channel!",
-        description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#" + datapack_channel +"> or <\#" + resourcepack_channel + "> if you require assistance.\nCheck out <\#935570290317086841> for tips on asking questions efficiently.",
+        description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#"
+        + datapack_channel
+        + "> or <\#"
+        + resourcepack_channel
+        + "> if you require assistance.\nCheck out <\#935570290317086841> for tips on asking questions efficiently.",
     )
 
     embed.set_author(
@@ -807,7 +811,7 @@ async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str)
 @bot.event
 async def on_message(message):
     intro_channel = bot.get_channel(intro_channel)
-    
+
     if message.channel == intro_channel:
         await message.add_reaction("👋")
 
@@ -818,7 +822,9 @@ async def on_message(message):
             description=(
                 "Reacted with :wave: to "
                 + message.author.name
-                + "'s message in <#" + intro_channel + ">"
+                + "'s message in <#"
+                + intro_channel
+                + ">"
             ),
         )
         get_log_channel()
