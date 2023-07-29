@@ -391,12 +391,12 @@ async def submitmethod(inter: disnake.CommandInteraction):
 # /resolve
 @bot.slash_command(title="resolve", description="Marks question as resolved")
 async def resolve(inter: disnake.ApplicationCommandInteraction):
-    helper_role = bot.get_guild(guild).get_role(helper_role)
+    role = bot.get_guild(guild).get_role(helper_role)
 
     try:
         channel = inter.channel.parent.id
         if (inter.channel.owner.id == inter.author.id) or (
-            helper_role in inter.author.roles
+            role in inter.author.roles
         ):
             if channel == datapack_channel or resourcepack_channel:
                 resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
@@ -416,7 +416,7 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                 get_log_channel()
                 await channel.send(embed=embed)
                 await inter.response.send_message(embed=embed)
-            elif not helper_role in inter.author.roles:
+            elif not role in inter.author.roles:
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title="Resolve Help Channel",
