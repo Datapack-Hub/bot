@@ -395,9 +395,7 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
 
     try:
         channel = inter.channel.parent.id
-        if (inter.channel.owner.id == inter.author.id) or (
-            role in inter.author.roles
-        ):
+        if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):
             if channel == datapack_channel or resourcepack_channel:
                 resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
                 await inter.channel.add_tags(resolved_tag)
