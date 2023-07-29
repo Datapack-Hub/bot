@@ -812,7 +812,7 @@ async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str)
 # ON MESSAGE
 @bot.event
 async def on_message(message):
-    intro_channel = bot.get_channel(intro_channel)
+    intro_channel = bot.get_channel(variables.intro_channel)
 
     if message.channel == intro_channel:
         await message.add_reaction("👋")
