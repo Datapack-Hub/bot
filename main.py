@@ -31,6 +31,7 @@ datapack_channel = variables.datapack_help_channel
 resourcepack_channel = variables.resourcepack_help_channel
 suggestion_channel = variables.suggestion_channel
 intro_channel = variables.intro_channel
+methods_channel = variables.methods_channel
 
 description = ""
 
@@ -110,7 +111,7 @@ class SubmitMethod(disnake.ui.Modal):
             emoji="✏️",
         )
 
-        channel = bot.get_channel(1134048960244363294)
+        channel = bot.get_channel(methods_channel)
         await channel.send(
             embed=embed, components=[accept_button, deny_button, edit_button]
         )
