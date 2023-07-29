@@ -405,6 +405,7 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                     title="Resolve Help Channel",
                     description=":white_check_mark:   Marked this channel as resolved!",
                 )
+                await inter.response.send_message(embed=embed)
                 # Logging
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
@@ -414,7 +415,7 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                 get_log_channel()
                 await channel.send(embed=embed)
                 await inter.response.send_message(embed=embed)
-            else:
+            elif not helper_role in inter.author.roles:
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title="Resolve Help Channel",
