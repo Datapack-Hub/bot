@@ -32,6 +32,7 @@ resourcepack_channel = variables.resourcepack_help_channel
 suggestion_channel = variables.suggestion_channel
 intro_channel = variables.intro_channel
 methods_channel = variables.methods_channel
+helper_role = variables.helper_role
 
 description = ""
 
@@ -390,7 +391,7 @@ async def submitmethod(inter: disnake.CommandInteraction):
 # /resolve
 @bot.slash_command(title="resolve", description="Marks question as resolved")
 async def resolve(inter: disnake.ApplicationCommandInteraction):
-    helper_role = bot.get_guild(guild).get_role(redirect_ban_role)
+    helper_role = bot.get_guild(guild).get_role(helper_role)
 
     try:
         channel = inter.channel.parent.id
