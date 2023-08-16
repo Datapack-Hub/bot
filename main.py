@@ -211,7 +211,7 @@ def get_log_channel():
 # redirect to help channel
 @bot.message_command(name="Redirect to Help Channel")
 async def claim(inter: disnake.MessageCommandInteraction):
-    redi_ban_role = bot.get_guild(guild).get_role(1108093399053111387)
+    redi_ban_role = bot.get_guild(guild).get_role(1031577795748450346)
     if inter.guild.id != guild:
         await inter.response.send_message(
             "You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!",
@@ -255,9 +255,9 @@ async def claim(inter: disnake.MessageCommandInteraction):
         color=disnake.Color.orange(),
         title="This question would be more fitting inside of a Help Channel!",
         description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#"
-        + datapack_channel
+        + str(datapack_channel)
         + "> or <\#"
-        + resourcepack_channel
+        + str(resourcepack_channel)
         + "> if you require assistance.\nCheck out <\#935570290317086841> for tips on asking questions efficiently.",
     )
 
