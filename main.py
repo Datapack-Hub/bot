@@ -256,9 +256,9 @@ async def claim(inter: disnake.MessageCommandInteraction):
         title="This question would be more fitting inside of a Help Channel!",
         description="It seems like someone here found your question to be more fitting in our help channels! \nHelp channels are the perfect place to ask questions and to be answered by anyone including our experienced helpers!\nVisit <#"
         + str(datapack_channel)
-        + "> or <\#"
+        + "> or <#"
         + str(resourcepack_channel)
-        + "> if you require assistance.\nCheck out <\#935570290317086841> for tips on asking questions efficiently.",
+        + "> if you require assistance.\nCheck out <#935570290317086841> for tips on asking questions efficiently.",
     )
 
     embed.set_author(
