@@ -849,8 +849,6 @@ async def on_message(message):
 
 
 # ON BUTTON CLICK
-
-
 @bot.listen("on_button_click")
 async def button_listener(inter: disnake.MessageInteraction):
     if inter.component.custom_id == "accept_method_button":
@@ -886,7 +884,70 @@ async def button_listener(inter: disnake.MessageInteraction):
                 inter.message.embeds[0].description,
             )
         )
+        
+    if inter.component.custom_id == "resolve_question_button":
+        role = bot.get_guild(guild).get_role(helper_role)
+        channel = inter.channel.parent.id
+        if (inter.channel.owner.id == inter.user.id) or (role in inter.user.roles):
+            resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
+            await inter.channel.add_tags(resolved_tag)
+            embed = disnake.Embed(
+                color=disnake.Color.green(),
+                title="Resolve Help Channel",
+                description=":white_check_mark:   Marked this channel as resolved!",
+            )
+            await inter.response.send_message(embed=embed)
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**`Resolve Help Channel` Button**"),
+                description=(str(inter.user.name) + " resolved a help channel"),
+            )
+            channel = bot.get_channel(logs_channel)
+            await channel.send(embed=embed)
+            await inter.response.send_message(embed=embed)
+            
+        else:
+            embed = disnake.Embed(
+                color=disnake.Color.red(),
+                title="Resolve Help Channel",
+                description="❌   You can't do this since you are neither a helper nor the owner of this channel!",
+            )
+            await inter.response.send_message(embed=embed,ephemeral=True)
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**`Resolve Help Channel` Button**"),
+                description=(str(inter.user.name) + " failed resolving a help channel`"),
+            )
+            channel = bot.get_channel(logs_channel)
+            await channel.send(embed=embed)
+            await inter.response.send_message(embed=embed)
+@bot.event
+async def on_thread_create(thread):
+    if thread.parent_id == (variables.datapack_help_channel or variables.resourcepack_help_channel):
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**Someone will come and help soon!**"),
+            description=("💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇‍♂️ If it’s been 20 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve")
+        )
+        summon_helpers_button = disnake.ui.Button(
+            label="Summon Helpers",
+            custom_id="accept_method_button",
+            style=disnake.ButtonStyle.blurple,
+            emoji="🙇‍♂️",
+        )
+        resolve_question_button = disnake.ui.Button(
+            label="Resolve Question",
+            custom_id="resolve_question_button",
+            style=disnake.ButtonStyle.green,
+            emoji="✅",
+        )
 
+        channel = bot.get_channel(methods_channel)
+        await thread.send(
+            embed=embed, components=[summon_helpers_button, resolve_question_button]
+        )
 
 # ON GUILD JOIN
 @bot.event
