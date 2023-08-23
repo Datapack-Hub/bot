@@ -926,22 +926,26 @@ async def button_listener(inter: disnake.MessageInteraction):
             channel = bot.get_channel(logs_channel)
             await channel.send(embed=embed)
             await inter.response.send_message(embed=embed)
-            
-    if inter.component.custom_id == "summon_helpers_button":
-            creation_time = inter.channel.create_timestamp
-            current_time = datetime.datetime.now(creation_time.tzinfo)
-            time_difference = current_time - creation_time
-            
-            time_difference_seconds = time_difference.total_seconds()
-            time_difference_minutes = time_difference_seconds / 60
 
-            if time_difference_minutes >= 20:
-                embed = disnake.Embed(
-                    color=disnake.Colour.blue(),
-                    title=("**🙇 Helpers Arise!**"),
-                    description=("Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"),
-                )
-            await inter.response.send_message("<@&" + str(variables.helper_role) + ">", embed=embed)
+    if inter.component.custom_id == "summon_helpers_button":
+        creation_time = inter.channel.create_timestamp
+        current_time = datetime.datetime.now(creation_time.tzinfo)
+        time_difference = current_time - creation_time
+
+        time_difference_seconds = time_difference.total_seconds()
+        time_difference_minutes = time_difference_seconds / 60
+
+        if time_difference_minutes >= 20:
+            embed = disnake.Embed(
+                color=disnake.Colour.blue(),
+                title=("**🙇 Helpers Arise!**"),
+                description=(
+                    "Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"
+                ),
+            )
+        await inter.response.send_message(
+            "<@&" + str(variables.helper_role) + ">", embed=embed
+        )
 
 
 @bot.event
@@ -952,7 +956,9 @@ async def on_thread_create(thread):
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**Someone will come and help soon!**"),
-            description=("💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 If it’s been 20 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve")
+            description=(
+                "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 If it’s been 20 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
+            ),
         )
         summon_helpers_button = disnake.ui.Button(
             label="Summon Helpers",
