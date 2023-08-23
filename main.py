@@ -924,88 +924,93 @@ async def button_listener(inter: disnake.MessageInteraction):
             )
             channel = bot.get_channel(logs_channel)
             await channel.send(embed=embed)
-            
-    if inter.component.custom_id == "summon_helpers_button":
-            creation_time = inter.channel.create_timestamp
-            current_time = datetime.datetime.now(creation_time.tzinfo)
-            time_difference = current_time - creation_time
-            
-            time_difference_seconds = time_difference.total_seconds()
-            time_difference_minutes = time_difference_seconds / 60
-            
-            role = bot.get_guild(guild).get_role(helper_role)
-            channel = inter.channel.parent.id
-            if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):            
-                if time_difference_minutes >= 30:
-                    embed = disnake.Embed(
-                        color=disnake.Colour.blue(),
-                        title=("**🙇 Helpers Arise!**"),
-                        description=("Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"),
-                    )
-                    await inter.response.send_message("<@&" + str(variables.helper_role) + ">", embed=embed, allowed_mentions=disnake.AllowedMentions(roles=True))
-                    embed = disnake.Embed(
-                        color=disnake.Colour.orange(),
-                        title=("**Someone will come and help soon!**"),
-                        description=(
-                            "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 ~~If it’s been 20 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here~~ **Someone has already summoned the helpers in this help channel!**\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
-                        ),
-                        )
-                    resolve_question_button = disnake.ui.Button(
-                        label="Resolve Question",
-                        custom_id="resolve_question_button",
-                        style=disnake.ButtonStyle.green,
-                        emoji="✅",
-                    )
-                    
-                    await inter.message.edit(embed=embed, components=[resolve_question_button])
-            
-                    # Logging
-                    embed = disnake.Embed(
-                        color=disnake.Colour.orange(),
-                        title=("**`Summon Helpers` Button**"),
-                        description=(
-                        str(inter.user.name) + " summoned helper"
-                        ),
-                    )
-                    channel = bot.get_channel(logs_channel)
-                    await channel.send(embed=embed)
-    
-                else:
-                    embed = disnake.Embed(
-                        color=disnake.Colour.red(),
-                        title=("**🦥 Not so fast!**"),
-                        description=("Please note that all our helpers are volunteers and thus can't always respond instantly. We'd thus advise you to give them some time! If you still haven't gotten an asnwer in `" + str(30 - int(time_difference_minutes)) + " minutes` feel free to use this again to ping all helpers :D"
-                        )
-                    )
-                    await inter.response.send_message(embed=embed,ephemeral=True)
-                    # Logging
-                    embed = disnake.Embed(
-                        color=disnake.Colour.orange(),
-                        title=("**`Summon Helpers` Button**"),
-                        description=(
-                        str(inter.user.name) + " failed summoning helpers`"
-                        ),
-                    )
-                    channel = bot.get_channel(logs_channel)
-                    await channel.send(embed=embed)
-            else:
-                embed = disnake.Embed(
-                    color=disnake.Color.red(),
-                    title="❌ Summon Helpers",
-                    description="You can't do this since you are neither a helper nor the owner of this channel!",
-                )
-                await inter.response.send_message(embed=embed, ephemeral=True)
 
-                    # Logging
+    if inter.component.custom_id == "summon_helpers_button":
+        creation_time = inter.channel.create_timestamp
+        current_time = datetime.datetime.now(creation_time.tzinfo)
+        time_difference = current_time - creation_time
+
+        time_difference_seconds = time_difference.total_seconds()
+        time_difference_minutes = time_difference_seconds / 60
+
+        role = bot.get_guild(guild).get_role(helper_role)
+        channel = inter.channel.parent.id
+        if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):
+            if time_difference_minutes >= 30:
                 embed = disnake.Embed(
-                        color=disnake.Colour.orange(),
-                        title=("**`Summon Helpers` Button**"),
-                        description=(
-                        str(inter.user.name) + " failed summoning helpers`"
-                        ),
-                    )
+                    color=disnake.Colour.blue(),
+                    title=("**🙇 Helpers Arise!**"),
+                    description=(
+                        "Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"
+                    ),
+                )
+                await inter.response.send_message(
+                    "<@&" + str(variables.helper_role) + ">",
+                    embed=embed,
+                    allowed_mentions=disnake.AllowedMentions(roles=True),
+                )
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**Someone will come and help soon!**"),
+                    description=(
+                        "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 ~~If it’s been 20 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here~~ **Someone has already summoned the helpers in this help channel!**\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
+                    ),
+                )
+                resolve_question_button = disnake.ui.Button(
+                    label="Resolve Question",
+                    custom_id="resolve_question_button",
+                    style=disnake.ButtonStyle.green,
+                    emoji="✅",
+                )
+
+                await inter.message.edit(
+                    embed=embed, components=[resolve_question_button]
+                )
+
+                # Logging
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**`Summon Helpers` Button**"),
+                    description=(str(inter.user.name) + " summoned helper"),
+                )
                 channel = bot.get_channel(logs_channel)
                 await channel.send(embed=embed)
+
+            else:
+                embed = disnake.Embed(
+                    color=disnake.Colour.red(),
+                    title=("**🦥 Not so fast!**"),
+                    description=(
+                        "Please note that all our helpers are volunteers and thus can't always respond instantly. We'd thus advise you to give them some time! If you still haven't gotten an asnwer in `"
+                        + str(30 - int(time_difference_minutes))
+                        + " minutes` feel free to use this again to ping all helpers :D"
+                    ),
+                )
+                await inter.response.send_message(embed=embed, ephemeral=True)
+                # Logging
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**`Summon Helpers` Button**"),
+                    description=(str(inter.user.name) + " failed summoning helpers`"),
+                )
+                channel = bot.get_channel(logs_channel)
+                await channel.send(embed=embed)
+        else:
+            embed = disnake.Embed(
+                color=disnake.Color.red(),
+                title="❌ Summon Helpers",
+                description="You can't do this since you are neither a helper nor the owner of this channel!",
+            )
+            await inter.response.send_message(embed=embed, ephemeral=True)
+
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**`Summon Helpers` Button**"),
+                description=(str(inter.user.name) + " failed summoning helpers`"),
+            )
+            channel = bot.get_channel(logs_channel)
+            await channel.send(embed=embed)
 
 
 @bot.event
