@@ -1083,7 +1083,6 @@ async def on_guild_remove(guild):
 # ON STARTUP
 @bot.event
 async def on_ready():
-    slow_count.start()
     embed = disnake.Embed(color=disnake.Colour.green(), title="**Bot started**")
     print(f"Logged in as {bot.user}")
     get_log_channel()
