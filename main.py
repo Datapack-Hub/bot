@@ -406,7 +406,7 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                     title=":white_check_mark: Closed Question",
                     description="Closed the channel and market it as resolved! \nIf you have more questions feel free to ask them in a new channel!",
                 )
-                await inter.channel.edit(archived = True)
+                await inter.channel.edit(archived=True)
                 await inter.response.send_message(embed=embed)
                 # Logging
                 embed = disnake.Embed(
@@ -898,7 +898,7 @@ async def button_listener(inter: disnake.MessageInteraction):
                 title=":white_check_mark: Closed Question",
                 description="Closed the channel and market it as resolved! \nIf you have more questions feel free to ask them in a new channel!",
             )
-            await inter.channel.edit(archived = True)
+            await inter.channel.edit(archived=True)
             await inter.response.send_message(embed=embed)
             # Logging
             embed = disnake.Embed(
@@ -1080,6 +1080,7 @@ async def on_guild_remove(guild):
     )
     get_log_channel()
     await channel.send(embed=embed)
+
 
 # LOOP
 @tasks.loop(minutes=1)
