@@ -406,8 +406,8 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                     title=":white_check_mark: Closed Question",
                     description="Closed the channel and market it as resolved! \nIf you have more questions feel free to ask them in a new channel!",
                 )
-                await inter.channel.edit(archived = True)
                 await inter.response.send_message(embed=embed)
+                await inter.channel.edit(archived = True)
                 # Logging
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
@@ -898,8 +898,8 @@ async def button_listener(inter: disnake.MessageInteraction):
                 title=":white_check_mark: Closed Question",
                 description="Closed the channel and market it as resolved! \nIf you have more questions feel free to ask them in a new channel!",
             )
-            await inter.channel.edit(archived = True)
             await inter.response.send_message(embed=embed)
+            await inter.channel.edit(archived = True)
             # Logging
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
