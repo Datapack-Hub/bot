@@ -964,7 +964,7 @@ async def button_listener(inter: disnake.MessageInteraction):
                         color=disnake.Colour.orange(),
                         title=("**`Summon Helpers` Button**"),
                         description=(
-                        str(inter.user.name) + " summoned helpers`"
+                        str(inter.user.name) + " summoned helper"
                         ),
                     )
                     channel = bot.get_channel(logs_channel)
