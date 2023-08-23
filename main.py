@@ -1080,6 +1080,7 @@ async def on_guild_remove(guild):
     get_log_channel()
     await channel.send(embed=embed)
 
+
 # ON STARTUP
 @bot.event
 async def on_ready():
