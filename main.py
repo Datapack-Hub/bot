@@ -926,40 +926,49 @@ async def button_listener(inter: disnake.MessageInteraction):
             channel = bot.get_channel(logs_channel)
             await channel.send(embed=embed)
             await inter.response.send_message(embed=embed)
-            
+
     if inter.component.custom_id == "summon_helpers_button":
-            creation_time = inter.channel.create_timestamp
-            current_time = datetime.datetime.now(creation_time.tzinfo)
-            time_difference = current_time - creation_time
-            
-            time_difference_seconds = time_difference.total_seconds()
-            time_difference_minutes = time_difference_seconds / 60
-            
-            role = bot.get_guild(guild).get_role(helper_role)
-            channel = inter.channel.parent.id
-            if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):            
-                if time_difference_minutes >= 30:
-                    embed = disnake.Embed(
-                        color=disnake.Colour.blue(),
-                        title=("**🙇 Helpers Arise!**"),
-                        description=("Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"),
-                    )
-                    await inter.response.send_message("<@&" + str(variables.helper_role) + ">", embed=embed, allowed_mentions=disnake.AllowedMentions(roles=True))
-                else:
-                    embed = disnake.Embed(
-                        color=disnake.Colour.red(),
-                        title=("**🦥 Not so fast!**"),
-                        description=("Please note that all our helpers are volunteers and thus can't always respond instantly. We'd thus advise you to give them some time! If you still haven't gotten an asnwer in `" + str(30 - int(time_difference_minutes)) + " minutes` feel free to use this again to ping all helpers :D"
-                        )
-                    )
-                    await inter.response.send_message(embed=embed,ephemeral=True)
+        creation_time = inter.channel.create_timestamp
+        current_time = datetime.datetime.now(creation_time.tzinfo)
+        time_difference = current_time - creation_time
+
+        time_difference_seconds = time_difference.total_seconds()
+        time_difference_minutes = time_difference_seconds / 60
+
+        role = bot.get_guild(guild).get_role(helper_role)
+        channel = inter.channel.parent.id
+        if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):
+            if time_difference_minutes >= 30:
+                embed = disnake.Embed(
+                    color=disnake.Colour.blue(),
+                    title=("**🙇 Helpers Arise!**"),
+                    description=(
+                        "Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"
+                    ),
+                )
+                await inter.response.send_message(
+                    "<@&" + str(variables.helper_role) + ">",
+                    embed=embed,
+                    allowed_mentions=disnake.AllowedMentions(roles=True),
+                )
             else:
                 embed = disnake.Embed(
-                    color=disnake.Color.red(),
-                    title="❌ Summon Helpers",
-                    description="You can't do this since you are neither a helper nor the owner of this channel!",
+                    color=disnake.Colour.red(),
+                    title=("**🦥 Not so fast!**"),
+                    description=(
+                        "Please note that all our helpers are volunteers and thus can't always respond instantly. We'd thus advise you to give them some time! If you still haven't gotten an asnwer in `"
+                        + str(30 - int(time_difference_minutes))
+                        + " minutes` feel free to use this again to ping all helpers :D"
+                    ),
                 )
                 await inter.response.send_message(embed=embed, ephemeral=True)
+        else:
+            embed = disnake.Embed(
+                color=disnake.Color.red(),
+                title="❌ Summon Helpers",
+                description="You can't do this since you are neither a helper nor the owner of this channel!",
+            )
+            await inter.response.send_message(embed=embed, ephemeral=True)
 
 
 @bot.event
