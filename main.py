@@ -401,9 +401,9 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                 resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
                 await inter.channel.add_tags(resolved_tag)
                 embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title="Resolve Help Channel",
-                    description=":white_check_mark:   Marked this channel as resolved!",
+                    color=disnake.Color.green(),
+                    title=":white_check_mark: Resolve Help Channel",
+                    description="Marked this channel as resolved!",
                 )
                 await inter.response.send_message(embed=embed)
                 # Logging
@@ -417,16 +417,16 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                 await inter.response.send_message(embed=embed)
             elif not role in inter.author.roles:
                 embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title="Resolve Help Channel",
+                    color=disnake.Color.red(),
+                    title="❌ Resolve Help Channel",
                     description="You can only do this in one of our help channels",
                 )
                 await inter.response.send_message(embed=embed, ephemeral=True)
 
         else:
             embed = disnake.Embed(
-                color=disnake.Color.orange(),
-                title="Resolve Help Channel",
+                color=disnake.Color.red(),
+                title="❌ Resolve Help Channel",
                 description="Only the creator of this question and helpers can mark it as resolved",
             )
             await inter.response.send_message(embed=embed, ephemeral=True)
@@ -784,7 +784,7 @@ async def info(inter: disnake.ApplicationCommandInteraction, info: infos):
 async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str):
     embed = disnake.Embed(
         color=disnake.Color.orange(),
-        title="Submitted Suggestion!",
+        title=":white_check_mark: Submitted Suggestion!",
         description=(
             'Sucessfully submitted your suggestion "'
             + suggestion
@@ -894,8 +894,8 @@ async def button_listener(inter: disnake.MessageInteraction):
             await inter.channel.add_tags(resolved_tag)
             embed = disnake.Embed(
                 color=disnake.Color.green(),
-                title="Resolve Help Channel",
-                description=":white_check_mark:   Marked this channel as resolved!",
+                title=":white_check_mark: Resolve Help Channel",
+                description="Marked this channel as resolved!",
             )
             await inter.response.send_message(embed=embed)
             # Logging
@@ -911,8 +911,8 @@ async def button_listener(inter: disnake.MessageInteraction):
         else:
             embed = disnake.Embed(
                 color=disnake.Color.red(),
-                title="Resolve Help Channel",
-                description="❌   You can't do this since you are neither a helper nor the owner of this channel!",
+                title="❌ Resolve Help Channel",
+                description="You can't do this since you are neither a helper nor the owner of this channel!",
             )
             await inter.response.send_message(embed=embed, ephemeral=True)
             # Logging
@@ -934,14 +934,32 @@ async def button_listener(inter: disnake.MessageInteraction):
             
             time_difference_seconds = time_difference.total_seconds()
             time_difference_minutes = time_difference_seconds / 60
-
-            if time_difference_minutes >= 20:
+            
+            role = bot.get_guild(guild).get_role(helper_role)
+            channel = inter.channel.parent.id
+            if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):            
+                if time_difference_minutes >= 30:
+                    embed = disnake.Embed(
+                        color=disnake.Colour.blue(),
+                        title=("**🙇 Helpers Arise!**"),
+                        description=("Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"),
+                    )
+                    await inter.response.send_message("<@&" + str(variables.helper_role) + ">", embed=embed, allowed_mentions=disnake.AllowedMentions(roles=True))
+                else:
+                    embed = disnake.Embed(
+                        color=disnake.Colour.red(),
+                        title=("**🦥 Not so fast!**"),
+                        description=("Please note that all our helpers are volunteers and thus can't always respond instantly. We'd thus advise you to give them some time! If you still haven't gotten an asnwer in `" + str(30 - int(time_difference_minutes)) + " minutes` feel free to use this again to ping all helpers :D"
+                        )
+                    )
+                    await inter.response.send_message(embed=embed,ephemeral=True)
+            else:
                 embed = disnake.Embed(
-                    color=disnake.Colour.blue(),
-                    title=("**🙇 Helpers Arise!**"),
-                    description=("Please note that you still might not immediately get a response since all helpers are human beings and volunteers (and also might be sleeping right now)"),
+                    color=disnake.Color.red(),
+                    title="❌ Summon Helpers",
+                    description="You can't do this since you are neither a helper nor the owner of this channel!",
                 )
-            await inter.response.send_message("<@&" + str(variables.helper_role) + ">", embed=embed)
+                await inter.response.send_message(embed=embed, ephemeral=True)
 
 
 @bot.event
@@ -952,7 +970,7 @@ async def on_thread_create(thread):
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**Someone will come and help soon!**"),
-            description=("💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 If it’s been 20 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve")
+            description=("💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 If it’s been 30 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run `/resolve`")
         )
         summon_helpers_button = disnake.ui.Button(
             label="Summon Helpers",
