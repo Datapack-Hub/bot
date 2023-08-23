@@ -39,7 +39,7 @@ jobs:
         pip install black
     - name: Run black
       run: |
-        black .
+        black . --fast
     - uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Apply formatting
@@ -65,7 +65,7 @@ jobs:
         pip install ruff
     - name: Run ruff
       run: |
-        ruff . --fix --ignore E501
+        ruff . --fix
     - uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
         commit_message: Apply linting
