@@ -10,6 +10,7 @@ import os
 import asyncio
 import variables
 import datetime
+from disnake.ext import tasks
 
 intents = disnake.Intents.all()
 
@@ -979,9 +980,9 @@ async def button_listener(inter: disnake.MessageInteraction):
             else:
                 embed = disnake.Embed(
                     color=disnake.Colour.red(),
-                    title=("**🦥 Not so fast!**"),
+                    title=("**🕑 Be patient!**"),
                     description=(
-                        "Please note that all our helpers are volunteers and thus can't always respond instantly. We'd therefore advise you to give them some time! If you still haven't gotten an answer in `"
+                        "All helpers are volunteers and thus can't always respond instantly. We'd therefore advise you to give them some time! If you still haven't gotten an answer in `"
                         + str(30 - int(time_difference_minutes))
                         + " minutes` feel free to use this again to ping all helpers :D"
                     ),
@@ -1079,10 +1080,10 @@ async def on_guild_remove(guild):
     get_log_channel()
     await channel.send(embed=embed)
 
-
 # ON STARTUP
 @bot.event
 async def on_ready():
+    slow_count.start()
     embed = disnake.Embed(color=disnake.Colour.green(), title="**Bot started**")
     print(f"Logged in as {bot.user}")
     get_log_channel()
