@@ -981,7 +981,7 @@ async def button_listener(inter: disnake.MessageInteraction):
                     color=disnake.Colour.red(),
                     title=("**🦥 Not so fast!**"),
                     description=(
-                        "Please note that all our helpers are volunteers and thus can't always respond instantly. We'd thus advise you to give them some time! If you still haven't gotten an asnwer in `"
+                        "Please note that all our helpers are volunteers and thus can't always respond instantly. We'd therefore advise you to give them some time! If you still haven't gotten an answer in `"
                         + str(30 - int(time_difference_minutes))
                         + " minutes` feel free to use this again to ping all helpers :D"
                     ),
