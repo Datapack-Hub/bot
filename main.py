@@ -403,9 +403,10 @@ async def resolve(inter: disnake.ApplicationCommandInteraction):
                 await inter.channel.add_tags(resolved_tag)
                 embed = disnake.Embed(
                     color=disnake.Color.green(),
-                    title=":white_check_mark: Resolve Help Channel",
-                    description="Marked this channel as resolved!",
+                    title=":white_check_mark: Closed Question",
+                    description="Closed the channel and market it as resolved! \nIf you have more questions feel free to ask them in a new channel!",
                 )
+                await inter.channel.edit(archived = True)
                 await inter.response.send_message(embed=embed)
                 # Logging
                 embed = disnake.Embed(
@@ -889,15 +890,15 @@ async def button_listener(inter: disnake.MessageInteraction):
 
     if inter.component.custom_id == "resolve_question_button":
         role = bot.get_guild(guild).get_role(helper_role)
-        channel = inter.channel.parent.id
         if (inter.channel.owner.id == inter.user.id) or (role in inter.user.roles):
             resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
             await inter.channel.add_tags(resolved_tag)
             embed = disnake.Embed(
                 color=disnake.Color.green(),
-                title=":white_check_mark: Resolve Help Channel",
-                description="Marked this channel as resolved!",
+                title=":white_check_mark: Closed Question",
+                description="Closed the channel and market it as resolved! \nIf you have more questions feel free to ask them in a new channel!",
             )
+            await inter.channel.edit(archived = True)
             await inter.response.send_message(embed=embed)
             # Logging
             embed = disnake.Embed(
@@ -1080,10 +1081,21 @@ async def on_guild_remove(guild):
     get_log_channel()
     await channel.send(embed=embed)
 
+# LOOP
+@tasks.loop(minutes=1)
+async def slow_count():
+    datapack_help_channel = bot.get_channel(variables.datapack_help_channel)
+    i = 0
+    for thread in datapack_help_channel.threads:
+        print(str(thread.message_count))
+
+    print("ayo")
+
 
 # ON STARTUP
 @bot.event
 async def on_ready():
+    slow_count.start()
     embed = disnake.Embed(color=disnake.Colour.green(), title="**Bot started**")
     print(f"Logged in as {bot.user}")
     get_log_channel()
