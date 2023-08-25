@@ -984,7 +984,7 @@ async def on_message(message):
                 g_value = (
                     re.search(r"!!CUSTOM-COLOR\s+\d+\s+\d+\s+(\d+)", text)
                 ).group(1)
-                description = description.replace("!!CUSTOM-COLOR", "")
+                description = re.sub(r'!!CUSTOM-COLOR\s+\d+\s+\d+\s+\d+', '', description)
 
             with open("newsletter_subscribers.txt", "r") as file:
                 description_copy = description
