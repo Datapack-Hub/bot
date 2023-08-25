@@ -30,9 +30,9 @@ bot = commands.Bot(
 newsletter_unsubscribe_button = disnake.ui.Button(
     label="Unsubscribe",
     custom_id="newsletter_unsubscribe_button",
-    style=disnake.ButtonStyle.gray
+    style=disnake.ButtonStyle.gray,
 )
-            
+
 logs_channel = variables.logs
 guild = variables.main_guild
 redirect_ban_role = variables.redirect_ban_role
@@ -645,32 +645,32 @@ async def newsletter(inter: disnake.ApplicationCommandInteraction):
             subscribers.append(clean_line)
 
         if str(inter.user.id) in subscribers:
-                with open('newsletter_subscribers.txt',"a") as file:
-                    file.seek(0)
-                    file.truncate()
-                    subscribers.remove(str(inter.user.id))
-                    for subscriber in subscribers:
-                        file.write(subscriber+"\n")
-                        
-                embed = disnake.Embed(
-                    color=disnake.Colour.yellow(),
-                    title=("**Datapack Newsletter**"),
-                    description="Unsubscribed you from out DM Datapack Newsletter!\n**This is an experimental feature and might get discontinued at any time without warning**",
-                    )
-                
-                await inter.response.send_message(embed=embed,ephemeral=True)
-                
-                # Logging
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**`/newsletter` Experimental Command**"),
-                    description=(
-                        str(inter.user.name) + " unsubscribed from the newsletter"
-                    ),
-                )
-                get_log_channel()
-                await channel.send(embed=embed)
-                
+            with open("newsletter_subscribers.txt", "a") as file:
+                file.seek(0)
+                file.truncate()
+                subscribers.remove(str(inter.user.id))
+                for subscriber in subscribers:
+                    file.write(subscriber + "\n")
+
+            embed = disnake.Embed(
+                color=disnake.Colour.yellow(),
+                title=("**Datapack Newsletter**"),
+                description="Unsubscribed you from out DM Datapack Newsletter!\n**This is an experimental feature and might get discontinued at any time without warning**",
+            )
+
+            await inter.response.send_message(embed=embed, ephemeral=True)
+
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**`/newsletter` Experimental Command**"),
+                description=(
+                    str(inter.user.name) + " unsubscribed from the newsletter"
+                ),
+            )
+            get_log_channel()
+            await channel.send(embed=embed)
+
         else:
             with open("newsletter_subscribers.txt", "a") as file:
                 file.write(str(inter.user.id) + "\n")
@@ -690,11 +690,12 @@ async def newsletter(inter: disnake.ApplicationCommandInteraction):
                 color=disnake.Colour.orange(),
                 title=("**👋 Hey there!**"),
                 description="Welcome to the Datapack Hub `Datapack Newsletter`! :eyes: \nFrom now on you will recieve an epic summary message whenever something relevant happens in the datapacking universe! :sparkles:\nIf you wish to unsubscribe click the `Unsubscribe` Button or use `/newsletter` again",
-                ) 
-             
-            await inter.user.send(embed=embed, components=[newsletter_unsubscribe_button])
+            )
 
-            
+            await inter.user.send(
+                embed=embed, components=[newsletter_unsubscribe_button]
+            )
+
             # Logging
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
@@ -921,7 +922,7 @@ async def on_message(message):
     elif ("flyrr_" == message.author.name) and (">.< shutdown" in message.content):
         methods = os.listdir(".\\method")
         methods_enum = commands.option_enum(methods)
-        
+
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.purple(),
@@ -938,14 +939,15 @@ async def on_message(message):
 
     # BROADCAST NEWSLETTER
 
-    elif ((message.channel == newsletter_channel) and (message.author.id != variables.bot_id)):
-        
+    elif (message.channel == newsletter_channel) and (
+        message.author.id != variables.bot_id
+    ):
         hide_unsub_button = False
         edit_last = False
         no_title = False
         hide_author = False
         custom_color = False
-        
+
         channel = message.channel
         text = message.content
         title = ""
@@ -955,11 +957,11 @@ async def on_message(message):
 
         if not "!!NO-TITLE" in text:
             title = lines[0]
-            description = description.replace(title,"")
+            description = description.replace(title, "")
         else:
-            description = description.replace("!!NO-TITLE","")
+            description = description.replace("!!NO-TITLE", "")
             no_title = True
-            
+
         if ((title == "" in text) and (not no_title == True)) or (len(lines) < 2):
             await message.add_reaction("❌")
 
@@ -968,21 +970,23 @@ async def on_message(message):
 
             if "!!HIDE-UNSUB-BUTTON" in text:
                 hide_unsub_button = True
-                description = description.replace("!!HIDE-UNSUB-BUTTON","")
+                description = description.replace("!!HIDE-UNSUB-BUTTON", "")
             if "!!EDIT-LAST" in text:
                 edit_last = True
-                description = description.replace("!!EDIT-LAST","")
+                description = description.replace("!!EDIT-LAST", "")
             if "!!HIDE-AUTHOR" in text:
                 hide_author = True
-                description = description.replace("!!HIDE-AUTHOR","")         
+                description = description.replace("!!HIDE-AUTHOR", "")
             if "!!CUSTOM-COLOR" in text:
                 custom_color = True
-                r_value = (re.search(r'!!CUSTOM-COLOR\s+(\d+)', text)).group(1)
-                b_value = (re.search(r'!!CUSTOM-COLOR\s+\d+\s+(\d+)', text)).group(1)
-                g_value = (re.search(r'!!CUSTOM-COLOR\s+\d+\s+\d+\s+(\d+)', text)).group(1)
-                description = description.replace("!!CUSTOM-COLOR","") 
-                
-            with open('newsletter_subscribers.txt',"r") as file:
+                r_value = (re.search(r"!!CUSTOM-COLOR\s+(\d+)", text)).group(1)
+                b_value = (re.search(r"!!CUSTOM-COLOR\s+\d+\s+(\d+)", text)).group(1)
+                g_value = (
+                    re.search(r"!!CUSTOM-COLOR\s+\d+\s+\d+\s+(\d+)", text)
+                ).group(1)
+                description = description.replace("!!CUSTOM-COLOR", "")
+
+            with open("newsletter_subscribers.txt", "r") as file:
                 description_copy = description
                 file_text = file.readlines()
                 subscribers = []
@@ -990,53 +994,64 @@ async def on_message(message):
                 for line in file_text:
                     clean_line = line.strip()
                     subscribers.append(clean_line)
-                      
-                print(subscribers)  
-                
+
+                print(subscribers)
+
                 for subscriber in subscribers:
                     description_copy = description
                     user = bot.get_user(int(subscriber))
-                    print(">>" + subscriber +"," + str(user))
-                    
-                    description_copy = description_copy.replace("{{username}}",("<@"+str(subscriber)+">"))
-                    description_copy = description_copy.replace("{{bot}}",("<@"+str(variables.bot_id)+">"))
-                    
+                    print(">>" + subscriber + "," + str(user))
+
+                    description_copy = description_copy.replace(
+                        "{{username}}", ("<@" + str(subscriber) + ">")
+                    )
+                    description_copy = description_copy.replace(
+                        "{{bot}}", ("<@" + str(variables.bot_id) + ">")
+                    )
+
                     if not custom_color == True:
                         embed = disnake.Embed(
                             color=disnake.Colour.orange(),
                             title=title,
-                            description=description_copy
-                        )  
+                            description=description_copy,
+                        )
                     else:
                         embed = disnake.Embed(
-                            color=disnake.Color.from_rgb(int(r_value),int(g_value),int(b_value)),
+                            color=disnake.Color.from_rgb(
+                                int(r_value), int(g_value), int(b_value)
+                            ),
                             title=title,
-                            description=description_copy
-                        )                    
+                            description=description_copy,
+                        )
 
                     if hide_author == False:
                         embed.set_footer(
-                            text=("Message written and broadcasted by " + message.author.name),
-                            icon_url=message.author.display_avatar
+                            text=(
+                                "Message written and broadcasted by "
+                                + message.author.name
+                            ),
+                            icon_url=message.author.display_avatar,
                         )
                     else:
                         embed.set_footer(
                             text=("Message provided by Datapack Hub"),
-                            icon_url="https://media.discordapp.net/attachments/1129493191847071875/1144716754292056126/ob0WaKM.png"
-                        )                
-            
+                            icon_url="https://media.discordapp.net/attachments/1129493191847071875/1144716754292056126/ob0WaKM.png",
+                        )
+
                     if edit_last == True:
                         dm_message = await user.history(limit=1).flatten()
                         message_obect = dm_message[0]
                         message_id = message_obect.id
                         print(message_id)
                         dm_message = await user.fetch_message(message_id)
-                        
+
                         if hide_unsub_button == True:
-                            await dm_message.edit(embed=embed,components=[])
+                            await dm_message.edit(embed=embed, components=[])
                             await message.add_reaction("🤫")
                         else:
-                            await dm_message.edit(embed=embed, components=[newsletter_unsubscribe_button])
+                            await dm_message.edit(
+                                embed=embed, components=[newsletter_unsubscribe_button]
+                            )
                         await message.add_reaction("✏️")
                     else:
                         if hide_unsub_button == True:
@@ -1044,11 +1059,12 @@ async def on_message(message):
                             await message.add_reaction("🤫")
                         else:
                             print(user)
-                            await user.send(embed=embed, components=[newsletter_unsubscribe_button])
+                            await user.send(
+                                embed=embed, components=[newsletter_unsubscribe_button]
+                            )
                         await message.add_reaction("📣")
-                
-                
-    
+
+
 # ON BUTTON CLICK
 @bot.listen("on_button_click")
 async def button_listener(inter: disnake.MessageInteraction):
@@ -1211,25 +1227,24 @@ async def button_listener(inter: disnake.MessageInteraction):
             )
             channel = bot.get_channel(logs_channel)
             await channel.send(embed=embed)
-            
+
     if inter.component.custom_id == "newsletter_unsubscribe_button":
-        
-        with open('newsletter_subscribers.txt',"r") as file:
+        with open("newsletter_subscribers.txt", "r") as file:
             file_text = file.readlines()
             subscribers = []
-        
+
         for line in file_text:
             clean_line = line.strip()
             subscribers.append(clean_line)
-            
+
         if str(inter.user.id) in subscribers:
-                with open('newsletter_subscribers.txt',"a") as file:
-                    file.seek(0)
-                    file.truncate()
-                    subscribers.remove(str(inter.user.id))
-                    for subscriber in subscribers:
-                        file.write(subscriber+"\n")
-                        
+            with open("newsletter_subscribers.txt", "a") as file:
+                file.seek(0)
+                file.truncate()
+                subscribers.remove(str(inter.user.id))
+                for subscriber in subscribers:
+                    file.write(subscriber + "\n")
+
         embed = disnake.Embed(
             color=disnake.Color.light_gray(),
             title="😔 Sad to see you go",
@@ -1237,18 +1252,17 @@ async def button_listener(inter: disnake.MessageInteraction):
         )
         user = inter.user
         await inter.response.send_message(embed=embed)
-        
+
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**`Unsubscribe` Button**"),
-            description=(
-                str(inter.user.name) + " unsubscribed from the newsletter"
-            ),
+            description=(str(inter.user.name) + " unsubscribed from the newsletter"),
         )
         channel = bot.get_channel(logs_channel)
         await channel.send(embed=embed)
-        
+
+
 @bot.event
 async def on_thread_create(thread):
     if thread.parent_id == (
