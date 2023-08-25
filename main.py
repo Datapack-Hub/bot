@@ -636,14 +636,14 @@ async def invite(inter: disnake.ApplicationCommandInteraction, invite: invites):
     description="EXPERIMENTAL!! Subscribes/Unsubscribes you to our datapack related DM newsletter.",
 )
 async def newsletter(inter: disnake.ApplicationCommandInteraction):
-    with open('newsletter_subscribers.txt',"r") as file:
+    with open("newsletter_subscribers.txt", "r") as file:
         file_text = file.readlines()
         subscribers = []
-        
+
         for line in file_text:
             clean_line = line.strip()
             subscribers.append(clean_line)
-            
+
         if str(inter.user.id) in subscribers:
                 with open('newsletter_subscribers.txt',"a") as file:
                     file.seek(0)
@@ -672,20 +672,20 @@ async def newsletter(inter: disnake.ApplicationCommandInteraction):
                 await channel.send(embed=embed)
                 
         else:
-            with open('newsletter_subscribers.txt',"a") as file:
-                file.write(str(inter.user.id)+"\n")
-                
+            with open("newsletter_subscribers.txt", "a") as file:
+                file.write(str(inter.user.id) + "\n")
+
             subscribers.append(str(inter.user.id))
 
             embed = disnake.Embed(
                 color=disnake.Colour.yellow(),
                 title=("**Datapack Newsletter**"),
                 description="Added you to our DM Datapack Newsletter! If everything worked correctly, you should also have just recieved your first DM from this bot :D\n**This is an experimental feature and might get discontinued at any time without warning**",
-                ) 
-            await inter.response.send_message(embed=embed,ephemeral=True)
+            )
+            await inter.response.send_message(embed=embed, ephemeral=True)
 
             dm_channel = inter.user.create_dm()
-            
+
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**👋 Hey there!**"),
@@ -699,13 +699,11 @@ async def newsletter(inter: disnake.ApplicationCommandInteraction):
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**`/newsletter` Experimental Command**"),
-                description=(
-                    str(inter.user.name) + " subscribed to the newsletter"
-                ),
+                description=(str(inter.user.name) + " subscribed to the newsletter"),
             )
             get_log_channel()
             await channel.send(embed=embed)
-            
+
         print(subscribers)
 
 
@@ -896,6 +894,7 @@ async def suggest(inter: disnake.ApplicationCommandInteraction, suggestion: str)
 
 # OTHER EVENTS
 
+
 # ON MESSAGE
 @bot.event
 async def on_message(message):
@@ -936,7 +935,7 @@ async def on_message(message):
         get_log_channel()
         await channel.send(embed=embed)
         await bot.close()
-        
+
     # BROADCAST NEWSLETTER
 
     elif ((message.channel == newsletter_channel) and (message.author.id != variables.bot_id)):
@@ -963,7 +962,7 @@ async def on_message(message):
             
         if ((title == "" in text) and (not no_title == True)) or (len(lines) < 2):
             await message.add_reaction("❌")
-            
+
         else:
             print(str(len(lines)))
 
@@ -987,7 +986,7 @@ async def on_message(message):
                 description_copy = description
                 file_text = file.readlines()
                 subscribers = []
-        
+
                 for line in file_text:
                     clean_line = line.strip()
                     subscribers.append(clean_line)
@@ -1316,10 +1315,11 @@ async def on_guild_remove(guild):
     get_log_channel()
     await channel.send(embed=embed)
 
+
 # ON STARTUP
 @bot.event
 async def on_ready():
-    #slow_count.start()
+    # slow_count.start()
     embed = disnake.Embed(color=disnake.Colour.green(), title="**Bot started**")
     print(f"Logged in as {bot.user}")
     get_log_channel()
