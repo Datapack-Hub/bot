@@ -14,7 +14,7 @@ class newsletter_command(commands.Cog, name='newsletter'):
         
     @commands.slash_command(title="newsletter",description="EXPERIMENTAL!! Subscribes/Unsubscribes you to our datapack related DM newsletter.")
     async def newsletter(self,inter: disnake.ApplicationCommandInteraction):
-        with open("newsletter_subscribers.txt", "r") as file:
+        with open("newsletter_subscribers.txt") as file:
             file_text = file.readlines()
             subscribers = []
 
@@ -62,7 +62,7 @@ class newsletter_command(commands.Cog, name='newsletter'):
                 )
                 await inter.response.send_message(embed=embed, ephemeral=True)
 
-                dm_channel = inter.user.create_dm()
+                inter.user.create_dm()
 
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),

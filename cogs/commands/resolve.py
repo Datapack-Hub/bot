@@ -32,7 +32,7 @@ class resolve_command(commands.Cog, name='resolve'):
                     channel = self.bot.get_channel(variables.logs)
                     await channel.send(embed=embed)
                     await inter.response.send_message(embed=embed)
-                elif not role in inter.author.roles:
+                elif role not in inter.author.roles:
                     embed = disnake.Embed(
                         color=disnake.Color.red(),
                         title="❌ Resolve Help Channel",
