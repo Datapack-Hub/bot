@@ -40,9 +40,9 @@ jobs:
     - name: Run black
       run: |
         black . --fast
-    - uses: stefanzweifel/git-auto-commit-action@v4.16.0
-      with:
-        commit_message: Apply formatting
+    # - uses: stefanzweifel/git-auto-commit-action@v4.16.0
+    #   with:
+    #     commit_message: Apply formatting
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -66,9 +66,9 @@ jobs:
     - name: Run ruff
       run: |
         ruff . --fix
-    - uses: stefanzweifel/git-auto-commit-action@v4.16.0
-      with:
-        commit_message: Apply linting
+    # - uses: stefanzweifel/git-auto-commit-action@v4.16.0
+    #   with:
+    #     commit_message: Apply linting
       # --exit-zero so it doesn't yell
   bandit:
     runs-on: ubuntu-latest
