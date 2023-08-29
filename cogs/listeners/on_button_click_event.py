@@ -43,7 +43,7 @@ class on_button_click(commands.Cog):
                     color=disnake.Colour.orange(),
                     title=("**`Resolve Help Channel` Button**"),
                     description=(
-                        str(inter.user.name) + " failed resolving a help channel`"
+                        str(inter.user.name) + " failed resolving a help channel"
                     ),
                 )
                 channel = self.bot.get_channel(variables.logs)

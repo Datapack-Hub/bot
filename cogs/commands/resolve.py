@@ -27,7 +27,7 @@ class resolve_command(commands.Cog, name='resolve'):
                     embed = disnake.Embed(
                         color=disnake.Colour.orange(),
                         title=("**`/resolve` Command**"),
-                        description=(str(inter.user.name) + " resolved a help channel`"),
+                        description=(str(inter.user.name) + " resolved a help channel"),
                     )
                     channel = self.bot.get_channel(variables.logs)
                     await channel.send(embed=embed)

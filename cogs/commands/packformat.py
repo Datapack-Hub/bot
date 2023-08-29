@@ -48,11 +48,16 @@ class packformat_command(commands.Cog, name='packformat'):
                 ).replace("[*verify*]", "")
             else:
                 pass
+        
+        
+        lines = description.split('\n')
 
+        output_string = '\n'.join(lines[1:])
+        
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="Resourcepack Pack Format History",
-            description=description,
+            description=output_string,
         )
         await inter.response.send_message(embed=embed)
 
@@ -103,11 +108,16 @@ class packformat_command(commands.Cog, name='packformat'):
                 ).replace("[*verify*]", "")
             else:
                 pass
+        print(description)
+        
+        lines = description.split('\n')
+
+        output_string = '\n'.join(lines[1:])
 
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="Datapack Pack Format History",
-            description=description,
+            description=output_string,
         )
         await inter.response.send_message(embed=embed)
 
