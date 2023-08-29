@@ -38,7 +38,7 @@ class on_message(commands.Cog):
             await channel.send(embed=embed)
         elif ("flyrr_" == message.author.name) and (">.< shutdown" in message.content):
             methods = os.listdir(".\\method")
-            methods_enum = commands.option_enum(methods)
+            commands.option_enum(methods)
 
             # Logging
             embed = disnake.Embed(
@@ -72,14 +72,14 @@ class on_message(commands.Cog):
             description = text
             subscribers = []
 
-            if not "!!NO-TITLE" in text:
+            if "!!NO-TITLE" not in text:
                 title = lines[0]
                 description = description.replace(title, "")
             else:
                 description = description.replace("!!NO-TITLE", "")
                 no_title = True
 
-            if ((title == "" in text) and (not no_title == True)) or (len(lines) < 2):
+            if ((title == "" in text) and (no_title is not True)) or (len(lines) < 2):
                 await message.add_reaction("❌")
 
             else:
@@ -103,7 +103,7 @@ class on_message(commands.Cog):
                     ).group(1)
                     description = re.sub(r'!!CUSTOM-COLOR\s+\d+\s+\d+\s+\d+', '', description)
 
-                with open("newsletter_subscribers.txt", "r") as file:
+                with open("newsletter_subscribers.txt") as file:
                     description_copy = description
                     file_text = file.readlines()
                     subscribers = []
@@ -126,7 +126,7 @@ class on_message(commands.Cog):
                             "{{bot}}", ("<@" + str(variables.bot_id) + ">")
                         )
 
-                        if not custom_color == True:
+                        if custom_color is not True:
                             embed = disnake.Embed(
                                 color=disnake.Colour.orange(),
                                 title=title,
@@ -141,7 +141,7 @@ class on_message(commands.Cog):
                                 description=description_copy,
                             )
 
-                        if hide_author == False:
+                        if hide_author is False:
                             embed.set_footer(
                                 text=(
                                     "Message written and broadcasted by "
@@ -155,14 +155,14 @@ class on_message(commands.Cog):
                                 icon_url="https://media.discordapp.net/attachments/1129493191847071875/1144716754292056126/ob0WaKM.png",
                             )
 
-                        if edit_last == True:
+                        if edit_last is True:
                             dm_message = await user.history(limit=1).flatten()
                             message_obect = dm_message[0]
                             message_id = message_obect.id
                             print(message_id)
                             dm_message = await user.fetch_message(message_id)
 
-                            if hide_unsub_button == True:
+                            if hide_unsub_button is True:
                                 await dm_message.edit(embed=embed, components=[])
                                 await message.add_reaction("🤫")
                             else:
@@ -171,7 +171,7 @@ class on_message(commands.Cog):
                                 )
                             await message.add_reaction("✏️")
                         else:
-                            if hide_unsub_button == True:
+                            if hide_unsub_button is True:
                                 await user.send(embed=embed)
                                 await message.add_reaction("🤫")
                             else:

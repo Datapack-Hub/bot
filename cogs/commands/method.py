@@ -1,6 +1,5 @@
 import disnake
 from disnake.ext import commands
-import variables
 import os
 
 
@@ -17,7 +16,7 @@ class method_command(commands.Cog, name='method'):
 
     @commands.slash_command(title="method",description="Shows information about methods commonly used by datapacks")
     async def method(self,inter: disnake.ApplicationCommandInteraction, method: methods_enum):
-        opened_file = open(("./method/" + str(method) + ".txt"), "r")
+        opened_file = open("./method/" + str(method) + ".txt")
         file_content = opened_file.read()
         print("Method Description: " + file_content)
         opened_file.close()

@@ -84,7 +84,7 @@ class on_button_click(commands.Cog):
                         color=disnake.Colour.orange(),
                         title=("**Someone will come and help soon!**"),
                         description=(
-                            "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there’s an easier way to solve this problem\n\n🙇 ~~If it’s been 30 minutes and you’re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here~~ **Someone has already summoned the helpers in this help channel!**\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
+                            "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there`s an easier way to solve this problem\n\n🙇 ~~If it`s been 30 minutes and you`re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here~~ **Someone has already summoned the helpers in this help channel!**\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
                         ),
                     )
                     resolve_question_button = disnake.ui.Button(
@@ -144,7 +144,7 @@ class on_button_click(commands.Cog):
                 await channel.send(embed=embed)
 
         if inter.component.custom_id == "newsletter_unsubscribe_button":
-            with open("newsletter_subscribers.txt", "r") as file:
+            with open("newsletter_subscribers.txt") as file:
                 file_text = file.readlines()
                 subscribers = []
 
@@ -165,7 +165,6 @@ class on_button_click(commands.Cog):
                 title="😔 Sad to see you go",
                 description="Successfully unsubscribed you from our newsletter!\nIn case you decide otherwise or this was on accident yout can use `/newsletter` to resubscribe",
             )
-            user = inter.user
             await inter.response.send_message(embed=embed)
 
             # Logging
