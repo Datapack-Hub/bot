@@ -180,4 +180,4 @@ class on_message(commands.Cog):
                                     )
                                 await message.add_reaction("📣")
             else:
-                message.delete()
+                await message.delete()
