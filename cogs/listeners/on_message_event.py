@@ -56,127 +56,128 @@ class on_message(commands.Cog):
 
         # BROADCAST NEWSLETTER
 
-        elif (message.channel == newsletter_channel) and (
-            message.author.id == 1146477268886106232
-        ):
-            hide_unsub_button = False
-            edit_last = False
-            no_title = False
-            hide_author = False
-            custom_color = False
+        elif (message.channel == newsletter_channel):
+            if (message.author.id == 1146477268886106232):
+                hide_unsub_button = False
+                edit_last = False
+                no_title = False
+                hide_author = False
+                custom_color = False
 
-            channel = message.channel
-            text = message.content
-            title = ""
-            lines = text.splitlines()
-            description = text
-            subscribers = []
+                channel = message.channel
+                text = message.content
+                title = ""
+                lines = text.splitlines()
+                description = text
+                subscribers = []
 
-            if "!!NO-TITLE" not in text:
-                title = lines[0]
-                description = description.replace(title, "")
-            else:
-                description = description.replace("!!NO-TITLE", "")
-                no_title = True
+                if "!!NO-TITLE" not in text:
+                    title = lines[0]
+                    description = description.replace(title, "")
+                else:
+                    description = description.replace("!!NO-TITLE", "")
+                    no_title = True
 
-            if ((title == "" in text) and (no_title is not True)) or (len(lines) < 2):
-                await message.add_reaction("❌")
+                if ((title == "" in text) and (no_title is not True)) or (len(lines) < 2):
+                    await message.add_reaction("❌")
 
-            else:
-                print(str(len(lines)))
+                else:
+                    print(str(len(lines)))
 
-                if "!!HIDE-UNSUB-BUTTON" in text:
-                    hide_unsub_button = True
-                    description = description.replace("!!HIDE-UNSUB-BUTTON", "")
-                if "!!EDIT-LAST" in text:
-                    edit_last = True
-                    description = description.replace("!!EDIT-LAST", "")
-                if "!!HIDE-AUTHOR" in text:
-                    hide_author = True
-                    description = description.replace("!!HIDE-AUTHOR", "")
-                if "!!CUSTOM-COLOR" in text:
-                    custom_color = True
-                    r_value = (re.search(r"!!CUSTOM-COLOR\s+(\d+)", text)).group(1)
-                    b_value = (re.search(r"!!CUSTOM-COLOR\s+\d+\s+(\d+)", text)).group(1)
-                    g_value = (
-                        re.search(r"!!CUSTOM-COLOR\s+\d+\s+\d+\s+(\d+)", text)
-                    ).group(1)
-                    description = re.sub(r'!!CUSTOM-COLOR\s+\d+\s+\d+\s+\d+', '', description)
+                    if "!!HIDE-UNSUB-BUTTON" in text:
+                        hide_unsub_button = True
+                        description = description.replace("!!HIDE-UNSUB-BUTTON", "")
+                    if "!!EDIT-LAST" in text:
+                        edit_last = True
+                        description = description.replace("!!EDIT-LAST", "")
+                    if "!!HIDE-AUTHOR" in text:
+                        hide_author = True
+                        description = description.replace("!!HIDE-AUTHOR", "")
+                    if "!!CUSTOM-COLOR" in text:
+                        custom_color = True
+                        r_value = (re.search(r"!!CUSTOM-COLOR\s+(\d+)", text)).group(1)
+                        b_value = (re.search(r"!!CUSTOM-COLOR\s+\d+\s+(\d+)", text)).group(1)
+                        g_value = (
+                            re.search(r"!!CUSTOM-COLOR\s+\d+\s+\d+\s+(\d+)", text)
+                        ).group(1)
+                        description = re.sub(r'!!CUSTOM-COLOR\s+\d+\s+\d+\s+\d+', '', description)
 
-                with open("newsletter_subscribers.txt") as file:
-                    description_copy = description
-                    file_text = file.readlines()
-                    subscribers = []
-
-                    for line in file_text:
-                        clean_line = line.strip()
-                        subscribers.append(clean_line)
-
-                    print(subscribers)
-
-                    for subscriber in subscribers:
+                    with open("newsletter_subscribers.txt") as file:
                         description_copy = description
-                        user = self.bot.get_user(int(subscriber))
-                        print(">>" + subscriber + "," + str(user))
+                        file_text = file.readlines()
+                        subscribers = []
 
-                        description_copy = description_copy.replace(
-                            "{{username}}", ("<@" + str(subscriber) + ">")
-                        )
-                        description_copy = description_copy.replace(
-                            "{{bot}}", ("<@" + str(variables.bot_id) + ">")
-                        )
+                        for line in file_text:
+                            clean_line = line.strip()
+                            subscribers.append(clean_line)
 
-                        if custom_color is not True:
-                            embed = disnake.Embed(
-                                color=disnake.Colour.orange(),
-                                title=title,
-                                description=description_copy,
+                        print(subscribers)
+
+                        for subscriber in subscribers:
+                            description_copy = description
+                            user = self.bot.get_user(int(subscriber))
+                            print(">>" + subscriber + "," + str(user))
+
+                            description_copy = description_copy.replace(
+                                "{{username}}", ("<@" + str(subscriber) + ">")
                             )
-                        else:
-                            embed = disnake.Embed(
-                                color=disnake.Color.from_rgb(
-                                    int(r_value), int(g_value), int(b_value)
-                                ),
-                                title=title,
-                                description=description_copy,
+                            description_copy = description_copy.replace(
+                                "{{bot}}", ("<@" + str(variables.bot_id) + ">")
                             )
 
-                        if hide_author is False:
-                            embed.set_footer(
-                                text=(
-                                    "Message written and broadcasted by "
-                                    + message.author.name
-                                ),
-                                icon_url=message.author.display_avatar,
-                            )
-                        else:
-                            embed.set_footer(
-                                text=("Message provided by Datapack Hub"),
-                                icon_url="https://media.discordapp.net/attachments/1129493191847071875/1144716754292056126/ob0WaKM.png",
-                            )
-
-                        if edit_last is True:
-                            dm_message = await user.history(limit=1).flatten()
-                            message_obect = dm_message[0]
-                            message_id = message_obect.id
-                            print(message_id)
-                            dm_message = await user.fetch_message(message_id)
-
-                            if hide_unsub_button is True:
-                                await dm_message.edit(embed=embed, components=[])
-                                await message.add_reaction("🤫")
-                            else:
-                                await dm_message.edit(
-                                    embed=embed, components=[newsletter_unsubscribe_button]
+                            if custom_color is not True:
+                                embed = disnake.Embed(
+                                    color=disnake.Colour.orange(),
+                                    title=title,
+                                    description=description_copy,
                                 )
-                            await message.add_reaction("✏️")
-                        else:
-                            if hide_unsub_button is True:
-                                await user.send(embed=embed)
-                                await message.add_reaction("🤫")
                             else:
-                                print(user)
-                                await user.send(
-                                    embed=embed, components=[newsletter_unsubscribe_button]
+                                embed = disnake.Embed(
+                                    color=disnake.Color.from_rgb(
+                                        int(r_value), int(g_value), int(b_value)
+                                    ),
+                                    title=title,
+                                    description=description_copy,
                                 )
-                            await message.add_reaction("📣")
+
+                            if hide_author is False:
+                                embed.set_footer(
+                                    text=(
+                                        "Message written and broadcasted by "
+                                        + message.author.name
+                                    ),
+                                    icon_url=message.author.display_avatar,
+                                )
+                            else:
+                                embed.set_footer(
+                                    text=("Message provided by Datapack Hub"),
+                                    icon_url="https://media.discordapp.net/attachments/1129493191847071875/1144716754292056126/ob0WaKM.png",
+                                )
+
+                            if edit_last is True:
+                                dm_message = await user.history(limit=1).flatten()
+                                message_obect = dm_message[0]
+                                message_id = message_obect.id
+                                print(message_id)
+                                dm_message = await user.fetch_message(message_id)
+
+                                if hide_unsub_button is True:
+                                    await dm_message.edit(embed=embed, components=[])
+                                    await message.add_reaction("🤫")
+                                else:
+                                    await dm_message.edit(
+                                        embed=embed, components=[newsletter_unsubscribe_button]
+                                    )
+                                await message.add_reaction("✏️")
+                            else:
+                                if hide_unsub_button is True:
+                                    await user.send(embed=embed)
+                                    await message.add_reaction("🤫")
+                                else:
+                                    print(user)
+                                    await user.send(
+                                        embed=embed, components=[newsletter_unsubscribe_button]
+                                    )
+                                await message.add_reaction("📣")
+            else:
+                message.delete()
