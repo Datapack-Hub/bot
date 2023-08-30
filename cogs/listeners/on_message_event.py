@@ -57,7 +57,7 @@ class on_message(commands.Cog):
         # BROADCAST NEWSLETTER
 
         elif (message.channel == newsletter_channel) and (
-            message.author.id != variables.bot_id
+            message.author.id == 1146477268886106232
         ):
             hide_unsub_button = False
             edit_last = False
