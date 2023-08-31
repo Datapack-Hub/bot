@@ -3,7 +3,7 @@ import disnake
 from disnake.ext import commands
 import variables
 
-infos = commands.option_enum(["logs default", "me", "editor","logs other"])
+infos = commands.option_enum(["logs default", "me", "editor","logs other","update rp 1.19.3+"])
 
 class info_command(commands.Cog, name='info'):
     def __init__(self, bot):
@@ -24,7 +24,7 @@ class info_command(commands.Cog, name='info'):
             embed = disnake.Embed(
                 color=disnake.Color.orange(),
                 title="Other Launcher Logs :wood:",
-                description="The logs are where Minecraft displays errors when something goes wrong and can thus help you gain information about why something isn't working for you! Opening logs works different for different 3rd party launchers, here's a quick summary for the most popular ones\n\n**Prism Launcher**\n`Rightclick Instance` > `Edit` > `Settings` > `Console Settings: Show console while the game is running?`\n\n**Multi MC**\n`Rightclick Instance` > `Edit Instance` > `Settings` > `Console Settings: Show console while the game is running?`\n\n**Lunar Client**\n`Settings` > `Open Logs in File Exploreer`",
+                description="The logs are where Minecraft displays errors when something goes wrong and can thus help you gain information about why something isn't working for you! Opening logs works different for different 3rd party launchers, here's a quick summary for the most popular ones\n\n**Prism Launcher**\n`Rightclick Instance` > `Edit` > `Settings` > `Console Settings: Show console while the game is running?`\n\n**Multi MC**\n`Rightclick Instance` > `Edit Instance` > `Settings` > `Console Settings: Show console while the game is running?`\n\n**Lunar Client**\n`Settings` > `Open Logs in File Explorer`",
             )
 
         elif info == "me":
@@ -40,6 +40,12 @@ class info_command(commands.Cog, name='info'):
                 title="Editor 📝",
                 description='While you can make datapacks using any ordinary text editor, our prefered editor of choice is [VSCode](https://code.visualstudio.com/)! \nIt is aviable for Windows, Linux and MacOS (which means it runs on almost all devices) and has lots of great extensions which make the creation of datapacks a whole lot easier!\n\nOur favourite VSCode extensions are:\n[language-mcfunction](https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction) - Provides beautiful syntax highlighting for .mcfunction\n[Data-pack Helper Plus](https://marketplace.visualstudio.com/items?itemName=SPGoding.datapack-language-server) - Despite how "datapack" is spelled in the title, this adds some really helpful features like auto completion for commands!\n[NBT Viewer](https://marketplace.visualstudio.com/items?itemName=Misodee.vscode-nbt) - Allows you to view 3D models of your `.nbt` files, directly in VSCode!\n[Datapack Icons](https://marketplace.visualstudio.com/items?itemName=SuperAnt.mc-dp-icons) - Adds cool icons to datapack folders and files',
             )  
+        elif info == "update rp 1.19.3+":
+            embed = disnake.Embed(
+                color=disnake.Color.orange(),
+                title="Updaing Resourcepacks Past 1.19.3 ",
+                description='If you want to update your older resourcepacks to a version newer than 1.19.2 you will need to add a texture atlas to your pack! \n[This video by Cloudwolf](https://www.youtube.com/watch?v=MHWX_GaK2g0) shows you how to do so!',
+            )     
        # elif info == "starting out":
        #     embed = disnake.Embed(
        #         color=disnake.Color.orange(),
