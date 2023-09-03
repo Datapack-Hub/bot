@@ -2,13 +2,16 @@ import disnake
 from disnake.ext import commands
 import variables
 
-class redirect_to_help_channel(commands.Cog, name='help_redir'):
+
+class redirect_to_help_channel(commands.Cog, name="help_redir"):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.message_command(name="Redirect to Help Channel")
-    async def claim(self,inter: disnake.MessageCommandInteraction):
-        redi_ban_role = self.bot.get_guild(variables.main_guild).get_role(1031577795748450346)
+    async def claim(self, inter: disnake.MessageCommandInteraction):
+        redi_ban_role = self.bot.get_guild(variables.main_guild).get_role(
+            1031577795748450346
+        )
         if inter.guild.id != variables.main_guild:
             await inter.response.send_message(
                 "You can only use this in the [Datapack Hub discord server](<https://dsc.gg/datapack>)!",
@@ -30,7 +33,7 @@ class redirect_to_help_channel(commands.Cog, name='help_redir'):
                 "You are blacklisted from doing this. If you believe this is a mistake please contact a staff member.",
                 ephemeral=True,
             )
-    
+
             # Logging
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
@@ -47,7 +50,7 @@ class redirect_to_help_channel(commands.Cog, name='help_redir'):
             channel = self.bot.get_channel(variables.logs)
             await channel.send(embed=embed)
             return
-    
+
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="This question would be more fitting inside of a Help Channel!",
@@ -57,17 +60,17 @@ class redirect_to_help_channel(commands.Cog, name='help_redir'):
             + str(variables.resourcepack_help_channel)
             + "> if you require assistance.\nCheck out <#935570290317086841> for tips on asking questions efficiently.",
         )
-    
+
         embed.set_footer(
             text=("Requested by " + inter.author.name),
             icon_url=inter.author.display_avatar,
         )
-    
+
         embed.set_footer(
             text="If you feel this function was misused, please contact staff."
         )
         await inter.target.reply(embed=embed)
-    
+
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.orange(),

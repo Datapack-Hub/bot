@@ -1,12 +1,12 @@
 # invite link, don't share for now: https://discord.com/oauth2/authorize?client_id=1108074519308017734&scope=bot&permissions=517611048000
-#* IMPORTING
+# * IMPORTING
 # Libaries
 import disnake
 from disnake.ext import commands
 
 # Local Files
 import variables
-import bot_token 
+import bot_token
 
 # Cogs
 import cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
@@ -25,7 +25,7 @@ import cogs.listeners.on_guild_join_event as on_guild_join
 import cogs.listeners.on_guild_remove_event as on_guild_remove
 import cogs.listeners.on_ready_event as on_ready
 
-#* SETUP BOT
+# * SETUP BOT
 # Set Intents
 intents = disnake.Intents.all()
 
@@ -44,7 +44,7 @@ bot = commands.Bot(
 )
 
 
-#* ADD COGS
+# * ADD COGS
 # Message Commands
 bot.add_cog(redirect_to_help_channel.redirect_to_help_channel(bot))
 
@@ -67,5 +67,5 @@ bot.add_cog(on_guild_remove.on_guild_remove(bot))
 bot.add_cog(on_ready.on_ready(bot))
 
 
-#* RUN BOT
+# * RUN BOT
 bot.run(bot_token.token)

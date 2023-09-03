@@ -2,18 +2,24 @@ import disnake
 from disnake.ext import commands
 import variables
 
-class resolve_command(commands.Cog, name='resolve'):
+
+class resolve_command(commands.Cog, name="resolve"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.slash_command(title="resolve", description="Marks question as resolved")
-    async def resolve(self,inter: disnake.ApplicationCommandInteraction):
+    async def resolve(self, inter: disnake.ApplicationCommandInteraction):
         role = self.bot.get_guild(variables.main_guild).get_role(variables.helper_role)
 
         try:
             channel = inter.channel.parent.id
-            if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):
-                if channel == variables.datapack_help_channel or variables.resourcepack_help_channel:
+            if (inter.channel.owner.id == inter.author.id) or (
+                role in inter.author.roles
+            ):
+                if (
+                    channel == variables.datapack_help_channel
+                    or variables.resourcepack_help_channel
+                ):
                     resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
                     await inter.channel.add_tags(resolved_tag)
                     embed = disnake.Embed(

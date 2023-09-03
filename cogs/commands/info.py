@@ -1,16 +1,21 @@
-
 import disnake
 from disnake.ext import commands
 import variables
 
-infos = commands.option_enum(["logs default", "me", "editor","logs other","update rp 1.19.3+"])
+infos = commands.option_enum(
+    ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]
+)
 
-class info_command(commands.Cog, name='info'):
+
+class info_command(commands.Cog, name="info"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(title="info",description="Gives you more information about an external feature to improve your datapacking experience")
-    async def info(self,inter: disnake.ApplicationCommandInteraction, info: infos):
+    @commands.slash_command(
+        title="info",
+        description="Gives you more information about an external feature to improve your datapacking experience",
+    )
+    async def info(self, inter: disnake.ApplicationCommandInteraction, info: infos):
         if info == "logs default":
             embed = disnake.Embed(
                 color=disnake.Color.orange(),
@@ -39,25 +44,27 @@ class info_command(commands.Cog, name='info'):
                 color=disnake.Color.orange(),
                 title="Editor 📝",
                 description='While you can make datapacks using any ordinary text editor, our prefered editor of choice is [VSCode](https://code.visualstudio.com/)! \nIt is aviable for Windows, Linux and MacOS (which means it runs on almost all devices) and has lots of great extensions which make the creation of datapacks a whole lot easier!\n\nOur favourite VSCode extensions are:\n[language-mcfunction](https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction) - Provides beautiful syntax highlighting for .mcfunction\n[Data-pack Helper Plus](https://marketplace.visualstudio.com/items?itemName=SPGoding.datapack-language-server) - Despite how "datapack" is spelled in the title, this adds some really helpful features like auto completion for commands!\n[NBT Viewer](https://marketplace.visualstudio.com/items?itemName=Misodee.vscode-nbt) - Allows you to view 3D models of your `.nbt` files, directly in VSCode!\n[Datapack Icons](https://marketplace.visualstudio.com/items?itemName=SuperAnt.mc-dp-icons) - Adds cool icons to datapack folders and files',
-            )  
+            )
         elif info == "update rp 1.19.3+":
             embed = disnake.Embed(
                 color=disnake.Color.orange(),
                 title="Updaing Resourcepacks Past 1.19.3 ",
-                description='1.19.3 introduced a change to resourcepacks which means that textures which aren\'t stored in `textures/item` or `textures/block` won\'t be loaded into the game by default. This means that most resource packs for earlier versions won\'t work in 1.19.3. \n\nThere are two ways to fix this:\n- Move your custom textures into `assets/minecraft/textures/item/…`, since all textures in the `item` (or `block`) folders are loaded by default.\n- Create an atlas file for your custom textures. An atlas file basically tells Minecraft to always load the textures in your custom folder. [This video](https://youtu.be/MHWX_GaK2g0) will explain how to do this.',
-            )     
-       # elif info == "starting out":
-       #     embed = disnake.Embed(
-       #         color=disnake.Color.orange(),
-       #         title="Starting Out 🧒",
-       #         description='Here are some tutorials for beginners:\nBasic Datapacking Tutorial by Legitimoose: https://www.youtube.com/watch?v=ac6V5-KT6Rg\nMore uwu',
-       #     )
-            
+                description="1.19.3 introduced a change to resourcepacks which means that textures which aren't stored in `textures/item` or `textures/block` won't be loaded into the game by default. This means that most resource packs for earlier versions won't work in 1.19.3. \n\nThere are two ways to fix this:\n- Move your custom textures into `assets/minecraft/textures/item/…`, since all textures in the `item` (or `block`) folders are loaded by default.\n- Create an atlas file for your custom textures. An atlas file basically tells Minecraft to always load the textures in your custom folder. [This video](https://youtu.be/MHWX_GaK2g0) will explain how to do this.",
+            )
+        # elif info == "starting out":
+        #     embed = disnake.Embed(
+        #         color=disnake.Color.orange(),
+        #         title="Starting Out 🧒",
+        #         description='Here are some tutorials for beginners:\nBasic Datapacking Tutorial by Legitimoose: https://www.youtube.com/watch?v=ac6V5-KT6Rg\nMore uwu',
+        #     )
+
         await inter.response.send_message(embed=embed)
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**`/info` Command**"),
-            description=(str(inter.user.name) + " gained knowledge about `" + info + "`!"),
+            description=(
+                str(inter.user.name) + " gained knowledge about `" + info + "`!"
+            ),
         )
         channel = self.bot.get_channel(variables.logs)
         await channel.send(embed=embed)
