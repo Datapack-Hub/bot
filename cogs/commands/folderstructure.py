@@ -2,16 +2,19 @@ import disnake
 from disnake.ext import commands
 import variables
 
-class folderstructure_command(commands.Cog, name='folderstructure'):
+
+class folderstructure_command(commands.Cog, name="folderstructure"):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.slash_command()
-    async def folderstructure(self,inter):
+    async def folderstructure(self, inter):
         pass
 
-    @folderstructure.sub_command(description="Shows the folderstructure for resourcepacks")
-    async def resourcepack(self,inter: disnake.ApplicationCommandInteraction):
+    @folderstructure.sub_command(
+        description="Shows the folderstructure for resourcepacks"
+    )
+    async def resourcepack(self, inter: disnake.ApplicationCommandInteraction):
         embed = disnake.Embed(
             title="Resourcepack Folderstructure",
             description="""```
@@ -47,15 +50,15 @@ class folderstructure_command(commands.Cog, name='folderstructure'):
             color=disnake.Colour.orange(),
             title=("**`/folderstructure` Command**"),
             description=(
-                str(inter.user.name) + " looked up the folderstructure of `resourcepacks`"
+                str(inter.user.name)
+                + " looked up the folderstructure of `resourcepacks`"
             ),
         )
         channel = self.bot.get_channel(variables.logs)
         await channel.send(embed=embed)
 
-
     @folderstructure.sub_command(description="Shows the folderstructure for datapacks")
-    async def datapack(self,inter: disnake.ApplicationCommandInteraction):
+    async def datapack(self, inter: disnake.ApplicationCommandInteraction):
         embed = disnake.Embed(
             title="Datapack Folderstructure",
             description="""```

@@ -15,12 +15,18 @@ invites = commands.option_enum(
     ]
 )
 
-class invite_command(commands.Cog, name='invite'):
+
+class invite_command(commands.Cog, name="invite"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(title="invite",description="Shows discord invite for a discord server relevant to datapacks")
-    async def invite(self,inter: disnake.ApplicationCommandInteraction, invite: invites):
+    @commands.slash_command(
+        title="invite",
+        description="Shows discord invite for a discord server relevant to datapacks",
+    )
+    async def invite(
+        self, inter: disnake.ApplicationCommandInteraction, invite: invites
+    ):
         if invite == "datapack hub":
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),

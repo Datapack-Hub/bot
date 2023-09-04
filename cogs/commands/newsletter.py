@@ -8,12 +8,16 @@ newsletter_unsubscribe_button = disnake.ui.Button(
     style=disnake.ButtonStyle.gray,
 )
 
-class newsletter_command(commands.Cog, name='newsletter'):
+
+class newsletter_command(commands.Cog, name="newsletter"):
     def __init__(self, bot):
         self.bot = bot
-        
-    @commands.slash_command(title="newsletter",description="EXPERIMENTAL!! Subscribes/Unsubscribes you to our datapack related DM newsletter.")
-    async def newsletter(self,inter: disnake.ApplicationCommandInteraction):
+
+    @commands.slash_command(
+        title="newsletter",
+        description="EXPERIMENTAL!! Subscribes/Unsubscribes you to our datapack related DM newsletter.",
+    )
+    async def newsletter(self, inter: disnake.ApplicationCommandInteraction):
         with open("newsletter_subscribers.txt") as file:
             file_text = file.readlines()
             subscribers = []
@@ -78,7 +82,9 @@ class newsletter_command(commands.Cog, name='newsletter'):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**`/newsletter` Experimental Command**"),
-                    description=(str(inter.user.name) + " subscribed to the newsletter"),
+                    description=(
+                        str(inter.user.name) + " subscribed to the newsletter"
+                    ),
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)

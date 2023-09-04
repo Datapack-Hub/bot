@@ -10,14 +10,17 @@ newsletter_unsubscribe_button = disnake.ui.Button(
     style=disnake.ButtonStyle.gray,
 )
 
+
 class on_message(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self,message):
+    async def on_message(self, message):
         intro_channel = self.bot.get_channel(variables.intro_channel)
-        newsletter_channel = self.bot.get_channel(variables.newsletter_broadcast_channel)
+        newsletter_channel = self.bot.get_channel(
+            variables.newsletter_broadcast_channel
+        )
 
         if message.channel == intro_channel:
             await message.add_reaction("👋")
@@ -56,8 +59,8 @@ class on_message(commands.Cog):
 
         # BROADCAST NEWSLETTER
 
-        elif (message.channel == newsletter_channel):
-            if (message.author.id == 880000911848636468):
+        elif message.channel == newsletter_channel:
+            if message.author.id == 880000911848636468:
                 hide_unsub_button = False
                 edit_last = False
                 no_title = False
@@ -78,7 +81,9 @@ class on_message(commands.Cog):
                     description = description.replace("!!NO-TITLE", "")
                     no_title = True
 
-                if ((title == "" in text) and (no_title is not True)) or (len(lines) < 2):
+                if ((title == "" in text) and (no_title is not True)) or (
+                    len(lines) < 2
+                ):
                     await message.add_reaction("❌")
 
                 else:
@@ -96,11 +101,15 @@ class on_message(commands.Cog):
                     if "!!CUSTOM-COLOR" in text:
                         custom_color = True
                         r_value = (re.search(r"!!CUSTOM-COLOR\s+(\d+)", text)).group(1)
-                        b_value = (re.search(r"!!CUSTOM-COLOR\s+\d+\s+(\d+)", text)).group(1)
+                        b_value = (
+                            re.search(r"!!CUSTOM-COLOR\s+\d+\s+(\d+)", text)
+                        ).group(1)
                         g_value = (
                             re.search(r"!!CUSTOM-COLOR\s+\d+\s+\d+\s+(\d+)", text)
                         ).group(1)
-                        description = re.sub(r'!!CUSTOM-COLOR\s+\d+\s+\d+\s+\d+', '', description)
+                        description = re.sub(
+                            r"!!CUSTOM-COLOR\s+\d+\s+\d+\s+\d+", "", description
+                        )
 
                     with open("newsletter_subscribers.txt") as file:
                         description_copy = description
@@ -166,7 +175,8 @@ class on_message(commands.Cog):
                                     await message.add_reaction("🤫")
                                 else:
                                     await dm_message.edit(
-                                        embed=embed, components=[newsletter_unsubscribe_button]
+                                        embed=embed,
+                                        components=[newsletter_unsubscribe_button],
                                     )
                                 await message.add_reaction("✏️")
                             else:
@@ -176,7 +186,8 @@ class on_message(commands.Cog):
                                 else:
                                     print(user)
                                     await user.send(
-                                        embed=embed, components=[newsletter_unsubscribe_button]
+                                        embed=embed,
+                                        components=[newsletter_unsubscribe_button],
                                     )
                                 await message.add_reaction("📣")
             else:

@@ -5,17 +5,17 @@ import requests
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 
-class packformat_command(commands.Cog, name='packformat'):
+
+class packformat_command(commands.Cog, name="packformat"):
     def __init__(self, bot):
         self.bot = bot
-        
+
     @commands.slash_command()
-    async def packformat(self,inter):
+    async def packformat(self, inter):
         pass
 
-
     @packformat.sub_command(description="Shows history of resourcepack pack formats")
-    async def resourcepack(self,inter: disnake.ApplicationCommandInteraction):
+    async def resourcepack(self, inter: disnake.ApplicationCommandInteraction):
         request = requests.get(
             "https://minecraft.fandom.com/wiki/Pack_format", timeout=5000
         )
@@ -48,12 +48,11 @@ class packformat_command(commands.Cog, name='packformat'):
                 ).replace("[*verify*]", "")
             else:
                 pass
-        
-        
-        lines = description.split('\n')
 
-        output_string = '\n'.join(lines[1:])
-        
+        lines = description.split("\n")
+
+        output_string = "\n".join(lines[1:])
+
         embed = disnake.Embed(
             color=disnake.Color.orange(),
             title="Resourcepack Pack Format History",
@@ -73,9 +72,8 @@ class packformat_command(commands.Cog, name='packformat'):
         channel = self.bot.get_channel(variables.logs)
         await channel.send(embed=embed)
 
-
     @packformat.sub_command(description="Shows history of datapack pack formats")
-    async def datapack(self,inter: disnake.ApplicationCommandInteraction):
+    async def datapack(self, inter: disnake.ApplicationCommandInteraction):
         request = requests.get(
             "https://minecraft.fandom.com/wiki/Pack_format", timeout=5000
         )
@@ -109,10 +107,10 @@ class packformat_command(commands.Cog, name='packformat'):
             else:
                 pass
         print(description)
-        
-        lines = description.split('\n')
 
-        output_string = '\n'.join(lines[1:])
+        lines = description.split("\n")
+
+        output_string = "\n".join(lines[1:])
 
         embed = disnake.Embed(
             color=disnake.Color.orange(),
@@ -126,7 +124,8 @@ class packformat_command(commands.Cog, name='packformat'):
             color=disnake.Colour.orange(),
             title=("**`/packformat` Command**"),
             description=(
-                str(inter.user.name) + " looked up the packformat history of `datapacks`"
+                str(inter.user.name)
+                + " looked up the packformat history of `datapacks`"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

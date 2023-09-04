@@ -3,14 +3,17 @@ from disnake.ext import commands
 import variables
 import asyncio
 
+
 class on_thread_create(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_thread_create(self,thread):
+    async def on_thread_create(self, thread):
         await asyncio.sleep(1)
-        if (thread.parent_id == variables.datapack_help_channel) or (thread.parent_id == variables.resourcepack_help_channel):
+        if (thread.parent_id == variables.datapack_help_channel) or (
+            thread.parent_id == variables.resourcepack_help_channel
+        ):
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**Someone will come and help soon!**"),

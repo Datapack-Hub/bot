@@ -3,15 +3,18 @@ from disnake.ext import commands
 import variables
 import datetime
 
+
 class on_button_click(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
+
     @commands.Cog.listener()
-    async def on_button_click(self,inter: disnake.MessageInteraction):
+    async def on_button_click(self, inter: disnake.MessageInteraction):
         print("asdasd")
         if inter.component.custom_id == "resolve_question_button":
-            role = self.bot.get_guild(variables.main_guild).get_role(variables.helper_role)
+            role = self.bot.get_guild(variables.main_guild).get_role(
+                variables.helper_role
+            )
             if (inter.channel.owner.id == inter.user.id) or (role in inter.user.roles):
                 resolved_tag = inter.channel.parent.get_tag_by_name("RESOLVED")
                 await inter.channel.add_tags(resolved_tag)
@@ -57,11 +60,14 @@ class on_button_click(commands.Cog):
             time_difference_seconds = time_difference.total_seconds()
             time_difference_minutes = time_difference_seconds / 60
 
-            role = self.bot.get_guild(variables.main_guild).get_role(variables.helper_role)
+            role = self.bot.get_guild(variables.main_guild).get_role(
+                variables.helper_role
+            )
             channel = inter.channel.parent.id
-            if (inter.channel.owner.id == inter.author.id) or (role in inter.author.roles):
+            if (inter.channel.owner.id == inter.author.id) or (
+                role in inter.author.roles
+            ):
                 if time_difference_minutes >= 30:
-                    
                     embed = disnake.Embed(
                         color=disnake.Colour.blue(),
                         title=("**🙇 Helpers Arise!**"),
@@ -71,15 +77,15 @@ class on_button_click(commands.Cog):
                     )
                     embed.set_footer(
                         text=("Requested by " + inter.user.name),
-                        icon_url=inter.user.avatar
+                        icon_url=inter.user.avatar,
                     )
-                    
+
                     await inter.response.send_message(
                         "<@&" + str(variables.helper_role) + ">",
                         embed=embed,
                         allowed_mentions=disnake.AllowedMentions(roles=True),
                     )
-                    
+
                     embed = disnake.Embed(
                         color=disnake.Colour.orange(),
                         title=("**Someone will come and help soon!**"),
@@ -122,7 +128,9 @@ class on_button_click(commands.Cog):
                     embed = disnake.Embed(
                         color=disnake.Colour.orange(),
                         title=("**`Summon Helpers` Button**"),
-                        description=(str(inter.user.name) + " failed summoning Helpers"),
+                        description=(
+                            str(inter.user.name) + " failed summoning Helpers"
+                        ),
                     )
                     channel = self.bot.get_channel(variables.logs)
                     await channel.send(embed=embed)
@@ -171,7 +179,9 @@ class on_button_click(commands.Cog):
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**`Unsubscribe` Button**"),
-                description=(str(inter.user.name) + " unsubscribed from the newsletter"),
+                description=(
+                    str(inter.user.name) + " unsubscribed from the newsletter"
+                ),
             )
             channel = self.bot.get_channel(variables.logs)
             await channel.send(embed=embed)
