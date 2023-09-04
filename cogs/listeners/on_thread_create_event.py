@@ -15,7 +15,7 @@ class on_thread_create(commands.Cog):
                 color=disnake.Colour.orange(),
                 title=("**Someone will come and help soon!**"),
                 description=(
-                    "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there`s an easier way to solve this problem\n\n🙇 If it`s been 30 minutes and you`re still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
+                    "💬 While you wait, take this time to provide more context and details. What are you trying to achieve overall - maybe there's an easier way to solve this problem\n\n🙇 If it's been 30 minutes and you're still waiting for someone to help, hit the __Summon Helpers__ button to call the official helpers here\n\n✅ Once your question has been resolved (or you no longer need it), hit the __Resolve Question__ button or run /resolve"
                 ),
             )
             summon_helpers_button = disnake.ui.Button(
