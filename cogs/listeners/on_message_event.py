@@ -27,7 +27,7 @@ class on_message(commands.Cog):
                 color=disnake.Colour.orange(),
                 title=("👋 Hey there!"),
                 description=(
-                    "I am Datapack Helper a discord bot focused around helping you with everything datapacks and maintained by [Datpaack Hub](https://discord.datapackhub.net)!\nTo lear about my commands run `/help` (not implemented yet) and to report bugs and similar feel free to report them [here](https://discord.datapackhub.net) (channels private till bot goes public). "
+                    "I am Datapack Helper a discord bot focused on helping you with everything datapacks and maintained by [Datapack Hub](https://discord.datapackhub.net)!\nTo learn about my commands run `/help` (not implemented yet) and to report bugs and similar feel free to report them [here](https://discord.datapackhub.net) (channels private till bot goes public)."
                 ),
             )
             await message.reply(embed=embed)
