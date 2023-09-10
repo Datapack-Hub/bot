@@ -22,7 +22,17 @@ class on_message(commands.Cog):
             variables.newsletter_broadcast_channel
         )
 
-        if message.channel == intro_channel:
+        if ("<@" + str(variables.bot_id) + ">") in message.content:
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("👋 Hey there!"),
+                description=(
+                    "I am Datapack Helper a discord bot focused around helping you with everything datapacks and maintained by [Datpaack Hub](https://discord.datapackhub.net)!\nTo lear about my commands run `/help` (not implemented yet) and to report bugs and similar feel free to report them [here](https://discord.datapackhub.net) (channels private till bot goes public). "
+                ),
+            )
+            await message.reply(embed=embed)
+
+        elif message.channel == intro_channel:
             await message.add_reaction("👋")
 
             # Logging

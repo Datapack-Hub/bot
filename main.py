@@ -18,12 +18,14 @@ import cogs.commands.invite as invite
 import cogs.commands.newsletter as newsletter
 import cogs.commands.packformat as packformat
 import cogs.commands.info as info
+import cogs.commands.template as template
 import cogs.listeners.on_message_event as on_message
 import cogs.listeners.on_thread_create_event as on_thread_create
 import cogs.listeners.on_button_click_event as on_button_click
 import cogs.listeners.on_guild_join_event as on_guild_join
 import cogs.listeners.on_guild_remove_event as on_guild_remove
 import cogs.listeners.on_ready_event as on_ready
+
 
 # * SETUP BOT
 # Set Intents
@@ -57,6 +59,7 @@ bot.add_cog(invite.invite_command(bot))
 bot.add_cog(newsletter.newsletter_command(bot))
 bot.add_cog(packformat.packformat_command(bot))
 bot.add_cog(info.info_command(bot))
+bot.add_cog(template.template_command(bot))
 
 # Listeners
 bot.add_cog(on_message.on_message(bot))

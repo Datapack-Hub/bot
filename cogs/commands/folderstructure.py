@@ -37,7 +37,6 @@ class folderstructure_command(commands.Cog, name="folderstructure"):
         │   ├── sounds    
         │   ├── texts    
         │   └── textures    
-        ├── pack.mcmeta    
         └── realms        
             ├── lang        
             └── textures

@@ -1,0 +1,103 @@
+Auflistung der Ordnerpfade
+Volumeseriennummer : 2C4C-2EA4
+C:.
+|   .editorconfig
+|   .gitignore
+|   bot_token.py
+|   doing_the_grabby_grabby.py
+|   main.py
+|   newsletter_subscribers.txt
+|   output.txt
+|   pyproject.toml
+|   README.md
+|   requirements.txt
+|   variables.py
+|   
++---.github
+|   \---workflows
+|           main.yml
+|           
++---.vscode
+|       settings.json
+|       
++---cogs
+|   +---commands
+|   |   |   folderstructure.py
+|   |   |   info.py
+|   |   |   invite.py
+|   |   |   method.py
+|   |   |   newsletter.py
+|   |   |   packformat.py
+|   |   |   resolve.py
+|   |   |   suggest.py
+|   |   |   syntax.py
+|   |   |   template.py
+|   |   |   
+|   |   +---templates
+|   |   |       datapack.zip
+|   |   |       Resourcepack Template UNZIP PLEASE.zip
+|   |   |       
+|   |   \---__pycache__
+|   |           folderstructure.cpython-311.pyc
+|   |           info.cpython-311.pyc
+|   |           invite.cpython-311.pyc
+|   |           method.cpython-311.pyc
+|   |           newsletter.cpython-311.pyc
+|   |           packformat.cpython-311.pyc
+|   |           resolve.cpython-311.pyc
+|   |           syntax.cpython-311.pyc
+|   |           template.cpython-311.pyc
+|   |           
+|   +---listeners
+|   |   |   on_button_click_event.py
+|   |   |   on_guild_join_event.py
+|   |   |   on_guild_remove_event.py
+|   |   |   on_message_event.py
+|   |   |   on_ready_event.py
+|   |   |   on_thread_create_event.py
+|   |   |   
+|   |   \---__pycache__
+|   |           on_button_click_event.cpython-311.pyc
+|   |           on_guild_join_event.cpython-311.pyc
+|   |           on_guild_remove_event.cpython-311.pyc
+|   |           on_mention_event.cpython-311.pyc
+|   |           on_message_event.cpython-311.pyc
+|   |           on_ready_event.cpython-311.pyc
+|   |           on_thread_create_event.cpython-311.pyc
+|   |           
+|   +---message_commands
+|   |   |   redirect_to_help_channel.py
+|   |   |   
+|   |   \---__pycache__
+|   |           redirect_to_help_channel.cpython-311.pyc
+|   |           
+|   \---__pycache__
+|           folderstructure_command.cpython-311.pyc
+|           info_command.cpython-311.pyc
+|           invite_command.cpython-311.pyc
+|           method_command.cpython-311.pyc
+|           newsletter_command.cpython-311.pyc
+|           on_button_click_event.cpython-311.pyc
+|           on_guild_join_event.cpython-311.pyc
+|           on_guild_remove_event.cpython-311.pyc
+|           on_message_event.cpython-311.pyc
+|           on_ready_event.cpython-311.pyc
+|           on_thread_create_event.cpython-311.pyc
+|           packformat_command.cpython-311.pyc
+|           redirect_to_help_channel.cpython-311.pyc
+|           resolve_command.cpython-311.pyc
+|           syntax_command.cpython-311.pyc
+|           
++---images
+|       bg.png
+|       pfp.png
+|       
++---method
+|       raycast.txt
+|       
+\---__pycache__
+        bot_token.cpython-311.pyc
+        redirect_to_help_channel.cpython-311.pyc
+        syntax_command.cpython-311.pyc
+        variables.cpython-311.pyc
+        
