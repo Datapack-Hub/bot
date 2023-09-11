@@ -1,4 +1,3 @@
-
 If you look this up, I assume you already know what a normal Raycast does.
 A Slowcast is similar but unlike a standard Raycast, it is not instant.
 You might think now: "Why do we need a Slowcast for that, You can just teleport a marker slowly forward to do the same?".
@@ -76,7 +75,6 @@ scoreboard players remove @s slowcastSteps 1
 
 particle flame ~ ~ ~ .1 .1 .1 0 1
 
-# The next command might look a bit complex but it is really not that complicated. The explanation is under this function.
 execute store result score hit temp as @e[type=!player,type=!item_display,dx=0] positioned ~-.99 ~-.99 ~-.99 if entity @s[dx=0] positioned ~.99 ~.99 ~.99 run function <namespace>:end 
 execute if score hit temp matches 1 run kill
 
@@ -85,15 +83,15 @@ tp ~ ~ ~
 execute if score @s slowcastSteps matches 1.. positioned ^ ^ ^.2 run function <namespace>:step
 ```
 
-Let's go over the command bit by bit.
+Now we have the last function necessary for the Slowcast. This one has only one important command for all of this to work, the rest is up to you, what you want to happen when hitting something. In my case, the entity just says hi.
+`end.mcfunction`
 
-- `execute store result score hit temp`:
-This part stores the result of the last action of the command in a scoreboard objective temp under the name hit. Because calling the `end` function is not something that gives back a result by default, we need to include a `return` command in it. You will see that further below.
-- `as @e[type=!player,type=!marker,dx=0]`:
-This part executes the rest of the command as the entity, that matches all the criteria in the `[]`.
-It cannot be a player or marker.
-`dx=0` might be a bit unintuitive, but it's very simple.
-Imagine a box that is 1x1x1 blocks big (you could also use dy=0, dz=0, or all of them, doesn't matter) every entity, that has its hitbox in this imaginary box fulfills this criterion.
-Keep in mind that the box is always one block bigger than specified.
-- `positioned ~-.99 ~-.99 ~-.99`:
-Shifts the execution position relative to the command by the specified amount.
+```hs
+say hi
+
+# Here is the return command. It just gives the execute store a result value, that's it
+return 1
+```
+
+That's it. This is how you make a Slowcast.
+If you want you can tweak some parts to do stuff a bit differently, for example, switch the marker with an item display or remove the kill command after hitting something to make it a piercing projectile or much more.
