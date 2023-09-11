@@ -1,0 +1,99 @@
+
+If you look this up, I assume you already know what a normal Raycast does.
+A Slowcast is similar but unlike a standard Raycast, it is not instant.
+You might think now: "Why do we need a Slowcast for that, You can just teleport a marker slowly forward to do the same?".
+Normally you're right, but now think about having a really fast projectile.
+To make it faster you would need to increase the distance the marker tp's ever tick.
+This is bad when the gap between the two points becomes too big and doesn't correctly recognize when hitting something.
+A Slowcast solves this problem by checking the gap between the two points in 0.2 block steps if it hits something on the way.
+
+How do we make a Slowcast now?
+
+First, add 2 commands to your load function:
+
+```hs
+scoreboard objectives add slowcastSteps dummy
+scoreboard objectives add slowcastDuration dummy
+```
+
+Now we need an initialization function. This function needs to be executed as and at the player that shoots the Slowcast.
+`init.mcfunction`
+
+```hs
+summon marker ~ ~ ~ {Tags:["slowcast","new"]}
+
+execute as @e[type=marker,tag=new,limit=1] run function <namespace>:setup
+```
+
+Next is the setup function that gives the marker projectile all the necessary stats.
+`setup.mcfunction`
+
+```hs
+tag @s remove new
+
+# The temp scoreboards are just to set the steps and duration of the Slowcast before calling it.
+scoreboard players operation @s slowcastSteps = steps temp
+scoreboard players operation @s slowcastDuration = duration temp
+
+# Here is a bit math to show how far the Slowcast will travel
+#
+# slowcastDuration = 50 (50 ticks)
+# slowcastSteps = 3 (3 0.2 block steps per tick)
+#
+# steps * duration / 5 ==> 3 * 50 / 5 = 30 blocks in 50 ticks
+
+function <namespace>:temp_tick
+```
+
+Good, the projectile is all set up and has called the temporary tick function, which will run every tick as long as there are active Slowcasts. Let's make it.
+`temp_tick.mcfunction`
+
+```hs
+execute as @e[type=marker,tag=slowcast,scores={slowcastDuration=1..}] at @s run function <namespace>:duration
+
+execute as @e[type=marker,tag=slowcast,limit=1] run schedule function <namespace>:temp_tick 1t
+```
+
+The duration function ensures, that the Slowcast doesn't go on forever and kills it after the duration timer reaches 0.
+`duration.mcfunction`
+
+```hs
+scoreboard players remove @s slowcastDuration 1
+
+scoreboard players operation slowcastSteps temp = @s spellAssembly.slowcastSteps
+scoreboard players reset hit temp
+execute positioned ^ ^ ^.2 run function <namespace>:step
+scoreboard players operation @s spellAssembly.slowcastSteps = slowcastSteps temp
+
+execute unless score @s slowcastDuration matches 1.. run kill
+```
+
+The step function, as stated in the introduction, is responsible for checking the gap between the two points the marker teleports between in one tick for collisions and ends the function early if it hits something.
+`step.mcfunction`
+
+```hs
+scoreboard players remove @s slowcastSteps 1
+
+particle flame ~ ~ ~ .1 .1 .1 0 1
+
+# The next command might look a bit complex but it is really not that complicated. The explanation is under this function.
+execute store result score hit temp as @e[type=!player,type=!item_display,dx=0] positioned ~-.99 ~-.99 ~-.99 if entity @s[dx=0] positioned ~.99 ~.99 ~.99 run function <namespace>:end 
+execute if score hit temp matches 1 run kill
+
+tp ~ ~ ~
+
+execute if score @s slowcastSteps matches 1.. positioned ^ ^ ^.2 run function <namespace>:step
+```
+
+Let's go over the command bit by bit.
+
+- `execute store result score hit temp`:
+This part stores the result of the last action of the command in a scoreboard objective temp under the name hit. Because calling the `end` function is not something that gives back a result by default, we need to include a `return` command in it. You will see that further below.
+- `as @e[type=!player,type=!marker,dx=0]`:
+This part executes the rest of the command as the entity, that matches all the criteria in the `[]`.
+It cannot be a player or marker.
+`dx=0` might be a bit unintuitive, but it's very simple.
+Imagine a box that is 1x1x1 blocks big (you could also use dy=0, dz=0, or all of them, doesn't matter) every entity, that has its hitbox in this imaginary box fulfills this criterion.
+Keep in mind that the box is always one block bigger than specified.
+- `positioned ~-.99 ~-.99 ~-.99`:
+Shifts the execution position relative to the command by the specified amount.
