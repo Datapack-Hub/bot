@@ -3,7 +3,7 @@ from disnake.ext import commands
 import variables
 
 
-class on_ready(commands.Cog):
+class OnReady(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

@@ -16,7 +16,7 @@ invites = commands.option_enum(
 )
 
 
-class invite_command(commands.Cog, name="invite"):
+class InviteCommand(commands.Cog, name="invite"):
     def __init__(self, bot):
         self.bot = bot
 

@@ -11,7 +11,7 @@ newsletter_unsubscribe_button = disnake.ui.Button(
 )
 
 
-class on_message(commands.Cog):
+class OnMessage(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

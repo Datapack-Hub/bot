@@ -3,7 +3,7 @@ from disnake.ext import commands
 import variables
 
 
-class redirect_to_help_channel(commands.Cog, name="help_redir"):
+class RedirectToHelpChannel(commands.Cog, name="help_redir"):
     def __init__(self, bot):
         self.bot = bot
 

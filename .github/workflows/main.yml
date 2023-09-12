@@ -40,9 +40,10 @@ jobs:
     - name: Run black
       run: |
         black . --fast
-    - uses: stefanzweifel/git-auto-commit-action@v4.16.0
-      with:
-        commit_message: Apply formatting
+    # - uses: stefanzweifel/git-auto-commit-action@v4.16.0
+    #   with:
+    #     commit_message: Apply formatting
+    # i wonder why this was still enabled?
   lint:
     runs-on: ubuntu-latest
     steps:

@@ -48,26 +48,26 @@ bot = commands.Bot(
 
 # * ADD COGS
 # Message Commands
-bot.add_cog(redirect_to_help_channel.redirect_to_help_channel(bot))
+bot.add_cog(redirect_to_help_channel.RedirectToHelpChannel(bot))
 
 # Slash Commands
-bot.add_cog(syntax.syntax_command(bot))
-bot.add_cog(method.method_command(bot))
-bot.add_cog(resolve.resolve_command(bot))
-bot.add_cog(folderstructure.folderstructure_command(bot))
-bot.add_cog(invite.invite_command(bot))
-bot.add_cog(newsletter.newsletter_command(bot))
-bot.add_cog(packformat.packformat_command(bot))
-bot.add_cog(info.info_command(bot))
-bot.add_cog(template.template_command(bot))
+bot.add_cog(syntax.SyntaxCommand(bot))
+bot.add_cog(method.MethodCommand(bot))
+bot.add_cog(resolve.ResolveCommand(bot))
+bot.add_cog(folderstructure.FolderStructureCommand(bot))
+bot.add_cog(invite.InviteCommand(bot))
+bot.add_cog(newsletter.NewsletterCommand(bot))
+bot.add_cog(packformat.PackFormatCommand(bot))
+bot.add_cog(info.InfoCommand(bot))
+bot.add_cog(template.TemplateCommand(bot))
 
 # Listeners
-bot.add_cog(on_message.on_message(bot))
-bot.add_cog(on_button_click.on_button_click(bot))
-bot.add_cog(on_thread_create.on_thread_create(bot))
-bot.add_cog(on_guild_join.on_guild_join(bot))
-bot.add_cog(on_guild_remove.on_guild_remove(bot))
-bot.add_cog(on_ready.on_ready(bot))
+bot.add_cog(on_message.OnMessage(bot))
+bot.add_cog(on_button_click.OnButtonClick(bot))
+bot.add_cog(on_thread_create.OnThreadCreate(bot))
+bot.add_cog(on_guild_join.OnGuildJoin(bot))
+bot.add_cog(on_guild_remove.OnGuildRemove(bot))
+bot.add_cog(on_ready.OnReady(bot))
 
 
 # * RUN BOT
