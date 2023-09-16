@@ -11,7 +11,7 @@ class eliminate_command(commands.Cog, name="eliminate"):
         title="eliminate",
         description="Eliminates sbdy",
     )
-    async def info(
+    async def eliminate(
         self, inter: disnake.ApplicationCommandInteraction, target: disnake.User
     ):
         user = target.id
