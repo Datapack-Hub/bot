@@ -1,21 +1,21 @@
 If you look this up, I assume you already know what a normal Raycast does.
-A Slowcast is similar but unlike a standard Raycast, it is not instant.
-You might think now: "Why do we need a Slowcast for that, You can just teleport a marker slowly forward to do the same?".
-Normally you're right, but now think about having a really fast projectile.
+A Slowcast is similar, but unlike a standard Raycast, it is not instant.
+You might think now: "Why do we need a Slowcast for that, you can just teleport a marker slowly forward to do the same?".
+You'd be right normally, but now think about having a really fast projectile.
 To make it faster you would need to increase the distance the marker tp's ever tick.
 This is bad when the gap between the two points becomes too big and doesn't correctly recognize when hitting something.
 A Slowcast solves this problem by checking the gap between the two points in 0.2 block steps if it hits something on the way.
 
 How do we make a Slowcast now?
 
-First, add 2 commands to your load function:
+First, add two commands to your load function:
 
 ```hs
 scoreboard objectives add slowcastSteps dummy
 scoreboard objectives add slowcastDuration dummy
 ```
 
-Now we need an initialization function. This function needs to be executed as and at the player that shoots the Slowcast.
+Now you need an initialization function. This function needs to be executed as and at the player that shoots the Slowcast.
 `init.mcfunction`
 
 ```hs
@@ -34,7 +34,7 @@ tag @s remove new
 scoreboard players operation @s slowcastSteps = steps temp
 scoreboard players operation @s slowcastDuration = duration temp
 
-# Here is a bit math to show how far the Slowcast will travel
+# Here is a bit of math to show how far the Slowcast will travel
 #
 # slowcastDuration = 50 (50 ticks)
 # slowcastSteps = 3 (3 0.2 block steps per tick)
@@ -44,7 +44,7 @@ scoreboard players operation @s slowcastDuration = duration temp
 function <namespace>:temp_tick
 ```
 
-Good, the projectile is all set up and has called the temporary tick function, which will run every tick as long as there are active Slowcasts. Let's make it.
+Good, the projectile is all setup and has called the temporary tick function, which will run every tick as long as there are active Slowcasts. Let's make it.
 `temp_tick.mcfunction`
 
 ```hs
@@ -83,7 +83,7 @@ tp ~ ~ ~
 execute if score @s slowcastSteps matches 1.. positioned ^ ^ ^.2 run function <namespace>:step
 ```
 
-Now we have the last function necessary for the Slowcast. This one has only one important command for all of this to work, the rest is up to you, what you want to happen when hitting something. In my case, the entity just says hi.
+Now you have the last function necessary for the Slowcast. This one has only one important command for all of this to work, the rest is up to you, what you want to happen when hitting something. In my case, the entity just says hi.
 `end.mcfunction`
 
 ```hs
