@@ -19,7 +19,8 @@ class eliminate_command(commands.Cog, name="eliminate"):
         target = target.id
         script_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(script_dir, "eliminated.txt")
-        
+        file_path_part = os.path.join(script_dir, "participants.txt")
+
         with open(file_path) as file:
                         file_text = file.readlines()
                         eliminated = []
@@ -29,7 +30,17 @@ class eliminate_command(commands.Cog, name="eliminate"):
                             eliminated.append(line_2.replace("\n",""))
                         
                         print(eliminated)
+            
+        with open(file_path_part) as file:
+                        file_text = file.readlines()
+                        participants = []
+
+                        for line in file_text:
+                            line_2 = line
+                            participants.append(line_2.replace("\n",""))
                         
+                        print(participants)     
+                               
         if str(inter.user.id) in eliminated:
             embed = disnake.Embed(
                 color=disnake.Color.red(),
@@ -45,7 +56,7 @@ class eliminate_command(commands.Cog, name="eliminate"):
             elif 200 <= error_code <= 299:
                 embed.set_footer(text="Error Code: 45726173652E")
             elif 200 <= error_code <= 300:
-                embed.set_footer(text="Err♡r C♡de: 4D 69 73 73 20 79 6F 75 20 3C 33")
+                embed.set_footer(text="Err♡r C♡de: 4D69737320796F75203C33")
                 
             await inter.response.send_message(embed=embed,ephemeral=True)
             
@@ -53,7 +64,9 @@ class eliminate_command(commands.Cog, name="eliminate"):
             if str(target) in eliminated:
                 with open(file_path, "a") as file:
                     file.write("\n"+str(inter.user.id))
-                    
+                if not inter.user.id in participants:
+                    with open(file_path_part, "a") as file:
+                        file.write("\n"+str(inter.user.id))         
                 embed = disnake.Embed(
                     color=disnake.Color.red(),
                     title="💥 Elimination Failed",
@@ -68,6 +81,9 @@ class eliminate_command(commands.Cog, name="eliminate"):
                 with open(file_path, "a") as file:
                     file.write("\n"+str(target))
                     
+                if not inter.user.id in participants:
+                    with open(file_path_part, "a") as file:
+                        file.write("\n"+str(inter.user.id))  
                 embed = disnake.Embed(
                         color=disnake.Color.orange(),
                         title="🧪 Elimination Successful",
