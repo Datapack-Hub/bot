@@ -1,3 +1,4 @@
+from pathlib import Path
 import disnake
 from disnake.ext import commands
 import variables
@@ -6,7 +7,7 @@ import os
 template = commands.option_enum(["datapack", "resourcepack"])
 
 
-class template_command(commands.Cog, name="template"):
+class TemplateCommand(commands.Cog, name="template"):
     def __init__(self, bot):
         self.bot = bot
 

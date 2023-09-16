@@ -3,7 +3,7 @@ from disnake.ext import commands
 import variables
 
 
-class resolve_command(commands.Cog, name="resolve"):
+class ResolveCommand(commands.Cog, name="resolve"):
     def __init__(self, bot):
         self.bot = bot
 

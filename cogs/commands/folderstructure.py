@@ -3,7 +3,7 @@ from disnake.ext import commands
 import variables
 
 
-class folderstructure_command(commands.Cog, name="folderstructure"):
+class FolderStructureCommand(commands.Cog, name="folderstructure"):
     def __init__(self, bot):
         self.bot = bot
 

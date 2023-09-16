@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 
 
-class packformat_command(commands.Cog, name="packformat"):
+class PackFormatCommand(commands.Cog, name="packformat"):
     def __init__(self, bot):
         self.bot = bot
 

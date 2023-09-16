@@ -4,7 +4,7 @@ import variables
 import datetime
 
 
-class on_button_click(commands.Cog):
+class OnButtonClick(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

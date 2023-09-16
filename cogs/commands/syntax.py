@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 
 
-class syntax_command(commands.Cog, name="syntax"):
+class SyntaxCommand(commands.Cog, name="syntax"):
     def __init__(self, bot):
         self.bot = bot
 

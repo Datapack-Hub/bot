@@ -4,7 +4,7 @@ import variables
 import asyncio
 
 
-class on_thread_create(commands.Cog):
+class OnThreadCreate(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

@@ -7,7 +7,7 @@ infos = commands.option_enum(
 )
 
 
-class info_command(commands.Cog, name="info"):
+class InfoCommand(commands.Cog, name="info"):
     def __init__(self, bot):
         self.bot = bot
 

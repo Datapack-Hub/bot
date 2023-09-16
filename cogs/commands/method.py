@@ -11,7 +11,7 @@ for idx, ele in enumerate(methods):
 methods_enum = commands.option_enum(methods)
 
 
-class method_command(commands.Cog, name="method"):
+class MethodCommand(commands.Cog, name="method"):
     def __init__(self, bot):
         self.bot = bot
 

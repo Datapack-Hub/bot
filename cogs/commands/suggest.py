@@ -3,7 +3,7 @@ from disnake.ext import commands
 import variables
 
 
-class suggest_command(commands.Cog, name="suggest"):
+class SuggestCommand(commands.Cog, name="suggest"):
     def __init__(self, bot):
         self.bot = bot
 
