@@ -8,8 +8,8 @@ class eliminate_command(commands.Cog, name="eliminate"):
         self.bot = bot
 
     @commands.slash_command(
-        title="info",
-        description="Gives you more information about an external feature to improve your datapacking experience",
+        title="eliminate",
+        description="Eliminates sbdy",
     )
     async def info(
         self, inter: disnake.ApplicationCommandInteraction, target: disnake.User
