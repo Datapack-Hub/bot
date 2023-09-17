@@ -77,7 +77,7 @@ class OnMessage(commands.Cog):
                 members.append(member.name)
                 
             print("summon text_display ~ ~ ~ {Tags:[\"rotate\"],text:'{\"text\":\""+ members[0] +"\\\n"+ members[1] +"\\\n"+ members[2] +"\\\n"+ members[3] +"\\\n"+ members[4] +"\\\n"+ members[5] +"\\\n"+ members[6] +"\\\n"+ members[7] +"\\\n"+ members[8] +"\\\n"+ members[9] +"\"}'}`")
-            my_list = my_list[10:]
+            members = members[10:]
                     
                 
         elif message.channel == newsletter_channel:
