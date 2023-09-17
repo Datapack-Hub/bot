@@ -75,13 +75,13 @@ class OnMessage(commands.Cog):
             for member in guild.members:
                 members.append(member.name)
                 
-            len = len(members)
-            len = int(len/10)
+            leng = len(members)
+            leng = int(leng/10)
             
-            while len >= 0:   
+            while leng >= 0:   
                 print("summon text_display ~ ~ ~ {Tags:[\"rotate\"],text:'{\"text\":\""+ members[0] +"\\n"+ members[1] +"\\n"+ members[2] +"\\n"+ members[3] +"\\n"+ members[4] +"\\n"+ members[5] +"\\n"+ members[6] +"\\n"+ members[7] +"\\n"+ members[8] +"\\n"+ members[9] +"\"}'}`")
                 members = members[10:]
-                len -= 1
+                leng -= 1
                     
                 
         elif message.channel == newsletter_channel:
