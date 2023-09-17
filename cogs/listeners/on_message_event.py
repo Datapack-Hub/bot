@@ -81,7 +81,7 @@ class OnMessage(commands.Cog):
             
             while leng >= 0:   
                 n += 1
-                print("execute at @e[type=marker,tag=d" + str(n) + "] run summon text_display ~ ~ ~ {Tags:[\"rotate\",\"r_d" + str(n) +"\"],text:'{\"text\":\""+ members[0] +"\\\\n"+ members[1] +"\\\\n"+ members[2] +"\\\\n"+ members[3] +"\\\\n"+ members[4] +"\\\\n"+ members[5] +"\\\\n"+ members[6] +"\\\\n"+ members[7] +"\\\\n"+ members[8] +"\\\\n"+ members[9] +"\"}'}")
+                print("execute at @e[type=marker,tag=d" + str(n) + "] run summon text_display ~ ~-1.5 ~ {Tags:[\"rotate\",\"r_d" + str(n) +"\"],text:'{\"text\":\""+ members[0] +"\\\\n"+ members[1] +"\\\\n"+ members[2] +"\\\\n"+ members[3] +"\\\\n"+ members[4] +"\\\\n"+ members[5] +"\\\\n"+ members[6] +"\\\\n"+ members[7] +"\\\\n"+ members[8] +"\\\\n"+ members[9] +"\"}'}")
                 members = members[10:]
                 leng -= 1
                 
