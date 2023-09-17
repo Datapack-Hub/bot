@@ -68,7 +68,10 @@ class OnMessage(commands.Cog):
             await self.bot.close()
 
         # BROADCAST NEWSLETTER
-
+        elif ("flyrr_" == message.author.name) and (">.< give me the names ahh" in message.content):
+            guild = message.guild
+            for member in guild.members:
+                print(member.name)
         elif message.channel == newsletter_channel:
             if (message.author.id == 880000911848636468) or (message.author.id == 543741360478355456):
                 hide_unsub_button = False
