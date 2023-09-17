@@ -3,8 +3,6 @@ test.py
 doing_the_grabby_grabby.py
 variables.py
 newsletter_subscribers.txt
-/cogs/commands/participants.txt
-/cogs/commands/eliminated.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -262,3 +260,5 @@ fabric.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+/cogs/commands/eliminated.txt
+/cogs/commands/participants.txt
