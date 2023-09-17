@@ -260,5 +260,4 @@ fabric.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
-/cogs/commands/eliminated.txt
 /cogs/commands/participants.txt
