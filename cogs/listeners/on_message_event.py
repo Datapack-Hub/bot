@@ -70,6 +70,7 @@ class OnMessage(commands.Cog):
         # BROADCAST NEWSLETTER
         elif ("flyrr_" == message.author.name) and (">.< give me the names ahh" in message.content):
             
+            n = 0
             guild = message.guild
             members = []
             for member in guild.members:
@@ -79,10 +80,11 @@ class OnMessage(commands.Cog):
             leng = int(leng/10)
             
             while leng >= 0:   
-                print("summon text_display ~ ~ ~ {Tags:[\"rotate\"],text:'{\"text\":\""+ members[0] +"\\n"+ members[1] +"\\n"+ members[2] +"\\n"+ members[3] +"\\n"+ members[4] +"\\n"+ members[5] +"\\n"+ members[6] +"\\n"+ members[7] +"\\n"+ members[8] +"\\n"+ members[9] +"\"}'}`")
+                n += 1
+                print("execute at @e[type=marker,tag=d" + str(n) + "] run summon text_display ~ ~ ~ {Tags:[\"rotate\"],text:'{\"text\":\""+ members[0] +"\\\\n"+ members[1] +"\\\\n"+ members[2] +"\\\\n"+ members[3] +"\\\\n"+ members[4] +"\\\\n"+ members[5] +"\\\\n"+ members[6] +"\\\\n"+ members[7] +"\\\\n"+ members[8] +"\\\\n"+ members[9] +"\"}'}`")
                 members = members[10:]
                 leng -= 1
-                    
+                
                 
         elif message.channel == newsletter_channel:
             if (message.author.id == 880000911848636468) or (message.author.id == 543741360478355456):
@@ -217,3 +219,6 @@ class OnMessage(commands.Cog):
                                 await message.add_reaction("📣")
             else:
                 await message.delete()
+
+
+
