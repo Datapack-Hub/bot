@@ -4,14 +4,15 @@ import variables
 import os
 from random import randrange
 
-class eliminate_command(commands.Cog, name="eliminate"):
+class EliminateCommand(commands.Cog, name="eliminate"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.slash_command(
         title="eliminate",
-        description="You did not see this. Nobody must know. Cover up your trace.",
+        description="You did not see this. Nobody must know. Cover up your trace."
     )
+    
     async def eliminate(
         self, inter: disnake.ApplicationCommandInteraction, target: disnake.User
     ):

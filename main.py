@@ -20,12 +20,14 @@ import cogs.commands.packformat as packformat
 import cogs.commands.info as info
 import cogs.commands.template as template
 import cogs.commands.eliminate as eliminate
+import cogs.commands.help as help
 import cogs.listeners.on_message_event as on_message
 import cogs.listeners.on_thread_create_event as on_thread_create
 import cogs.listeners.on_button_click_event as on_button_click
 import cogs.listeners.on_guild_join_event as on_guild_join
 import cogs.listeners.on_guild_remove_event as on_guild_remove
 import cogs.listeners.on_ready_event as on_ready
+
 
 
 # * SETUP BOT
@@ -61,7 +63,9 @@ bot.add_cog(newsletter.NewsletterCommand(bot))
 bot.add_cog(packformat.PackFormatCommand(bot))
 bot.add_cog(info.InfoCommand(bot))
 bot.add_cog(template.TemplateCommand(bot))
-bot.add_cog(eliminate.eliminate_command(bot))
+bot.add_cog(eliminate.EliminateCommand(bot))
+#bot.add_cog(help.HelpCommand(bot))
+
 
 # Listeners
 bot.add_cog(on_message.OnMessage(bot))
