@@ -17,7 +17,7 @@ class MethodCommand(commands.Cog, name="method"):
 
     @commands.slash_command(
         title="method",
-        description="Shows information about methods commonly used by datapacks",
+        description="Shows information about methods commonly used in datapacks",
     )
     async def method(
         self, inter: disnake.ApplicationCommandInteraction, method: methods_enum

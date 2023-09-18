@@ -12,6 +12,7 @@ invites = commands.option_enum(
         "blockbench",
         "optifine",
         "fabric",
+        "minecraft"
     ]
 )
 
@@ -77,7 +78,12 @@ class InviteCommand(commands.Cog, name="invite"):
                 title=("**Fabric Invite**"),
                 description="Join The Fabric Project for information/help regarding Fabric using this link: https://discord.gg/DtevV9NmaR",
             )
-
+        elif invite == "minecraft":
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**Minecraft Invite**"),
+                description="Join the official minecraft discord server using this link: https://discord.gg/minecraft",
+            )
         await inter.response.send_message(embed=embed)
         # Logging
         embed = disnake.Embed(

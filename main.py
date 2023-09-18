@@ -64,7 +64,7 @@ bot.add_cog(packformat.PackFormatCommand(bot))
 bot.add_cog(info.InfoCommand(bot))
 bot.add_cog(template.TemplateCommand(bot))
 bot.add_cog(eliminate.EliminateCommand(bot))
-#bot.add_cog(help.HelpCommand(bot))
+bot.add_cog(help.HelpCommand(bot))
 
 
 # Listeners

@@ -16,7 +16,7 @@ class TemplateCommand(commands.Cog, name="template"):
         description="Shows discord invite for a discord server relevant to datapacks",
     )
     async def template(
-        self, inter: disnake.ApplicationCommandInteraction, template: template
+        self, inter: disnake.ApplicationCommandInteraction, template: template = "datapack"
     ):
         if template == "datapack":
             # Get the directory where the script is located
