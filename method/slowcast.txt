@@ -16,11 +16,11 @@ scoreboard objectives add slowcastDuration dummy
 ```
 
 Now you need an initialization function. This function needs to be executed as and at the player that shoots the Slowcast.
+
 `init.mcfunction`
 
 ```hs
 summon marker ~ ~ ~ {Tags:["slowcast","new"]}
-
 execute as @e[type=marker,tag=new,limit=1] run function <namespace>:setup
 ```
 
@@ -45,6 +45,7 @@ function <namespace>:temp_tick
 ```
 
 Good, the projectile is all setup and has called the temporary tick function, which will run every tick as long as there are active Slowcasts. Let's make it.
+
 `temp_tick.mcfunction`
 
 ```hs
@@ -54,6 +55,7 @@ execute as @e[type=marker,tag=slowcast,limit=1] run schedule function <namespace
 ```
 
 The duration function ensures, that the Slowcast doesn't go on forever and kills it after the duration timer reaches 0.
+
 `duration.mcfunction`
 
 ```hs
@@ -68,6 +70,7 @@ execute unless score @s slowcastDuration matches 1.. run kill
 ```
 
 The step function, as stated in the introduction, is responsible for checking the gap between the two points the marker teleports between in one tick for collisions and ends the function early if it hits something.
+
 `step.mcfunction`
 
 ```hs
@@ -84,6 +87,7 @@ execute if score @s slowcastSteps matches 1.. positioned ^ ^ ^.2 run function <n
 ```
 
 Now you have the last function necessary for the Slowcast. This one has only one important command for all of this to work, the rest is up to you, what you want to happen when hitting something. In my case, the entity just says hi.
+
 `end.mcfunction`
 
 ```hs
