@@ -64,7 +64,7 @@ class HelpCommand(commands.Cog, name="help"):
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**🚑 `/syntax`**"),
-                description="Shows the syntax of any minecraft command. *Slightly* bugged at the moment, fix coming asap\nSyntax: `/syntax `command:<command>`",
+                description="Shows the syntax of any minecraft command. *Slightly* bugged at the moment, fix coming asap\nSyntax: `/syntax command:<command>`",
             )
         elif command == "template":
             embed = disnake.Embed(
