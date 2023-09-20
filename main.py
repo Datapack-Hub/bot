@@ -9,7 +9,7 @@ import variables
 import bot_token
 
 # Cogs
-i#mport cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
+#import cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
 import cogs.commands.syntax as syntax
 import cogs.commands.method as method
 #import cogs.commands.resolve as resolve
@@ -56,7 +56,6 @@ bot = commands.Bot(
 # Slash Commands
 bot.add_cog(syntax.SyntaxCommand(bot))
 bot.add_cog(method.MethodCommand(bot))
-#bot.add_cog(resolve.ResolveCommand(bot))
 bot.add_cog(folderstructure.FolderStructureCommand(bot))
 bot.add_cog(invite.InviteCommand(bot))
 bot.add_cog(newsletter.NewsletterCommand(bot))

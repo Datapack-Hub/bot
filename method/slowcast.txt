@@ -22,6 +22,8 @@ Now you need an initialization function. This function needs to be executed as a
 ```hs
 summon marker ~ ~ ~ {Tags:["slowcast","new"]}
 execute as @e[type=marker,tag=new,limit=1] run function <namespace>:setup
+execute as @e[type=marker,tag=new,limit=1] run tp ~ ~1 ~
+
 ```
 
 Next is the setup function that gives the marker projectile all the necessary stats.
