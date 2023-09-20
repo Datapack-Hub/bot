@@ -9,7 +9,7 @@ import variables
 import bot_token
 
 # Cogs
-i#mport cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
+#import cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
 import cogs.commands.syntax as syntax
 import cogs.commands.method as method
 #import cogs.commands.resolve as resolve
@@ -22,7 +22,7 @@ import cogs.commands.template as template
 import cogs.commands.eliminate as eliminate
 import cogs.commands.help as help
 import cogs.listeners.on_message_event as on_message
-#import cogs.listeners.on_thread_create_event as on_thread_create
+import cogs.listeners.on_thread_create_event as on_thread_create
 import cogs.listeners.on_button_click_event as on_button_click
 import cogs.listeners.on_guild_join_event as on_guild_join
 import cogs.listeners.on_guild_remove_event as on_guild_remove
