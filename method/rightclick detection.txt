@@ -83,7 +83,7 @@ say Used eoe
 advancement revoke @s only namespace:used_eye_of_ender
 ```
 
-## Display Entities
+## Interaction Entities
 Pros:
 - see "depends"
 - can also detect leftclicks
