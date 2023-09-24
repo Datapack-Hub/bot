@@ -1,6 +1,9 @@
-There are multiple ways to detect rightclicks using datapacks/commands, all of them having their pros and cons 
+There are multiple ways to detect rightclicks using datapacks/commands, here is a quick rundown on each of them and their cons and pros! 
+You can get more detailed instructions on how to use them using their corresponding `/method`s
 
-## Warped Funguns on a Stick (wfoas)/Carrot on a Stick (coas)
+## Warped Funguns on a Stick (WFOAS)/Carrot on a Stick (COAS)
+This method works by using an `item.used` which triggers when using either of the two items and then running commands as/at players with a score of 1 or higher.
+
 Pros: 
 - easy to pull off
 - works in any world
@@ -10,80 +13,28 @@ Cons:
 - wfoas attracts striders/coas pigs and rabbit
 
 Depends:
-- detects up to 5 clicks/second
+- detects up to 5 clicks/second when holding rightclick
 
-This method works by using an `item.used` which triggers when using either of the two items and then running commands as/at players with a score of 1 or higher. For the sake of simplicity the following example will use a coas, if you want to change that you can just `carrot_on_a_stick` in the load function with `warped_fungus_on_a_stick`!
 
-`load.mcfunction`
+## Eye of Ender (EoE)
+This method works by using an advancement to detect whenever a player uses an eye of ender and then executing code as/at them.
 
-```hs
-# adds the objective to be usable later on
-scoreboard objectives add rightclick minecraft.used:minecraft.carrot_on_a_stick 
-```
-
-`main.mcfunction`
-
-```hs 
-# runs the "rightclick_run" as players who used a coas (you can also specify special item nbt here by using a predicate or using "execute if data entity @s", you will still have to reset the score on EVERY click if you don't want the pack to break tho)
-execute as @a[scores={rightlick=1}] run function namespace:rightclick_run 
-```
-
-`rightclick_run.mcfunction`
-
-```hs
-# announces the use of the item in chat, feel free to replace this with whatever
-say Used COAS 
-# sets the rightclick score to 0 so it can be used again
-scoreboard players set @s rightclick 0 
-```
-
-## Eye of Ender (eoe)
 Pros:
 - doesn't require additional entities 
 - doesn't attract mobs
 - doesn't need to run every tick
 
 Cons:
-- only works in worlds without strongholds
+- slows player down when holding rightclick
+- only works in worlds without strongholds (there are ways to work around this, although these are way less performant)
 
 Depends:
-- detects up to 20 clicks/second 
+- detects up to 20 clicks/second when holding rightclick 
 - bound to the player, not a specific location
 
-This method works by using an advancement to detect whenever a player uses an eye of ender and then executing code as/at them.
-
-`used_eye_of_ender.json` (located in your packs `advancements` folder, you can also add an nbt tag to the nbt field in `items` to make this only run when specific eoes are used)
-
-```json
-{
-  "criteria": {
-    "requirement": {
-      "trigger": "minecraft:using_item",
-      "conditions": {
-        "item": {
-          "items": [
-            "minecraft:ender_eye"
-          ]
-        }
-      }
-    }
-  },
-  "rewards": {
-    "function": "namespace:rightclick_run"
-  }
-}
-```
-
-`rightclick_run` (located in your packs `functions` folder)
-
-```hs
-# announces the use of the item in chat, feel free to replace this with whatever
-say Used eoe
-# revokes the advancement from the player so it can be used again
-advancement revoke @s only namespace:used_eye_of_ender
-```
-
 ## Interaction Entities
+This method works by using an advancement to check wether a player interacted with an interaction entity and then executing code
+
 Pros:
 - see "depends"
 - can also detect leftclicks
@@ -92,35 +43,6 @@ Cons:
 - requires an additional entity
 
 Depends:
-- detects up to 20 clicks/second
-- bound to a specific location, not entity 
+- detects up to 5 clicks/second when holding rightclick
+- bound to a specific location, not player 
 - can't be interacted through
-
-This method works by using an advancement to check wether a player interacted with an interaction entity and then executing code
-
-`interacted_with_interaction.json` (located in the packs `advancements` folder)
-
-```hs
-{
-  "criteria": {
-    "requirement": {
-      "trigger": "minecraft:player_interacted_with_entity",
-      "conditions": {
-        "entity": {
-          "type": "minecraft:interaction"
-        }
-      }
-    }
-  },
-  "rewards": {
-    "function": "namespace:rightclick_run"
-  }
-}
-```
-
-`rightclick_run.mcfunction` (located in the packs `functions` folder)
-```hs
-# announces the use of the item in chat, feel free to replace this with whatever
-say Used interaction 
-advancement revoke @s only namespace:interacted_with_interaction
-```
