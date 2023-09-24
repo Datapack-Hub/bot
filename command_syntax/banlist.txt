@@ -1,0 +1,1 @@
+`banlist [ips|players]`

@@ -1,0 +1,1 @@
+`kick <target> [<reason>]`

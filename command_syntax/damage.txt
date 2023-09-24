@@ -1,5 +1,2 @@
-help
-    `Lists all commands.`
-
-help <command>
-    `Shows usages for one command.`
+`damage <target> <amount> [<damageType>] [at <location>]`
+`damage <target> <amount> [<damageType>] [by <entity>] [from <cause>]`

@@ -1,0 +1,15 @@
+`/place feature <feature> [<pos>]`
+
+Place the [configured feature](/w/Custom_feature#Configured_Feature "Custom feature").
+
+`/place jigsaw <pool> <target> <max_depth> [<position>]`
+
+Place the [jigsaw](/w/Jigsaw_block "Jigsaw block").
+
+`/place structure <structure> [<pos>]`
+
+Place the [configured structure feature](/w/Custom_structure#Configured_Structure_Feature "Custom structure").
+
+`/place template <template> [<pos>] [<rotation>] [<mirror>] [<integrity>] [<seed>]`
+
+Place the structure template. (Works like using the load button in the UI for a structure block)

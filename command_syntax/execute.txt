@@ -1,0 +1,37 @@
+`**/execute** . . .`
+
+*   `… [**align**](#align) <axes> -> _execute_`
+*   `… [**anchored**](#anchored) <anchor> -> _execute_`
+*   `… [**as**](#as) <targets> -> _execute_`
+*   `… [**at**](#at) <targets> -> _execute_`
+*   `… [**facing**](#facing) (<pos>|entity <targets> <anchor>) -> _execute_`
+*   `… [**in**](#in) <dimension> -> _execute_`
+*   `… [**on**](#on) <_relation_> -> _execute_`
+*   `… [**positioned**](#positioned) (<pos>|as <targets>|over <heightmap>) -> _execute_`
+*   `… [**rotated**](#rotated) (<rot>|as <targets>) -> _execute_`
+*   `… [**store**](#store) (result|success) . . .`
+    *   `… block <targetPos> <path> <_type_> <scale> -> _execute_`
+    *   `… bossbar <id> (max|value) -> _execute_`
+    *   `… entity <target> <path> <_type_> <scale> -> _execute_`
+    *   `… score <targets> <objective> -> _execute_`
+    *   `… storage <target> <path> <_type_> <scale> -> _execute_`
+*   `… [**summon**](#summon) <entity> -> _execute_`
+*   `… ([**if**](#if)|[**unless**](#unless)) . . .`
+    *   `… biome <pos> <biome> -> [_execute_]`
+    *   `… block <pos> <block> -> [_execute_]`
+    *   `… blocks <start> <end> <destination> (all|masked) -> [_execute_]`
+    *   `… data . . .`
+        *   `… block <sourcePos> <path> -> [_execute_]`
+        *   `… entity <source> <path> -> [_execute_]`
+        *   `… storage <source> <path> -> [_execute_]`
+    *   `… dimension <dimension> -> [_execute_]`
+    *   `… function <function> -> [_execute_]`‌\[_upcoming: [JE 1.20.2](/w/Java_Edition_1.20.2 "Java Edition 1.20.2")_\]
+    *   `… entity <entities> -> [_execute_]`
+    *   `… loaded <pos> -> [_execute_]`
+    *   `… predicate <predicate> -> [_execute_]`
+    *   `… score <target> <targetObjective> . . .`
+        *   `… (<|<=|=|>|>=) <source> <sourceObjective> -> [_execute_]`
+        *   `… matches <range> -> [_execute_]`
+*   `… [**run**](#run) <_command_>`
+
+where `-> _execute_` represents the start of another subcommand.

@@ -1,0 +1,1 @@
+`difficulty [peaceful|easy|normal|hard]`

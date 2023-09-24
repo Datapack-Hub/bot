@@ -1,0 +1,337 @@
+\## Objectives Commands ### list
+
+Syntax
+
+`**scoreboard objectives list**`
+
+Description
+
+List all existing [objectives](/w/Scoreboard#Objectives "Scoreboard") with their display names and criteria.
+
+Result
+
+Command
+
+Trigger
+
+_Java Edition_
+
+_Bedrock Edition_
+
+`... list`
+
+there's no objective in scoreboard system
+
+Successful
+
+Failed
+
+Otherwise
+
+Successful
+
+Output
+
+Command
+
+Edition
+
+Situation
+
+Success Count
+
+`/execute store success ...`
+
+`/execute store result ...`
+
+`... list`
+
+_[Java Edition](/w/Java_Edition "Java Edition")_
+
+On success
+
+1
+
+1
+
+the number of objectives in scoreboard system
+
+_[Bedrock Edition](/w/Bedrock_Edition "Bedrock Edition")_
+
+On fail
+
+0
+
+N/A
+
+N/A
+
+On success
+
+the number of objectives in scoreboard system
+
+N/A
+
+N/A
+
+\### add
+
+Syntax
+
+`**scoreboard objectives add** <objective> <criteria> [<displayName>]` (_[Java Edition](/w/Java_Edition "Java Edition")_)  
+`**scoreboard objectives add** <objective: string> dummy [displayName: string]` (_[Bedrock Edition](/w/Bedrock_Edition "Bedrock Edition")_)
+
+Description
+
+Create a new objective with the given internal objective name, specified criterion, and the optional display name.
+
+Arguments
+
+_[JE](/w/Java_Edition "Java Edition")_: `<objective>`: [string](/w/Argument_types#string "Argument types")  
+_[BE](/w/Bedrock_Edition "Bedrock Edition")_: `objective: string`: [basic\_string](/w/Argument_types#basic_string "Argument types")
+
+Specifies the internal objective name.
+
+Must be a string. In [_Java Edition_](/w/Java_Edition "Java Edition"), it must be in a single word (Allowed characters include: `-`, `+`, `.`, `_`, `A`\-`Z`, `a`\-`z`, and `0`\-`9`). In [_Bedrock Edition_](/w/Bedrock_Edition "Bedrock Edition"), it must be a single word that has no space or a quoted string. In [_Bedrock Edition_](/w/Bedrock_Edition "Bedrock Edition"), it must be either a single word that isn't a number (allowed characters: `-`, `:`, `.`, `_`, `A`\-`Z`, `a`\-`z`, and `0`\-`9`) or a double-quoted string.
+
+_[JE](/w/Java_Edition "Java Edition")_: `<criteria>`: [objective\_criteria](/w/Argument_types#objective_criteria "Argument types")  
+_[BE](/w/Bedrock_Edition "Bedrock Edition")_: `dummy`
+
+Specifies the criterion of the new objective.
+
+Must be a [scoreboard objective criterion](/w/Scoreboard#Criteria "Scoreboard"). In [_Bedrock Edition_](/w/Bedrock_Edition "Bedrock Edition"), "dummy" is the only criterion currently supported.
+
+_[JE](/w/Java_Edition "Java Edition")_: `<displayName>`: [component](/w/Argument_types#component "Argument types")  
+_[BE](/w/Bedrock_Edition "Bedrock Edition")_: `displayName: string`: [basic\_string](/w/Argument_types#basic_string "Argument types")
+
+Specifies the display name, defaulting to `<objective>` when unspecified.
+
+In [_Java Edition_](/w/Java_Edition "Java Edition"), must be a [raw JSON text](/w/Raw_JSON_text "Raw JSON text"). In [_Bedrock Edition_](/w/Bedrock_Edition "Bedrock Edition"), it must be either a single word that isn't a number (allowed characters: `-`, `:`, `.`, `_`, `A`\-`Z`, `a`\-`z`, and `0`\-`9`) or a double-quoted string.
+
+Result
+
+Command
+
+Trigger
+
+_Java Edition_
+
+_Bedrock Edition_
+
+`... add ...`
+
+the arguments are not specified correctly
+
+Unparseable
+
+Unparseable
+
+`<objective>` already exists
+
+Failed
+
+Failed
+
+Otherwise
+
+Successful
+
+Output
+
+Command
+
+Edition
+
+Situation
+
+Success Count
+
+`/execute store success ...`
+
+`/execute store result ...`
+
+`... add ...`
+
+_[Java Edition](/w/Java_Edition "Java Edition")_
+
+On fail
+
+0
+
+0
+
+0
+
+On success
+
+1
+
+1
+
+the number of objectives in scoreboard system after execution
+
+_[Bedrock Edition](/w/Bedrock_Edition "Bedrock Edition")_
+
+On fail
+
+0
+
+N/A
+
+N/A
+
+On success
+
+1
+
+N/A
+
+N/A
+
+\### remove
+
+Syntax
+
+`**scoreboard objectives remove** <objective>` (_[Java Edition](/w/Java_Edition "Java Edition")_)  
+`**scoreboard objectives remove** <objective: string>` (_[Bedrock Edition](/w/Bedrock_Edition "Bedrock Edition")_)
+
+Description
+
+Delete the named objective from the scoreboard system. Data is deleted from the objectives list and score holders' scores, and if it was on a display list it is no longer displayed.
+
+Arguments
+
+_[JE](/w/Java_Edition "Java Edition")_: `<objective>`: [objective](/w/Argument_types#objective "Argument types")  
+_[BE](/w/Bedrock_Edition "Bedrock Edition")_: `objective: string`: [basic\_string](/w/Argument_types#basic_string "Argument types")
+
+Specifies the internal objective name.
+
+In [_Java Edition_](/w/Java_Edition "Java Edition"), it must be a valid [scoreboard objective name](/w/Scoreboard#Objectives "Scoreboard"). In [_Bedrock Edition_](/w/Bedrock_Edition "Bedrock Edition"), it must be a single word that has no space or a quoted string.
+
+Result
+
+Command
+
+Trigger
+
+_Java Edition_
+
+_Bedrock Edition_
+
+`... remove ...`
+
+the arguments are not specified correctly
+
+Unparseable
+
+Unparseable
+
+`<objective>` doesn't exist
+
+Failed
+
+Failed
+
+Otherwise
+
+Successful
+
+Output
+
+Command
+
+Edition
+
+Situation
+
+Success Count
+
+`/execute store success ...`
+
+`/execute store result ...`
+
+`... remove ...`
+
+_[Java Edition](/w/Java_Edition "Java Edition")_
+
+On fail
+
+0
+
+0
+
+0
+
+On success
+
+1
+
+1
+
+the number of objectives in scoreboard system after execution
+
+_[Bedrock Edition](/w/Bedrock_Edition "Bedrock Edition")_
+
+On fail
+
+0
+
+N/A
+
+N/A
+
+On success
+
+1
+
+N/A
+
+N/A
+
+\### setdisplay setdisplay\[[edit](/w/Commands/scoreboard?section=5&veaction=edit "Edit section: setdisplay") | [edit source](/w/Commands/scoreboard?action=edit&section=5 "Edit section: setdisplay")\] ### modify ... displayname
+
+Syntax
+
+`**scoreboard objectives modify** <objective> **displayname** <displayName>` (_[Java Edition](/w/Java_Edition "Java Edition")_)
+
+Description
+
+Change the display name of the scoreboard in display slots.
+
+Arguments
+
+`<objective>`: [objective](/w/Argument_types#objective "Argument types")
+
+Specifies the internal objective name.
+
+It must be a valid [scoreboard objective name](/w/Scoreboard#Objectives "Scoreboard").
+
+`<displayName>`: [component](/w/Argument_types#component "Argument types")
+
+Specifies the display name.
+
+Must be a [raw JSON text](/w/Raw_JSON_text_format "Raw JSON text format").
+
+\### modify ... rendertype
+
+Syntax
+
+`**scoreboard objectives modify** <objective> **rendertype** (hearts|integer)` (_[Java Edition](/w/Java_Edition "Java Edition")_)
+
+Description
+
+Change the display format for scores in the tab player list.
+
+Arguments
+
+`<objective>`: [objective](/w/Argument_types#objective "Argument types")
+
+Specifies the internal objective name.
+
+It must be a valid [scoreboard objective name](/w/Scoreboard#Objectives "Scoreboard").
+
+`hearts|integer`
+
+Specifies the format.
+
+...visit the official minecraft wiki for more information: https://minecraft.wiki/w/Commands/scoreboard

@@ -1,0 +1,3 @@
+`/return <value>`  
+Terminate the function to which it belongs and `/function` set the return value of the command to an arbitrary integer value. `/return run <command>`‌\[_upcoming: [JE 1.20.2](/w/Java_Edition_1.20.2 "Java Edition 1.20.2")_\]  
+Executes the command specified in , terminates the function `/function` to which it belongs, and uses the return value of that command as the return value of the command that executed that function. If the executed command fails, the return value will be 0.
