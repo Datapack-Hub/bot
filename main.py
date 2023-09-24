@@ -17,6 +17,7 @@ import cogs.commands.folderstructure as folderstructure
 import cogs.commands.invite as invite
 import cogs.commands.newsletter as newsletter
 import cogs.commands.packformat as packformat
+import cogs.commands.ping as ping
 import cogs.commands.info as info
 import cogs.commands.template as template
 import cogs.commands.eliminate as eliminate
@@ -64,7 +65,7 @@ bot.add_cog(info.InfoCommand(bot))
 bot.add_cog(template.TemplateCommand(bot))
 bot.add_cog(eliminate.EliminateCommand(bot))
 bot.add_cog(help.HelpCommand(bot))
-
+bot.add_cog(ping.PingCommand(bot))
 
 # Listeners
 bot.add_cog(on_message.OnMessage(bot))

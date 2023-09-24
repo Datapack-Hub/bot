@@ -2,7 +2,7 @@ There are multiple ways to detect rightclicks using datapacks/commands, here is 
 You can get more detailed instructions on how to use them using their corresponding `/method`s
 
 ## Warped Funguns on a Stick (WFOAS)/Carrot on a Stick (COAS)
-This method works by using an `item.used` which triggers when using either of the two items and then running commands as/at players with a score of 1 or higher.
+This method works by using an `item.used` scoreboard objective which triggers when using either of the two items and then running commands as/at players with a score of 1 or higher.
 
 Pros: 
 - easy to pull off
