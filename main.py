@@ -1,4 +1,3 @@
-# invite link, don't share for now: https://discord.com/oauth2/authorize?client_id=1108074519308017734&scope=bot&permissions=517611048000
 # * IMPORTING
 # Libaries
 import disnake
