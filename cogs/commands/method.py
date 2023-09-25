@@ -28,7 +28,7 @@ class MethodCommand(commands.Cog, name="method"):
         opened_file.close()
 
         embed = disnake.Embed(
-            title=method.title(),
+            title=("⚙️"+method.title()),
             description=file_content,
             color=disnake.Colour.orange(),
         )

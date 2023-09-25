@@ -23,7 +23,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
     ):
         if type == "resourcepack":
             embed = disnake.Embed(
-                        title="Resourcepack Folderstructure",
+                        title="📂 Resourcepack Folderstructure",
                         description="""```
                 .
                 ├── pack.mcmeta
@@ -65,7 +65,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
             
         if type == "datapack":
             embed = disnake.Embed(
-                    title="Datapack Folderstructure",
+                    title="📂 Datapack Folderstructure",
                     description="""```
             .
             ├── pack.mcmeta

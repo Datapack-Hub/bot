@@ -12,7 +12,6 @@ import bot_token
 #import cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
 import cogs.commands.syntax as syntax
 import cogs.commands.method as method
-#import cogs.commands.resolve as resolve
 import cogs.commands.folderstructure as folderstructure
 import cogs.commands.invite as invite
 import cogs.commands.newsletter as newsletter
@@ -70,7 +69,6 @@ bot.add_cog(ping.PingCommand(bot))
 # Listeners
 bot.add_cog(on_message.OnMessage(bot))
 bot.add_cog(on_button_click.OnButtonClick(bot))
-#bot.add_cog(on_thread_create.OnThreadCreate(bot))
 bot.add_cog(on_guild_join.OnGuildJoin(bot))
 bot.add_cog(on_guild_remove.OnGuildRemove(bot))
 bot.add_cog(on_ready.OnReady(bot))

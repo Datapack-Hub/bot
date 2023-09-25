@@ -13,8 +13,8 @@ class PingCommand(commands.Cog, name="ping"):
 
     @commands.slash_command(
         title="info",
-        description="Returns bot latency",
+        description="Returns bot ping",
     )
     async def ping(self, inter: disnake.ApplicationCommandInteraction):
         ping = round((self.bot.latency * 1000),2)
-        await inter.response.send_message("Current Bot Ping: " + str(ping) + "ms",ephemeral=True)
+        await inter.response.send_message("🏓 Current Bot Ping: " + str(ping) + "ms",ephemeral=True)

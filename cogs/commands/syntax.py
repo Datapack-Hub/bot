@@ -16,19 +16,26 @@ class SyntaxCommand(commands.Cog, name="syntax"):
 
     @commands.slash_command(
         title="syntax",
-        description="",
+        description="Outputs syntax of any minecraft command",
     )
     async def syntax(
         self, inter: disnake.ApplicationCommandInteraction, command: str
     ):
-        opened_file = open("./command_syntax/" + str(command) + ".txt")
-        file_content = opened_file.read()
-        print("Method Description: " + file_content)
-        opened_file.close()
-        embed = disnake.Embed(
-            title=command,
-            description=file_content,
-            color=disnake.Colour.orange(),
-        )
+        try: 
+            opened_file = open("./command_syntax/" + str(command) + ".txt")
+            file_content = opened_file.read()
+            print("Command Syntax: " + file_content)
+            opened_file.close()
+            embed = disnake.Embed(
+                title=("📜 /"+(str(command))),
+                description=file_content,
+                color=disnake.Colour.orange(),
+            )
+        except:
+            embed = disnake.Embed(
+                title="❌ Command Not Found",
+                description="Make sure to check for typos and keep in mind that the bot does not include bedrock commands :>",
+                color=disnake.Colour.red(),
+            )
 
         await inter.response.send_message(embed=embed)

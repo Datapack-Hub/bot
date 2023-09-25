@@ -1,14 +1,14 @@
 `/place feature <feature> [<pos>]`
 
-Place the [configured feature](/w/Custom_feature#Configured_Feature "Custom feature").
+Place the configured feature.
 
 `/place jigsaw <pool> <target> <max_depth> [<position>]`
 
-Place the [jigsaw](/w/Jigsaw_block "Jigsaw block").
+Place the jigsaw.
 
 `/place structure <structure> [<pos>]`
 
-Place the [configured structure feature](/w/Custom_structure#Configured_Structure_Feature "Custom structure").
+Place the configured structure feature.
 
 `/place template <template> [<pos>] [<rotation>] [<mirror>] [<integrity>] [<seed>]`
 

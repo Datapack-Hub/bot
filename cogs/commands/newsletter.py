@@ -36,7 +36,7 @@ class NewsletterCommand(commands.Cog, name="newsletter"):
 
                 embed = disnake.Embed(
                     color=disnake.Colour.yellow(),
-                    title=("**Datapack Newsletter**"),
+                    title=("**📰 Datapack Newsletter**"),
                     description="Unsubscribed you from out DM Datapack Newsletter!\n**This is an experimental feature and might get discontinued at any time without warning**",
                 )
 
@@ -61,7 +61,7 @@ class NewsletterCommand(commands.Cog, name="newsletter"):
 
                 embed = disnake.Embed(
                     color=disnake.Colour.yellow(),
-                    title=("**Datapack Newsletter**"),
+                    title=("**📰 Datapack Newsletter**"),
                     description="Added you to our DM Datapack Newsletter! If everything worked correctly, you should also have just recieved your first DM from this bot :D\n**This is an experimental feature and might get discontinued at any time without warning**",
                 )
                 await inter.response.send_message(embed=embed, ephemeral=True)

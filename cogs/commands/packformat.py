@@ -65,7 +65,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
 
             embed = disnake.Embed(
                 color=disnake.Color.orange(),
-                title="Resourcepack Pack Format History",
+                title="📦 Resourcepack Pack Format History",
                 description=output_string,
             )
             await inter.response.send_message(embed=embed)
@@ -119,7 +119,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
             output_string = "\n".join(lines[1:])
             embed = disnake.Embed(
                 color=disnake.Color.orange(),
-                title="Datapack Pack Format History",
+                title="📦 Datapack Pack Format History",
                 description=output_string,
             )
             await inter.response.send_message(embed=embed)

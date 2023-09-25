@@ -35,13 +35,13 @@ class HelpCommand(commands.Cog, name="help"):
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**🚑 Help**"),
-                description="Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!\n\n</template:1150431751076855878>: Sends a datapack/resourcepack template\n</invite:1153330774825766947>: Shows invites to datapacking-relevant discord servers\n</packformat:1153330774825766949>: Shows `packformat` history for datapacks/resourcepacks\n</folderstructure:1153330774825766946>: Shows folder structure for datapacks/resourcepacks\n</syntax:1153330774825766943>: Shows the syntax of any minecraft command\n</info:1153330774825766950>: Shows information about stuff outside of minecraft, which might improve your datapacking experience\n</method:1153330774825766944>: Shows how to do certain stuff using datapacks/commands\ninsertherelol Returns current bot latency",
+                description="Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!\n\n</template:1153330774825766951>: Sends a datapack/resourcepack template\n</invite:1153330774825766947>: Shows invites to datapacking-relevant discord servers\n</packformat:1153330774825766949>: Shows `packformat` history for datapacks/resourcepacks\n</folderstructure:1153330774825766946>: Shows folder structure for datapacks/resourcepacks\n</syntax:1153330774825766943>: Shows the syntax of any minecraft command\n</info:1153330774825766950>: Shows information about stuff outside of minecraft, which might improve your datapacking experience\n</method:1153330774825766944>: Shows how to do certain stuff using datapacks/commands\ninsertherelol Returns current bot latency",
             )
-        elif command == "invite":
+        elif command == "ping":
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**🚑 `/ping`**"),
-                description="Returns latency of the bot."
+                description="Returns bot ping."
             )
         elif command == "invite":
             embed = disnake.Embed(
@@ -83,13 +83,13 @@ class HelpCommand(commands.Cog, name="help"):
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**🚑 `/info`**"),
-                description="Shows information about stuff outside of minecraft which might help you improve your datapacking experience MORE COMING SOON\nSyntax: `/info info:<info>`\nAviable infos: `logs default`, `me`, `editor`, `logs other`, `update rp 1.19.3+`",
+                description="Shows information about stuff outside of minecraft which might help you improve your datapacking experience\nSyntax: `/info info:<info>`\nAviable infos: `logs default`, `me`, `editor`, `logs other`, `update rp 1.19.3+` **MORE COMING SOON**",
             )
         elif command == "method":
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
                 title=("**🚑 `/method`**"),
-                description="Shows how to do certain stuff using datapacks/commands MORE COMING SOON\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction`",
+                description="Shows how to do certain stuff using datapacks/commands\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction` **MORE COMING SOON**",
             )
         elif command == "packformat":
             embed = disnake.Embed(
