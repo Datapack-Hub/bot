@@ -9,16 +9,15 @@ class OnGuildJoin(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
-        # Logging
         embed = disnake.Embed(
             color=disnake.Colour.green(),
             title=("**Joined New Guild**"),
             description=(
                 "Bot was added to the **"
-                + str(guild.name)
-                + "** (**"
-                + str(guild.id)
-                + "**) server"
+                + str(guild.name) 
+                + "** server (owned by **"
+                + str(guild.owner.name)
+                + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

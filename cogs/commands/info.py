@@ -63,7 +63,7 @@ class InfoCommand(commands.Cog, name="info"):
             color=disnake.Colour.orange(),
             title=("**`/info` Command**"),
             description=(
-                str(inter.user.name) + " gained knowledge about `" + info + "`!"
+                str(inter.user.name) + " gained knowledge about `" + info + "`! (Server: **" + inter.guild.name + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

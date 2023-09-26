@@ -129,7 +129,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                 title=("**`/packformat` Command**"),
                 description=(
                     str(inter.user.name)
-                    + " looked up the packformat history of `datapacks`"
+                    + " looked up the packformat history of `datapacks` (Server: **" + inter.guild.name + "**)"
                 ),
             )
             channel = self.bot.get_channel(variables.logs)

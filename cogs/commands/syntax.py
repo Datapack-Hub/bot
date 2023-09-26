@@ -1,6 +1,7 @@
 import disnake
 from disnake.ext import commands
 import os
+import variables
 
 commands_2 = os.listdir("./command_syntax")
 
@@ -39,3 +40,17 @@ class SyntaxCommand(commands.Cog, name="syntax"):
             )
 
         await inter.response.send_message(embed=embed)
+        # Logging
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**`/syntax` Command**"),
+            description=(
+                str(inter.user.name)
+                + " looked up the syntax of `"
+                + command
+                + "` (Server: **" + inter.guild.name + "**)"
+            ),
+        )
+        channel = self.bot.get_channel(variables.logs)
+        
+        await channel.send(embed=embed)

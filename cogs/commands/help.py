@@ -110,7 +110,7 @@ class HelpCommand(commands.Cog, name="help"):
             color=disnake.Colour.orange(),
             title=("**`/help` Command**"),
             description=(
-                str(inter.user.name) + " looked up `" + str(command) + "`"
+                str(inter.user.name) + " looked up `" + str(command) + "` (Server: **" + inter.guild.name + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

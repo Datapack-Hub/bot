@@ -54,7 +54,7 @@ class TemplateCommand(commands.Cog, name="template"):
                 str(inter.user.name)
                 + " got themselves a `"
                 + str(template)
-                + "` template"
+                + "` template (Server: **" + inter.guild.name + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

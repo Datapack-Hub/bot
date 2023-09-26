@@ -1,7 +1,7 @@
 import disnake
 from disnake.ext import commands
 import os
-
+import variables
 
 methods = os.listdir("./method")
 
@@ -34,3 +34,13 @@ class MethodCommand(commands.Cog, name="method"):
         )
 
         await inter.response.send_message(embed=embed)
+        
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(),
+            title=("**`/method` Command**"),
+            description=(
+                str(inter.user.name) + " gained knowledge about `" + method + "`! (Server: **" + inter.guild.name + "**)"
+            ),
+        )
+        channel = self.bot.get_channel(variables.logs)
+        await channel.send(embed=embed)

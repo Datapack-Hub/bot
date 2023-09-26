@@ -115,7 +115,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 color=disnake.Colour.orange(),
                 title=("**`/folderstructure` Command**"),
                 description=(
-                    str(inter.user.name) + " looked up the folderstructure of `datapacks`"
+                    str(inter.user.name) + " looked up the folderstructure of `datapacks` (Server: **" + inter.guild.name + "**)"
                 ),
             )
             channel = self.bot.get_channel(variables.logs)

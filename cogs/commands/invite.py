@@ -90,7 +90,7 @@ class InviteCommand(commands.Cog, name="invite"):
             color=disnake.Colour.orange(),
             title=("**`/invite` Command**"),
             description=(
-                str(inter.user.name) + " looked up the invite of `" + str(invite) + "`"
+                str(inter.user.name) + " looked up the invite of `" + str(invite) + "`(Server: **" + inter.guild.name + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)
