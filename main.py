@@ -27,7 +27,6 @@ import cogs.listeners.on_guild_remove_event as on_guild_remove
 import cogs.listeners.on_ready_event as on_ready
 
 
-
 # * SETUP BOT
 # Set Intents
 intents = disnake.Intents.all()
@@ -43,7 +42,7 @@ bot = commands.Bot(
     command_prefix="?",
     intents=intents,
     activity=activity
-)
+    )
 
 
 # * ADD COGS

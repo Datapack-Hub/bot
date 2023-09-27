@@ -14,11 +14,11 @@ class OnGuildRemove(commands.Cog):
             color=disnake.Colour.red(),
             title=("**Left Guild**"),
             description=(
-                "Bot was removed from the **"
-                + str(guild.name)
-                + "** (**"
-                + str(guild.id)
-                + "**) server"
+                "Bot was added to the **"
+                + str(guild.name) 
+                + "** server (owned by **"
+                + str(guild.owner.name)
+                + "**, " + str(guild.member_count) + " members)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

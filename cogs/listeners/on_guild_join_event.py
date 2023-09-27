@@ -17,7 +17,7 @@ class OnGuildJoin(commands.Cog):
                 + str(guild.name) 
                 + "** server (owned by **"
                 + str(guild.owner.name)
-                + "**)"
+                + "**, " + str(guild.member_count) + " members)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)
