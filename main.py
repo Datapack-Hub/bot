@@ -43,8 +43,7 @@ activity = disnake.Activity(
 bot = commands.Bot(
     command_prefix="?",
     intents=intents,
-    activity=activity,
-    test_guilds=variables.test_guilds
+    activity=activity
 )
 
 
