@@ -14,7 +14,7 @@ class OnGuildRemove(commands.Cog):
             color=disnake.Colour.red(),
             title=("**Left Guild**"),
             description=(
-                "Bot was added to the **"
+                "Bot was removed from the **"
                 + str(guild.name) 
                 + "** server (owned by **"
                 + str(guild.owner.name)
