@@ -12,7 +12,8 @@ invites = commands.option_enum(
         "blockbench",
         "optifine",
         "fabric",
-        "minecraft"
+        "minecraft",
+        "dataworld (fr)"
     ]
 )
 
@@ -84,6 +85,12 @@ class InviteCommand(commands.Cog, name="invite"):
                     color=disnake.Colour.orange(),
                     title=("**🚪Minecraft Invite**"),
                     description="Join the official minecraft discord server using this link: https://discord.gg/minecraft",
+                )
+            case "dataworld (fr)":
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**🚪Data World Invite**"),
+                    description="Rejoins Data World pour obtenir de l'aide sur les datapacks avec le lien: https://discord.gg/5y5FBz5",
                 )
         await inter.response.send_message(embed=embed)
         # Logging
