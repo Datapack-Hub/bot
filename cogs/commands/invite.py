@@ -90,7 +90,7 @@ class InviteCommand(commands.Cog, name="invite"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚪Data World Invite**"),
-                    description="Rejoins Data World pour obtenir de l'aide sur les datapacks avec le lien: https://discord.gg/5y5FBz5",
+                    description="Join Data World to get help about datapack using the link: https://discord.gg/5y5FBz5 \nRejoins Data World pour obtenir de l'aide sur les datapacks avec le lien: https://discord.gg/5y5FBz5",
                 )
         await inter.response.send_message(embed=embed)
         # Logging
