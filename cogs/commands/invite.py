@@ -89,9 +89,10 @@ class InviteCommand(commands.Cog, name="invite"):
             case "dataworld (fr)":
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
-                    title=("**🚪Data World Invite**"),
-                    description="Join Data World to get help about datapack using the link: https://discord.gg/5y5FBz5 \nRejoins Data World pour obtenir de l'aide sur les datapacks avec le lien: https://discord.gg/5y5FBz5",
+                    title=("**🚪DataWorld Invite**"),
+                    description="Join DataWorld, a french-only discord server, to get help with datapacks using the link: https://discord.gg/5y5FBz5 \nRejoins Data World pour obtenir de l'aide sur les datapacks avec le lien: https://discord.gg/5y5FBz5",
                 )
+                
         await inter.response.send_message(embed=embed)
         # Logging
         embed = disnake.Embed(
