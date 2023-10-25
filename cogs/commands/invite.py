@@ -13,7 +13,8 @@ invites = commands.option_enum(
         "optifine",
         "fabric",
         "minecraft",
-        "dataworld (fr)"
+        "dataworld (fr)",
+        "animated java"
     ]
 )
 
@@ -91,6 +92,12 @@ class InviteCommand(commands.Cog, name="invite"):
                     color=disnake.Colour.orange(),
                     title=("**🚪DataWorld Invite**"),
                     description="Join DataWorld, a french-only discord server, to get help with datapacks using the link: https://discord.gg/5y5FBz5 \nRejoins Data World pour obtenir de l'aide sur les datapacks avec le lien: https://discord.gg/5y5FBz5",
+                )
+            case "animated java":
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**Animated Java Invite**"),
+                    description="Join the Animated Java discord server for help with the Animated Java Blockbench plugin using this link: https://animated-java.dev/discord",
                 )
                 
         await inter.response.send_message(embed=embed)
