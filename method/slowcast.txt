@@ -63,10 +63,10 @@ The duration function ensures, that the Slowcast doesn't go on forever and kills
 ```hs
 scoreboard players remove @s slowcastDuration 1
 
-scoreboard players operation slowcastSteps temp = @s spellAssembly.slowcastSteps
+scoreboard players operation slowcastSteps temp = @s slowcastSteps
 scoreboard players reset hit temp
 execute positioned ^ ^ ^.2 run function <namespace>:step
-scoreboard players operation @s spellAssembly.slowcastSteps = slowcastSteps temp
+scoreboard players operation @s slowcastSteps = slowcastSteps temp
 
 execute unless score @s slowcastDuration matches 1.. run kill
 ```
