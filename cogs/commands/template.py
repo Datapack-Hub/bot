@@ -1,7 +1,8 @@
-import disnake
-from disnake.ext import commands
-import variables
 import os
+
+import disnake
+import variables
+from disnake.ext import commands
 
 template = commands.option_enum(["datapack", "resourcepack"])
 
@@ -15,7 +16,9 @@ class TemplateCommand(commands.Cog, name="template"):
         description="Shows discord invite for a discord server relevant to datapacks",
     )
     async def template(
-        self, inter: disnake.ApplicationCommandInteraction, template: template = "datapack"
+        self,
+        inter: disnake.ApplicationCommandInteraction,
+        template: template = "datapack",
     ):
         match template:
             case "datapack":
@@ -34,12 +37,12 @@ class TemplateCommand(commands.Cog, name="template"):
             case "resourcepack":
                 # Get the directory where the script is located
                 script_dir = os.path.dirname(os.path.abspath(__file__))
-    
+
                 # Construct the full path to the 'datapack.zip' file
                 resourcepack_path = os.path.join(
                     script_dir, "templates", "resourcepack.zip"
                 )
-    
+
                 with open(resourcepack_path, "rb") as fp:
                     await inter.response.send_message(
                         "📁 Here is a basic resourcepack template for 1.20.1:",
@@ -54,7 +57,9 @@ class TemplateCommand(commands.Cog, name="template"):
                 str(inter.user.name)
                 + " got themselves a `"
                 + str(template)
-                + "` template (Server: **" + inter.guild.name + "**)"
+                + "` template (Server: **"
+                + inter.guild.name
+                + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

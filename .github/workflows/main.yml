@@ -1,0 +1,54 @@
+name: Lint and Format
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: build-and-test
+  cancel-in-progress: true
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.11.x
+          cache: pip
+          architecture: x64
+          check-latest: true
+      - name: Install ruff
+        run: |
+          pip install ruff -U
+      - name: Run ruff
+        run: |
+          ruff format . --preview
+      - uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        with:
+          commit_message: "Apply formatting"
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.11.x
+          cache: pip
+          architecture: x64
+          check-latest: true
+      - name: Install ruff
+        run: |
+          pip install ruff -U
+      - name: Run ruff
+        run: |
+          ruff . --fix
+      - uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        with:
+          commit_message: "Apply linting"

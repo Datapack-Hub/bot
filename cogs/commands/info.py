@@ -1,6 +1,6 @@
 import disnake
-from disnake.ext import commands
 import variables
+from disnake.ext import commands
 
 infos = commands.option_enum(
     ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]
@@ -52,7 +52,7 @@ class InfoCommand(commands.Cog, name="info"):
                     title=":information_source: Updating Resourcepacks Past 1.19.3",
                     description="1.19.3 introduced a change to resourcepacks which means that textures which aren't stored in `textures/item` or `textures/block` won't be loaded into the game by default. This means that most resource packs for earlier versions won't work in 1.19.3. \n\nThere are two ways to fix this:\n- Move your custom textures into `assets/minecraft/textures/item/...`, since all textures in the `item` (or `block`) folders are loaded by default.\n- Create an atlas file for your custom textures. An atlas file basically tells Minecraft to always load the textures in your custom folder. [This video](https://youtu.be/MHWX_GaK2g0) will explain how to do this.",
                 )
-            #case "starting out":
+            # case "starting out":
             #     embed = disnake.Embed(
             #         color=disnake.Color.orange(),
             #         title="Starting Out 🧒",
@@ -64,7 +64,12 @@ class InfoCommand(commands.Cog, name="info"):
             color=disnake.Colour.orange(),
             title=("**`/info` Command**"),
             description=(
-                str(inter.user.name) + " gained knowledge about `" + info + "`! (Server: **" + inter.guild.name + "**)"
+                str(inter.user.name)
+                + " gained knowledge about `"
+                + info
+                + "`! (Server: **"
+                + inter.guild.name
+                + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

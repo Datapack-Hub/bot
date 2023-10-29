@@ -1,6 +1,7 @@
 [tool.ruff]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-select = ["E", "F", "PERF", "RUF", "B", "N", "UP"]
+select = ["E", "F", "PERF", "RUF", "B", "N", "UP", "EM", "FURB", "S"]
+ignore = ["E501"]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
@@ -32,7 +33,7 @@ exclude = [
 ]
 
 # Same as Black.
-line-length = 9999
+line-length = 88
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"

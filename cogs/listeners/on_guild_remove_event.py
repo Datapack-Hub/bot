@@ -1,6 +1,6 @@
 import disnake
-from disnake.ext import commands
 import variables
+from disnake.ext import commands
 
 
 class OnGuildRemove(commands.Cog):
@@ -15,10 +15,12 @@ class OnGuildRemove(commands.Cog):
             title=("**Left Guild**"),
             description=(
                 "Bot was removed from the **"
-                + str(guild.name) 
+                + str(guild.name)
                 + "** server (owned by **"
                 + str(guild.owner.name)
-                + "**, " + str(guild.member_count) + " members)"
+                + "**, "
+                + str(guild.member_count)
+                + " members)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

@@ -1,31 +1,26 @@
 import disnake
-from disnake.ext import commands
 import variables
+from disnake.ext import commands
 
-type_enum = commands.option_enum(
-    [
-        "resourcepack",
-        "datapack"
-    ]
-)
+type_enum = commands.option_enum(["resourcepack", "datapack"])
+
 
 class FolderStructureCommand(commands.Cog, name="folderstructure"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.slash_command(
-        title = "folderstructure",
-        description= "Shows the folder structure of datapacks/resourcepacks"
+        title="folderstructure",
+        description="Shows the folder structure of datapacks/resourcepacks",
     )
-
     async def folderstructure(
         self, inter: disnake.ApplicationCommandInteraction, type: type_enum = "datapack"
     ):
         match type:
             case "resourcepack":
                 embed = disnake.Embed(
-                            title="📂 Resourcepack Folderstructure",
-                            description="""```
+                    title="📂 Resourcepack Folderstructure",
+                    description="""```
                     .
                     ├── pack.mcmeta
                     ├── pack.png
@@ -49,8 +44,8 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                             ├── lang        
                             └── textures
                             ```""",
-                            color=disnake.Colour.orange(),
-                        )
+                    color=disnake.Colour.orange(),
+                )
                 await inter.response.send_message(embed=embed)
                 # Logging
                 embed = disnake.Embed(
@@ -63,11 +58,11 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
-                
+
             case "datapack":
                 embed = disnake.Embed(
-                        title="📂 Datapack Folderstructure",
-                        description="""```
+                    title="📂 Datapack Folderstructure",
+                    description="""```
                 .
                 ├── pack.mcmeta
                 ├── pack.png
@@ -108,15 +103,18 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                             ├── world_preset
                             └── flat_level_generator_preset
                         ```""",
-                        color=disnake.Colour.orange(),
-                    )
+                    color=disnake.Colour.orange(),
+                )
                 await inter.response.send_message(embed=embed)
                 # Logging
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**`/folderstructure` Command**"),
                     description=(
-                        str(inter.user.name) + " looked up the folderstructure of `datapacks` (Server: **" + inter.guild.name + "**)"
+                        str(inter.user.name)
+                        + " looked up the folderstructure of `datapacks` (Server: **"
+                        + inter.guild.name
+                        + "**)"
                     ),
                 )
                 channel = self.bot.get_channel(variables.logs)
