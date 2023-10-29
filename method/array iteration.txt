@@ -2,9 +2,7 @@ In Minecraft, you can create arrays within data storages like this:
 ```hs
 data merge storage namespace:main {array:[9, "string", 3.14f, true, {"foo":"bar"}]}
 ```
-and array iteration allows us to check each array element individually and do something with it.
-
-Array iteration allows you to check each array element individually and perform actions on them.
+Array iteration allows you to **check each array element individually** and perform actions on them.
 
 For this example, let's use the previously created array and print out each element individually. Our first step is to create an initializing function that will call our main function at the end:
 `namespace:array_iteration/init`
