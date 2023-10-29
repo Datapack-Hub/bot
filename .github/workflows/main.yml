@@ -48,7 +48,7 @@ jobs:
           pip install ruff -U
       - name: Run ruff
         run: |
-          ruff . --fix
+          ruff . --fix --preview
       - uses: stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "Apply linting"
