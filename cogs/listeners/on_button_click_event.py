@@ -1,7 +1,6 @@
 import disnake
 from disnake.ext import commands
 import variables
-import datetime
 
 
 class OnButtonClick(commands.Cog):

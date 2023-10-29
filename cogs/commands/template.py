@@ -1,4 +1,3 @@
-from pathlib import Path
 import disnake
 from disnake.ext import commands
 import variables

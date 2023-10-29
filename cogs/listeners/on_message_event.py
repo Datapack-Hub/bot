@@ -72,9 +72,7 @@ class OnMessage(commands.Cog):
             
             n = 0
             guild = message.guild
-            members = []
-            for member in guild.members:
-                members.append(member.name)
+            members = [member.name for member in guild.members]
                 
             leng = len(members)
             leng = int(leng/10)

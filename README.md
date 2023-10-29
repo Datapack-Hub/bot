@@ -19,4 +19,3 @@ If you encounter any issues or have questions about using the Datapack Hub Helpe
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
-

@@ -4,7 +4,6 @@ import disnake
 from disnake.ext import commands
 
 # Local Files
-import variables
 import bot_token
 
 # Cogs

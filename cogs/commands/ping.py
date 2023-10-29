@@ -1,6 +1,5 @@
 import disnake
 from disnake.ext import commands
-import variables
 
 infos = commands.option_enum(
     ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]

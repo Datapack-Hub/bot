@@ -1,6 +1,5 @@
 import disnake
 from disnake.ext import commands
-import variables
 import os
 from random import randrange
 
@@ -16,7 +15,6 @@ class EliminateCommand(commands.Cog, name="eliminate"):
     async def eliminate(
         self, inter: disnake.ApplicationCommandInteraction, target: disnake.User
     ):
-        channel = inter.channel
         target = target.id
         script_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(script_dir, "eliminated.txt")
@@ -65,7 +63,7 @@ class EliminateCommand(commands.Cog, name="eliminate"):
             if str(target) in eliminated:
                 with open(file_path, "a") as file:
                     file.write("\n"+str(inter.user.id))
-                if not inter.user.id in participants:
+                if inter.user.id not in participants:
                     with open(file_path_part, "a") as file:
                         file.write("\n"+str(inter.user.id))         
                 embed = disnake.Embed(
@@ -82,7 +80,7 @@ class EliminateCommand(commands.Cog, name="eliminate"):
                 with open(file_path, "a") as file:
                     file.write("\n"+str(target))
                     
-                if not inter.user.id in participants:
+                if inter.user.id not in participants:
                     with open(file_path_part, "a") as file:
                         file.write("\n"+str(inter.user.id))  
                 embed = disnake.Embed(

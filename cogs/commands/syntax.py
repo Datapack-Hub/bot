@@ -32,7 +32,7 @@ class SyntaxCommand(commands.Cog, name="syntax"):
                 description=file_content,
                 color=disnake.Colour.orange(),
             )
-        except:
+        except FileNotFoundError:
             embed = disnake.Embed(
                 title="❌ Command Not Found",
                 description="Make sure to check for typos and keep in mind that the bot does not include bedrock commands :>",
