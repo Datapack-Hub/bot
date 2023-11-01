@@ -28,7 +28,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
         match type:
             case "resourcepack":
                 request = requests.get(
-                    "https://minecraft.fandom.com/wiki/Pack_format", timeout=5000
+                    "https://minecraft.wiki/w/Pack_format", timeout=5000
                 )
                 request = BeautifulSoup(request.content, "html.parser")
                 description = ""
@@ -83,7 +83,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
 
             case "datapack":
                 request = requests.get(
-                    "https://minecraft.fandom.com/wiki/Pack_format", timeout=5000
+                    "https://minecraft.wiki/w/Pack_format", timeout=5000
                 )
                 request = BeautifulSoup(request.content, "html.parser")
                 description = ""
