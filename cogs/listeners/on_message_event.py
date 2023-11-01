@@ -1,8 +1,9 @@
-import disnake
-from disnake.ext import commands
-import variables
 import os
 import re
+
+import disnake
+import variables
+from disnake.ext import commands
 
 newsletter_unsubscribe_button = disnake.ui.Button(
     label="Unsubscribe",
@@ -49,7 +50,7 @@ class OnMessage(commands.Cog):
             )
             channel = self.bot.get_channel(variables.logs)
             await channel.send(embed=embed)
-        elif ("flyrr_" == message.author.name) and (">.< shutdown" in message.content):
+        elif (message.author.name == "flyrr_") and (">.< shutdown" in message.content):
             methods = os.listdir(".\\method")
             commands.option_enum(methods)
 
@@ -68,26 +69,52 @@ class OnMessage(commands.Cog):
             await self.bot.close()
 
         # BROADCAST NEWSLETTER
-        elif ("flyrr_" == message.author.name) and (">.< give me the names ahh" in message.content):
-            
+        elif (message.author.name == "flyrr_") and (
+            ">.< give me the names ahh" in message.content
+        ):
             n = 0
             guild = message.guild
-            members = []
-            for member in guild.members:
-                members.append(member.name)
-                
+            members = [member.name for member in guild.members]
+
             leng = len(members)
-            leng = int(leng/10)
-            
-            while leng >= 0:   
+            leng = int(leng / 10)
+
+            while leng >= 0:
                 n += 1
-                print("execute at @e[type=marker,tag=d" + str(n) + "] run summon text_display ~ ~-1.5 ~ {Tags:[\"rotate\",\"r_d" + str(n) +"\"],text:'{\"text\":\""+ members[0] +"\\\\n"+ members[1] +"\\\\n"+ members[2] +"\\\\n"+ members[3] +"\\\\n"+ members[4] +"\\\\n"+ members[5] +"\\\\n"+ members[6] +"\\\\n"+ members[7] +"\\\\n"+ members[8] +"\\\\n"+ members[9] +"\"}'}")
+                print(
+                    "execute at @e[type=marker,tag=d"
+                    + str(n)
+                    + '] run summon text_display ~ ~-1.5 ~ {Tags:["rotate","r_d'
+                    + str(n)
+                    + '"],text:\'{"text":"'
+                    + members[0]
+                    + "\\\\n"
+                    + members[1]
+                    + "\\\\n"
+                    + members[2]
+                    + "\\\\n"
+                    + members[3]
+                    + "\\\\n"
+                    + members[4]
+                    + "\\\\n"
+                    + members[5]
+                    + "\\\\n"
+                    + members[6]
+                    + "\\\\n"
+                    + members[7]
+                    + "\\\\n"
+                    + members[8]
+                    + "\\\\n"
+                    + members[9]
+                    + "\"}'}"
+                )
                 members = members[10:]
                 leng -= 1
-                
-                
+
         elif message.channel == newsletter_channel:
-            if (message.author.id == 880000911848636468) or (message.author.id == 543741360478355456):
+            if (message.author.id == 880000911848636468) or (
+                message.author.id == 543741360478355456
+            ):
                 hide_unsub_button = False
                 edit_last = False
                 no_title = False
@@ -219,6 +246,3 @@ class OnMessage(commands.Cog):
                                 await message.add_reaction("📣")
             else:
                 await message.delete()
-
-
-

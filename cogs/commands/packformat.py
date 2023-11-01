@@ -1,27 +1,21 @@
 import disnake
-from disnake.ext import commands
-import variables
 import requests
+import variables
 from bs4 import BeautifulSoup
+from disnake.ext import commands
 from markdownify import markdownify as md
 
+type_enum = commands.option_enum(["resourcepack", "datapack"])
 
-type_enum = commands.option_enum(
-    [
-        "resourcepack",
-        "datapack"
-    ]
-)
 
 class PackFormatCommand(commands.Cog, name="packformat"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.slash_command(
-        title = "packformat",
-        description= "Shows the packformat history of datapacks/resourcepacks"
+        title="packformat",
+        description="Shows the packformat history of datapacks/resourcepacks",
     )
-
     async def packformat(
         self, inter: disnake.ApplicationCommandInteraction, type: type_enum = "datapack"
     ):
@@ -126,7 +120,9 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                     title=("**`/packformat` Command**"),
                     description=(
                         str(inter.user.name)
-                        + " looked up the packformat history of `datapacks` (Server: **" + inter.guild.name + "**)"
+                        + " looked up the packformat history of `datapacks` (Server: **"
+                        + inter.guild.name
+                        + "**)"
                     ),
                 )
                 channel = self.bot.get_channel(variables.logs)

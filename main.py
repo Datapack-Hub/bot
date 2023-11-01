@@ -1,31 +1,29 @@
 # * IMPORTING
 # Libaries
+# Local Files
+import bot_token
 import disnake
 from disnake.ext import commands
 
-# Local Files
-import variables
-import bot_token
-
-# Cogs
-#import cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
-import cogs.commands.syntax as syntax
-import cogs.commands.method as method
+import cogs.commands.eliminate as eliminate
 import cogs.commands.folderstructure as folderstructure
+import cogs.commands.help as help
+import cogs.commands.info as info
 import cogs.commands.invite as invite
+import cogs.commands.method as method
 import cogs.commands.newsletter as newsletter
 import cogs.commands.packformat as packformat
 import cogs.commands.ping as ping
-import cogs.commands.info as info
+
+# Cogs
+# import cogs.message_commands.redirect_to_help_channel as redirect_to_help_channel
+import cogs.commands.syntax as syntax
 import cogs.commands.template as template
-import cogs.commands.eliminate as eliminate
-import cogs.commands.help as help
-import cogs.listeners.on_message_event as on_message
 import cogs.listeners.on_button_click_event as on_button_click
 import cogs.listeners.on_guild_join_event as on_guild_join
 import cogs.listeners.on_guild_remove_event as on_guild_remove
+import cogs.listeners.on_message_event as on_message
 import cogs.listeners.on_ready_event as on_ready
-
 
 # * SETUP BOT
 # Set Intents
@@ -38,11 +36,7 @@ activity = disnake.Activity(
 )
 
 # Initialize
-bot = commands.Bot(
-    command_prefix="?",
-    intents=intents,
-    activity=activity
-    )
+bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
 
 
 # * ADD COGS

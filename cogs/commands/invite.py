@@ -1,6 +1,6 @@
 import disnake
-from disnake.ext import commands
 import variables
+from disnake.ext import commands
 
 invites = commands.option_enum(
     [
@@ -14,7 +14,7 @@ invites = commands.option_enum(
         "fabric",
         "minecraft",
         "dataworld (fr)",
-        "animated java"
+        "animated java",
     ]
 )
 
@@ -99,14 +99,19 @@ class InviteCommand(commands.Cog, name="invite"):
                     title=("**Animated Java Invite**"),
                     description="Join the Animated Java discord server for help with the Animated Java Blockbench plugin using this link: https://animated-java.dev/discord",
                 )
-                
+
         await inter.response.send_message(embed=embed)
         # Logging
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
             title=("**`/invite` Command**"),
             description=(
-                str(inter.user.name) + " looked up the invite of `" + str(invite) + "`(Server: **" + inter.guild.name + "**)"
+                str(inter.user.name)
+                + " looked up the invite of `"
+                + str(invite)
+                + "`(Server: **"
+                + inter.guild.name
+                + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

@@ -1,6 +1,6 @@
 import disnake
-from disnake.ext import commands
 import variables
+from disnake.ext import commands
 
 commands_enum = commands.option_enum(
     [
@@ -14,7 +14,7 @@ commands_enum = commands.option_enum(
         "method",
         "folderstructure",
         "packformat",
-        "ping"
+        "ping",
     ]
 )
 
@@ -25,11 +25,12 @@ class HelpCommand(commands.Cog, name="help"):
 
     @commands.slash_command(
         title="Help",
-        description="Gives you information about any command this bot adds"
+        description="Gives you information about any command this bot adds",
     )
-    
     async def help(
-        self, inter: disnake.ApplicationCommandInteraction, command: commands_enum = "all"
+        self,
+        inter: disnake.ApplicationCommandInteraction,
+        command: commands_enum = "all",
     ):
         match command:
             case "all":
@@ -42,19 +43,19 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/ping`**"),
-                    description="Returns bot ping."
+                    description="Returns bot ping.",
                 )
             case "invite":
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/invite`**"),
-                    description="Shows invites for discord servers relevant for datapacks in one way or another\nSyntax: `/invite invite:<server>`\nAviable invites: `datapack hub`,`minecraft commands`,`shader labs`,`bot`,`smithed`,`blockbench`,`optifine`,`fabric`,`minecraft`"
+                    description="Shows invites for discord servers relevant for datapacks in one way or another\nSyntax: `/invite invite:<server>`\nAviable invites: `datapack hub`,`minecraft commands`,`shader labs`,`bot`,`smithed`,`blockbench`,`optifine`,`fabric`,`minecraft`",
                 )
             case "help":
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/help`**"),
-                    description="Shows either a list of all bot commands or information about a specific bot command\nSyntax `/help command:<command>`\nAviable commands: `invite`,`help`,`eliminate`,`resolve`,`newsletter`,`syntax`,`template`,`info`,`folderstructure`,`packformat`,`ping`"
+                    description="Shows either a list of all bot commands or information about a specific bot command\nSyntax `/help command:<command>`\nAviable commands: `invite`,`help`,`eliminate`,`resolve`,`newsletter`,`syntax`,`template`,`info`,`folderstructure`,`packformat`,`ping`",
                 )
             case "eliminate":
                 embed = disnake.Embed(
@@ -96,13 +97,13 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/packformat`**"),
-                    description="Shows the history of datapack/resourcepack packformats\nSyntax: `/packformat type:[datapack|resourcepack]` (defaults to datapack)"
+                    description="Shows the history of datapack/resourcepack packformats\nSyntax: `/packformat type:[datapack|resourcepack]` (defaults to datapack)",
                 )
             case "folderstructure":
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/folderstructure`**"),
-                    description="Shows the folderstructure of datapacks/resourcepacks\nSyntax: `/folderstructure type:[datapack|resourcepack]` (defaults to datapack)"
+                    description="Shows the folderstructure of datapacks/resourcepacks\nSyntax: `/folderstructure type:[datapack|resourcepack]` (defaults to datapack)",
                 )
 
         await inter.response.send_message(embed=embed)
@@ -111,7 +112,12 @@ class HelpCommand(commands.Cog, name="help"):
             color=disnake.Colour.orange(),
             title=("**`/help` Command**"),
             description=(
-                str(inter.user.name) + " looked up `" + str(command) + "` (Server: **" + inter.guild.name + "**)"
+                str(inter.user.name)
+                + " looked up `"
+                + str(command)
+                + "` (Server: **"
+                + inter.guild.name
+                + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)

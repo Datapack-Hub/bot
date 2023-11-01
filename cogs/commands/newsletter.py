@@ -1,6 +1,6 @@
 import disnake
-from disnake.ext import commands
 import variables
+from disnake.ext import commands
 
 newsletter_unsubscribe_button = disnake.ui.Button(
     label="Unsubscribe",
@@ -47,7 +47,10 @@ class NewsletterCommand(commands.Cog, name="newsletter"):
                     color=disnake.Colour.orange(),
                     title=("**`/newsletter` Experimental Command**"),
                     description=(
-                        str(inter.user.name) + " unsubscribed from the newsletter (Server: **" + inter.guild.name + "**)"
+                        str(inter.user.name)
+                        + " unsubscribed from the newsletter (Server: **"
+                        + inter.guild.name
+                        + "**)"
                     ),
                 )
                 channel = self.bot.get_channel(variables.logs)
@@ -83,7 +86,10 @@ class NewsletterCommand(commands.Cog, name="newsletter"):
                     color=disnake.Colour.orange(),
                     title=("**`/newsletter` Experimental Command**"),
                     description=(
-                        str(inter.user.name) + " subscribed to the newsletter (Server: **" + inter.guild.name + "**)"
+                        str(inter.user.name)
+                        + " subscribed to the newsletter (Server: **"
+                        + inter.guild.name
+                        + "**)"
                     ),
                 )
                 channel = self.bot.get_channel(variables.logs)

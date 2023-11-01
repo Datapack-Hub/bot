@@ -1,7 +1,8 @@
-import disnake
-from disnake.ext import commands
 import os
+
+import disnake
 import variables
+from disnake.ext import commands
 
 commands_2 = os.listdir("./command_syntax")
 
@@ -19,20 +20,18 @@ class SyntaxCommand(commands.Cog, name="syntax"):
         title="syntax",
         description="Outputs syntax of any minecraft command",
     )
-    async def syntax(
-        self, inter: disnake.ApplicationCommandInteraction, command: str
-    ):
-        try: 
+    async def syntax(self, inter: disnake.ApplicationCommandInteraction, command: str):
+        try:
             opened_file = open("./command_syntax/" + str(command) + ".txt")
             file_content = opened_file.read()
             print("Command Syntax: " + file_content)
             opened_file.close()
             embed = disnake.Embed(
-                title=("📜 /"+(str(command))),
+                title=("📜 /" + (str(command))),
                 description=file_content,
                 color=disnake.Colour.orange(),
             )
-        except:
+        except FileNotFoundError:
             embed = disnake.Embed(
                 title="❌ Command Not Found",
                 description="Make sure to check for typos and keep in mind that the bot does not include bedrock commands :>",
@@ -48,9 +47,11 @@ class SyntaxCommand(commands.Cog, name="syntax"):
                 str(inter.user.name)
                 + " looked up the syntax of `"
                 + command
-                + "` (Server: **" + inter.guild.name + "**)"
+                + "` (Server: **"
+                + inter.guild.name
+                + "**)"
             ),
         )
         channel = self.bot.get_channel(variables.logs)
-        
+
         await channel.send(embed=embed)
