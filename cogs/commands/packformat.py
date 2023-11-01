@@ -37,7 +37,10 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                     else:
                         full_versions = ""
 
-                    if value.find_previous("h2").find_next("caption").text == "Data pack formats ":
+                    if (
+                        value.find_previous("h2").find_next("caption").text
+                        == "Data pack formats "
+                    ):
                         #   print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
                         description += md(
                             (
@@ -91,7 +94,10 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                         full_versions = " (`" + str(full_versions) + "`)"
                     else:
                         full_versions = ""
-                    if value.find_previous("h2").find_next("caption").text == "Resource pack formats ":
+                    if (
+                        value.find_previous("h2").find_next("caption").text
+                        == "Resource pack formats "
+                    ):
                         #  print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
                         description += md(
                             (
