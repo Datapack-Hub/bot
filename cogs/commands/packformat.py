@@ -57,7 +57,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                 output_string = "\n".join(lines[1:])
 
                 embed = disnake.Embed(
-                    color=disnake.Color.orange(),
+                    color=disnake.Color.purple(),
                     title="📦 Resourcepack Pack Format History",
                     description="This command is currently unavailable, expect it to be back either later today or tomorrow!",
                 )
