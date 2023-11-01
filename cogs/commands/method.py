@@ -7,7 +7,7 @@ from disnake.ext import commands
 methods = os.listdir("./method")
 
 for idx, ele in enumerate(methods):
-    methods[idx] = ele.replace(".txt", "")
+    methods[idx] = ele.replace(".md", "")
 
 methods_enum = commands.option_enum(methods)
 
@@ -23,7 +23,7 @@ class MethodCommand(commands.Cog, name="method"):
     async def method(
         self, inter: disnake.ApplicationCommandInteraction, method: methods_enum
     ):
-        opened_file = open("./method/" + str(method) + ".txt")
+        opened_file = open("./method/" + str(method) + ".md")
         file_content = opened_file.read()
         print("Method Description: " + file_content)
         opened_file.close()
