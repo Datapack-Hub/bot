@@ -19,50 +19,30 @@ class PackFormatCommand(commands.Cog, name="packformat"):
     async def packformat(
         self, inter: disnake.ApplicationCommandInteraction, type: type_enum = "datapack"
     ):
+        request = requests.get(
+                    "https://minecraft.wiki/w/Pack_format", timeout=5000, headers={"User-Agent":"Datapack Helper Discord Bot"}
+                    )
+
+        request = BeautifulSoup(request.content, "html.parser")
+        
+        description = ""
         match type:
             case "resourcepack":
-                request = requests.get(
-                    "https://minecraft.wiki/w/Pack_format", timeout=5000
-                )
-                request = BeautifulSoup(request.content, "html.parser")
-                description = ""
-                trs = request.find_all("tr")
-                for tr in trs:
-                    value = tr.find_next("td")
-                    versions = value.find_next("td")
-                    full_versions = versions.find_next("td")
-                    # print (md(str(full_versions)))
-                    if "—" not in md(str(full_versions)):
-                        full_versions = " (`" + str(full_versions) + "`)"
-                    else:
-                        full_versions = ""
 
-                    if (
-                        value.find_previous("h2").find_next("caption").text
-                        == "Data pack formats "
-                    ):
-                        #   print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
-                        description += md(
-                            (
-                                "Format: "
-                                + str(value)
-                                + "      Versions: `"
-                                + str(versions)
-                                + "`"
-                                + full_versions
-                                + "\n"
-                            ),
-                            strip=["a", "td"],
-                        ).replace("[*verify*]", "")
+                table_body = request.find('tbody')
 
-                lines = description.split("\n")
+                for row in table_body.find_all('tr'):
+                    cells = row.find_all('td')
 
-                output_string = "\n".join(lines[1:])
+                    if len(cells) >= 2:
+                        pack_format = cells[0].get_text(strip=True)
+                        version_range = cells[1].get_text(strip=True)
+                        description += f"Format: `{pack_format}` Version(s): `{version_range}`\n"
 
                 embed = disnake.Embed(
                     color=disnake.Color.purple(),
                     title="📦 Resourcepack Pack Format History",
-                    description="This command is currently unavailable, expect it to be back either later today or tomorrow!",
+                    description=description.rsplit('\n', 1)[0],
                 )
                 await inter.response.send_message(embed=embed)
 
@@ -79,46 +59,22 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                 await channel.send(embed=embed)
 
             case "datapack":
-                request = requests.get(
-                    "https://minecraft.wiki/w/Pack_format", timeout=5000
-                )
-                request = BeautifulSoup(request.content, "html.parser")
-                description = ""
-                trs = request.find_all("tr")
-                for tr in trs:
-                    value = tr.find_next("td")
-                    versions = value.find_next("td")
-                    full_versions = versions.find_next("td")
-                    # print (md(str(full_versions)))
-                    if "—" not in md(str(full_versions)):
-                        full_versions = " (`" + str(full_versions) + "`)"
-                    else:
-                        full_versions = ""
-                    if (
-                        value.find_previous("h2").find_next("caption").text
-                        == "Resource pack formats "
-                    ):
-                        #  print((md(("(RP) \nValue: " + str(value) + "\nVersions: " + str(versions)),strip=['a','td'])).replace("[*verify*]",""))
-                        description += md(
-                            (
-                                "Format: "
-                                + str(value)
-                                + "      Versions: `"
-                                + str(versions)
-                                + "`"
-                                + full_versions
-                                + "\n"
-                            ),
-                            strip=["a", "td"],
-                        ).replace("[*verify*]", "")
-                print(description)
-                lines = description.split("\n")
-                output_string = "\n".join(lines[1:])
+                datapack_table_body = request.find_all('table')[1]
+                
+                for row in datapack_table_body.find_all('tr'):
+                    cells = row.find_all('td')
+
+                    if len(cells) >= 2:
+                        pack_format = cells[0].get_text(strip=True)
+                        version_range = cells[1].get_text(strip=True)
+                        description += f"Format: `{pack_format}` Version(s): `{version_range}`\n"
+
                 embed = disnake.Embed(
                     color=disnake.Color.purple(),
                     title="📦 Datapack Pack Format History",
-                    description="This command is currently unavailable, expect it to be back either later today or tomorrow!",
+                    description=description.rsplit('\n', 1)[0],
                 )
+                
                 await inter.response.send_message(embed=embed)
                 # Logging
                 embed = disnake.Embed(
@@ -133,3 +89,5 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
+
+
