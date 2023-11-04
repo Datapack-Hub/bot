@@ -7,7 +7,7 @@ from disnake.ext import commands
 commands_2 = os.listdir("./command_syntax")
 
 for idx, ele in enumerate(commands_2):
-    commands_2[idx] = ele.replace(".txt", "")
+    commands_2[idx] = ele.replace(".md", "")
 
 commands_enum = commands.option_enum(commands_2)
 
@@ -22,7 +22,7 @@ class SyntaxCommand(commands.Cog, name="syntax"):
     )
     async def syntax(self, inter: disnake.ApplicationCommandInteraction, command: str):
         try:
-            opened_file = open("./command_syntax/" + str(command) + ".txt")
+            opened_file = open("./command_syntax/" + str(command) + ".md")
             file_content = opened_file.read()
             print("Command Syntax: " + file_content)
             opened_file.close()
