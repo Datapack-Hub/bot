@@ -14,6 +14,7 @@ resources = commands.option_enum(
     ]
 )
 
+
 class ResourceCommand(commands.Cog, name="resource"):
     def __init__(self, bot):
         self.bot = bot
@@ -36,38 +37,38 @@ class ResourceCommand(commands.Cog, name="resource"):
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 MCStacker**"),
-                    description="Allows you to generate lots of different types of commands! Especially useful for long `/give` commands for items with custom names and lore and other things of the like.\n\nLink: https://mcstacker.net/"
+                    description="Allows you to generate lots of different types of commands! Especially useful for long `/give` commands for items with custom names and lore and other things of the like.\n\nLink: https://mcstacker.net/",
                 )
             case "taglib":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Taglib**"),
-                    description="A libary of (entity, block, item, etc.) tags containing probably every tag you'll ever need!\n\nLink: https://github.com/HeDeAnTheonlyone/Taglib"
+                    description="A libary of (entity, block, item, etc.) tags containing probably every tag you'll ever need!\n\nLink: https://github.com/HeDeAnTheonlyone/Taglib",
                 )
             case "minecraft wiki":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Minecraft Wiki**"),
-                    description="Contains information about everything minecraft, including datapacking related features!\n\nLink: https://minecraft.wiki/"
+                    description="Contains information about everything minecraft, including datapacking related features!\n\nLink: https://minecraft.wiki/",
                 )
             case "cloudwolf":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Cloudwolf**"),
-                    description="Great Youtube channel with lots of tutorials and explanations on advanced datapacking!\n\nLink: https://www.youtube.com/@CloudWolfMinecraft"
-                )                
+                    description="Great Youtube channel with lots of tutorials and explanations on advanced datapacking!\n\nLink: https://www.youtube.com/@CloudWolfMinecraft",
+                )
             case "crafting (thedestruc7i0n)":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Crafting (thedestruc7i0n)**"),
-                    description="Great looking, self explanatory generator for crafting recipes\n\nLink: https://crafting.thedestruc7i0n.ca/"
-                )            
+                    description="Great looking, self explanatory generator for crafting recipes\n\nLink: https://crafting.thedestruc7i0n.ca/",
+                )
             case "smithed":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Smithed**"),
-                    description="Great libaries, also has datapacking conventions and allows you to upload your own packs!\n\nLink: https://smithed.dev/"
-                )     
+                    description="Great libaries, also has datapacking conventions and allows you to upload your own packs!\n\nLink: https://smithed.dev/",
+                )
 
         await inter.response.send_message(embed=embed)
         # Logging
@@ -75,7 +76,7 @@ class ResourceCommand(commands.Cog, name="resource"):
             color=disnake.Colour.orange(),
             title=("**`/invite` Command**"),
             description=(
-                str(inter.user.name).replace("_","\\_")
+                str(inter.user.name).replace("_", "\\_")
                 + " got themselves a link to `"
                 + str(resource)
                 + "`(Server: **"
