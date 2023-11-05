@@ -1,5 +1,4 @@
-
-#* IMPORTING
+# * IMPORTING
 
 # Local Files
 import bot_token
@@ -26,7 +25,7 @@ import cogs.listeners.on_guild_remove_event as on_guild_remove
 import cogs.listeners.on_message_event as on_message
 import cogs.listeners.on_ready_event as on_ready
 
-#* SETUP BOT
+# * SETUP BOT
 # Set Intents
 intents = disnake.Intents.all()
 
@@ -40,7 +39,7 @@ activity = disnake.Activity(
 bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
 
 
-#* ADD COGS
+# * ADD COGS
 # Message Commands
 
 # Slash Commands
@@ -66,5 +65,5 @@ bot.add_cog(on_guild_remove.OnGuildRemove(bot))
 bot.add_cog(on_ready.OnReady(bot))
 
 
-#* RUN BOT
+# * RUN BOT
 bot.run(bot_token.token)
