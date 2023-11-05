@@ -12,7 +12,7 @@ resources = commands.option_enum(
         "crafting (thedestruc7i0n)",
         "smithed",
         "minecraft tools",
-        "minecraftjson"
+        "minecraftjson",
     ]
 )
 
@@ -69,21 +69,20 @@ class ResourceCommand(commands.Cog, name="resource"):
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Smithed**"),
-                    description="Great libaries, also has datapacking conventions and allows you to upload your own packs!\n\nLink: https://smithed.dev/"
-                )    
+                    description="Great libaries, also has datapacking conventions and allows you to upload your own packs!\n\nLink: https://smithed.dev/",
+                )
             case "minecraft tools":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 Minecraft Tools**"),
-                    description="General minecraft tools, especially useful in datapacking because of it's tellraw generator!\n\nLink: https://minecraft.tools/"
-                )     
+                    description="General minecraft tools, especially useful in datapacking because of it's tellraw generator!\n\nLink: https://minecraft.tools/",
+                )
             case "minecraftjson":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
                     title=("**📖 minecraftjson**"),
-                    description="JSON generator for tellraws, titles and books!\n\nLink: https://www.minecraftjson.com/"
-                )     
-
+                    description="JSON generator for tellraws, titles and books!\n\nLink: https://www.minecraftjson.com/",
+                )
 
         await inter.response.send_message(embed=embed)
         # Logging

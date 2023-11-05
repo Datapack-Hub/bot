@@ -110,7 +110,8 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/resource`**"),
-                    description="Shows link and short explanation to a resource helpful on your datapacking journey\nSyntax: `/resource resource:<reource>`\nAviable resources: `misode`, `mcstacker`, `taglib`, `minecraft wiki`, `cloudwolf`, `crafting (thedestruc7i0n)`, `smithed`, `minecraft tools`, `minecraftjson`",)
+                    description="Shows link and short explanation to a resource helpful on your datapacking journey\nSyntax: `/resource resource:<reource>`\nAviable resources: `misode`, `mcstacker`, `taglib`, `minecraft wiki`, `cloudwolf`, `crafting (thedestruc7i0n)`, `smithed`, `minecraft tools`, `minecraftjson`",
+                )
 
         await inter.response.send_message(embed=embed)
         # Logging
