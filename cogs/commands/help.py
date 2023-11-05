@@ -14,6 +14,7 @@ commands_enum = commands.option_enum(
         "method",
         "folderstructure",
         "packformat",
+        "resource",
         "ping",
     ]
 )
@@ -37,7 +38,7 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 Help**"),
-                    description="Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!\n\n</template:1153330774825766951>: Sends a datapack/resourcepack template\n</invite:1153330774825766947>: Shows invites to datapacking-relevant discord servers\n</packformat:1153330774825766949>: Shows `packformat` history for datapacks/resourcepacks\n</folderstructure:1153330774825766946>: Shows folder structure for datapacks/resourcepacks\n</syntax:1153330774825766943>: Shows the syntax of any minecraft command\n</info:1153330774825766950>: Shows information about stuff outside of minecraft, which might improve your datapacking experience\n</method:1153330774825766944>: Shows how to do certain stuff using datapacks/commands\n</ping:1155920839905128478> Returns current bot latency",
+                    description="Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!\n\n**/template**: Sends a datapack/resourcepack template\n**/invite**: Shows invites to datapacking-relevant discord servers\n**/packformat**: Shows `packformat` history for datapacks/resourcepacks\n**/folderstructure**: Shows folder structure for datapacks/resourcepacks\n**/syntax**: Shows the syntax of any minecraft command\n**/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience\n**/method**: Shows how to do certain stuff using datapacks/commands\n**/resource**: Gives you the link to any resource useful for datapacking\n**/ping**: Returns current bot latency",
                 )
             case "ping":
                 embed = disnake.Embed(
@@ -91,7 +92,7 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/method`**"),
-                    description="Shows how to do certain stuff using datapacks/commands\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction` **MORE COMING SOON**",
+                    description="Shows how to do certain stuff using datapacks/commands\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction,`array iteration`` **MORE COMING SOON**",
                 )
             case "packformat":
                 embed = disnake.Embed(
@@ -105,6 +106,11 @@ class HelpCommand(commands.Cog, name="help"):
                     title=("**🚑 `/folderstructure`**"),
                     description="Shows the folderstructure of datapacks/resourcepacks\nSyntax: `/folderstructure type:[datapack|resourcepack]` (defaults to datapack)",
                 )
+            case "resource":
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**🚑 `/resource`**"),
+                    description="Shows link and short explanation to a resource helpful on your datapacking journey\nSyntax: `/resource resource:<reource>`\nAviable resources: `misode`, `mcstacker`, `taglib`, `minecraft wiki`, `cloudwolf`, `crafting (thedestruc7i0n)`, `smithed`, `minecraft tools`, `minecraftjson`",)
 
         await inter.response.send_message(embed=embed)
         # Logging

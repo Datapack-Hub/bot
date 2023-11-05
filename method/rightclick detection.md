@@ -33,7 +33,7 @@ Depends:
 - bound to the player, not a specific location
 
 ## Interaction Entities
-This method works by using an advancement to check wether a player interacted with an interaction entity and then executing code
+This method works by using an advancement to check whether a player interacted with an interaction entity and then executing code
 
 Pros:
 - see "depends"
