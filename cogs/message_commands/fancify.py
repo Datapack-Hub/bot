@@ -16,7 +16,6 @@ class FancifyCommand(commands.Cog):
                     description="```hs\n" + match.group(0).strip().replace("`","") + "\n```",
                     color=disnake.Colour.purple()
                 )
-
                 
             else:
                 embed = disnake.Embed(
@@ -24,7 +23,7 @@ class FancifyCommand(commands.Cog):
                     color=disnake.Colour.purple()
                 )  
                 
-            await inter.target.reply(embed=embed)
+            await inter.target.reply(embed=embed,allowed_mentions=None)
             await inter.response.send_message("Fancification successful :sparkles:", ephemeral=True)
 
         else:
