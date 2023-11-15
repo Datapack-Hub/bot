@@ -6,6 +6,8 @@ import disnake
 from disnake.ext import commands
 
 # Cogs
+import cogs.message_commands.fancify as fancify
+
 import cogs.commands.eliminate as eliminate
 import cogs.commands.folderstructure as folderstructure
 import cogs.commands.help as help
@@ -16,9 +18,9 @@ import cogs.commands.newsletter as newsletter
 import cogs.commands.packformat as packformat
 import cogs.commands.ping as ping
 import cogs.commands.resource as resource
-
 import cogs.commands.syntax as syntax
 import cogs.commands.template as template
+
 import cogs.listeners.on_button_click_event as on_button_click
 import cogs.listeners.on_guild_join_event as on_guild_join
 import cogs.listeners.on_guild_remove_event as on_guild_remove
@@ -41,6 +43,7 @@ bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
 
 # * ADD COGS
 # Message Commands
+bot.add_cog(fancify.FancifyCommand(bot))
 
 # Slash Commands
 bot.add_cog(syntax.SyntaxCommand(bot))
