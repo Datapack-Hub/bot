@@ -23,10 +23,14 @@ def fancify(command):
                 "type": "comment",
             })
         elif line.startswith('$'):
-            cmds.append({
-                "text": line,
-                "type": "macro"
-            })
+            word = re.match(r'^$\w* ?', line)
+            cmds.extend([{
+                "text": word[0],
+                "type": "macro",
+            }, {
+                "text": line.removeprefix(word[0]),
+                "type": "",
+            }])
         elif line:
             word = re.match(r'^\w* ?', line)
             cmds.extend([{
@@ -78,33 +82,25 @@ def fancify(command):
                 out.append(cmd)
         return out
     
+    def replace_all(arr:list[dict[str,str]], *args) -> list[dict[str,str]]:
+        out: list[dict[str,str]] = arr
+        for arg in args:
+            pattern: str = arg[0]
+            kind: str = arg[1]
+            replace: list[str] = arg[2] if len(arg) > 2 else [""]
+            
+            out = replace(pattern, kind, out)
+    
     # ignore namespace in json {}
     #
     
-    final = replace(
-        r'\\',
-        "comment",
-        replace(
-            r'\d*\.?\d+',
-            "number",
-            replace(
-                r'@[aeprs]',
-                "selector",
-                replace(
-                    r'(?<=run) \w+|(?<=run \\\n)\n\s+\w+',
-                    "command",
-                    replace(
-                        r'([\w\d_\-]*:[\w\d_\-/]+)|([\w\d_\-]+:[\w\d_\-/]*)',
-                        "resource",
-                        replace(
-                            r'(?<!\\)(\\{2})*".*?(?<!\\)(\\{2})*"',
-                            "string",
-                            cmds,
-                        )
-                    )
-                )
-            )
-    )
+    final = replace_all(cmds,
+        (r'(?<!\\)(\\{2})*".*?(?<!\\)(\\{2})*"',               "string"  ),
+        (r'([\w\d_\-]*:[\w\d_\-/]+)|([\w\d_\-]+:[\w\d_\-/]*)', "resource"),
+        (r'(?<=run) \w+|(?<=run \\\n)\n\s+\w+',                "command" ),
+        (r'@[aeprs]\[\]',                                      "selector"),
+        (r'\d*\.?\d+',                                         "number"  ),
+        (r'\\\n',                                              "comment" ),
     )
     
     output_value = ""
