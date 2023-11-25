@@ -2,7 +2,7 @@ If you look this up, I assume you already know what a normal Raycast does.
 A Slowcast is similar, but unlike a standard Raycast, it is not instant.
 You might think now: "Why do we need a Slowcast for that, you can just teleport a marker slowly forward to do the same?".
 You'd be right normally, but now think about having a really fast projectile.
-To make it faster you would need to increase the distance the marker tp's ever tick.
+To make it faster you would need to increase the distance the marker TPs ever tick.
 This is bad when the gap between the two points becomes too big and doesn't correctly recognize when hitting something.
 A Slowcast solves this problem by checking the gap between the two points in 0.2 block steps if it hits something on the way.
 

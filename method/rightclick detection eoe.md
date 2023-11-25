@@ -29,4 +29,4 @@ say Used eoe
 advancement revoke @s only namespace:used_eye_of_ender
 ```
 
-If you want this method to work in worlds with strongholds, you can either block the target of ender eyes in the pack.mcmeta or killing the eye and giving it back after it being used
+If you want this method to work in worlds with strongholds, you can either block the target of ender eyes in the pack.mcmeta or killing the eye and giving it back after it being used.

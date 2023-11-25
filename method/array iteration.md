@@ -1,11 +1,14 @@
 In Minecraft, you can create arrays within data storages like this:
+
 ```hs
 data merge storage namespace:main {array:[9, "string", 3.14f, true, {"foo":"bar"}]}
 ```
+
 Array iteration allows you to **check each array element individually** and perform actions on them.
 
 For this example, let's use the previously created array and print out each element individually. Our first step is to create an initializing function that will call our main function at the end:
 `namespace:array_iteration/init`
+
 ```hs
 # Get amount of all the elements in the array to avoid looping twice.
 execute store result score $len OBJECTIVE run data get storage namespace:main array[]
@@ -18,6 +21,7 @@ function namespace:array_iteration/main
 
 Next, we create our main function:
 `namespace:array_iteration/main`
+
 ```hs
 # Print out current element
 tellraw @a {"storage":"namespace:main","nbt":"array[0]"}

@@ -19,6 +19,7 @@
 ```
 
 `rightclick_run.mcfunction` (located in the packs `functions` folder)
+
 ```hs
 # announces the use of the item in chat, feel free to replace this with whatever
 say Used interaction 
