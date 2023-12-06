@@ -114,7 +114,7 @@ class OnMessage(commands.Cog):
         elif message.channel == newsletter_channel:
             if (message.author.id == 880000911848636468) or (
                 message.author.id == 543741360478355456
-            ):
+            ) or (message.author.id == 611968735099617291):
                 hide_unsub_button = False
                 edit_last = False
                 no_title = False

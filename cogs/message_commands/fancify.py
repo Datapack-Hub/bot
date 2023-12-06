@@ -99,7 +99,7 @@ def fancify(command):
         (r'([\w\d_\-]*:[\w\d_\-/]+)|([\w\d_\-]+:[\w\d_\-/]*)', "resource"),
         (r'(?<=run) \w+|(?<=run \\\n)\n\s+\w+',                "command" ),
         (r'@[aeprs]\[\]',                                      "selector"),
-        (r'\d*\.?\d+',                                         "number"  ),
+        (r'^-?\d+(\.\d+)?$',                                    "number"  ),
         (r'\\\n',                                              "comment" ),
     )
     
