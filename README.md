@@ -15,18 +15,17 @@ Contributions to this project are welcome! If you have ideas for new features, i
 ### Develop Locally
 
 1. Clone the repo and navigate to it using a terminal
-2. Install python
-3. Install the dependencies using:
+2. Install the dependencies using:
    ```bash
    pip install -r requirements.txt
    ```
    > You may need to use `pip3` instead of `pip`
-4. Go to https://discord.com/developers/applications, create and set up a bot and invite it to a server
-5. Create a file in the root directory called `bot_token.py` and fill in your token:
+3. Go to https://discord.com/developers/applications, create and set up a bot and invite it to a server
+4. Create a file in the root directory called `bot_token.py` and fill in your token:
    ```py
    token = "<DISCORD_BOT_TOKEN>"
    ```
-6. Create a file in the root directory called `variables.py` and fill it with ids of your bot and channels:
+5. Create a file in the root directory called `variables.py` and fill it with ids of your bot and channels:
    ```py
    logs = <BOT_LOG_CHANNEL_ID>
    intro_channel = <INTRO_CHANNEL_ID>
@@ -34,7 +33,7 @@ Contributions to this project are welcome! If you have ideas for new features, i
    bot_id = <BOT_USER_ID>
    ```
    > These values are given as integers and must therefore not be quoted
-7. Start the bot using:
+6. Start the bot using:
    ```bash
    python main.py
    ```
