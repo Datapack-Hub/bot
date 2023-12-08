@@ -171,9 +171,26 @@ class FancifyCommand(commands.Cog):
                     color=disnake.Colour.purple()
                 )  
                 
+            embed.set_footer(text=f"Requested by {inter.user.name} ✨", icon_url=inter.user.avatar)
             await inter.target.reply(embed=embed,allowed_mentions=None)
             await inter.response.send_message("Fancification successful :sparkles:", ephemeral=True)
 
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(),
+                title=("**`Fancify` Message Command**"),
+                description=(
+                    str(inter.user.name)
+                    + "Fancified a message! "
+                    + str(message.jump_url)
+                    + " (Server: **"
+                    + inter.guild.name
+                    + "**)"
+                )
+            )
+            channel = self.bot.get_channel(variables.logs)
+            await channel.send(embed=embed)
+        
         else:
             await inter.response.send_message("You can't fancify this message!", ephemeral=True)
                 
