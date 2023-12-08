@@ -23,13 +23,24 @@ def fancify(command):
                 "type": "comment",
             })
         elif line.startswith('$'):
-            word = re.match(r'^$\w* ?', line)
+            word = re.match(r'^\$\w* ?', line)
+            is_say = re.match(r'^\$say ?', line) or re.match(r'^\$me ?', line)
             cmds.extend([{
                 "text": word[0],
                 "type": "macro",
             }, {
                 "text": line.removeprefix(word[0]),
-                "type": "",
+                "type": "message" if is_say else "",
+            }])
+        elif line.startswith('say') or line.startswith('$say') or line.startswith('me') or line.startswith('$me'):
+            word = re.match(r'^\$?\w* ?', line)
+            is_say = re.match(r'^say ?', line) or re.match(r'^me ?', line)
+            cmds.extend([{
+                "text": word[0],
+                "type": "command",
+            }, {
+                "text": line.removeprefix(word[0]),
+                "type": "message" if is_say else "",
             }])
         elif line:
             word = re.match(r'^\w* ?', line)
@@ -48,13 +59,13 @@ def fancify(command):
     
     
     
-    def match(pattern: str, kind: str, line: str):
+    def match(pattern: str, kind: str, prev_kind: str, line: str):
         out = []
         last = 0
         for m in re.finditer(pattern, line):
             out.extend([{
                 "text": line[last:m.span()[0]],
-                "type": "",
+                "type": prev_kind,
             }, {
                 "text": m[0],
                 "type": kind,
@@ -62,19 +73,20 @@ def fancify(command):
             last = m.span()[1]
         out.append({
             "text": line[last:],
-            "type": "",
+            "type": prev_kind,
         })
         return out
     
     
-    def replace(pattern: str, kind: str, array: list[dict[str,str]]) -> list[dict[str,str]]:
+    def replace(pattern: str, kind: str, array: list[dict[str,str]], repl: list[str]) -> list[dict[str,str]]:
         out = []
         for cmd in array:
-            if cmd['type'] == "":
+            if cmd['type'] in repl:
                 out.extend(
                     match(
                         pattern,
                         kind,
+                        cmd['type'],
                         cmd['text'],
                     )
                 )
@@ -83,45 +95,52 @@ def fancify(command):
         return out
     
     def replace_all(arr:list[dict[str,str]], *args) -> list[dict[str,str]]:
-        out: list[dict[str,str]] = arr
         for arg in args:
             pattern: str = arg[0]
             kind: str = arg[1]
-            replace: list[str] = arg[2] if len(arg) > 2 else [""]
+            repl: list[str] = arg[2] if len(arg) > 2 else [""]
             
-            out = replace(pattern, kind, out)
-    
-    # ignore namespace in json {}
-    #
+            arr = replace(pattern, kind, arr, repl)
+        return arr
     
     final = replace_all(cmds,
-        (r'(?<!\\)(\\{2})*".*?(?<!\\)(\\{2})*"',               "string"  ),
-        (r'([\w\d_\-]*:[\w\d_\-/]+)|([\w\d_\-]+:[\w\d_\-/]*)', "resource"),
-        (r'(?<=run) \w+|(?<=run \\\n)\n\s+\w+',                "command" ),
-        (r'@[aeprs]\[\]',                                      "selector"),
-        (r'^-?\d+(\.\d+)?$',                                    "number"  ),
-        (r'\\\n',                                              "comment" ),
+        (r'(?<=run say )(.*?\\\n|.*)+',                        "message",   [""]),
+        (r'(?<=run me )(.*?\\\n|.*)+',                         "message",   [""]),
+        (r'(?<=run \\\n)\s*(say|me) (.*?\\\n|.*)+',            "say",       [""]),
+        (r'^\s*say |^\s*me ',                                  "command",   ["say"]),
+        (r'(.*\n?)+',                                          "message",   ["say"]),
+        (r'(^| )@[aeprs](\[(.*?(\\\n)?)+(?<!\\)(\\{2})*\])?',  "selector",  ["","message"]),
+        (r'(?<!\\)(\\{2})*\{(.*?(\\\n)?)+(?<!\\)(\\{2})*\}',   "snbt",      ["","selector"]),
+        (r'(?<!\\)(\\{2})*"(.*?(\\\n)?)+(?<!\\)(\\{2})*"',     "string",    ["","snbt","selector"]),
+        (r'([\w\d_\-]*:[\w\d_\-/]+)|([\w\d_\-]+:[\w\d_\-/]*)', "resource",  ["","selector"]),
+        (r'(?<=run )\w+|(?<=run \\\n)\s*\w+',                  "command",   [""]),
+        (r'\b-?\d+(\.\d+)?\b',                                 "number",    ["","snbt","selector"]),
+        (r'\\\n',                                              "\\",        ["","snbt","string","selector","message"]),
+        (r'\$\([a-z_\-0-9]+\)',                                "var",       ["","string","number","selector","message"]),
+        (r'[\[\]\{\}]',                                        "bracket",   ["","snbt","selector"]),
+        (r'<[a-zA-Z_0-9\-\. ]*>',                              "highlight", ["","snbt","selector","string","var","message"]),
     )
     
     output_value = ""
     for d in final:
-        match d['type']:
-            case "comment":
-                output_value += '\033[30m' + d['text']
-            case "command":
-                output_value += '\033[35m' + d['text']
-            case "macro":
-                output_value += '\033[31m' + d['text']
-            case "string":
-                output_value += '\033[34m' + d['text']
-            case "resource":
-                output_value += '\033[33m' + d['text']
-            case "number":
-                output_value += '\033[36m' + d['text']
-            case "selector":
-                output_value += '\033[36m' + d['text']
-            case _:
-                output_value += '\033[34m' + d['text']
+        if d['type'] in ["comment", "\\"]:
+            output_value += '\033[0;30m' + d['text'] # black
+        elif d['type'] in ["macro", "var"]:
+            output_value += '\033[0;31m' + d['text'] # red
+        elif d['type'] in ["string", "message"]:
+            output_value += '\033[0;33m' + d['text'] # yellow
+        elif d['type'] in ["resource", "bracket"]:
+            output_value += '\033[0;34m' + d['text'] # blue
+        elif d['type'] in ["command"]:
+            output_value += '\033[0;35m' + d['text'] # magenta
+        elif d['type'] in ["number", "selector"]:
+            output_value += '\033[0;36m' + d['text'] # cyan
+        elif d['type'] in ["highlight"]:
+            output_value += '\033[0;31;47m' + d['text'] # red with white bg
+        else:
+            output_value += '\033[0;39m' + d['text'] # reset
+
+    output_value = re.sub(r'(\n\033\[0;31m\$.*)(\033\[0;[0-9][0-9]m)(.*?)(\$\([a-z]+\))', r'\1\2\3\033[0;31m\4\2', output_value)
     return output_value
          
 class FancifyCommand(commands.Cog):
@@ -130,14 +149,18 @@ class FancifyCommand(commands.Cog):
 
     @commands.message_command(name="Fancify ✨")
     async def fancify(self, inter: disnake.MessageCommandInteraction,message):
-        description_real = ""
-        matches = re.findall(r'\`\`\`([\s\S]*?)\`\`\`|\`([\s\S]*?)\`',message.content)
+        p = re.compile(r"(?<!\\)(\\{2})*```(.*?(?<!\\))(\\{2})*```", flags=re.DOTALL)
+        matches = re.findall(p,message.content)
         for match in matches:
-            output = fancify(match.split('\n'))
+            lines = match[1].split('\n')
+            if re.match(r"^[a-z]+$", lines[0]): lines = lines[1:]
+            while lines and lines[0] == '': lines.pop(0)
+            while lines and lines[-1] == '': lines.pop()
+            output = fancify(lines)
         if (not message.embeds) and (not message.stickers) and (not message.attachments):
             if matches:
                 embed = disnake.Embed(
-                    description="```hs\n" + output + "\n```",
+                    description="```ansi\n" + output + "\n```",
                     color=disnake.Colour.purple()
                 )
                 
