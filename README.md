@@ -24,9 +24,16 @@ Contributions to this project are welcome! If you have ideas for new features, i
 4. Go to https://discord.com/developers/applications, create and set up a bot and invite it to a server
 5. Create a file in the root directory called `bot_token.py` and fill in your token:
    ```py
-   token = "<YOUR_DISCORD_BOT_TOKEN>"
+   token = "<DISCORD_BOT_TOKEN>"
    ```
-6. Create a file in the root directory called `variables.py`
+6. Create a file in the root directory called `variables.py` and fill it with ids of your bot and channels:
+   ```py
+   logs = <BOT_LOG_CHANNEL_ID>
+   intro_channel = <INTRO_CHANNEL_ID>
+   newsletter_broadcast_channel = <NEWSLETTER_CHANNEL_ID>
+   bot_id = <BOT_USER_ID>
+   ```
+   > These values are given as integers and must therefore not be quoted
 7. Start the bot using:
    ```bash
    python main.py
