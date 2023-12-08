@@ -43,7 +43,7 @@ bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
 
 # * ADD COGS
 # Message Commands
-#bot.add_cog(fancify.FancifyCommand(bot))
+bot.add_cog(fancify.FancifyCommand(bot))
 
 # Slash Commands
 bot.add_cog(syntax.SyntaxCommand(bot))
