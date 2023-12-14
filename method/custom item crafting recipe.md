@@ -1,4 +1,4 @@
-# Custom items crafting recipes (1.20+)
+### For 1.20+
 
 **This guide assumes that you already have the knowlege of some basic commands as well as on how crafting recipes and advancements work.**
 
