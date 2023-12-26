@@ -8,7 +8,8 @@ To create a raycast, we can use a **recursive function**. A recursive function i
 scoreboard players set .limit <any objective> 1000
 
 # Start the raycast
-execute at @s anchored eyes positioned ^ ^ ^.1 run function <namespace>:raycast```
+execute at @s anchored eyes positioned ^ ^ ^.1 run function <namespace>:raycast
+```
 
 **raycast** function:
 ```elixir
