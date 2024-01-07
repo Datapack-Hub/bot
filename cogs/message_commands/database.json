@@ -1,0 +1,275 @@
+{
+	"color_codes": {
+		"comment": "\u001b[30m",
+		"link-comment": "\u001b[34m",
+		"backslash": "\u001b[30m",
+
+		"macro": "\u001b[34m",
+
+		"command": "\u001b[35m",
+		"subcommand": "\u001b[34m",
+		
+		"selector": "\u001b[36m",
+		"delimiter": "\u001b[34m",
+		
+		"text": "\u001b[0m",
+		"path": "\u001b[33m",
+		"number": "\u001b[32m",
+		
+		"bracket0": "\u001b[33m",
+		"bracket1": "\u001b[35m",
+		"bracket2": "\u001b[34m",
+		
+		"key": "\u001b[0m",
+		"value": "\u001b[32m",
+		"string": "\u001b[33m"
+	},
+	"commands": {
+		"advancement": {
+			"subcommands": ["grant", "revoke", "everything", "only", "from", "through"]
+		},
+		"attribute": {
+			"subcommands": ["get", "base", "modifier", "add", "multiply", "multiply_base"]
+		},
+		"ban": {
+			"subcommands": []
+		},
+		"ban-ip": {
+			"subcommands": []
+		},
+		"ban-list": {
+			"subcommands": []
+		},
+		"bossbar": {
+			"subcommands": ["add", "get", "max", "players", "value", "visible", "list", "set", "color", "max", "name", "players", "style", "blue", "green", "pink", "purple", "red", "white", "yellow", "notched_6", "notched_10", "notched_12", "notched_20", "progress"]
+		},
+		"clear": {
+			"subcommands": []
+		},
+		"clone": {
+			"subcommands": ["from", "to", "replace", "masked", "force", "move", "normal", "filtered"]
+		},
+		"damage": {
+			"subcommands": ["at", "by", "from"]
+		},
+		"data": {
+			"subcommands": ["get", "merge", "modify", "remove", "block", "entity", "storage", "append", "insert", "prepend", "from", "string", "value"]
+		},
+		"datapack": {
+			"subcommands": ["disable", "enable", "list", "first", "last", "before", "after", "avaliable", "enabled"]
+		},
+		"debug": {
+			"subcommands": ["start", "stop", "function"]
+		},
+		"defaultgamemode": {
+			"subcommands": []
+		},
+		"deop": {
+			"subcommands": []
+		},
+		"difficulty": {
+			"subcommands": ["peaceful", "easy", "normal", "hard"]
+		},
+		"effect": {
+			"subcommands": ["clear", "give", "infinite"]
+		},
+		"enchant": {
+			"subcommands": []
+		},
+		"execute": {
+			"subcommands": ["align", "anchored", "as", "at", "facing", "in", "on", "positioned", "rotated", "store", "summon", "if", "unless", "run", "x", "y", "z", "xy", "xz", "xyz", "xzy", "yx", "yz", "yxz", "yzx", "zx", "zy", "zxy", "zyx", "eyes", "feet", "entity", "attacker", "controller", "leasher", "origin", "owner", "passengers", "target", "vehicle", "over", "result", "succes", "biome", "block", "data", "storage", "dimension", "loaded", "predicate", "score", "matches", "<", "<=", "=", ">=", ">"]
+		},
+		"experience": {
+			"subcommands": ["add", "set", "query", "levels", "points"]
+		},
+		"fill": {
+			"subcommands": ["destroy", "hollow", "kepp", "outline", "replace"]
+		},
+		"fillbiome": {
+			"subcommands": ["replace"]
+		},
+		"forceload": {
+			"subcommands": ["add", "remove", "query", "all"]
+		},
+		"function": {
+			"subcommands": ["with", "storage", "block", "entity"]
+		},
+		"gamemode": {
+			"subcommands": []
+		},
+		"gamerule": {
+			"subcommands": []
+		},
+		"give": {
+			"subcommands": []
+		},
+		"help": {
+			"subcommands": []
+		},
+		"item": {
+			"subcommands": ["modify", "replace", "block", "entity", "with", "from"]
+		},
+		"jfr": {
+			"subcommands": ["start", "stop"]
+		},
+		"kick": {
+			"subcommands": []
+		},
+		"kill": {
+			"subcommands": []
+		},
+		"list": {
+			"subcommands": ["uuids"]
+		},
+		"loacte": {
+			"subcommands": ["structure", "biome", "poi"]
+		},
+		"loot": {
+			"subcommands": ["give", "insert", "spawn", "replace", "block", "entity", "fish", "loot", "kill", "mine"]
+		},
+		"me": {
+			"subcommands": []
+		},
+		"motion": {
+			"subcommands": ["add", "set"]
+		},
+		"msg": {
+			"subcommands": []
+		},
+		"op": {
+			"subcommands": []
+		},
+		"pardon": {
+			"subcommands": []
+		},
+		"pardon-ip": {
+			"subcommands": []
+		},
+		"particle": {
+			"subcommands": ["force", "normal"]
+		},
+		"perf": {
+			"subcommands": ["start", "stop"]
+		},
+		"place": {
+			"subcommands": ["feature", "jigsaw", "structure", "template"]
+		},
+		"playsound": {
+			"subcommands": []
+		},
+		"publish": {
+			"subcommands": []
+		},
+		"recipe": {
+			"subcommands": ["give", "take"]
+		},
+		"reload": {
+			"subcommands": []
+		},
+		"return": {
+			"subcommands": []
+		},
+		"ride": {
+			"subcommands": ["mount", "dismount"]
+		},
+		"save-all": {
+			"subcommands": []
+		},
+		"save-off": {
+			"subcommands": []
+		},
+		"save-on": {
+			"subcommands": []
+		},
+		"say": {
+			"subcommands": []
+		},
+		"schedule": {
+			"subcommands": ["function", "clear", "append", "replace"]
+		},
+		"scoreboard": {
+			"subcommands": ["objectives", "players", "add", "remove", "setdisplay", "modify", "list", "get", "set", "add", "reset", "enable", "operation", "displayname", "rendertype", "hearts", "integer", "=", "+=", "-=", "*=", "/=", "%=", "><", "<", ">"]
+		},
+		"seed": {
+			"subcommands": []
+		},
+		"setblock": {
+			"subcommands": []
+		},
+		"setidletimeout": {
+			"subcommands": []
+		},
+		"setworldspawn": {
+			"subcommands": []
+		},
+		"spawnpoint": {
+			"subcommands": []
+		},
+		"spectate": {
+			"subcommands": []
+		},
+		"spreadplayers": {
+			"subcommands": ["under"]
+		},
+		"stop": {
+			"subcommands": []
+		},
+		"stopsound": {
+			"subcommands": []
+		},
+		"summon": {
+			"subcommands": []
+		},
+		"tag": {
+			"subcommands": ["add", "list", "remove", "list"]
+		},
+		"team": {
+			"subcommands": ["list", "add", "remove", "empty", "join", "leave", "modify"]
+		},
+		"teammsg": {
+			"subcommands": []
+		},
+		"teleport": {
+			"subcommands": []
+		},
+		"tell": {
+			"subcommands": []
+		},
+		"tellraw": {
+			"subcommands": []
+		},
+		"tick": {
+			"subcommands": ["query", "rate", "freeze", "step", "stop", "unfreeze", "sprint"]
+		},
+		"time": {
+			"subcommands": ["add", "query", "set", "daytime", "gametime", "day", "night", "noon", "midnight"]
+		},
+		"title": {
+			"subcommands": ["clear", "reset", "title", "subtitle", "actionbar", "times"]
+		},
+		"titleraw": {
+			"subcommands": []
+		},
+		"tp": {
+			"subcommands": []
+		},
+		"trigger": {
+			"subcommands": ["add", "set"]
+		},
+		"w": {
+			"subcommands": []
+		},
+		"weather": {
+			"subcommands": ["clear", "rain", "thunder"]
+		},
+		"whitelist": {
+			"subcommands": ["add", "list", "off", "on", "reload", "remove"]
+		},
+		"worldborder": {
+			"subcommands": ["add", "center", "damage", "get", "set", "warining", "amount", "buffer", "distance", "time"]
+		},
+		"xp": {
+			"subcommands": ["add", "set", "query", "levels", "points"]
+		}
+	}
+}
