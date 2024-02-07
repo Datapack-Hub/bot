@@ -1,6 +1,8 @@
-If you've not made many datapacks, you might not be familiar with raycasting. It's a really useful tool which we can use to essentially find where the player is looking and then do stuff (such as spawn explosions 😎).
+# Raycasting Guide
 
-To create a raycast, we can use a **recursive function**. A recursive function is a function which will run itself over and over again. In our case, the function will run itself 0.1 blocks forward (`^ ^ ^0.1`) each time, and repeat until it hits something. It will do this all within the same tick - but bear in mind that the bigger the distance, the more laggy it will be. We can stop this unwanted behaviour by putting a distance limit on the raycast - each time it runs itself, it will count down on a scoreboard, and only repeat if it hasn't hit the limit.
+**Raycasting** is when we shoot a line from the player's eyes in the direction they are looking. We use this to get what the player is looking at, and do something to it, such as spawning an explosion.
+
+Raycasting is very simple. All we need do is run a **recursive function**. This function will run at the player's eyes, check if there is a block at `~ ~ ~`, and if there is not, then move 0.1 blocks forward and run itself again. This creates a loop, which will eventually hit a block.
 
 **start_raycast** function:
 ```elixir
@@ -10,7 +12,6 @@ scoreboard players set .limit <any objective> 1000
 # Start the raycast
 execute at @s anchored eyes positioned ^ ^ ^.1 run function <namespace>:raycast
 ```
-
 **raycast** function:
 ```elixir
 # Remove one from the limit
@@ -24,7 +25,6 @@ execute unless block ~ ~ ~ <namespace>:pass_through run setblock ~ ~ ~ diamond_b
 
 # If the raycast hasn't hit a block, continue, but only if the limit is 1 or more (1..)
 execute if block ~ ~ ~ <namespace>:pass_through positioned ^ ^ ^0.1 if score .limit <objective> matches 1.. run function <namespace>:raycast```
-
 namespace/tags/blocks/**pass_through**.json:```
 {
     "replace": false,

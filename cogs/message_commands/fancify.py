@@ -43,15 +43,9 @@ class FancifyCommand(commands.Cog):
                 # Fancify the entire message content
                 output = Highlighter.highlight((message.content).split('\n'))
                 # Create embed with the fancified message
-                embed = disnake.Embed(
-                    description="```ansi\n" + output + "\n```",
-                    color=disnake.Colour.purple()
-                )
-
-            # Set footer with the requester's info
-            embed.set_footer(text=f"Requested by {inter.user.name} ✨", icon_url=inter.user.avatar)
+                
             # Reply to the original message with the embed
-            await inter.target.reply(embed=embed,allowed_mentions=None)
+            await inter.target.reply("```ansi\n" + output + "\n```")
             # Send a success message to the user who invoked the command
             await inter.response.send_message("Fancification successful :sparkles:", ephemeral=True)
 
