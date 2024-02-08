@@ -25,16 +25,12 @@ class MethodCommand(commands.Cog, name="method"):
     ):
         opened_file = open("./method/" + str(method) + ".md")
         file_content = opened_file.read()
-        print("Method Description: " + file_content)
         opened_file.close()
 
-        embed = disnake.Embed(
-            title=("⚙️" + method.title()),
-            description=file_content,
-            color=disnake.Colour.orange(),
-        )
+        text = f"""# {method.title()}
+        >>> {file_content}"""
 
-        await inter.response.send_message(embed=embed)
+        await inter.response.send_message(text)
 
         embed = disnake.Embed(
             color=disnake.Colour.orange(),
