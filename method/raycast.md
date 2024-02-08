@@ -21,10 +21,11 @@ scoreboard players remove .limit <objective> 1
 particle minecraft:dust 1 0 0 1 ~ ~ ~
 
 # If the raycast has hit a block, do something
-execute unless block ~ ~ ~ <namespace>:pass_through run setblock ~ ~ ~ diamond_block
+execute unless block ~ ~ ~ #<namespace>:pass_through run setblock ~ ~ ~ diamond_block
 
 # If the raycast hasn't hit a block, continue, but only if the limit is 1 or more (1..)
-execute if block ~ ~ ~ <namespace>:pass_through positioned ^ ^ ^0.1 if score .limit <objective> matches 1.. run function <namespace>:raycast```
+execute if block ~ ~ ~ #<namespace>:pass_through positioned ^ ^ ^0.1 if score .limit <objective> matches 1.. run function <namespace>:raycast```
+
 namespace/tags/blocks/**pass_through**.json:```
 {
     "replace": false,
