@@ -32,24 +32,6 @@ class OnMessage(commands.Cog):
                 ),
             )
             await message.reply(embed=embed)
-
-        elif message.channel == intro_channel:
-            await message.add_reaction("👋")
-
-            # Logging
-            embed = disnake.Embed(
-                color=disnake.Colour.orange(),
-                title=("**Intro Channel Reaction**"),
-                description=(
-                    "Reacted with :wave: to "
-                    + message.author.name
-                    + "'s message in <#"
-                    + intro_channel
-                    + ">"
-                ),
-            )
-            channel = self.bot.get_channel(variables.logs)
-            await channel.send(embed=embed)
         elif (message.author.name == "flyrr_") and (">.< shutdown" in message.content):
             methods = os.listdir(".\\method")
             commands.option_enum(methods)
