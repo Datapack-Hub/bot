@@ -41,6 +41,12 @@ class ResourceCommand(commands.Cog, name="resource"):
                     title=("**📖 MCStacker**"),
                     description="Allows you to generate lots of different types of commands! Especially useful for long `/give` commands for items with custom names and lore and other things of the like.\n\nLink: https://mcstacker.net/",
                 )
+            case "mcassets":
+                embed = disnake.Embed(
+                    color=disnake.Color.orange(),
+                    title=("**📖 MC Assets**"),
+                    description="A cloud storage for all default files in Minecraft's assets and data folders, plus some additional tags and lists with helpful information.\n\nLink: https://mcasset.cloud/",
+                )
             case "taglib":
                 embed = disnake.Embed(
                     color=disnake.Color.orange(),
