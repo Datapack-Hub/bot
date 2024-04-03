@@ -33,23 +33,43 @@ class OnMessage(commands.Cog):
             )
             await message.reply(embed=embed)
         elif (message.author.name == "flyrr_") and (">.< shutdown" in message.content):
-            methods = os.listdir(".\\method")
-            commands.option_enum(methods)
-
             # Logging
             embed = disnake.Embed(
                 color=disnake.Colour.purple(),
                 title=("**Magic** :sparkles:"),
                 description=(
-                    "The bot was forced to shutdown by some strange magical power...\nNew Contents: `"
-                    + str(methods)
-                    + "`"
+                    "The bot was forced to shutdown by some strange magical power..."
                 ),
             )
             channel = self.bot.get_channel(variables.logs)
             await channel.send(embed=embed)
             await self.bot.close()
 
+
+        elif (message.author.name == "flyrr_") and (">.< memberlist" in message.content):
+            guild = self.bot.get_guild(1126869253589577770)
+            channel = message.channel
+            with open("members.txt", "w") as members_file:
+                members_file.write("MEMBERS: ")
+            for member in guild.members:
+                with open("members.txt", "a") as members_file:
+                    members_file.write(f"\n{member.name}")
+                    print(member.name)
+                    
+            await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
+
+                    
+            # Logging
+            embed = disnake.Embed(
+                color=disnake.Colour.purple(),
+                title=("**Magic** :sparkles:"),
+                description=(
+                    "Lol seems like another x member event/announcement is approaching"
+                ),
+            )
+            channel = self.bot.get_channel(variables.logs)
+            await channel.send(embed=embed)
+            
         # BROADCAST NEWSLETTER
         elif (message.author.name == "flyrr_") and (
             ">.< give me the names ahh" in message.content
