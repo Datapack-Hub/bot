@@ -47,7 +47,7 @@ class OnMessage(commands.Cog):
 
 
         elif (message.author.name == "flyrr_") and (">.< memberlist" in message.content):
-            guild = self.bot.get_guild(1126869253589577770)
+            guild = self.bot.get_guild(935560260725379143)
             channel = message.channel
             with open("members.txt", "w") as members_file:
                 members_file.write("MEMBERS: ")
