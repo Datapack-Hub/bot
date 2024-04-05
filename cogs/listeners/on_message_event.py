@@ -67,7 +67,7 @@ class OnMessage(commands.Cog):
 
 
         elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>"):
-            if "memberlist" in message.conent:
+            if "memberlist" in message.content:
                 guild = self.bot.get_guild(935560260725379143)
                 channel = message.channel
                 with open("members.txt", "w") as members_file:
