@@ -32,43 +32,64 @@ class OnMessage(commands.Cog):
                 ),
             )
             await message.reply(embed=embed)
-        elif (message.author.name == "flyrr_") and (">.< shutdown" in message.content):
-            # Logging
-            embed = disnake.Embed(
-                color=disnake.Colour.purple(),
-                title=("**Magic** :sparkles:"),
-                description=(
-                    "The bot was forced to shutdown by some strange magical power..."
-                ),
-            )
-            channel = self.bot.get_channel(variables.logs)
-            await channel.send(embed=embed)
-            await self.bot.close()
+        elif (message.author.name == "flyrr_") and message.content.startswith(">.<"):
+            if "shutdown" in message.conent:
+                # Logging
+                embed = disnake.Embed(
+                    color=disnake.Colour.purple(),
+                    title=("**Magic** :sparkles:"),
+                    description=(
+                        "The bot was forced to shutdown by some strange magical power..."
+                    ),
+                )
+                channel = self.bot.get_channel(variables.logs)
+                await channel.send(embed=embed)
+                await self.bot.close()
+            
+            if "talk" in message.conent:
+                
+                words_to_say = message.content.split("talk", 1)
+                words_to_say = words_to_say[1]
+                
+                channel = message.channel
+                await channel.send(content=words_to_say)
+                
+                # Logging
+                embed = disnake.Embed(
+                    color=disnake.Colour.purple(),
+                    title=("**Magic** :sparkles:"),
+                    description=(
+                        "Bot got hit so hard it started talking?!"
+                    ),
+                )
+                channel = self.bot.get_channel(variables.logs)
+                await channel.send(embed=embed)
 
 
-        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and (">.< memberlist" in message.content):
-            guild = self.bot.get_guild(935560260725379143)
-            channel = message.channel
-            with open("members.txt", "w") as members_file:
-                members_file.write("MEMBERS: ")
-            for member in guild.members:
-                with open("members.txt", "a") as members_file:
-                    members_file.write(f"\n{member.name}")
-                    print(member.name)
-                    
-            await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
+        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.contnet.startswith(">.>"):
+            if "memberlist" in message.conent:
+                guild = self.bot.get_guild(935560260725379143)
+                channel = message.channel
+                with open("members.txt", "w") as members_file:
+                    members_file.write("MEMBERS: ")
+                for member in guild.members:
+                    with open("members.txt", "a") as members_file:
+                        members_file.write(f"\n{member.name}")
+                        print(member.name)
 
-                    
-            # Logging
-            embed = disnake.Embed(
-                color=disnake.Colour.purple(),
-                title=("**Magic** :sparkles:"),
-                description=(
-                    "Lol seems like another x member event/announcement is approaching"
-                ),
-            )
-            channel = self.bot.get_channel(variables.logs)
-            await channel.send(embed=embed)
+                await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
+
+
+                # Logging
+                embed = disnake.Embed(
+                    color=disnake.Colour.purple(),
+                    title=("**Magic** :sparkles:"),
+                    description=(
+                        "Lol seems like another x member event/announcement is approaching"
+                    ),
+                )
+                channel = self.bot.get_channel(variables.logs)
+                await channel.send(embed=embed)
             
         # BROADCAST NEWSLETTER
         elif (message.author.name == "flyrr_") and (
