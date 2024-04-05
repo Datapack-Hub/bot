@@ -33,7 +33,7 @@ class OnMessage(commands.Cog):
             )
             await message.reply(embed=embed)
         elif (message.author.name == "flyrr_") and message.content.startswith(">.<"):
-            if "shutdown" in message.conent:
+            if "shutdown" in message.content:
                 # Logging
                 embed = disnake.Embed(
                     color=disnake.Colour.purple(),
@@ -46,7 +46,7 @@ class OnMessage(commands.Cog):
                 await channel.send(embed=embed)
                 await self.bot.close()
             
-            if "talk" in message.conent:
+            if "talk" in message.content:
                 
                 words_to_say = message.content.split("talk", 1)
                 words_to_say = words_to_say[1]
