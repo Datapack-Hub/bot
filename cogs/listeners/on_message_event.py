@@ -64,6 +64,7 @@ class OnMessage(commands.Cog):
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
+                await message.delete()
 
 
         elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>"):
