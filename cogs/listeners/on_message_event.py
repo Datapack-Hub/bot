@@ -66,7 +66,7 @@ class OnMessage(commands.Cog):
                 await channel.send(embed=embed)
 
 
-        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.contnet.startswith(">.>"):
+        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>"):
             if "memberlist" in message.conent:
                 guild = self.bot.get_guild(935560260725379143)
                 channel = message.channel
