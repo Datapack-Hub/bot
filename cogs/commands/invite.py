@@ -55,7 +55,7 @@ class InviteCommand(commands.Cog, name="invite"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚪Datapack Helper Invite**"),
-                    description="Add the Datapack Helper bot to your server using this link: *COMING SOON*",
+                    description="Add the Datapack Helper bot to your server using this link: https://datapackhub.net",
                 )
             case "smithed":
                 embed = disnake.Embed(
