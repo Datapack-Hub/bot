@@ -92,7 +92,7 @@ class OnMessage(commands.Cog):
                 await channel.send(embed=embed)
             
             elif "memberlist" in message.content and "role" in message.content:
-                role_id = message.content.split("role", 1).replace(" ", "")
+                role_id = message.content.split("role", 1)[1].replace(" ", "")
                 guild = self.bot.get_guild(935560260725379143)
                 role = self.bot.get_role(int(role_id))
                 channel = message.channel
