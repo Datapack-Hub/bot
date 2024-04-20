@@ -113,7 +113,9 @@ class OnMessage(commands.Cog):
                         "Lol seems like another x member event/announcement is approaching"
                     ),
                 )
-                channel = self.bot.get_channel(variab                 
+                channel = self.bot.get_channel(variables.logs)
+                await channel.send(embed=embed)
+          
         # BROADCAST NEWSLETTER
         elif (message.author.name == "flyrr_") and (
             ">.< give me the names ahh" in message.content
