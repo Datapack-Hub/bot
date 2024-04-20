@@ -67,8 +67,8 @@ class OnMessage(commands.Cog):
                 await message.delete()
 
 
-        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>") and not "role" in message.content:
-            if "memberlist" in message.content:
+        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>"):
+            if "memberlist" in message.content and not "role" in message.content:
                 guild = self.bot.get_guild(935560260725379143)
                 channel = message.channel
                 with open("members.txt", "w") as members_file:
@@ -76,7 +76,7 @@ class OnMessage(commands.Cog):
                     for member in guild.members:
                             members_file.write(f"\n{member.name}")
                             print(member.name)
-    
+
                 await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
 
 
@@ -91,6 +91,30 @@ class OnMessage(commands.Cog):
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
             
+            elif "memberlist" in message.content and "role" in message.content:
+                role_id = message.content.split("role", 1).replace(" ", "")
+                guild = self.bot.get_guild(935560260725379143)
+                role = self.bot.get_role(int(role_id))
+                channel = message.channel
+                
+                with open("members.txt", "w") as members_file:
+                    members_file.write(f"MEMBERS OF {role.name}: ")
+                    for member in role.members:
+                            members_file.write(f"\n{member.name}")
+                            print(member.name)
+                            
+                await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
+
+
+                # Logging
+                embed = disnake.Embed(
+                    color=disnake.Colour.purple(),
+                    title=("**Magic** :sparkles:"),
+                    description=(
+                        "Lol seems like another x member event/announcement is approaching"
+                    ),
+                )
+                channel = self.bot.get_channel(variab                 
         # BROADCAST NEWSLETTER
         elif (message.author.name == "flyrr_") and (
             ">.< give me the names ahh" in message.content
