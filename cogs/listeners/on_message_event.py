@@ -67,17 +67,16 @@ class OnMessage(commands.Cog):
                 await message.delete()
 
 
-        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>"):
+        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>") and not "role" in message.content:
             if "memberlist" in message.content:
                 guild = self.bot.get_guild(935560260725379143)
                 channel = message.channel
                 with open("members.txt", "w") as members_file:
                     members_file.write("MEMBERS: ")
-                for member in guild.members:
-                    with open("members.txt", "a") as members_file:
-                        members_file.write(f"\n{member.name}")
-                        print(member.name)
-
+                    for member in guild.members:
+                            members_file.write(f"\n{member.name}")
+                            print(member.name)
+    
                 await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
 
 
