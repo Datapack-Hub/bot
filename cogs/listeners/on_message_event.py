@@ -98,7 +98,7 @@ class OnMessage(commands.Cog):
                 channel = message.channel
                 
                 with open("members.txt", "w") as members_file:
-                    members_file.write(f"{role.name.upper}: ")
+                    members_file.write(f"{str(role.name).upper}: ")
                     for member in role.members:
                             members_file.write(f"\n{member.name}")
                             print(member.name)
