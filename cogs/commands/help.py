@@ -92,7 +92,7 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/method`**"),
-                    description="Shows how to do certain stuff using datapacks/commands\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction,`array iteration`` **MORE COMING SOON**",
+                    description="Shows how to do certain stuff using datapacks/commands\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction`,`array iteration`, `player id system` **MORE COMING SOON**",
                 )
             case "packformat":
                 embed = disnake.Embed(
