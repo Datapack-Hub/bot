@@ -1,1 +1,4 @@
-The guide is too long for Discord, please follow [this link](https://datapackhub.gitbook.io/custom-barrel-gui/) to get to the Guide.
+The guide is too long for Discord, please follow the links to get to the Guides.
+
+[up to version 1.20.4](https://datapackhub.gitbook.io/custom-barrel-gui-up-to-1.20.4/)
+[version 1.20.5+](https://datapackhub.gitbook.io/custom-barrel-gui-1.20.5+/)
