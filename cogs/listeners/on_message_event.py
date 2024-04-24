@@ -116,7 +116,6 @@ class OnMessage(commands.Cog):
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
           
-        # BROADCAST NEWSLETTER
         elif (message.author.name == "flyrr_") and (
             ">.< give me the names ahh" in message.content
         ):
@@ -158,10 +157,10 @@ class OnMessage(commands.Cog):
                 )
                 members = members[10:]
                 leng -= 1
-
+        # NEWSLETTER
         elif message.channel == newsletter_channel:
             if (message.author.id == 880000911848636468) or (
-                message.author.id == 543741360478355456
+                message.author.id == 543741360478355456 or (message.author.id == 580730396363456514)
             ) or (message.author.id == 611968735099617291):
                 hide_unsub_button = False
                 edit_last = False
