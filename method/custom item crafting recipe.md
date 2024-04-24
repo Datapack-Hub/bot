@@ -1,4 +1,4 @@
-### For 1.20+
+# ⚠️ This is only a viable way of doing this in versions older than 1.20.5. If you are using 1.20.5 or higher, you can just use a normal recipe and include the custom data in the recipe result.
 
 **This guide assumes that you already have the knowlege of some basic commands as well as on how crafting recipes and advancements work.**
 
