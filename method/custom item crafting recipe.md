@@ -1,12 +1,12 @@
-# ⚠️ This is only a viable way of doing this in versions older than 1.20.5. If you are using 1.20.5 or higher, you can just use a normal recipe and include the custom data in the recipe result.
+# ⚠️ This Guide is deprecated as of version 1.20.5
 
-**This guide assumes that you already have the knowlege of some basic commands as well as on how crafting recipes and advancements work.**
+**This guide assumes that you already knowledge some basic commands and how crafting recipes and advancements work.**
 
-*Text in between `<>`` is aplaceholder for your namespaces and filepaths*
+*Text in between `<>`` is a placeholder*
 
 To create a crafting recipe for one of your custom items, you need just a little bit more than for a normal recipe.
 
-Becasue of the fact that you can't use nbt in a recipe, we need a small workaround.
+Because of the fact that you can't use nbt in a recipe, we need a small workaround.
 
 Lets add the recipe first:
 
@@ -33,7 +33,7 @@ Lets add the recipe first:
 }
 ```
 
-As mentione before, we can't use the custom item as output, so we use a knowledge book as a placeholder.
+As mentioned before, we can't use the custom item as output, so we use a knowledge book as a placeholder.
 
 To switch the knowledge book with our custom item, we need an advancement to react when we craft the recipe. For this we use the `recipe_crafted` trigger.
 *With some trickery it is also possible to make the ingredients require certain nbt.*
@@ -55,14 +55,14 @@ To switch the knowledge book with our custom item, we need an advancement to rea
 }
 ```
 
-Last but not least we have to make the function that deals with the item switching.
-You can either use a give command or, what I recommend more, define the item in a seperate loot table and use the loot command.
+Last but not least we have to make the function that handles the item switching.
+You can either use a give command or, what I recommend more, define the item in a separate loot table and use the loot command.
 
 > craft_rocket.mcfunction
 ```hs
 clear @s knowledge_book
 loot give @s loot <namespace>:<rocket_item_loot_table>
-advancemt revoke @s only <namespace>:craft_rocket
+advancement revoke @s only <namespace>:craft_rocket
 ```
 
 This is all you need to create a crafting recipe for your custom items.
