@@ -1,3 +1,4 @@
+import os
 import re
 
 import disnake
@@ -17,7 +18,7 @@ class OnMessage(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        # intro_channel = self.bot.get_channel(variables.intro_channel)
+        intro_channel = self.bot.get_channel(variables.intro_channel)
         newsletter_channel = self.bot.get_channel(
             variables.newsletter_broadcast_channel
         )
@@ -44,40 +45,40 @@ class OnMessage(commands.Cog):
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
                 await self.bot.close()
-
+            
             if "talk" in message.content:
+                
                 words_to_say = message.content.split("talk", 1)
                 words_to_say = words_to_say[1]
-
+                
                 channel = message.channel
                 await channel.send(content=words_to_say)
-
+                
                 # Logging
                 embed = disnake.Embed(
                     color=disnake.Colour.purple(),
                     title=("**Magic** :sparkles:"),
-                    description=("Bot got hit so hard it started talking?!"),
+                    description=(
+                        "Bot got hit so hard it started talking?!"
+                    ),
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
                 await message.delete()
 
-        elif (
-            message.author.name == "flyrr_" or message.author.name == "amandin"
-        ) and message.content.startswith(">.>"):
-            if "memberlist" in message.content and "role" not in message.content:
+
+        elif (message.author.name == "flyrr_" or message.author.name == "amandin") and message.content.startswith(">.>"):
+            if "memberlist" in message.content and not "role" in message.content:
                 guild = self.bot.get_guild(935560260725379143)
                 channel = message.channel
                 with open("members.txt", "w") as members_file:
                     members_file.write("MEMBERS: ")
                     for member in guild.members:
-                        members_file.write(f"\n{member.name}")
-                        print(member.name)
+                            members_file.write(f"\n{member.name}")
+                            print(member.name)
 
-                await channel.send(
-                    content="Your wish is my command 🙏",
-                    file=disnake.File("members.txt"),
-                )
+                await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
+
 
                 # Logging
                 embed = disnake.Embed(
@@ -89,23 +90,20 @@ class OnMessage(commands.Cog):
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
-
+            
             elif "memberlist" in message.content and "role" in message.content:
                 role_id = message.content.split("role", 1)[1].replace(" ", "")
                 guild = self.bot.get_guild(935560260725379143)
                 role = guild.get_role(int(role_id))
                 channel = message.channel
-
+                
                 with open("members.txt", "w") as members_file:
                     members_file.write(f"{str(role.name).upper()}: ")
                     for member in role.members:
-                        members_file.write(f"\n{member.name}")
-                        print(member.name)
-
-                await channel.send(
-                    content="Your wish is my command 🙏",
-                    file=disnake.File("members.txt"),
-                )
+                            members_file.write(f"\n{member.name}")
+                            print(member.name)
+                            
+                await channel.send(content="Your wish is my command 🙏",file=disnake.File('members.txt'))
 
                 # Logging
                 embed = disnake.Embed(
@@ -117,7 +115,7 @@ class OnMessage(commands.Cog):
                 )
                 channel = self.bot.get_channel(variables.logs)
                 await channel.send(embed=embed)
-
+          
         elif (message.author.name == "flyrr_") and (
             ">.< give me the names ahh" in message.content
         ):
@@ -161,14 +159,9 @@ class OnMessage(commands.Cog):
                 leng -= 1
         # NEWSLETTER
         elif message.channel == newsletter_channel:
-            if (
-                (message.author.id == 880000911848636468)
-                or (
-                    message.author.id == 543741360478355456
-                    or (message.author.id == 580730396363456514)
-                )
-                or (message.author.id == 611968735099617291)
-            ):
+            if (message.author.id == 880000911848636468) or (
+                message.author.id == 543741360478355456 or (message.author.id == 580730396363456514)
+            ) or (message.author.id == 611968735099617291):
                 hide_unsub_button = False
                 edit_last = False
                 no_title = False

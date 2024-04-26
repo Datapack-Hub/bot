@@ -3,6 +3,7 @@ import requests
 import variables
 from bs4 import BeautifulSoup
 from disnake.ext import commands
+from markdownify import markdownify as md
 
 type_enum = commands.option_enum(["resourcepack", "datapack"])
 

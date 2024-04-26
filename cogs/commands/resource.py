@@ -13,7 +13,7 @@ resources = commands.option_enum(
         "smithed",
         "minecraft tools",
         "minecraftjson",
-        "mcassets",
+        "mcassets"
     ]
 )
 
