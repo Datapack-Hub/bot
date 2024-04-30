@@ -17,7 +17,7 @@ class OnMessage(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self, message):
+    async def on_message(self, message: disnake.Message):
         intro_channel = self.bot.get_channel(variables.intro_channel)
         newsletter_channel = self.bot.get_channel(
             variables.newsletter_broadcast_channel
@@ -32,7 +32,7 @@ class OnMessage(commands.Cog):
                 ),
             )
             await message.reply(embed=embed)
-        elif (message.author.name == "flyrr_") and message.content.startswith(">.<"):
+        elif (935560587113541633 in message.author.roles) and message.content.startswith(">.<"):
             if "shutdown" in message.content:
                 # Logging
                 embed = disnake.Embed(
