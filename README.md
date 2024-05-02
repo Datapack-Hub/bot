@@ -35,8 +35,6 @@ Contributions to this project are welcome! If you have ideas for new features, i
 
    # CHANNELS
    logs_channel = <log channel id>
-   datapack_help_channel = <datapack help forum id>
-   resourcepack_help_channel = <resourcepack help forum id>
 
    # ROLES
    special_commands_roles = [<ids of roles that can run `>.<` commands>]
