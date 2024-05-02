@@ -27,12 +27,20 @@ Contributions to this project are welcome! If you have ideas for new features, i
    ```
 5. Create a file in the root directory called `variables.py` and fill it with ids of your bot and channels:
    ```py
-   logs = <BOT_LOG_CHANNEL_ID>
-   intro_channel = <INTRO_CHANNEL_ID>
-   snapshot_input_channel = <NEWSLETTER_CHANNEL_ID>
-   bot_id = <BOT_USER_ID>
+   full_path = "<file path to folder with bot>"
+   bot_id = <bot's discord id>
+
+   # GUILDS
+   main_guild = <main guild the bot will be active in>
+
+   # CHANNELS
+   logs_channel = <log channel id>
+   datapack_help_channel = <datapack help forum id>
+   resourcepack_help_channel = <resourcepack help forum id>
+
+   # ROLES
+   special_commands_roles = [<ids of roles that can run `>.<` commands>]
    ```
-   > These values are given as integers and must therefore not be quoted
 6. Start the bot using:
    ```bash
    python main.py
