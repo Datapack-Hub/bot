@@ -1,6 +1,6 @@
 `interacted_with_interaction.json` (located in the packs `advancements` folder)
 
-```hs
+```json
 {
   "criteria": {
     "requirement": {
