@@ -16,16 +16,22 @@ Contributions to this project are welcome! If you have ideas for new features, i
 
 1. Clone the repo and navigate to it using a terminal
 2. Install the dependencies using:
+
    ```bash
    pip install -r requirements.txt
    ```
+
    > You may need to use `pip3` instead of `pip`
-3. Go to https://discord.com/developers/applications, create and set up a bot and invite it to a server
+
+3. Go to <https://discord.com/developers/applications>, create and set up a bot and invite it to a server
 4. Create a file in the root directory called `bot_token.py` and fill in your token:
+   
    ```py
    token = "<DISCORD_BOT_TOKEN>"
    ```
+
 5. Create a file in the root directory called `variables.py` and fill it with ids of your bot and channels:
+   
    ```py
    full_path = "<file path to folder with bot>"
    bot_id = <bot's discord id>
@@ -39,10 +45,13 @@ Contributions to this project are welcome! If you have ideas for new features, i
    # ROLES
    special_commands_roles = [<ids of roles that can run `>.<` commands>]
    ```
+
 6. Start the bot using:
+   
    ```bash
    python main.py
    ```
+   
    > You may need to use `python3` instead of `python`
 
 ## Support and Issues
