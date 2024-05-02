@@ -1,6 +1,7 @@
 import disnake
 import requests
 import variables
+import dph
 from bs4 import BeautifulSoup
 from disnake.ext import commands
 from markdownify import markdownify as md
@@ -49,17 +50,7 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                 )
                 await inter.response.send_message(embed=embed)
 
-                # Logging
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**`/packformat` Command**"),
-                    description=(
-                        str(inter.user.name)
-                        + " looked up the packformat history of `resourcepacks`"
-                    ),
-                )
-                channel = self.bot.get_channel(variables.logs)
-                await channel.send(embed=embed)
+                await dph.log("`/packformat` Command", f"{inter.user.name} looked up `resourcepack` pack versions (Server: **{inter.guild.name}**)","orange",self)
 
             case "datapack":
                 datapack_table_body = request.find_all("table")[1]
@@ -81,16 +72,5 @@ class PackFormatCommand(commands.Cog, name="packformat"):
                 )
 
                 await inter.response.send_message(embed=embed)
-                # Logging
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**`/packformat` Command**"),
-                    description=(
-                        str(inter.user.name)
-                        + " looked up the packformat history of `datapacks` (Server: **"
-                        + inter.guild.name
-                        + "**)"
-                    ),
-                )
-                channel = self.bot.get_channel(variables.logs)
-                await channel.send(embed=embed)
+
+                await dph.log("`/packformat` Command", f"{inter.user.name} looked up `datapack` pack versions (Server: **{inter.guild.name}**)","orange",self)

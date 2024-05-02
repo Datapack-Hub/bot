@@ -2,6 +2,7 @@ import os
 
 import disnake
 import variables
+import dph
 from disnake.ext import commands
 
 template = commands.option_enum(["datapack", "resourcepack"])
@@ -49,18 +50,5 @@ class TemplateCommand(commands.Cog, name="template"):
                         file=disnake.File(fp, "Resourcepack Template UNZIP PLEASE.zip"),
                     )
 
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**`/template` Command**"),
-            description=(
-                str(inter.user.name)
-                + " got themselves a `"
-                + str(template)
-                + "` template (Server: **"
-                + inter.guild.name
-                + "**)"
-            ),
-        )
-        channel = self.bot.get_channel(variables.logs)
-        await channel.send(embed=embed)
+        await dph.log("`/template` Command", f"{inter.user.name} got themselves a `{template}` template (Server: **{inter.guild.name}**)","orange",self)
+

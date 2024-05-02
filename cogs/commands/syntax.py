@@ -2,6 +2,7 @@ import os
 
 import disnake
 import variables
+import dph
 from disnake.ext import commands
 
 commands_2 = os.listdir("./command_syntax")
@@ -27,7 +28,7 @@ class SyntaxCommand(commands.Cog, name="syntax"):
             print("Command Syntax: " + file_content)
             opened_file.close()
             embed = disnake.Embed(
-                title=("📜 /" + (str(command))),
+                title=("📜 /" + (str(command.replace("/","")))),
                 description=file_content,
                 color=disnake.Colour.orange(),
             )
@@ -39,19 +40,4 @@ class SyntaxCommand(commands.Cog, name="syntax"):
             )
 
         await inter.response.send_message(embed=embed)
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**`/syntax` Command**"),
-            description=(
-                str(inter.user.name)
-                + " looked up the syntax of `"
-                + command
-                + "` (Server: **"
-                + inter.guild.name
-                + "**)"
-            ),
-        )
-        channel = self.bot.get_channel(variables.logs)
-
-        await channel.send(embed=embed)
+        await dph.log("`/syntax` Command", f"{inter.user.name} looked up the syntax of `{command.replace("/","")}` (Server: **{inter.guild.name}**)","orange",self)

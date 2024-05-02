@@ -1,5 +1,6 @@
 import disnake
 import variables
+import dph
 from disnake.ext import commands
 
 resources = commands.option_enum(
@@ -92,18 +93,5 @@ class ResourceCommand(commands.Cog, name="resource"):
                 )
 
         await inter.response.send_message(embed=embed)
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**`/resource` Command**"),
-            description=(
-                str(inter.user.name).replace("_", "\\_")
-                + " got themselves a link to `"
-                + str(resource)
-                + "` (Server: **"
-                + inter.guild.name
-                + "**)"
-            ),
-        )
-        channel = self.bot.get_channel(variables.logs)
-        await channel.send(embed=embed)
+        
+        await dph.log("`/resource` Command", f"{inter.user.name} looked up the `{resource}` resource (Server: **{inter.guild.name}**)","orange",self)

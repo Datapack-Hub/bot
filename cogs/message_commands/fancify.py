@@ -1,6 +1,7 @@
 import disnake
 from disnake.ext import commands
 import variables
+import dph
 import re
 from cogs.message_commands.highlighter import Highlighter
 
@@ -63,7 +64,7 @@ class FancifyCommand(commands.Cog):
                 )
             )
             # Get the logs channel and send the logging embed
-            channel = self.bot.get_channel(variables.logs)
+            channel = self.bot.get_channel(variables.logs_channel)
             await channel.send(embed=embed)
 
         else:

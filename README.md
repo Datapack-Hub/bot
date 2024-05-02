@@ -29,7 +29,7 @@ Contributions to this project are welcome! If you have ideas for new features, i
    ```py
    logs = <BOT_LOG_CHANNEL_ID>
    intro_channel = <INTRO_CHANNEL_ID>
-   newsletter_broadcast_channel = <NEWSLETTER_CHANNEL_ID>
+   snapshot_input_channel = <NEWSLETTER_CHANNEL_ID>
    bot_id = <BOT_USER_ID>
    ```
    > These values are given as integers and must therefore not be quoted

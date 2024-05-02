@@ -1,5 +1,6 @@
 import disnake
 import variables
+import dph
 from disnake.ext import commands
 
 type_enum = commands.option_enum(["resourcepack", "datapack"])
@@ -47,17 +48,8 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                     color=disnake.Colour.orange(),
                 )
                 await inter.response.send_message(embed=embed)
-                # Logging
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**`/folderstructure` Command**"),
-                    description=(
-                        str(inter.user.name)
-                        + " looked up the folderstructure of `resourcepacks`"
-                    ),
-                )
-                channel = self.bot.get_channel(variables.logs)
-                await channel.send(embed=embed)
+                
+                await dph.log("`/folderstructure` Command", f"{inter.user.name} looked up the `resourcepack` folderstructure (Server: **{inter.guild.name}**)","orange",self)
 
             case "datapack":
                 embed = disnake.Embed(
@@ -106,16 +98,5 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                     color=disnake.Colour.orange(),
                 )
                 await inter.response.send_message(embed=embed)
-                # Logging
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**`/folderstructure` Command**"),
-                    description=(
-                        str(inter.user.name)
-                        + " looked up the folderstructure of `datapacks` (Server: **"
-                        + inter.guild.name
-                        + "**)"
-                    ),
-                )
-                channel = self.bot.get_channel(variables.logs)
-                await channel.send(embed=embed)
+
+                await dph.log("`/folderstructure` Command", f"{inter.user.name} looked up the `datapack` folderstructure (Server: **{inter.guild.name}**)","orange",self)

@@ -1,5 +1,6 @@
 import disnake
 import variables
+import dph
 from disnake.ext import commands
 
 invites = commands.option_enum(
@@ -101,18 +102,5 @@ class InviteCommand(commands.Cog, name="invite"):
                 )
 
         await inter.response.send_message(embed=embed)
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**`/invite` Command**"),
-            description=(
-                str(inter.user.name)
-                + " looked up the invite of `"
-                + str(invite)
-                + "`(Server: **"
-                + inter.guild.name
-                + "**)"
-            ),
-        )
-        channel = self.bot.get_channel(variables.logs)
-        await channel.send(embed=embed)
+        
+        await dph.log("`/invite` Command", f"{inter.user.name} looked up the `{invite}` invite (Server: **{inter.guild.name}**)","orange",self)

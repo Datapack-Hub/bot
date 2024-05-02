@@ -1,6 +1,7 @@
 import re
 from json import loads
 import variables
+import dph
 
 class Highlighter:
 	class Database:

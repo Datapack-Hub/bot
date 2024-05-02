@@ -1,4 +1,6 @@
 import disnake
+import dph
+import variables
 from disnake.ext import commands
 
 infos = commands.option_enum(
@@ -19,3 +21,4 @@ class PingCommand(commands.Cog, name="ping"):
         await inter.response.send_message(
             "🏓 Current Bot Ping: " + str(ping) + "ms", ephemeral=True
         )
+        await dph.log("`/ping` Command", f"{inter.user.name} looked up the bot ping: `{str(ping)}ms` (Server: **{inter.guild.name}**)","orange",self)

@@ -1,5 +1,6 @@
 import disnake
 import variables
+import dph
 from disnake.ext import commands
 
 commands_enum = commands.option_enum(
@@ -114,18 +115,5 @@ class HelpCommand(commands.Cog, name="help"):
                 )
 
         await inter.response.send_message(embed=embed)
-        # Logging
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(),
-            title=("**`/help` Command**"),
-            description=(
-                str(inter.user.name)
-                + " looked up `"
-                + str(command)
-                + "` (Server: **"
-                + inter.guild.name
-                + "**)"
-            ),
-        )
-        channel = self.bot.get_channel(variables.logs)
-        await channel.send(embed=embed)
+        
+        await dph.log("`/help` Command", f"{inter.user.name} looked up help for `{command}` (Server: **{inter.guild.name}**)","orange",self)
