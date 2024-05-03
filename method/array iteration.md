@@ -1,7 +1,7 @@
 In Minecraft, you can create arrays within data storages like this:
 
 ```hs
-data merge storage namespace:main {array:[9, "string", 3.14f, true, {"foo":"bar"}]}
+data merge storage namespace:main {array:[1,2,3,4,5]}
 ```
 
 Array iteration allows you to **check each array element individually** and perform actions on them.
