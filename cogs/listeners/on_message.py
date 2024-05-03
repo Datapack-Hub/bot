@@ -50,7 +50,7 @@ class OnMessage(commands.Cog):
 
                 await message.delete()
                 
-            if "memberlist" in message.content and not "role" in message.content:
+            if "memberlist" in message.content and "role" not in message.content:
                 guild = message.guild
                 channel = message.channel
                 with open("members.txt", "w") as members_file:

@@ -5,7 +5,7 @@ import dph
 
 class Highlighter:
 	class Database:
-		with open(variables.full_path + "/cogs/message_commands/database.json", "r", encoding="utf-8") as db:
+		with open(variables.full_path + "/cogs/message_commands/database.json", encoding="utf-8") as db:
 			database_content = loads(db.read())
 		color_codes = database_content["color_codes"]
 		commands = database_content["commands"]
