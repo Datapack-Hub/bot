@@ -22,7 +22,7 @@ Create a predicate that compares the id
 ```json
 // namespace:match_id
 { "condition": "minecraft:entity_scores", "entity": "this", "scores": {
-  "pssll.id.player": {
+  "playerid": {
     "min": { "type": "minecraft:score", "target": { "type": "minecraft:fixed", "name": "#this" }, "score": "playerid" },
     "max": { "type": "minecraft:score", "target": { "type": "minecraft:fixed", "name": "#this" }, "score": "playerid" }
   }}

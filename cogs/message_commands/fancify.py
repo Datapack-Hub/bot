@@ -19,10 +19,13 @@ class FancifyCommand(commands.Cog):
             # Split the code block content into lines
             lines = match[1].split('\n')
             # Check if the first line is a language identifier and remove it
-            if re.match(r"^[a-z]+$", lines[0]): lines = lines[1:]
+            if re.match(r"^[a-z]+$", lines[0]): 
+                lines = lines[1:]
             # Remove empty lines from the start and end
-            while lines and lines[0] == '': lines.pop(0)
-            while lines and lines[-1] == '': lines.pop()
+            while lines and lines[0] == '': 
+                lines.pop(0)
+            while lines and lines[-1] == '': 
+                lines.pop()
             # Convert lines back into one string
             match_content = '\n'.join(lines)
             
