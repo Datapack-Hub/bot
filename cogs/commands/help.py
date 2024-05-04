@@ -39,7 +39,7 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 Help**"),
-                    description="Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!\n\n**/template**: Sends a datapack/resourcepack template\n**/invite**: Shows invites to datapacking-relevant discord servers\n**/packformat**: Shows `packformat` history for datapacks/resourcepacks\n**/folderstructure**: Shows folder structure for datapacks/resourcepacks\n**/syntax**: Shows the syntax of any minecraft command\n**/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience\n**/method**: Shows how to do certain stuff using datapacks/commands\n**/resource**: Gives you the link to any resource useful for datapacking\n**/ping**: Returns current bot latency",
+                    description="Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!\n\n**/template**: Sends a datapack/resourcepack template\n**/invite**: Shows invites to datapacking-relevant discord servers\n**/packformat**: Shows the datapack/resourcepack packformat for a specific version or multiple versions\n**/folderstructure**: Shows folder structure for datapacks/resourcepacks\n**/syntax**: Shows the syntax of any minecraft command\n**/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience\n**/method**: Shows how to do certain stuff using datapacks/commands\n**/resource**: Gives you the link to any resource useful for datapacking\n**/ping**: Returns current bot latency",
                 )
             case "ping":
                 embed = disnake.Embed(
@@ -99,7 +99,7 @@ class HelpCommand(commands.Cog, name="help"):
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/packformat`**"),
-                    description="Shows the history of datapack/resourcepack packformats\nSyntax: `/packformat type:[datapack|resourcepack]` (defaults to datapack)",
+                    description="Shows the datapack/resourcepack packformat for a specific version or multiple versions\nSyntax: `/packformat [resourcepacks|datapacks|<minecraft version>]` ",
                 )
             case "folderstructure":
                 embed = disnake.Embed(
