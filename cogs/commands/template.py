@@ -14,7 +14,7 @@ class TemplateCommand(commands.Cog, name="template"):
 
     @commands.slash_command(
         title="template",
-        description="Shows discord invite for a discord server relevant to datapacks",
+        description="Provides a datapack/resourcepack template!",
     )
     async def template(
         self,
