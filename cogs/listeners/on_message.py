@@ -6,12 +6,24 @@ import variables
 import dph
 from disnake.ext import commands
 
+from cogs.listeners.highlighter.highlighter import Hl
+
 newsletter_unsubscribe_button = disnake.ui.Button(
     label="Unsubscribe",
     custom_id="newsletter_unsubscribe_button",
     style=disnake.ButtonStyle.gray,
 )
 
+def replace_code_blocks(message):
+    pattern = re.compile(r'```mcf(?:unction)?\n([\s\S]+?)```', re.DOTALL)
+
+    def replace_function(match):
+        code_block_content = match.group(1).strip()
+        return f'```ansi\n{Hl.highlight(code_block_content)}\n```'
+
+    edited_message = pattern.sub(replace_function, message)
+
+    return edited_message
 
 class OnMessage(commands.Cog):
     def __init__(self, bot):
@@ -19,7 +31,9 @@ class OnMessage(commands.Cog):
                          
     @commands.Cog.listener()
     async def on_message(self, message: disnake.Message):
-
+        
+        highlighter_servers = dph.get_highlighter_server_list()
+        
         if ("<@" + str(variables.bot_id) + ">") in message.content:
             embed = disnake.Embed(
                 color=disnake.Colour.orange(),
@@ -78,33 +92,30 @@ class OnMessage(commands.Cog):
                 await channel.send(file=disnake.File('members.txt'))
 
                 await dph.log(">.< memberlist", f"**{dph.convert_username(message.author.name)}** generated a memberlist for <@&{role.name}> ({message.jump_url})","purple",self)
-
-
-        # NEWSLETTER (moved to main bot)
-        # elif message.channel.id == variables.snapshot_input_channel:
-        #     snapshot_role = message.guild.get_role(variables.snapshot_role)
-        #     if (snapshot_role in message.author.roles):
-        #         print("asdsd")
-        #         split_input = message.content.split('\n', 1)
+        
+        if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot) and (str(message.guild.id) in highlighter_servers):
+            if message.channel.type == disnake.ChannelType.public_thread:
+                hooks = await message.channel.parent.webhooks()
                 
-        #         title = split_input[0]
-        #         content = split_input[1]
+                for hook in hooks:
+                    if hook.name == "DPH":
+                        break
+                else:
+                    hook = await message.channel.parent.create_webhook(name="DPH")
                 
-        #         embed = disnake.Embed(
-        #             color=disnake.Colour.orange(),
-        #             title=title,
-        #             description=(
-        #                 content
-        #             )
-        #         )
+                await message.delete()
+                try:
+                    await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none())
+                except:
+                    await hook.send(message.content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
+            else:
+                hooks = await message.channel.webhooks()
                 
-        #         embed.set_footer(text=f"Message broadcasted by {message.author.display_name}",icon_url=message.author.display_avatar)
-        #         channel = self.bot.get_channel(variables.snapshot_output_channel)
-        #         message = await channel.send(f"<@&{variables.snapshot_role}>",embed=embed)
+                for hook in hooks:
+                    if hook.name == "DPH":
+                        break
+                else:
+                    hook = await message.channel.create_webhook(name="DPH")
                 
-        #         await functions.log("Snapshot Broadcast", f"**{functions.convert_username(message.author.name)}** broadcasted a message to the <#{variables.snapshot_output_channel}> channel ({message.jump_url})",self)
-                
-        #     elif message.author.id != variables.bot_id:
-        #         await message.delete()
-
-        #         await functions.log("Snapshot Broadcast", f"**{functions.convert_username(message.author.name)}** tried to broadcast a message to the <#{variables.snapshot_output_channel}> channel but failed due to missing permission",self)
+                await message.delete()
+                await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())

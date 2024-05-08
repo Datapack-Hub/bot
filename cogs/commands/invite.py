@@ -16,6 +16,7 @@ invites = commands.option_enum(
         "minecraft",
         "dataworld (fr)",
         "animated java",
+        "datapack jam"
     ]
 )
 
@@ -99,6 +100,12 @@ class InviteCommand(commands.Cog, name="invite"):
                     color=disnake.Colour.orange(),
                     title=("**Animated Java Invite**"),
                     description="Join the Animated Java discord server for help with the Animated Java Blockbench plugin using this link: https://animated-java.dev/discord",
+                )
+            case "datapack jam":
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**Datapack Jam Invite**"),
+                    description="Join the Datapack Jam discord server to test your skill in fun jams: https://dsc.gg/datapackjam",
                 )
 
         await inter.response.send_message(embed=embed)

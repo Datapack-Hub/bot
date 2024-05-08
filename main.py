@@ -4,10 +4,11 @@ import bot_token
 import variables
 import dph
 
-# Cogs
-import cogs.message_commands.fancify as fancify
 
-import cogs.commands.eliminate as eliminate
+# Cogs
+#TODO import cogs.message_commands.fancify as fancify
+
+#? reconsider/rework this: import cogs.commands.eliminate as eliminate
 import cogs.commands.folderstructure as folderstructure
 import cogs.commands.help as help
 import cogs.commands.info as info
@@ -18,15 +19,14 @@ import cogs.commands.ping as ping
 import cogs.commands.resource as resource
 import cogs.commands.syntax as syntax
 import cogs.commands.template as template
+import cogs.commands.highlighter as highlighter_command
 
 import cogs.listeners.on_button_click as on_button_click
 import cogs.listeners.on_guild_join as on_guild_join
 import cogs.listeners.on_guild_remove as on_guild_remove
 import cogs.listeners.on_message as on_message
 import cogs.listeners.on_ready as on_ready
-
 # Other Stuff
-import traceback
 import disnake
 from disnake.ext import commands
 
@@ -42,11 +42,11 @@ activity = disnake.Activity(
 
 # Initialize
 bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
-
-
+   
+    
 # * ADD COGS
 # Message Commands
-bot.add_cog(fancify.FancifyCommand(bot))
+#TODO bot.add_cog(fancify.FancifyCommand(bot))
 
 # Slash Commands
 bot.add_cog(syntax.SyntaxCommand(bot))
@@ -56,10 +56,11 @@ bot.add_cog(invite.InviteCommand(bot))
 bot.add_cog(packformat.PackFormatCommand(bot))
 bot.add_cog(info.InfoCommand(bot))
 bot.add_cog(template.TemplateCommand(bot))
-bot.add_cog(eliminate.EliminateCommand(bot))
+#? reconsider/rework this: bot.add_cog(eliminate.EliminateCommand(bot))
 bot.add_cog(help.HelpCommand(bot))
 bot.add_cog(ping.PingCommand(bot))
 bot.add_cog(resource.ResourceCommand(bot))
+bot.add_cog(highlighter_command.HighlighterCommand(bot))
 
 
 # Listeners
