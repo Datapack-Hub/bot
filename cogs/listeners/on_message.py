@@ -98,24 +98,28 @@ class OnMessage(commands.Cog):
                 hooks = await message.channel.parent.webhooks()
                 
                 for hook in hooks:
-                    if hook.name == "DPH":
+                    if hook.name == "Datapack Helper Bot":
                         break
                 else:
-                    hook = await message.channel.parent.create_webhook(name="DPH")
+                    hook = await message.channel.parent.create_webhook(name="Datapack Helper Bot")
                 
                 await message.delete()
+                
                 try:
                     await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none())
+                    await dph.log("Syntax Highlighter", f"Sucessfully highlighted **{dph.convert_username(message.author.name)}**'s message ({message.jump_url}) (Server: **{message.guild.name}**)","orange",self)
                 except:
                     await hook.send(message.content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
+                    await dph.log("Syntax Highlighter", f"Failed highlighting **{dph.convert_username(message.author.name)}**'s message ({message.jump_url}) (Server: **{message.guild.name}**)","red",self)
             else:
                 hooks = await message.channel.webhooks()
                 
                 for hook in hooks:
-                    if hook.name == "DPH":
+                    if hook.name == "Datapack Helper Bot":
                         break
                 else:
-                    hook = await message.channel.create_webhook(name="DPH")
+                    hook = await message.channel.create_webhook(name="Datapack Helper Bot")
                 
                 await message.delete()
                 await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
+                await dph.log("Syntax Highlighter", f"Sucessfully highlighted **{dph.convert_username(message.author.name)}**'s message ({message.jump_url}) (Server: **{message.guild.name}**)","orange",self)
