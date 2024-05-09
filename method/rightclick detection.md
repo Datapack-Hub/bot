@@ -1,5 +1,4 @@
-There are multiple ways to detect right clicks using datapacks/commands, here is a quick rundown on each of them and their cons and pros! 
-You can get more detailed instructions on how to use them using their corresponding `/method`s
+Get more detailed info about individual methods using the respective `/method`s
 
 ## Warped Fungus on a Stick (WFOAS)/Carrot on a Stick (COAS)
 
