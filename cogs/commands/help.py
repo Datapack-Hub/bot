@@ -116,4 +116,4 @@ class HelpCommand(commands.Cog, name="help"):
 
         await inter.response.send_message(embed=embed)
         
-        await dph.log("`/help` Command", f"{inter.user.name} looked up help for `{command}` (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/help` Command", f"A user looked up help for `{command}` (Server: **{inter.guild.name}**)","orange",self)

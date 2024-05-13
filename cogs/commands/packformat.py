@@ -104,4 +104,4 @@ class PackFormatCommand(commands.Cog, name="packformat"):
             )
             await inter.response.send_message(embed=embed,ephemeral=True)
             
-        await dph.log("`/packformat` Command", f"{inter.user.name} looked up the pack format for `{version}` (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/packformat` Command", f"A user looked up the pack format for `{version}` (Server: **{inter.guild.name}**)","orange",self)

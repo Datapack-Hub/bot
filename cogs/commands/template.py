@@ -50,5 +50,5 @@ class TemplateCommand(commands.Cog, name="template"):
                         file=disnake.File(fp, "Resourcepack Template UNZIP PLEASE.zip"),
                     )
 
-        await dph.log("`/template` Command", f"{inter.user.name} got themselves a `{template}` template (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/template` Command", f"A user got themselves a `{template}` template (Server: **{inter.guild.name}**)","orange",self)
 

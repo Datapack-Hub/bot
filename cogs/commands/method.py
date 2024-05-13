@@ -33,4 +33,4 @@ class MethodCommand(commands.Cog, name="method"):
 
         await inter.response.send_message(text)
 
-        await dph.log("`/method` Command", f"{inter.user.name} looked up the `{method}` method (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/method` Command", f"A user looked up the `{method}` method (Server: **{inter.guild.name}**)","orange",self)

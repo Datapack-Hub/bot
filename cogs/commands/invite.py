@@ -110,4 +110,4 @@ class InviteCommand(commands.Cog, name="invite"):
 
         await inter.response.send_message(embed=embed)
         
-        await dph.log("`/invite` Command", f"{inter.user.name} looked up the `{invite}` invite (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/invite` Command", f"A user looked up the `{invite}` invite (Server: **{inter.guild.name}**)","orange",self)
