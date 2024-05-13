@@ -1,4 +1,3 @@
-# Datapack Hub Discord Bot TOS
 Terms and Conditions
 ====================
 
