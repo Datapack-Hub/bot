@@ -43,56 +43,6 @@ class OnMessage(commands.Cog):
                 ),
             )
             await message.reply(embed=embed)
-            
-        elif (any(role.id in variables.special_commands_roles for role in message.author.roles) or ("flyrr_" == message.author.name)) and message.content.startswith(">.<"):
-            
-            if "shutdown" in message.content:
-                
-                await dph.log(">.< shutdown", f"The bot has been shut down by **{dph.convert_username(message.author.name)}**","purple",self)
-
-                await self.bot.close()
-            
-            if "talk" in message.content:
-                
-                words_to_say = message.content.split("talk", 1)
-                words_to_say = words_to_say[1].strip()
-                
-                channel = message.channel
-                sent_message = await channel.send(content=words_to_say)
-                
-                await dph.log(">.< talk", f"**{dph.convert_username(message.author.name)}** made the bot say `{words_to_say}`({sent_message.jump_url})","purple",self)
-
-                await message.delete()
-                
-            if "memberlist" in message.content and "role" not in message.content:
-                guild = message.guild
-                channel = message.channel
-                with open("members.txt", "w") as members_file:
-                    members_file.write("MEMBERS: ")
-                    for member in guild.members:
-                            members_file.write(f"\n{member.name}")
-                            print(member.name)
-
-                await channel.send(file=disnake.File('members.txt'))
-
-                await dph.log(">.< memberlist", f"**{dph.convert_username(message.author.name)}** generated a memberlist ({message.jump_url})","purple",self)
-            
-            elif "memberlist" in message.content and "role" in message.content:
-                role_id = message.content.split("role", 1)[1].replace(" ", "")
-                guild = message.guild
-                role = guild.get_role(int(role_id))
-                channel = message.channel
-                
-                with open("members.txt", "w") as members_file:
-                    members_file.write(f"{str(role.name).upper()}: ")
-                    for member in role.members:
-                            members_file.write(f"\n{member.name}")
-                            print(member.name)
-                            
-                await channel.send(file=disnake.File('members.txt'))
-
-                await dph.log(">.< memberlist", f"**{dph.convert_username(message.author.name)}** generated a memberlist for <@&{role.name}> ({message.jump_url})","purple",self)
-        
         if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot) and (str(message.guild.id) in highlighter_servers):
             if message.channel.type == disnake.ChannelType.public_thread:
                 hooks = await message.channel.parent.webhooks()
