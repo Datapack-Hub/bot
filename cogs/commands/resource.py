@@ -94,4 +94,4 @@ class ResourceCommand(commands.Cog, name="resource"):
 
         await inter.response.send_message(embed=embed)
         
-        await dph.log("`/resource` Command", f"A user looked up the `{resource}` resource (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/resource` Command", f"A user looked up the `{resource}` resource","orange",self)

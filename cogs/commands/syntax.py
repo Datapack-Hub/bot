@@ -40,4 +40,4 @@ class SyntaxCommand(commands.Cog, name="syntax"):
             )
 
         await inter.response.send_message(embed=embed)
-        await dph.log("`/syntax` Command", f"A user looked up the syntax of `{command}` (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/syntax` Command", f"A user looked up the syntax of `{command}`","orange",self)

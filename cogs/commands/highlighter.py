@@ -51,7 +51,7 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
                 await inter.response.send_message(embed=embed,components=button,ephemeral=True)  
                 
             
-            await dph.log("`/highlighter` Command", f"A user viewed the highlighter interaction menu (Server: **{inter.guild.name}**)","orange",self)
+            await dph.log("`/highlighter` Command", f"A user viewed the highlighter interaction menu","orange",self)
             
         else:
             embed = disnake.Embed(
@@ -60,4 +60,4 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
                 color= disnake.Color.red()
             )
             await inter.response.send_message(embed=embed,ephemeral=True)
-            await dph.log("`/highlighter` Command", f"A user attempted to use the command (Server: **{inter.guild.name}**)","red",self)
+            await dph.log("`/highlighter` Command", f"A user attempted to use the command","red",self)

@@ -49,7 +49,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 )
                 await inter.response.send_message(embed=embed)
                 
-                await dph.log("`/folderstructure` Command", f"A user looked up the `resourcepack` folderstructure (Server: **{inter.guild.name}**)","orange",self)
+                await dph.log("`/folderstructure` Command", f"A user looked up the `resourcepack` folderstructure","orange",self)
 
             case "datapack":
                 embed = disnake.Embed(
@@ -99,4 +99,4 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 )
                 await inter.response.send_message(embed=embed)
 
-                await dph.log("`/folderstructure` Command", f"A user looked up the `datapack` folderstructure (Server: **{inter.guild.name}**)","orange",self)
+                await dph.log("`/folderstructure` Command", f"A user looked up the `datapack` folderstructure","orange",self)

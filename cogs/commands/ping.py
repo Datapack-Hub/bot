@@ -21,4 +21,4 @@ class PingCommand(commands.Cog, name="ping"):
         await inter.response.send_message(
             "🏓 Current Bot Ping: " + str(ping) + "ms", ephemeral=True
         )
-        await dph.log("`/ping` Command", f"A user looked up the bot ping: `{ping!s}ms` (Server: **{inter.guild.name}**)","orange",self)
+        await dph.log("`/ping` Command", f"A user looked up the bot ping: `{ping!s}ms`","orange",self)
