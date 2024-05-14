@@ -32,7 +32,7 @@ from disnake.ext import commands
 
 # * SETUP BOT
 # Set Intents
-intents = disnake.Intents.message_content()
+intents = disnake.Intents.value(449428450368)
 
 # Set Activity Status
 activity = disnake.Activity(
