@@ -41,7 +41,7 @@ activity = disnake.Activity(
 )
 
 # Initialize
-bot = commands.Bot(command_prefix="?", intents=intents, activity=activity, intents=intents)
+bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
    
     
 # * ADD COGS
