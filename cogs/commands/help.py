@@ -59,12 +59,6 @@ class HelpCommand(commands.Cog, name="help"):
                     title=("**🚑 `/help`**"),
                     description="Shows either a list of all bot commands or information about a specific bot command\nSyntax `/help command:<command>`\nAviable commands: `invite`,`help`,`eliminate`,`resolve`,`newsletter`,`syntax`,`template`,`info`,`folderstructure`,`packformat`,`ping`",
                 )
-            case "eliminate":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/eliminate`**"),
-                    description="Welcome to round one. `/eliminate` others before they can `/elimnate` you. Don't try to `/eliminate` the `/eliminate`d. You didn't see this.\nSyntax: `/eliminate target:<@user>`",
-                )
             case "newsletter":
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),

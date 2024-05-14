@@ -30,7 +30,8 @@ class PackFormatCommand(commands.Cog, name="packformat"):
         description = ""
         print("geasdsd")
 
-        
+        if version.lower() == "latest":
+            version = "default"
         if version.lower() == "snapshots":
             version = "snapshot"
         if version.lower() == "releases":

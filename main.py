@@ -32,7 +32,7 @@ from disnake.ext import commands
 
 # * SETUP BOT
 # Set Intents
-intents = disnake.Intents.all()
+intents = disnake.Intents.message_content()
 
 # Set Activity Status
 activity = disnake.Activity(
@@ -41,12 +41,10 @@ activity = disnake.Activity(
 )
 
 # Initialize
-bot = commands.Bot(command_prefix="?", intents=intents, activity=activity)
+bot = commands.Bot(command_prefix="?", intents=intents, activity=activity, intents=intents)
    
     
 # * ADD COGS
-# Message Commands
-#TODO bot.add_cog(fancify.FancifyCommand(bot))
 
 # Slash Commands
 bot.add_cog(syntax.SyntaxCommand(bot))
@@ -56,7 +54,6 @@ bot.add_cog(invite.InviteCommand(bot))
 bot.add_cog(packformat.PackFormatCommand(bot))
 bot.add_cog(info.InfoCommand(bot))
 bot.add_cog(template.TemplateCommand(bot))
-#? reconsider/rework this: bot.add_cog(eliminate.EliminateCommand(bot))
 bot.add_cog(help.HelpCommand(bot))
 bot.add_cog(ping.PingCommand(bot))
 bot.add_cog(resource.ResourceCommand(bot))
