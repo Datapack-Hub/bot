@@ -7,8 +7,6 @@ commands_enum = commands.option_enum(
     [
         "invite",
         "help",
-        "eliminate",
-        "newsletter",
         "syntax",
         "template",
         "info",
@@ -71,12 +69,6 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
                     title=("**🚑 `/help`**"),
                     description="Shows either a list of all bot commands or information about a specific bot command\nSyntax `/help command:<command>`\nAviable commands: `invite`,`help`,`eliminate`,`resolve`,`newsletter`,`syntax`,`template`,`info`,`folderstructure`,`packformat`,highlighter,`ping`",
                 )
-            case "newsletter":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/newsletter`**"),
-                    description="Subscribes/unsubscribes you to/from our DM-Newsletter, which will notify you each time something relevant to datapacks happens (for example: new snapshot with datapack related changes, new website/tool release, etc.)",
-                )
             case "syntax":
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
@@ -105,7 +97,7 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/packformat`**"),
-                    description="Shows the datapack/resourcepack packformat for a specific version or multiple versions\nSyntax: `/packformat [resourcepacks|datapacks|<minecraft version>]` ",
+                    description="Shows the datapack/resourcepack packformat for a specific version or multiple versions\nSyntax: `/packformat [latest|snapshots|releases|<minecraft version>]` ",
                 )
             case "folderstructure":
                 embed = disnake.Embed(
