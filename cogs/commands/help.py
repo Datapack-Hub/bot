@@ -41,17 +41,17 @@ class HelpCommand(commands.Cog, name="help"):
                     color=disnake.Colour.orange(),
                     title=("**🚑 Help**"),
                     description="""
-                    Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!
-                    **/template**: Sends a datapack/resourcepack template
-                    **/invite**: Shows invites to datapacking-relevant discord servers
-                    **/packformat**: Shows the datapack/resourcepack packformat for a specific version or multiple versions
-                    **/folderstructure**: Shows folder structure for datapacks/resourcepacks
-                    **/syntax**: Shows the syntax of any minecraft command
-                    **/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience
-                    **/method**: Shows how to do certain stuff using datapacks/commands
-                    **/resource**: Gives you the link to any resource useful for datapacking
-                    **/highlighter**: Allows you to toggle the `mcfunction` syntax highlighter
-                    **/ping**: Returns current bot latency""",
+Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!
+**/template**: Sends a datapack/resourcepack template
+**/invite**: Shows invites to datapacking-relevant discord servers
+**/packformat**: Shows the datapack/resourcepack packformat for a specific version or multiple versions
+**/folderstructure**: Shows folder structure for datapacks/resourcepacks
+**/syntax**: Shows the syntax of any minecraft command
+**/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience
+**/method**: Shows how to do certain stuff using datapacks/commands
+**/resource**: Gives you the link to any resource useful for datapacking
+**/highlighter**: Allows you to toggle the `mcfunction` syntax highlighter
+**/ping**: Returns current bot latency""",
                 )
             case "ping":
                 embed = disnake.Embed(
