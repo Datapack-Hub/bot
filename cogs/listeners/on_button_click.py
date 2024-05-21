@@ -2,7 +2,7 @@ import disnake
 import variables
 import dph
 from disnake.ext import commands
-
+import json
 
 class OnButtonClick(commands.Cog):
     def __init__(self, bot):
@@ -41,10 +41,14 @@ class OnButtonClick(commands.Cog):
                 description="The **`mcfunction` Highlighter** adds syntax highlighting to all **mcfunction code in codeblocks**. This is achvieved by **deleting** the message originally sent and **replacing it using a webhook** (with the original senders name and profile picture). \nYou can always **disable** this option at any time after enabling it!\n**Does not apply retroactively to already sent messages**",
                 color= disnake.Color.blue()
             )
-            
-            with open(file=f"{variables.full_path}/highlighter_servers.txt", mode="w+") as file:
-                for line in file:
-                    line.replace(f"{inter.guild.id}","")
+                    
+            with open(file=f"{variables.full_path}/highlighter_servers.txt", mode="r") as file:
+                lines = file.readlines()
+                
+            with open(f"{variables.full_path}/highlighter_servers.txt", "w") as file:
+                for line in lines:
+                    if not str(inter.guild.id) in line:
+                        file.write(line)
                 
             await inter.response.edit_message(embed=embed,components=button)
             
