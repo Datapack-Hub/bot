@@ -71,13 +71,14 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                         ├── damage_type
                         ├── tags 
                         │   ├── blocks
+                        │   ├── chat_type
+                        │   ├── damage_type
                         │   ├── entity_types
                         │   ├── fluids
                         │   ├── functions
                         │   ├── game_events
                         │   ├── items
-                        │   ├── chat_type
-                        │   └── damage_type
+                        |   └── worldgen
                         ├── dimension
                         ├── dimension_type
                         └── worldgen
