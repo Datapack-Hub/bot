@@ -1,8 +1,6 @@
 # * IMPORTING
 # Local Files
 import bot_token
-import variables
-import dph
 
 
 # Cogs

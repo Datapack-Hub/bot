@@ -1,4 +1,3 @@
-import disnake
 import variables
 import dph
 from disnake.ext import commands

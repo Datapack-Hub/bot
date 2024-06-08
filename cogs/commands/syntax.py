@@ -1,7 +1,6 @@
 import os
 
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
@@ -25,7 +24,6 @@ class SyntaxCommand(commands.Cog, name="syntax"):
         try:
             opened_file = open("./command_syntax/" + str(command) + ".md")
             file_content = opened_file.read()
-            print("Command Syntax: " + file_content)
             opened_file.close()
             embed = disnake.Embed(
                 title=("📜 /" + (str(command.replace("/","")))),

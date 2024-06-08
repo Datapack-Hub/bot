@@ -1,11 +1,10 @@
 import os
 
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
-template = commands.option_enum(["datapack", "resourcepack"])
+Template = commands.option_enum(["datapack", "resourcepack"])
 
 
 class TemplateCommand(commands.Cog, name="template"):
@@ -19,7 +18,7 @@ class TemplateCommand(commands.Cog, name="template"):
     async def template(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        template: template = "datapack",
+        template: Template = "datapack",
     ):
         match template:
             case "datapack":

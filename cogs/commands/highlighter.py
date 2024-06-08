@@ -1,5 +1,4 @@
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
@@ -18,7 +17,6 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
             servers = dph.get_highlighter_server_list()
             
             if str(inter.guild.id) in servers:
-                print
                 button = disnake.ui.Button(
                     style = disnake.ButtonStyle.red,
                     custom_id = "dph_highlighter_off",
@@ -47,7 +45,7 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
                 await inter.response.send_message(embed=embed,components=button,ephemeral=True)  
                 
             
-            await dph.log("`/highlighter` Command", f"A user viewed the highlighter interaction menu","orange",self)
+            await dph.log("`/highlighter` Command", "A user viewed the highlighter interaction menu","orange",self)
             
         else:
             embed = disnake.Embed(
@@ -56,4 +54,4 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
                 color= disnake.Color.red()
             )
             await inter.response.send_message(embed=embed,ephemeral=True)
-            await dph.log("`/highlighter` Command", f"A user attempted to use the command","red",self)
+            await dph.log("`/highlighter` Command", "A user attempted to use the command","red",self)

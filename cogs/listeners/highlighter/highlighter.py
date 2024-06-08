@@ -1,11 +1,10 @@
 from re import match, findall, sub, search, MULTILINE
 from json import loads
-from string import ascii_letters
 import variables
 
 class Hl:
 	class Database:
-		with open(f"{variables.full_path}/cogs/listeners/highlighter/database.json", "r", encoding="utf-8") as db:
+		with open(f"{variables.full_path}/cogs/listeners/highlighter/database.json", encoding="utf-8") as db:
 			database_content = loads(db.read())
 		color_codes = database_content["color_codes"]
 		commands = database_content["commands"]
@@ -67,7 +66,6 @@ class Hl:
 		# Magec
 		for idx, char in enumerate(func):
 			next_char = func[idx+1:idx+2]
-			prev_char = func[idx-1]
 			prev_tokens = tokens[::-1]
 			if state["mode"] == "normal":
 				if char not in " \\\n\t#[]{}.\"'/$":
@@ -278,5 +276,5 @@ class Hl:
 		function_elements = function.replace("\n", "<br>").split("\u001b[")[1:]
 		for element in function_elements:
 			matches = search(ansi_codes_re, element)
-			converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" "+color_classes[matches.group(4)] if matches.group(4) != None else ""}">{element.replace(matches.group(1), "")}</span>'
+			converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" "+color_classes[matches.group(4)] if matches.group(4) is not None else ""}">{element.replace(matches.group(1), "")}</span>'
 		return f"<pre>{converted}</pre>"
