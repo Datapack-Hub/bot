@@ -48,7 +48,7 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
 **/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience
 **/method**: Shows how to do certain stuff using datapacks/commands
 **/resource**: Gives you the link to any resource useful for datapacking
-**/highlighter**: Allows you to toggle the `mcfunction` syntax highlighter
+**/highlighter**: Allows you to toggle the `mcfunction` syntax highlighter _([Source Code by bth123](https://github.com/bth123/mcf-ansi-highlighter))_
 **/ping**: Returns current bot latency""",
                 )
             case "ping":
@@ -109,7 +109,7 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/resource`**"),
-                    description="Shows link and short explanation to a resource helpful on your datapacking journey\nSyntax: `/resource resource:<reource>`\nAviable resources: `misode`, `mcstacker`, `taglib`, `minecraft wiki`, `cloudwolf`, `crafting (thedestruc7i0n)`, `smithed`, `minecraft tools`, `minecraftjson`",
+                    description="Shows link and short explanation to a resource helpful on your datapacking journey\nSyntax: `/resource resource:<reource>`\nAviable resources: `misode`, `mcstacker`, `taglib`, `minecraft wiki`, `cloudwolf`, `crafting (thedestruc7i0n)`, `smithed`, `minecraft tools`, `minecraftjson`\n_([Source Code by bth123](https://github.com/bth123/mcf-ansi-highlighter))_",
                 )
             case "highlighter":
                 embed = disnake.Embed(
