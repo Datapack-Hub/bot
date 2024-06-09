@@ -16,9 +16,6 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
     async def highlighter(self,inter: disnake.ApplicationCommandInteraction,):
         if inter.user.guild_permissions.manage_guild:
             servers = dph.get_highlighter_server_list()
-
-            print(inter.guild.id)
-            print(servers)
             
             if str(inter.guild.id) in servers:
                 print
@@ -36,7 +33,6 @@ class HighlighterCommand(commands.Cog, name="highlighter"):
                 await inter.response.send_message(embed=embed,components=button,ephemeral=True)
                 
             else:
-
                 button = disnake.ui.Button(
                     style = disnake.ButtonStyle.green,
                     custom_id = "dph_highlighter_on",
