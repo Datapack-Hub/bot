@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from disnake.ext import commands
 import json
 
-type_enum = commands.option_enum(["resourcepack", "datapack"])
+PackFormatType = commands.option_enum(["resourcepack", "datapack"])
 
 
 class PackFormatCommand(commands.Cog, name="packformat"):

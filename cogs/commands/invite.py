@@ -2,7 +2,7 @@ import disnake
 import dph
 from disnake.ext import commands
 
-invites = commands.option_enum(
+Invites = commands.option_enum(
     [
         "datapack hub",
         "minecraft commands",
@@ -29,7 +29,7 @@ class InviteCommand(commands.Cog, name="invite"):
         description="Shows discord invite for a discord server relevant to datapacks",
     )
     async def invite(
-        self, inter: disnake.ApplicationCommandInteraction, invite: invites
+        self, inter: disnake.ApplicationCommandInteraction, invite: Invites
     ):
         match invite:
             case "datapack hub":

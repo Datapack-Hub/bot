@@ -2,7 +2,7 @@ import disnake
 import dph
 from disnake.ext import commands
 
-infos = commands.option_enum(
+InfoPages = commands.option_enum(
     ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]
 )
 
@@ -15,7 +15,7 @@ class InfoCommand(commands.Cog, name="info"):
         title="info",
         description="Gives you more information about an external feature to improve your datapacking experience",
     )
-    async def info(self, inter: disnake.ApplicationCommandInteraction, info: infos):
+    async def info(self, inter: disnake.ApplicationCommandInteraction, info: InfoPages):
         match info:
             case "logs default":
                 embed = disnake.Embed(

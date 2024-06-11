@@ -2,11 +2,6 @@ import disnake
 import dph
 from disnake.ext import commands
 
-infos = commands.option_enum(
-    ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]
-)
-
-
 class PingCommand(commands.Cog, name="ping"):
     def __init__(self, bot):
         self.bot = bot

@@ -2,7 +2,7 @@ import disnake
 import dph
 from disnake.ext import commands
 
-type_enum = commands.option_enum(["resourcepack", "datapack"])
+FolderStructureType = commands.option_enum(["resourcepack", "datapack"])
 
 
 class FolderStructureCommand(commands.Cog, name="folderstructure"):
@@ -14,7 +14,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
         description="Shows the folder structure of datapacks/resourcepacks",
     )
     async def folderstructure(
-        self, inter: disnake.ApplicationCommandInteraction, type: type_enum = "datapack"
+        self, inter: disnake.ApplicationCommandInteraction, type: FolderStructureType = "datapack"
     ):
         match type:
             case "resourcepack":
