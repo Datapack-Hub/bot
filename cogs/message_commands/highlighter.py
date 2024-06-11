@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 from json import loads
 import variables
@@ -5,8 +6,8 @@ from typing import ClassVar
 
 class Highlighter:
 	class Database:
-		with open(variables.full_path + "/cogs/message_commands/database.json", encoding="utf-8") as db:
-			database_content = loads(db.read())
+		path = Path(variables.full_path + "/cogs/message_commands/database.json")
+		database_content = loads(path.read_text())
 		color_codes = database_content["color_codes"]
 		commands = database_content["commands"]
 		regexes: ClassVar[dict] = {

@@ -1,9 +1,11 @@
+import json
+
+import aiohttp
 import disnake
-import requests
-import dph
 from bs4 import BeautifulSoup
 from disnake.ext import commands
-import json
+
+import dph
 
 type_enum = commands.option_enum(["resourcepack", "datapack"])
 
@@ -19,27 +21,27 @@ class PackFormatCommand(commands.Cog, name="packformat"):
     async def packformat(
         self, inter: disnake.ApplicationCommandInteraction, version: str = "default"
     ):
-        
-        request = requests.get("https://raw.githubusercontent.com/misode/mcmeta/summary/versions/data.json",timeout=5000,
-            headers={"User-Agent": "Datapack Helper Discord Bot"},)
+        async with aiohttp.ClientSession() as session: 
+            response = await session.get("https://raw.githubusercontent.com/misode/mcmeta/summary/versions/data.json",timeout=5000,
+                headers={"User-Agent": "Datapack Helper Discord Bot"},)
 
 
-        request = BeautifulSoup(request.content, "html.parser")
+            response = BeautifulSoup(await response.text(), "html.parser")
 
-        if version.lower() == "latest":
-            version = "default"
-        if version.lower() == "snapshots":
-            version = "snapshot"
-        if version.lower() == "releases":
-            version = "release"
-        
-        if "w" in version.lower() and not ("a" in version.lower() or "b" in version.lower() or "c" in version.lower()):
-            version += "a"
-        
-        request = requests.get("https://raw.githubusercontent.com/misode/mcmeta/summary/versions/data.json",timeout=5000,headers={"User-Agent": "Datapack Helper Discord Bot"})
-        request = BeautifulSoup(request.content, "html.parser")
-        
-        json_data = json.loads(request.text)
+            if version.lower() == "latest":
+                version = "default"
+            if version.lower() == "snapshots":
+                version = "snapshot"
+            if version.lower() == "releases":
+                version = "release"
+            
+            if "w" in version.lower() and not ("a" in version.lower() or "b" in version.lower() or "c" in version.lower()):
+                version += "a"
+            
+            response = await session.get("https://raw.githubusercontent.com/misode/mcmeta/summary/versions/data.json",timeout=5000,headers={"User-Agent": "Datapack Helper Discord Bot"})
+            response = BeautifulSoup(await response.text(), "html.parser")
+            
+            json_data = json.loads(response.text)
         
         versions_array = []
         output_array = []

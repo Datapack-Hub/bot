@@ -1,7 +1,7 @@
 [tool.ruff]
 # Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
 select = ["E", "F", "PERF", "RUF", "B", "N", "UP", "EM", "FURB", "ASYNC", "C4"]
-ignore = ["E501","S105","N805"]
+ignore = ["E501","S105","N805","E305","E231","E306","E301","E226"]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
