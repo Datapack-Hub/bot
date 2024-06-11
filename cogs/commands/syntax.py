@@ -3,6 +3,7 @@ import os
 import disnake
 import dph
 from disnake.ext import commands
+from aiofiles import open
 
 commands_2 = os.listdir("./command_syntax")
 
@@ -22,14 +23,13 @@ class SyntaxCommand(commands.Cog, name="syntax"):
     )
     async def syntax(self, inter: disnake.ApplicationCommandInteraction, command: str):
         try:
-            opened_file = open("./command_syntax/" + str(command) + ".md")
-            file_content = opened_file.read()
-            opened_file.close()
-            embed = disnake.Embed(
-                title=("📜 /" + (str(command.replace("/","")))),
-                description=file_content,
-                color=disnake.Colour.orange(),
-            )
+            async with open("./command_syntax/" + str(command) + ".md") as opened_file:
+                file_content = await opened_file.read()
+                embed = disnake.Embed(
+                    title=("📜 /" + (str(command.replace("/","")))),
+                    description=file_content,
+                    color=disnake.Colour.orange(),
+                )
         except FileNotFoundError:
             embed = disnake.Embed(
                 title="❌ Command Not Found",

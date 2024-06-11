@@ -2,3 +2,4 @@ beautifulsoup4==4.12.3
 disnake==2.9.2
 markdownify==0.12.1
 Requests==2.32.3
+aiofiles==23.2.1

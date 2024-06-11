@@ -3,6 +3,7 @@ import os
 import disnake
 import dph
 from disnake.ext import commands
+from aiofiles import open
 
 methods = os.listdir("./method")
 
@@ -23,10 +24,9 @@ class MethodCommand(commands.Cog, name="method"):
     async def method(
         self, inter: disnake.ApplicationCommandInteraction, method: methods_enum
     ):
-        opened_file = open("./method/" + str(method) + ".md")
-        file_content = opened_file.read()
-        opened_file.close()
-
+        async with open("./method/" + str(method) + ".md") as opened_file:
+            file_content = await opened_file.read()
+            
         text = f"""# {method.title()}
         >>> {file_content}"""
 

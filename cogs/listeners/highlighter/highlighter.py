@@ -91,7 +91,7 @@ class Hl:
 						next_chars = func[idx+1:]
 						is_comment = [True] if prev_tokens == [] else [True if i == '\n' else False for i in prev_tokens if i not in " \t"]
 						next_word = next_chars.split(" ")[0]
-						if is_comment[0] and not any([True for command in ["define", "declare", "alias"] if command == next_word]):
+						if is_comment[0] and not any(True for command in ["define", "declare", "alias"] if command == next_word):
 							switch_mode("comment")
 							reset_token()
 							curr_token += "\u200b"

@@ -3,6 +3,7 @@ import os
 import disnake
 import dph
 from disnake.ext import commands
+from aiofiles import open
 
 Template = commands.option_enum(["datapack", "resourcepack"])
 
@@ -28,10 +29,10 @@ class TemplateCommand(commands.Cog, name="template"):
                 # Construct the full path to the 'datapack.zip' file
                 datapack_path = os.path.join(script_dir, "templates", "datapack.zip")
 
-                with open(datapack_path, "rb") as fp:
+                async with open(datapack_path, "rb") as fp:
                     await inter.response.send_message(
                         "📁 Here is a basic datapack template for 1.20.6:",
-                        file=disnake.File(fp, "Datapack Template UNZIP PLEASE.zip"),
+                        file=disnake.File(await fp.read(), "Datapack Template UNZIP PLEASE.zip"),
                     )
 
             case "resourcepack":
