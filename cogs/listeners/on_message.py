@@ -43,7 +43,7 @@ class OnMessage(commands.Cog):
                 ),
             )
             await message.reply(embed=embed)
-        if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot) and (str(message.guild.id) in highlighter_servers):
+        if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot):
             if message.channel.type == disnake.ChannelType.public_thread:
                 hooks = await message.channel.parent.webhooks()
                 
