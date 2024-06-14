@@ -4,7 +4,7 @@ import variables
 from disnake.ext import commands
 
 infos = commands.option_enum(
-    ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]
+    ["logs default", "me", "editor", "logs other", "update rp 1.19.3+", "update dp 1.21+"]
 )
 
 
