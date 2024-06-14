@@ -85,7 +85,7 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
                 embed = disnake.Embed(
                     color=disnake.Colour.orange(),
                     title=("**🚑 `/info`**"),
-                    description="Shows information about stuff outside of minecraft which might help you improve your datapacking experience\nSyntax: `/info info:<info>`\nAviable infos: `logs default`, `me`, `editor`, `logs other`, `update rp 1.19.3+` **MORE COMING SOON**",
+                    description="Shows information about stuff outside of minecraft which might help you improve your datapacking experience\nSyntax: `/info info:<info>`\nAviable infos: `logs default`, `me`, `editor`, `logs other`, `update rp 1.19.3+`, `update dp 1.21+` **MORE COMING SOON**",
                 )
             case "method":
                 embed = disnake.Embed(

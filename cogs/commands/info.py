@@ -4,7 +4,7 @@ import dph
 from disnake.ext import commands
 
 infos = commands.option_enum(
-    ["logs default", "me", "editor", "logs other", "update rp 1.19.3+"]
+    ["logs default", "me", "editor", "logs other", "update rp 1.19.3+", "update dp 1.21+"]
 )
 
 
@@ -52,6 +52,13 @@ class InfoCommand(commands.Cog, name="info"):
                     color=disnake.Color.orange(),
                     title=":information_source: Updating Resourcepacks Past 1.19.3",
                     description="1.19.3 introduced a change to resourcepacks which means that textures which aren't stored in `textures/item` or `textures/block` won't be loaded into the game by default. This means that most resource packs for earlier versions won't work in 1.19.3. \n\nThere are two ways to fix this:\n- Move your custom textures into `assets/minecraft/textures/item/...`, since all textures in the `item` (or `block`) folders are loaded by default.\n- Create an atlas file for your custom textures. An atlas file basically tells Minecraft to always load the textures in your custom folder. [This video](https://youtu.be/MHWX_GaK2g0) will explain how to do this.",
+                )
+
+            case "update dp 1.21+":
+                embed = disnake.Embed(
+                    color=disnake.Color.orange(),
+                    title=":information_source: Updating Datapacks Past 1.21",
+                    description="1.21 renamed many folders that make up a Minecraft datapack, breaking virtually all datapacks from prior versions. Most plural folder names were renamed to their singular variant. For example, the `functions` folder in previous versions, is now named `function`. The only folder that is still plural is `tags`.\nBelow is a list of all folder names changed in 1.21:\n`structures` -> `structure`\n`advancements` -> `advancement`\n`recipes` -> `recipe`\n`loot_tables` -> `loot_table`\n`predicates` -> `predicate`\n`item_modifiers` -> `item_modifier`\n`functions` -> `function`\n`tags/functions` -> `tags/function`\n`tags/items` -> `tags/item`\n`tags/blocks` -> `tags/block`\n`tags/entity_types` -> `tags/entity_type`\n`tags/fluids` -> `tags/fluid`\n`tags/game_events` -> `tags/game_event`",
                 )
 
         await inter.response.send_message(embed=embed)
