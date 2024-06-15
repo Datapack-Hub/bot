@@ -1,16 +1,16 @@
 import os
 
 import disnake
-import variables
 import dph
 from disnake.ext import commands
+from aiofiles import open
 
 methods = os.listdir("./method")
 
 for idx, ele in enumerate(methods):
     methods[idx] = ele.replace(".md", "")
 
-methods_enum = commands.option_enum(methods)
+MethodsType = commands.option_enum(methods)
 
 
 class MethodCommand(commands.Cog, name="method"):
@@ -22,12 +22,11 @@ class MethodCommand(commands.Cog, name="method"):
         description="Shows information about methods commonly used in datapacks",
     )
     async def method(
-        self, inter: disnake.ApplicationCommandInteraction, method: methods_enum
+        self, inter: disnake.ApplicationCommandInteraction, method: MethodsType
     ):
-        opened_file = open("./method/" + str(method) + ".md")
-        file_content = opened_file.read()
-        opened_file.close()
-
+        async with open("./method/" + str(method) + ".md") as opened_file:
+            file_content = await opened_file.read()
+            
         text = f"""# {method.title()}
         >>> {file_content}"""
 

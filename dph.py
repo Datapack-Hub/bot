@@ -1,8 +1,6 @@
 import disnake
 import variables
-import re
 
-from cogs.listeners.highlighter.highlighter import Hl
 
 async def log(header, description,color,self):
     
@@ -37,6 +35,5 @@ def convert_username(name):
 def get_highlighter_server_list():
     server_ids = []
     with open(file=f"{variables.full_path}/highlighter_servers.txt") as file:
-        for line in file.readlines():
-            server_ids.append(line.replace("\n",""))
+        server_ids = [line.replace("\n","") for line in file.readlines()]
     return server_ids

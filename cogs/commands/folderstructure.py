@@ -1,9 +1,8 @@
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
-type_enum = commands.option_enum(["resourcepack", "datapack"])
+FolderStructureType = commands.option_enum(["resourcepack", "datapack"])
 
 
 class FolderStructureCommand(commands.Cog, name="folderstructure"):
@@ -15,7 +14,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
         description="Shows the folder structure of datapacks/resourcepacks",
     )
     async def folderstructure(
-        self, inter: disnake.ApplicationCommandInteraction, type: type_enum = "datapack"
+        self, inter: disnake.ApplicationCommandInteraction, type: FolderStructureType = "datapack"
     ):
         match type:
             case "resourcepack":
@@ -49,7 +48,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 )
                 await inter.response.send_message(embed=embed)
                 
-                await dph.log("`/folderstructure` Command", f"A user looked up the `resourcepack` folderstructure","orange",self)
+                await dph.log("`/folderstructure` Command", "A user looked up the `resourcepack` folderstructure","orange",self)
 
             case "datapack":
                 embed = disnake.Embed(
@@ -99,4 +98,4 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 )
                 await inter.response.send_message(embed=embed)
 
-                await dph.log("`/folderstructure` Command", f"A user looked up the `datapack` folderstructure","orange",self)
+                await dph.log("`/folderstructure` Command", "A user looked up the `datapack` folderstructure","orange",self)
