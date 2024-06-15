@@ -43,33 +43,34 @@ class OnMessage(commands.Cog):
                 ),
             )
             await message.reply(embed=embed)
-        # if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot):
-        #     if message.channel.type == disnake.ChannelType.public_thread:
-        #         hooks = await message.channel.parent.webhooks()
+        if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot):
+            print("attempting highliht")
+            if message.channel.type == disnake.ChannelType.public_thread:
+                hooks = await message.channel.parent.webhooks()
                 
-        #         for hook in hooks:
-        #             if hook.name == "Datapack Helper Bot yay":
-        #                 break
-        #         else:
-        #             hook = await message.channel.parent.create_webhook(name="Datapack Helper Bot yay")
+                for hook in hooks:
+                    if hook.name == "Datapack Helper Bot yay":
+                        break
+                else:
+                    hook = await message.channel.parent.create_webhook(name="Datapack Helper Bot yay")
                 
-        #         await message.delete()
+                await message.delete()
                 
-        #         try:
-        #             await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none())
-        #             await dph.log("Syntax Highlighter", f"Sucessfully highlighted a user's message ","orange",self)
-        #         except:
-        #             await hook.send(message.content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
-        #             await dph.log("Syntax Highlighter", f"Failed highlighting a user's message ","red",self)
-        #     else:
-        #         hooks = await message.channel.webhooks()
+                try:
+                    await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none())
+                    await dph.log("Syntax Highlighter", f"Sucessfully highlighted a user's message ","orange",self)
+                except:
+                    await hook.send(message.content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
+                    await dph.log("Syntax Highlighter", f"Failed highlighting a user's message ","red",self)
+            else:
+                hooks = await message.channel.webhooks()
                 
-        #         for hook in hooks:
-        #             if hook.name == "Datapack Helper Bot yay":
-        #                 break
-        #         else:
-        #             hook = await message.channel.create_webhook(name="Datapack Helper Bot yay")
+                for hook in hooks:
+                    if hook.name == "Datapack Helper Bot yay":
+                        break
+                else:
+                    hook = await message.channel.create_webhook(name="Datapack Helper Bot yay")
                 
-        #         await message.delete()
-        #         await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
-        #         await dph.log("Syntax Highlighter", f"Sucessfully highlighted a user's message ","orange",self)
+                await message.delete()
+                await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
+                await dph.log("Syntax Highlighter", f"Sucessfully highlighted a user's message ","orange",self)
