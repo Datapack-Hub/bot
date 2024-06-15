@@ -1,4 +1,3 @@
-import logging
 import disnake
 import variables
 from disnake.ext import commands
@@ -69,4 +68,4 @@ class OnButtonClick(commands.Cog):
             await inter.response.edit_message(embed=embed,components=button)
             
         else:
-            logging.info(inter.component.custom_id)
+            print(inter.component.custom_id)
