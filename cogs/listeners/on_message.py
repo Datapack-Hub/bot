@@ -66,10 +66,10 @@ class OnMessage(commands.Cog):
                 hooks = await message.channel.webhooks()
                 
                 for hook in hooks:
-                    if hook.name == "Datapack Helper Bot yay":
+                    if hook.name == "Datapack Helper Bot (Updated Webhook)":
                         break
                 else:
-                    hook = await message.channel.create_webhook(name="Datapack Helper Bot yay")
+                    hook = await message.channel.create_webhook(name="Datapack Helper Bot (Updated Webhook)")
                 
                 await message.delete()
                 await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
