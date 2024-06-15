@@ -44,6 +44,9 @@ Contributions to this project are welcome! If you have ideas for new features, i
 
    # ROLES
    special_commands_roles = [<ids of roles that can run `>.<` commands>]
+
+   # OTHER
+   dev_bot_string = <string of characters that need to be unique to each version of the bot (dev, prod, etc) to avoid conflicts>
    ```
 
 6. Start the bot using:
