@@ -7,7 +7,7 @@ from disnake.ext import commands
 
 import dph
 
-type_enum = commands.option_enum(["resourcepack", "datapack"])
+PackFormatType = commands.option_enum(["resourcepack", "datapack"])
 
 
 class PackFormatCommand(commands.Cog, name="packformat"):

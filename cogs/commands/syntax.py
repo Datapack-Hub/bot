@@ -10,7 +10,7 @@ commands_2 = os.listdir("./command_syntax")
 for idx, ele in enumerate(commands_2):
     commands_2[idx] = ele.replace(".md", "")
 
-commands_enum = commands.option_enum(commands_2)
+CommandsEnum = commands.option_enum(commands_2)
 
 
 class SyntaxCommand(commands.Cog, name="syntax"):

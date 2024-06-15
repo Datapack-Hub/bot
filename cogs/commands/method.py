@@ -10,7 +10,7 @@ methods = os.listdir("./method")
 for idx, ele in enumerate(methods):
     methods[idx] = ele.replace(".md", "")
 
-methods_enum = commands.option_enum(methods)
+MethodsType = commands.option_enum(methods)
 
 
 class MethodCommand(commands.Cog, name="method"):
@@ -22,7 +22,7 @@ class MethodCommand(commands.Cog, name="method"):
         description="Shows information about methods commonly used in datapacks",
     )
     async def method(
-        self, inter: disnake.ApplicationCommandInteraction, method: methods_enum
+        self, inter: disnake.ApplicationCommandInteraction, method: MethodsType
     ):
         async with open("./method/" + str(method) + ".md") as opened_file:
             file_content = await opened_file.read()
