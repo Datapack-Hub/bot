@@ -1,10 +1,9 @@
-import os
 import re
 
 import disnake
 import variables
-import dph
 from disnake.ext import commands
+import dph
 
 from cogs.listeners.highlighter.highlighter import Hl
 
@@ -32,7 +31,7 @@ class OnMessage(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: disnake.Message):
         
-        highlighter_servers = dph.get_highlighter_server_list()
+        # highlighter_servers = dph.get_highlighter_server_list()
         
         if ("<@" + str(variables.bot_id) + ">") in message.content:
             embed = disnake.Embed(

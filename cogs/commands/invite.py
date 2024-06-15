@@ -1,9 +1,8 @@
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
-invites = commands.option_enum(
+Invites = commands.option_enum(
     [
         "datapack hub",
         "minecraft commands",
@@ -30,7 +29,7 @@ class InviteCommand(commands.Cog, name="invite"):
         description="Shows discord invite for a discord server relevant to datapacks",
     )
     async def invite(
-        self, inter: disnake.ApplicationCommandInteraction, invite: invites
+        self, inter: disnake.ApplicationCommandInteraction, invite: Invites
     ):
         match invite:
             case "datapack hub":
@@ -106,6 +105,11 @@ class InviteCommand(commands.Cog, name="invite"):
                     color=disnake.Colour.orange(),
                     title=("**Datapack Jam Invite**"),
                     description="Join the Datapack Jam discord server to test your skill in fun jams: https://dsc.gg/datapackjam",
+                )
+            case _:
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**🚪Datapack Helper Invite**"),
                 )
 
         await inter.response.send_message(embed=embed)

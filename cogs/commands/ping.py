@@ -1,6 +1,5 @@
 import disnake
 import dph
-import variables
 from disnake.ext import commands
 
 infos = commands.option_enum(

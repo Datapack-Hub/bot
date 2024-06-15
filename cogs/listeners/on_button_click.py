@@ -1,8 +1,8 @@
+import logging
 import disnake
 import variables
-import dph
 from disnake.ext import commands
-import json
+from aiofiles import open
 
 class OnButtonClick(commands.Cog):
     def __init__(self, bot):
@@ -24,8 +24,16 @@ class OnButtonClick(commands.Cog):
                 color= disnake.Color.blue()
             )
             
-            with open(file=f"{variables.full_path}/highlighter_servers.txt", mode="a") as file:
-                file.write(f"\n{inter.guild.id}")
+            if inter.guild is None:
+                embed = disnake.Embed(
+                    title="Error!",
+                    description="Something went wrong, report this to the developer! (on_button_click.py:29)",
+                )
+                await inter.send(embed=embed, ephemeral=True)
+                return
+            
+            async with open(file=f"{variables.full_path}/highlighter_servers.txt", mode="a") as file:
+                await file.write(f"\n{inter.guild.id}")
             
             await inter.response.edit_message(embed=embed,components=button)
 
@@ -42,15 +50,23 @@ class OnButtonClick(commands.Cog):
                 color= disnake.Color.blue()
             )
                     
-            with open(file=f"{variables.full_path}/highlighter_servers.txt", mode="r") as file:
-                lines = file.readlines()
+            async with open(file=f"{variables.full_path}/highlighter_servers.txt") as file:
+                lines = await file.readlines()
                 
-            with open(f"{variables.full_path}/highlighter_servers.txt", "w") as file:
+            async with open(f"{variables.full_path}/highlighter_servers.txt", "w") as file: 
+                if inter.guild is None:
+                    embed = disnake.Embed(
+                        title="Error!",
+                        description="Something went wrong, report this to the developer! (on_button_click.py:29)",
+                    )
+                    await inter.send(embed=embed, ephemeral=True)
+                    return
+                
                 for line in lines:
-                    if not str(inter.guild.id) in line:
-                        file.write(line)
+                    if str(inter.guild.id) not in line:
+                        await file.write(line)
                 
             await inter.response.edit_message(embed=embed,components=button)
             
         else:
-            print(inter.component.custom_id)
+            logging.info(inter.component.custom_id)

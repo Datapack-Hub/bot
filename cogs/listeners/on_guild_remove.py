@@ -1,7 +1,8 @@
-import disnake
 import variables
 import dph
 from disnake.ext import commands
+from disnake import Guild
+from aiofiles import open
 
 
 class OnGuildRemove(commands.Cog):
@@ -9,12 +10,12 @@ class OnGuildRemove(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_guild_remove(self, guild):
-        with open(file=f"{variables.full_path}/highlighter_servers.txt", mode="r") as file:
-            lines = file.readlines()
+    async def on_guild_remove(self, guild: Guild):
+        async with open(file=f"{variables.full_path}/highlighter_servers.txt") as file:
+            lines = await file.readlines()
             
-        with open(f"{variables.full_path}/highlighter_servers.txt", "w") as file:
+        async with open(f"{variables.full_path}/highlighter_servers.txt", "w") as file:
             for line in lines:
-                if not str(inter.guild.id) in line:
-                    file.write(line)
+                if str(guild.id) not in line:
+                    await file.write(line)
         await dph.log("**Removed From guild**","Bot was removed from a server","red",self)

@@ -1,12 +1,12 @@
+from pathlib import Path
 from re import match, findall, sub, search, MULTILINE
 from json import loads
-from string import ascii_letters
 import variables
 
 class Hl:
 	class Database:
-		with open(f"{variables.full_path}/cogs/listeners/highlighter/database.json", "r", encoding="utf-8") as db:
-			database_content = loads(db.read())
+		path = Path(f"{variables.full_path}/cogs/listeners/highlighter/database.json")
+		database_content = loads(path.read_text())
 		color_codes = database_content["color_codes"]
 		commands = database_content["commands"]
 		color_classes = database_content["color_classes"]
@@ -67,7 +67,6 @@ class Hl:
 		# Magec
 		for idx, char in enumerate(func):
 			next_char = func[idx+1:idx+2]
-			prev_char = func[idx-1]
 			prev_tokens = tokens[::-1]
 			if state["mode"] == "normal":
 				if char not in " \\\n\t#[]{}.\"'/$":
@@ -93,7 +92,7 @@ class Hl:
 						next_chars = func[idx+1:]
 						is_comment = [True] if prev_tokens == [] else [True if i == '\n' else False for i in prev_tokens if i not in " \t"]
 						next_word = next_chars.split(" ")[0]
-						if is_comment[0] and not any([True for command in ["define", "declare", "alias"] if command == next_word]):
+						if is_comment[0] and not any(True for command in ["define", "declare", "alias"] if command == next_word):
 							switch_mode("comment")
 							reset_token()
 							curr_token += "\u200b"
@@ -278,5 +277,5 @@ class Hl:
 		function_elements = function.replace("\n", "<br>").split("\u001b[")[1:]
 		for element in function_elements:
 			matches = search(ansi_codes_re, element)
-			converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" "+color_classes[matches.group(4)] if matches.group(4) != None else ""}">{element.replace(matches.group(1), "")}</span>'
+			converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" "+color_classes[matches.group(4)] if matches.group(4) is not None else ""}">{element.replace(matches.group(1), "")}</span>'
 		return f"<pre>{converted}</pre>"

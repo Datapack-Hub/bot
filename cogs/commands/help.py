@@ -1,9 +1,8 @@
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
-commands_enum = commands.option_enum(
+CommandsEnum = commands.option_enum(
     [
         "invite",
         "help",
@@ -31,7 +30,7 @@ class HelpCommand(commands.Cog, name="help"):
     async def help(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        command: commands_enum = "all",
+        command: CommandsEnum = "all",
     ):
         match command:
             case "all":
@@ -117,6 +116,12 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
                     title=("**🚑 `/highlighter`**"),
                     description="Informs you about the bot's `mcfunction` syntax highlighter function. \nSyntax: `/highlighter`",
                 ) 
+            case _:
+                embed = disnake.Embed(
+                    color=disnake.Colour.orange(),
+                    title=("**⚠️ `Invalid command`**"),
+                    description="Please use `/help` to see a list of all commands",
+                ),
 
 
         await inter.response.send_message(embed=embed)

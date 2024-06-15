@@ -1,9 +1,8 @@
 import disnake
-import variables
 import dph
 from disnake.ext import commands
 
-resources = commands.option_enum(
+Resources = commands.option_enum(
     [
         "misode",
         "mcstacker",
@@ -28,7 +27,7 @@ class ResourceCommand(commands.Cog, name="resource"):
         description="Shows links for useful minecraft resources",
     )
     async def resource(
-        self, inter: disnake.ApplicationCommandInteraction, resource: resources
+        self, inter: disnake.ApplicationCommandInteraction, resource: Resources
     ):
         match resource:
             case "misode":
@@ -90,6 +89,12 @@ class ResourceCommand(commands.Cog, name="resource"):
                     color=disnake.Color.orange(),
                     title=("**📖 minecraftjson**"),
                     description="JSON generator for tellraws, titles and books!\n\nLink: https://www.minecraftjson.com/",
+                )
+            case _:
+                embed = disnake.Embed(
+                    color=disnake.Color.orange(),
+                    title=("**📖 Minecraft Wiki**"),
+                    description="Contains information about everything minecraft, including datapacking related features!\n\nLink: https://minecraft.wiki/",
                 )
 
         await inter.response.send_message(embed=embed)
