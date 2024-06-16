@@ -1,8 +1,0 @@
-MEMBERS: 
-dev_diamond
-flyrr_
-Datapack Helper
-Datapack Helper Dev
-Datapack Hub Dev
-fernlyfact
-FPS
