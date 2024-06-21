@@ -1,7 +1,7 @@
 In Minecraft, you can create arrays within data storages like this:
 
 ```hs
-data merge storage namespace:main {array:[1,2,3,4,5]}
+data modify storage namespace:main array set value [1, 2, 3, 4, 5]
 ```
 
 Array iteration allows you to **check each array element individually** and perform actions on them.
@@ -11,7 +11,7 @@ For this example, let's use the previously created array and print out each elem
 
 ```hs
 # Get amount of all the elements in the array to avoid looping twice.
-execute store result score $len OBJECTIVE run data get storage namespace:main array[]
+execute store result score $len OBJECTIVE run data get storage namespace:main array
 
 # Set current amount of iterations to 0
 scoreboard players set $current OBJECTIVE 0
