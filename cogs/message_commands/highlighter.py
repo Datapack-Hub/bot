@@ -4,6 +4,7 @@ from json import loads
 import variables
 from typing import ClassVar
 
+
 class Highlighter:
 	class Database:
 		path = Path(variables.full_path + "/cogs/message_commands/database.json")
