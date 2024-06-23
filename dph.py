@@ -27,10 +27,12 @@ async def log(header, description,color,self):
     
     await channel.send(embed=embed)
 
+
 def convert_username(name):
     
     name.replace("*","\*").replace("_","\_").replace("~~","\~~")
     return name
+
 
 def get_highlighter_server_list():
     server_ids = []

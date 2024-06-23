@@ -4,9 +4,9 @@ import bot_token
 
 
 # Cogs
-#TODO import cogs.message_commands.fancify as fancify
+# TODO import cogs.message_commands.fancify as fancify
 
-#? reconsider/rework this: import cogs.commands.eliminate as eliminate
+# ? reconsider/rework this: import cogs.commands.eliminate as eliminate
 import cogs.commands.folderstructure as folderstructure
 import cogs.commands.help as help
 import cogs.commands.info as info

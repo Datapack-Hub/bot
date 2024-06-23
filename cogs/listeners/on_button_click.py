@@ -3,6 +3,7 @@ import variables
 from disnake.ext import commands
 from aiofiles import open
 
+
 class OnButtonClick(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -12,15 +13,15 @@ class OnButtonClick(commands.Cog):
         
         if inter.component.custom_id == "dph_highlighter_on":
             button = disnake.ui.Button(
-                style = disnake.ButtonStyle.red,
-                custom_id = "dph_highlighter_off",
-                label = "Disable"
+                style=disnake.ButtonStyle.red,
+                custom_id="dph_highlighter_off",
+                label="Disable"
             )
         
             embed = disnake.Embed(
                 title="`mcfunction` Highlighter (ENABLED)",
                 description="The **`mcfunction` Highlighter** adds syntax highlighting to all **mcfunction code in codeblocks**. This is achvieved by **deleting** the message originally sent and **replacing it using a webhook** (with the original senders name and profile picture). \nYou always can **re-enable** this option at any time after disabling it!\n**Does not apply retroactively to already sent messages**",
-                color= disnake.Color.blue()
+                color=disnake.Color.blue()
             )
             
             if inter.guild is None:
@@ -38,15 +39,15 @@ class OnButtonClick(commands.Cog):
 
         elif inter.component.custom_id == "dph_highlighter_off":
             button = disnake.ui.Button(
-                style = disnake.ButtonStyle.green,
-                custom_id = "dph_highlighter_on",
-                label = "Enable"
+                style=disnake.ButtonStyle.green,
+                custom_id="dph_highlighter_on",
+                label="Enable"
             )
         
             embed = disnake.Embed(
                 title="`mcfunction` Highlighter (DISABLED)",
                 description="The **`mcfunction` Highlighter** adds syntax highlighting to all **mcfunction code in codeblocks**. This is achvieved by **deleting** the message originally sent and **replacing it using a webhook** (with the original senders name and profile picture). \nYou can always **disable** this option at any time after enabling it!\n**Does not apply retroactively to already sent messages**",
-                color= disnake.Color.blue()
+                color=disnake.Color.blue()
             )
                     
             async with open(file=f"{variables.full_path}/highlighter_servers.txt") as file:
