@@ -68,7 +68,7 @@ class OnMessage(commands.Cog):
                     if hook.name == f"Datapack Helper Bot (Updated Webhook){variables.dev_bot_string}":
                         break
                 else:
-                    hook = await message.channel.create_webhook(name=f"Datapack Helper Bot (Updated Webhook){variables.dev_bot_string}")
+                    hook = await message.channel.create_webhook(name=f"Datapack Helper Bot (Updated Webhook){variables.dev_bot_string}") #asd
                 
                 await message.delete()
                 await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
