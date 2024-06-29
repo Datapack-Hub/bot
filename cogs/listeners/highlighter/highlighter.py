@@ -3,6 +3,7 @@ from re import match, findall, sub, search, MULTILINE
 from json import loads
 import variables
 
+
 class Hl:
 	class Database:
 		path = Path(f"{variables.full_path}/cogs/listeners/highlighter/database.json")
@@ -225,15 +226,15 @@ class Hl:
 				highlighted += colors["comment"] + token.replace(comment_content, "") + (colors[comment_type] if comment_type == "link-comment" else "") + edited_content
 			elif token in possible_subcommands and bracket_index <= 0 and prev_clear_tokens[0] != "run":
 				highlighted += colors["subcommand"] + token
-			elif (raw_command:=token.replace("$", "")) in commands and bracket_index <= 0:
+			elif (raw_command := token.replace("$", "")) in commands and bracket_index <= 0:
 				highlighted += (colors["macro_bf_command"]+"$" if "$" in token else "") + colors["command"] + raw_command
 				possible_subcommands = commands[raw_command]["subcommands"]
 			elif token[0] in "\"'":
 				# Highlighting macros
 				macros = findall(r"\$\([0-9A-z-_\.]+\)", token)
 				for macro in macros:
-					token = token.replace(macro, macro.replace("$", colors["macro"]+"$")\
-					.replace("(", colors[f"bracket{bracket_index}"]+"("+colors["text"])\
+					token = token.replace(macro, macro.replace("$", colors["macro"]+"$")
+					.replace("(", colors[f"bracket{bracket_index}"]+"("+colors["text"])
 					.replace(")", colors[f"bracket{bracket_index}"]+")"+colors["string"]))
 				#
 				highlighted += colors["string"] + token
@@ -248,11 +249,11 @@ class Hl:
 			elif token == "/" and fut_tokens[0] in commands:
 				highlighted += colors["macro_bf_command"] + token
 			elif token in "[{(":
-				highlighted += colors[f"bracket{bracket_index%3}"] + token
+				highlighted += colors[f"bracket{bracket_index % 3}"] + token
 				bracket_index += 1
 			elif token in ")}]":
 				bracket_index -= 1
-				highlighted += colors[f"bracket{bracket_index%3}"] + token
+				highlighted += colors[f"bracket{bracket_index % 3}"] + token
 			elif match(r"^(~-?[0-9]*\.?[0-9]*|\^-?[0-9]*\.?[0-9]*|-?[0-9]+\.?[0-9]*[bsdf]?|-?\.?[0-9]+[bsdf]?)$", token):
 				highlighted += colors["number"] + token
 			elif match(r"\$\([0-9A-z-_\.]+\)", token):

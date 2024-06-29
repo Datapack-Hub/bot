@@ -123,7 +123,6 @@ Here's a list of all the commands this bot adds, use `/help command:<command>` t
                     description="Please use `/help` to see a list of all commands",
                 ),
 
-
         await inter.response.send_message(embed=embed)
         
         await dph.log("`/help` Command", f"A user looked up help for `{command}`","orange",self)

@@ -25,7 +25,6 @@ class PackFormatCommand(commands.Cog, name="packformat"):
             response = await session.get("https://raw.githubusercontent.com/misode/mcmeta/summary/versions/data.json",timeout=5000,
                 headers={"User-Agent": "Datapack Helper Discord Bot"},)
 
-
             response = BeautifulSoup(await response.text(), "html.parser")
 
             if version.lower() == "latest":
@@ -74,7 +73,6 @@ class PackFormatCommand(commands.Cog, name="packformat"):
             if len(output_array) > 10:
                 output_array = output_array[(len(output_array)-10):]
                 output_array.append("\n_Only showing the 10 most recent formats. To view specific versions use `/packformat version:<id>`_")
-        
         
         for item in output_array:
             output += item
