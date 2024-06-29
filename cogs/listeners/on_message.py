@@ -68,7 +68,6 @@ class OnMessage(commands.Cog):
                         await hook.send(message.content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
                         await dph.log("Syntax Highlighter", f"Failed highlighting a user's message ","red",self)
                 else:
-<<<<<<< HEAD
                     hooks = await message.channel.webhooks()
 
                     for hook in hooks:
@@ -80,27 +79,3 @@ class OnMessage(commands.Cog):
                     await message.delete()
                     await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
                     await dph.log("Syntax Highlighter", f"Sucessfully highlighted a user's message ","orange",self)
-=======
-                    hook = await message.channel.parent.create_webhook(name="Datapack Helper Bot yay")
-                
-                await message.delete()
-                
-                try:
-                    await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none())
-                    await dph.log("Syntax Highlighter", "Sucessfully highlighted a user's message ","orange",self)
-                except:
-                    await hook.send(message.content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
-                    await dph.log("Syntax Highlighter", "Failed highlighting a user's message ","red",self)
-            else:
-                hooks = await message.channel.webhooks()
-                
-                for hook in hooks:
-                    if hook.name == f"Datapack Helper Bot (Updated Webhook){variables.dev_bot_string}":
-                        break
-                else:
-                    hook = await message.channel.create_webhook(name=f"Datapack Helper Bot (Updated Webhook){variables.dev_bot_string}")  # asd
-                
-                await message.delete()
-                await hook.send(replace_code_blocks(message.content),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
-                await dph.log("Syntax Highlighter", "Sucessfully highlighted a user's message ","orange",self)
->>>>>>> 0e74e545aaf1291bdd86e9adac18a8546811347d
