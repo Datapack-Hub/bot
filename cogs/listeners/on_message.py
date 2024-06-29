@@ -48,7 +48,7 @@ class OnMessage(commands.Cog):
         if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot):
             print("attempting highliht")
             if len(replace_code_blocks(message.content)) >= 2000:
-                await message.reply("_**ERROR**: Can't apply syntax highlighting due to message lenght limitations_")
+                await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else: 
                 if message.channel.type == disnake.ChannelType.public_thread:
                     hooks = await message.channel.parent.webhooks()
