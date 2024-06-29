@@ -1,13 +1,11 @@
-from pathlib import Path
 from re import match, findall, sub, search, MULTILINE
 from json import loads
-import variables
-
+from string import ascii_letters
 
 class Hl:
 	class Database:
-		path = Path(f"{variables.full_path}/cogs/listeners/highlighter/database.json")
-		database_content = loads(path.read_text())
+		with open("database.json", "r", encoding="utf-8") as db:
+			database_content = loads(db.read())
 		color_codes = database_content["color_codes"]
 		commands = database_content["commands"]
 		color_classes = database_content["color_classes"]
@@ -68,6 +66,7 @@ class Hl:
 		# Magec
 		for idx, char in enumerate(func):
 			next_char = func[idx+1:idx+2]
+			prev_char = func[idx-1]
 			prev_tokens = tokens[::-1]
 			if state["mode"] == "normal":
 				if char not in " \\\n\t#[]{}.\"'/$":
@@ -93,7 +92,7 @@ class Hl:
 						next_chars = func[idx+1:]
 						is_comment = [True] if prev_tokens == [] else [True if i == '\n' else False for i in prev_tokens if i not in " \t"]
 						next_word = next_chars.split(" ")[0]
-						if is_comment[0] and not any(True for command in ["define", "declare", "alias"] if command == next_word):
+						if is_comment[0] and not any([True for command in ["define", "declare", "alias"] if command == next_word]):
 							switch_mode("comment")
 							reset_token()
 							curr_token += "\u200b"
@@ -211,7 +210,7 @@ class Hl:
 				token = token[1:]
 				comment_content = sub(r"^\s*#(#|>)?", "", token, flags=MULTILINE)
 				edited_content = comment_content[:]
-				if token[1] in "#>":
+				if len(token) >= 2 and token[1] in "#>":
 					comment_type = "link-comment"
 				else:
 					comment_type = "comment"
@@ -226,16 +225,16 @@ class Hl:
 				highlighted += colors["comment"] + token.replace(comment_content, "") + (colors[comment_type] if comment_type == "link-comment" else "") + edited_content
 			elif token in possible_subcommands and bracket_index <= 0 and prev_clear_tokens[0] != "run":
 				highlighted += colors["subcommand"] + token
-			elif (raw_command := token.replace("$", "")) in commands and bracket_index <= 0:
+			elif (raw_command:=token.replace("$", "")) in commands and bracket_index <= 0:
 				highlighted += (colors["macro_bf_command"]+"$" if "$" in token else "") + colors["command"] + raw_command
 				possible_subcommands = commands[raw_command]["subcommands"]
 			elif token[0] in "\"'":
 				# Highlighting macros
 				macros = findall(r"\$\([0-9A-z-_\.]+\)", token)
 				for macro in macros:
-					token = token.replace(macro, macro.replace("$", colors["macro"]+"$")
-					.replace("(", colors[f"bracket{bracket_index}"]+"("+colors["text"])
-					.replace(")", colors[f"bracket{bracket_index}"]+")"+colors["string"]))
+					token = token.replace(macro, macro.replace("$", colors["macro"]+"$")\
+					.replace("(", colors[f"bracket{bracket_index%3}"]+"("+colors["text"])\
+					.replace(")", colors[f"bracket{bracket_index%3}"]+")"+colors["string"]))
 				#
 				highlighted += colors["string"] + token
 			elif token == "..":
@@ -249,15 +248,15 @@ class Hl:
 			elif token == "/" and fut_tokens[0] in commands:
 				highlighted += colors["macro_bf_command"] + token
 			elif token in "[{(":
-				highlighted += colors[f"bracket{bracket_index % 3}"] + token
+				highlighted += colors[f"bracket{bracket_index%3}"] + token
 				bracket_index += 1
 			elif token in ")}]":
 				bracket_index -= 1
-				highlighted += colors[f"bracket{bracket_index % 3}"] + token
+				highlighted += colors[f"bracket{bracket_index%3}"] + token
 			elif match(r"^(~-?[0-9]*\.?[0-9]*|\^-?[0-9]*\.?[0-9]*|-?[0-9]+\.?[0-9]*[bsdf]?|-?\.?[0-9]+[bsdf]?)$", token):
 				highlighted += colors["number"] + token
 			elif match(r"\$\([0-9A-z-_\.]+\)", token):
-				highlighted += f"{colors['macro']}${colors[f'bracket{bracket_index}']}({colors['text']}{token[2:-1]}{colors[f'bracket{bracket_index}']})"
+				highlighted += f"{colors['macro']}${colors[f'bracket{bracket_index%3}']}({colors['text']}{token[2:-1]}{colors[f'bracket{bracket_index}']})"
 			elif token == "\\":
 				highlighted += colors["backslash"] + token
 			elif token in " \t\n":
@@ -278,5 +277,5 @@ class Hl:
 		function_elements = function.replace("\n", "<br>").split("\u001b[")[1:]
 		for element in function_elements:
 			matches = search(ansi_codes_re, element)
-			converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" "+color_classes[matches.group(4)] if matches.group(4) is not None else ""}">{element.replace(matches.group(1), "")}</span>'
+			converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" "+color_classes[matches.group(4)] if matches.group(4) != None else ""}">{element.replace(matches.group(1), "")}</span>'
 		return f"<pre>{converted}</pre>"

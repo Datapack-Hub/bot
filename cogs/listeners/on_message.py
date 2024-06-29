@@ -47,7 +47,7 @@ class OnMessage(commands.Cog):
             
         if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot):
             print("attempting highliht")
-            content = (message.content).replace("#\n","").replace("# \n","")
+            content = (message.content)
             if len(replace_code_blocks(content)) >= 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else: 
