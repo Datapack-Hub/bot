@@ -1,10 +1,15 @@
 from re import match, findall, sub, search, MULTILINE
 from json import loads
 from string import ascii_letters
+from pathlib import Path
+import variables
+
+path = Path(f"{variables.full_path}/cogs/listeners/highlighter/database.json")
 
 class Hl:
 	class Database:
-		with open("database.json", "r", encoding="utf-8") as db:
+
+		with open(path, "r", encoding="utf-8") as db:
 			database_content = loads(db.read())
 		color_codes = database_content["color_codes"]
 		commands = database_content["commands"]
