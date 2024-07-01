@@ -2,21 +2,58 @@ import disnake
 import dph
 from disnake.ext import commands
 
-CommandsEnum = commands.option_enum(
-    [
-        "invite",
-        "help",
-        "syntax",
-        "template",
-        "info",
-        "method",
-        "folderstructure",
-        "packformat",
-        "resource",
-        "highlighter",
-        "ping"
-    ]
-)
+COMMANDS = [
+    {
+        "command":"template",
+        "short":"Shows a template for datapacks or resource packs",
+        "long":"**About**\nSends a datapack/resource pack template.\nSyntax: `/template [type:datapack|resourcepack>]` (defaults to `datapack`)"
+    },
+    {
+        "command":"invite",
+        "short":"Shows invites to useful datapack related servers",
+        "long":"**About**\nShows invites to useful datapack related servers\n\n**Syntax:**\n `/invite invite:<server>`\n\n**Available invites:**\n - `datapack hub`\n- `minecraft commands`\n- `shader labs`\n- `bot`\n- `smithed`\n- `blockbench`\n- `optifine`\n- `fabric`\n- `minecraft`\n- `dataworld (fr)`\n- `animated java`\n- `datapack jam`"
+    },
+    {
+        "command":"packformat",
+        "short":"Shows the `pack_format` for a specific version",
+        "long":"**About**\nShows the `pack_format` (for use in `pack.mcmeta`) for a specific version(s)\n\n**Syntax:**\n `/packformat [version:latest|snapshots|releases|<minecraft version>]` "
+    },
+    {
+        "command":"folderstructure",
+        "short":"Shows the folder structure for datapacks/resource packs",
+        "long":"**About**\nShows the folder structure for datapacks/resource packs as a folder tree.\n\n**Syntax:**\n `/folderstructure [type:datapack|resourcepack]` (defaults to `datapack`)"
+    },
+    {
+        "command":"syntax",
+        "short":"Shows the syntax of any Minecraft command",
+        "long":"**About**\nShows the syntax of any Minecraft command\n\n**Syntax:**\n `/syntax command:<command>`"
+    },
+    {
+        "command":"info",
+        "short":"Shows a quick guide about certain tips/tools you can use",
+        "long":"**About**\nShows a quick guide about certain tips/tools you can use\n\n**Syntax:**\n `/info info:<name>`\n\n**Available Guides**: \n- `logs default`\n- `me`\n- `editor`\n- `logs other`\n- `update rp 1.19.3+`\n- `update dp 1.21+`"
+    },
+    {
+        "command":"method",
+        "short":"Shows a full-size guide for certain common datapack concepts",
+        "long":"**About**\nShows a full-size guide for certain common datapack concepts\n\n**Syntax:**\n `/method method:<name>`\n\n**Available Guides**:\n- `random number`\n- `raycast`\n- `slowcast`\n- `rightclick detection`\n- `rightclick detection coas`\n- `rightclick detection EoE`\n- `rightclick detection`\n- `rightclick detection interaction`\n- `rightclick detection food`\n- `custom gui`\n- `custom item crafting recipe`\n- `array iteration`\n- `player id system`"
+    },
+    {
+        "command":"resource",
+        "short":"Links to external datapack resources",
+        "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `misode`\n- `mcstacker`\n- `taglib`\n- `minecraft wiki`\n- `cloudwolf`\n- `crafting`\n- `smithed`\n- `minecraft tools`\n- `minecraftjson`"
+    },
+    {
+        "command":"highlighter",
+        "short":"Information about the automatic syntax highlighter for mcfunction",
+        "long":"**About**\nInformation about the automatic syntax highlighter for mcfunction\n\n**Syntax:**\n `/highlighter`"
+    },
+    {
+        "command":"ping",
+        "short":"Returns the ping of the bot",
+        "long":"**About**\nReturns the ping of the bot\n\n**Syntax:**\n `/ping`"
+    }
+]
 
 
 class HelpCommand(commands.Cog, name="help"):
@@ -30,99 +67,32 @@ class HelpCommand(commands.Cog, name="help"):
     async def help(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        command: CommandsEnum = "all",
+        command: str = commands.Param("*",choices=[item["command"] for item in COMMANDS]),
     ):
-        match command:
-            case "all":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 Help**"),
-                    description="""
-Here's a list of all the commands this bot adds, use `/help command:<command>` to learn more about a specific command!
-**/template**: Sends a datapack/resourcepack template
-**/invite**: Shows invites to datapacking-relevant discord servers
-**/packformat**: Shows the datapack/resourcepack packformat for a specific version or multiple versions
-**/folderstructure**: Shows folder structure for datapacks/resourcepacks
-**/syntax**: Shows the syntax of any minecraft command
-**/info:**: Shows information about stuff outside of minecraft, which might improve your datapacking experience
-**/method**: Shows how to do certain stuff using datapacks/commands
-**/resource**: Gives you the link to any resource useful for datapacking
-**/highlighter**: Informs you about the bot's `mcfunction` syntax highlighter function. _([Source Code by bth123](https://github.com/bth123/mcf-ansi-highlighter))_
-**/ping**: Returns current bot latency""",
-                )
-            case "ping":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/ping`**"),
-                    description="Returns bot ping.",
-                )
-            case "invite":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/invite`**"),
-                    description="Shows invites for discord servers relevant for datapacks in one way or another\nSyntax: `/invite invite:<server>`\nAviable invites: `datapack hub`,`minecraft commands`,`shader labs`,`bot`,`smithed`,`blockbench`,`optifine`,`fabric`,`minecraft`,`dataworld (fr)`, `animated java`,`datapack jam`",
-                )
-            case "help":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/help`**"),
-                    description="Shows either a list of all bot commands or information about a specific bot command\nSyntax `/help command:<command>`\nAviable commands: `invite`,`help`,`eliminate`,`resolve`,`newsletter`,`syntax`,`template`,`info`,`folderstructure`,`packformat`,highlighter,`ping`",
-                )
-            case "syntax":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/syntax`**"),
-                    description="Shows the syntax of any minecraft command\nSyntax: `/syntax command:<command>`",
-                )
-            case "template":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/template`**"),
-                    description="Sends a datapack/resourcepack template to the current channel\nSyntax: `/template type[datapack|resourcepack]` (defaults to `datapack`)",
-                )
-            case "info":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/info`**"),
-                    description="Shows information about stuff outside of minecraft which might help you improve your datapacking experience\nSyntax: `/info info:<info>`\nAviable infos: `logs default`, `me`, `editor`, `logs other`, `update rp 1.19.3+`, `update dp 1.21+` **MORE COMING SOON**",
-                )
-            case "method":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/method`**"),
-                    description="Shows how to do certain stuff using datapacks/commands\nSyntax: `/method method:<method>`\nAviable methods: `random number`, `raycast`, `slowcast`, `rightclick detection`, `rightclick detection coas`, `rightclick detection EoE`, `rightclick detection`, `rightclick detection interaction`,`rightclick detection food`,`custom gui`,`custom item crafting recipe`,`array iteration`, `player id system` **MORE COMING SOON**",
-                )
-            case "packformat":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/packformat`**"),
-                    description="Shows the datapack/resourcepack packformat for a specific version or multiple versions\nSyntax: `/packformat [latest|snapshots|releases|<minecraft version>]` ",
-                )
-            case "folderstructure":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/folderstructure`**"),
-                    description="Shows the folderstructure of datapacks/resourcepacks\nSyntax: `/folderstructure type:[datapack|resourcepack]` (defaults to datapack)",
-                )
-            case "resource":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/resource`**"),
-                    description="Shows link and short explanation to a resource helpful on your datapacking journey\nSyntax: `/resource resource:<reource>`\nAviable resources: `misode`, `mcstacker`, `taglib`, `minecraft wiki`, `cloudwolf`, `crafting (thedestruc7i0n)`, `smithed`, `minecraft tools`, `minecraftjson`\n_([Source Code by bth123](https://github.com/bth123/mcf-ansi-highlighter))_",
-                )
-            case "highlighter":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**🚑 `/highlighter`**"),
-                    description="Informs you about the bot's `mcfunction` syntax highlighter function. \nSyntax: `/highlighter`",
-                ) 
-            case _:
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**⚠️ `Invalid command`**"),
-                    description="Please use `/help` to see a list of all commands",
-                ),
+        if command == "*":
+            content = "Datapack Helper is a bot run by the team at **Datapack Hub** to help you with your datapacking experience. With this bot, teaching people how to create datapacks (as well as making them yourself) is much quicker and easier.\n\n**Commands**:\n"
+            for cmd in COMMANDS:
+                content += f"- `/{cmd['command']}`: {cmd['short']}\n"
+            content += "\nYou can use `/help <command>` to find out more about a command."
+            
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(), 
+                title="Datapack Helper", 
+                description=content,
+            )
+                
+            await inter.response.send_message(embed=embed)
+        else:
+            cmd = next((item for item in COMMANDS if item["command"] == command), None)
+            if not cmd:
+                return await inter.response.send_message(f"The command `{command}` does not exist.",ephemeral=True)
 
-        await inter.response.send_message(embed=embed)
-        
+            embed = disnake.Embed(
+                color=disnake.Colour.orange(), 
+                title=f"About the command`/{command}`", 
+                description=cmd["long"],
+            )
+                
+            await inter.response.send_message(embed=embed)
+
         await dph.log("`/help` Command", f"A user looked up help for `{command}`","orange",self)
