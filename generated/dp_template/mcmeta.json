@@ -1,8 +1,8 @@
 {
     "pack":{
-        "pack_format": 40,
+        "pack_format": 48,
         "description":[
-            {"text":"0.20.6 Datapack Template, made with <3 by Datapack Hub","color":"#FF631A"}
+            {"text":"1.21 Datapack Template, made with <3 by Datapack Hub","color":"#FF631A"}
         ]
     }
 }

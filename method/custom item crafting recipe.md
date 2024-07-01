@@ -2,7 +2,7 @@
 
 **This guide assumes that you already knowledge some basic commands and how crafting recipes and advancements work.**
 
-*Text in between `<>`` is a placeholder*
+*Text in between `<>` is a placeholder*
 
 To create a crafting recipe for one of your custom items, you need just a little bit more than for a normal recipe.
 
