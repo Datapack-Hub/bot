@@ -26,11 +26,11 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                     ├── pack.png
                     └── assets    
                         ├── icons    
-                        ├── minecraft    
-                        │   ├── sounds.json    
+                        ├── minecraft
+                        │   ├── sounds.json  
+                        │   ├── atlases
                         │   ├── blockstates    
                         │   ├── font    
-                        │   ├── gpu_warnlist.json    
                         │   ├── icons    
                         │   ├── lang    
                         │   ├── models    
@@ -38,8 +38,9 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                         │   ├── resourcepacks    
                         │   ├── shaders    
                         │   ├── sounds    
-                        │   ├── texts    
-                        │   └── textures    
+                        │   ├── texts
+                        |   ├── textures
+                        │   └── gpu_warnlist.json        
                         └── realms        
                             ├── lang        
                             └── textures
@@ -59,24 +60,27 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 ├── pack.png
                 └── data
                     └── <namespace>
-                        ├── advancements
-                        ├── functions
-                        ├── item_modifiers
-                        ├── loot_tables
-                        ├── predicates
-                        ├── recipes
-                        ├── structures
+                        ├── advancement
+                        ├── function
+                        ├── item_modifier
+                        ├── loot_table
+                        ├── predicate
+                        ├── recipe
+                        ├── structure
                         ├── chat_type
                         ├── damage_type
-                        ├── tags 
-                        │   ├── blocks
-                        │   ├── entity_types
-                        │   ├── fluids
-                        │   ├── functions
-                        │   ├── game_events
-                        │   ├── items
-                        │   ├── chat_type
-                        │   └── damage_type
+                        ├── tags
+                        |   ├── banner_pattern
+                        │   ├── block
+                        │   ├── cat_variant
+                        │   ├── damage_type
+                        │   ├── enchantment
+                        │   ├── entity_type
+                        │   ├── fluid
+                        │   ├── function
+                        │   ├── game_event
+                        │   ├── instrument
+                        │   └── item
                         ├── dimension
                         ├── dimension_type
                         └── worldgen
