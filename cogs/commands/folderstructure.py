@@ -34,8 +34,7 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                         │   ├── icons    
                         │   ├── lang    
                         │   ├── models    
-                        │   ├── particles    
-                        │   ├── resourcepacks    
+                        │   ├── particles      
                         │   ├── shaders    
                         │   ├── sounds    
                         │   ├── texts
@@ -61,6 +60,8 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 └── data
                     └── <namespace>
                         ├── advancement
+                        ├── enchantment
+                        ├── enchantment_provider
                         ├── function
                         ├── item_modifier
                         ├── loot_table
@@ -69,12 +70,16 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                         ├── structure
                         ├── chat_type
                         ├── damage_type
+                        ├── trim_material
+                        ├── trim_pattern
+                        ├── jukebox_song
+                        ├── painting_variant
+                        ├── wolf_variant
                         ├── tags
                         |   ├── banner_pattern
                         │   ├── block
                         │   ├── cat_variant
                         │   ├── damage_type
-                        │   ├── enchantment
                         │   ├── entity_type
                         │   ├── fluid
                         │   ├── function
