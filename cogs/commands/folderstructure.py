@@ -85,7 +85,10 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                         │   ├── function
                         │   ├── game_event
                         │   ├── instrument
-                        │   └── item
+                        │   ├── item
+                        │   ├── painting_variant
+                        │   ├── point_of_interest_type
+                        │   └── worldgen
                         ├── dimension
                         ├── dimension_type
                         └── worldgen
