@@ -26,7 +26,7 @@ execute unless block ~ ~ ~ #<namespace>:pass_through run setblock ~ ~ ~ diamond_
 # If the raycast hasn't hit a block, continue, but only if the limit is 1 or more (1..)
 execute if block ~ ~ ~ #<namespace>:pass_through positioned ^ ^ ^0.1 if score .limit <objective> matches 1.. run function <namespace>:raycast```
 
-namespace/tags/blocks/**pass_through**.json:```
+namespace/tags/block/**pass_through**.json:```
 {
     "replace": false,
     "values": [

@@ -59,22 +59,22 @@ class FolderStructureCommand(commands.Cog, name="folderstructure"):
                 ├── pack.png
                 └── data
                     └── <namespace>
-                        ├── advancements
-                        ├── functions
-                        ├── item_modifiers
-                        ├── loot_tables
-                        ├── predicates
-                        ├── recipes
-                        ├── structures
+                        ├── advancement
+                        ├── function
+                        ├── item_modifier
+                        ├── loot_table
+                        ├── predicate
+                        ├── recipe
+                        ├── structure
                         ├── chat_type
                         ├── damage_type
                         ├── tags 
-                        │   ├── blocks
-                        │   ├── entity_types
-                        │   ├── fluids
-                        │   ├── functions
-                        │   ├── game_events
-                        │   ├── items
+                        │   ├── block
+                        │   ├── entity_type
+                        │   ├── fluid
+                        │   ├── function
+                        │   ├── game_event
+                        │   ├── item
                         │   ├── chat_type
                         │   └── damage_type
                         ├── dimension

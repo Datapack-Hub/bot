@@ -1,4 +1,4 @@
-`interacted_with_interaction.json` (located in the packs `advancements` folder)
+`interacted_with_interaction.json` (located in the packs `advancement` folder)
 
 ```json
 {
@@ -18,7 +18,7 @@
 }
 ```
 
-`rightclick_run.mcfunction` (located in the packs `functions` folder)
+`rightclick_run.mcfunction` (located in the packs `function` folder)
 
 ```hs
 # announces the use of the item in chat, feel free to replace this with whatever
