@@ -66,7 +66,6 @@ class ResourceCommand(commands.Cog, name="resource"):
         inter: disnake.ApplicationCommandInteraction, 
         resource: str = commands.Param(choices=[item["name"] for item in RESOURCES])
     ):
-        
         res = next((item for item in RESOURCES if item["name"] == resource), None)
         if not res:
             return await inter.response.send_message(f"The resource `{resource}` does not exist.",ephemeral=True)
