@@ -7,11 +7,8 @@ from aiofiles import open
 
 methods = os.listdir("./method")
 
-for idx, ele in enumerate(methods):
-    methods[idx] = ele.replace(".md", "")
-
-MethodsType = commands.option_enum(methods)
-
+for i, e in enumerate(methods):
+    methods[i] = e.replace(".md", "")
 
 class MethodCommand(commands.Cog, name="method"):
     def __init__(self, bot):
@@ -22,7 +19,7 @@ class MethodCommand(commands.Cog, name="method"):
         description="Shows information about methods commonly used in datapacks",
     )
     async def method(
-        self, inter: disnake.ApplicationCommandInteraction, method: MethodsType
+        self, inter: disnake.ApplicationCommandInteraction, method: str = commands.Param(methods)
     ):
         async with open("./method/" + str(method) + ".md") as opened_file:
             file_content = await opened_file.read()

@@ -64,7 +64,8 @@ class ResourceCommand(commands.Cog, name="resource"):
     async def resource(
         self, 
         inter: disnake.ApplicationCommandInteraction, 
-        resource: str = commands.Param(choices=[item["name"] for item in RESOURCES])):
+        resource: str = commands.Param(choices=[item["name"] for item in RESOURCES])
+    ):
         
         res = next((item for item in RESOURCES if item["name"] == resource), None)
         if not res:
