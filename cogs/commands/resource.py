@@ -2,101 +2,79 @@ import disnake
 import dph
 from disnake.ext import commands
 
-Resources = commands.option_enum(
-    [
-        "misode",
-        "mcstacker",
-        "taglib",
-        "minecraft wiki",
-        "cloudwolf",
-        "crafting (thedestruc7i0n)",
-        "smithed",
-        "minecraft tools",
-        "minecraftjson",
-        "mcassets"
-    ]
-)
+RESOURCES = [
+    {
+        "name":"Misode",
+        "about":"misode.github.io is the most popular site for JSON datapack generators. This site has generators for commonly used files such as advancements, recipes, and more, as well as datapack changelogs, debug inspectors, and more.",
+        "link":"https://misode.github.io/"
+    },
+    {
+        "name":"MCStacker",
+        "about":"MCStacker is a Minecraft command generator, focusing on generating commands with NBT/item components easily without having to write long commands by hand.",
+        "link":"https://mcstacker.net/"
+    },
+    {
+        "name":"Taglib",
+        "about":"Taglib by HeDeAn is a repopsitory containing loads of useful entity, block, and item tags for almost any use case.",
+        "link":"https://github.com/HeDeAnTheonlyone/Taglib"
+    },
+    {
+        "name":"Minecraft Wiki",
+        "about":"The Minecraft Wiki is a community-built wiki for Minecraft. It has loads of articles on useful features for datapacks.",
+        "link":"https://minecraft.wiki/"
+    },
+    {
+        "name":"Cloud Wolf",
+        "about":"Cloud Wolf is a youtuber covering loads of key datapacking concepts in videos targeted at intermediate and advanced datapackers - beginners might find it difficult to understand them.",
+        "link":"https://www.youtube.com/@CloudWolfMinecraft"
+    },
+    {
+        "name":"Crafting (TheDestruc7i0n)",
+        "about":"TheDestruc7i0n's crafting generator is a super easy way to generate crafting recipes instantly for use in datapacks.",
+        "link":"https://crafting.thedestruc7i0n.ca/"
+    },
+    {
+        "name":"Smithed",
+        "about":"Smithed is a community project aiming to provide a platform to share datapacks and remove all compatibility issues with datapacks. Following Smithed's conventions on compatibility make it easier for datapacks to work together",
+        "link":"https://smithed.net/"
+    },
+    {
+        "name":"Minecraft Tools",
+        "about":"Minecraft Tools has a really intuitive and easy GUI editor for JSON text and tellraw editor which makes creating nice-looking tellraw messages super easy",
+        "link":"https://minecraft.tools/"
+    },
+    {
+        "name":"MinecraftJson",
+        "about":"MinecraftJson is a more advanced online JSON text/tellraw editor for more advanced datapackers to create customised JSON text.",
+        "link":"https://minecraftjson.com/"
+    },
+    {
+        "name":"mcmeta (vanilla files)",
+        "about":"mcmeta (by Misode) is a repository containing all of the vanilla assets, data, commands, and version data for Minecraft Java edition.",
+        "link":"https://github.com/misode/mcmeta"
+    }
+]
 
 
 class ResourceCommand(commands.Cog, name="resource"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(
-        title="resource",
-        description="Shows links for useful minecraft resources",
-    )
+    @commands.slash_command(title="resource",description="Shows links for useful datapack-related resources")
     async def resource(
-        self, inter: disnake.ApplicationCommandInteraction, resource: Resources
+        self, 
+        inter: disnake.ApplicationCommandInteraction, 
+        resource: str = commands.Param(choices=[item["name"] for item in RESOURCES])
     ):
-        match resource:
-            case "misode":
-                embed = disnake.Embed(
-                    color=disnake.Colour.orange(),
-                    title=("**📖 Misode**"),
-                    description="Awesome website with generators for almost everything. Also contains a technical changelog for new versions, guides on how to use some features, a performance report inspector and more!\n\n**Full list of generators**: Loot Tables, Predicates, Item Modifiers, Advancements, Recipes, Text Components, Damage Types, Chat Types, Trim Materials, Trim Patterns, pack.mcmetas, Dimensions, Dimension Types, Biomes, Configured Carvers, Configured Features, Placed Features, Density Functions, Noise, Noise Settings, Structures, Structure Sets, Processor Lists, Template Pools, World Presets, Flat World Presets, World Settings, Block Tags, Entity Type Tags, Fluid Tags, Game Event Tags, Item Tags, Biome Tags, Structure Tags, Blockstates, Models, Fonts, Atlases\n\nLink: https://misode.github.io/",
-                )
-            case "mcstacker":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 MCStacker**"),
-                    description="Allows you to generate lots of different types of commands! Especially useful for long `/give` commands for items with custom names and lore and other things of the like.\n\nLink: https://mcstacker.net/",
-                )
-            case "mcassets":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 MC Assets**"),
-                    description="A cloud storage for all default files in Minecraft's assets and data folders, plus some additional tags and lists with helpful information.\n\nLink: https://mcasset.cloud/",
-                )
-            case "taglib":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Taglib**"),
-                    description="A libary of (entity, block, item, etc.) tags containing probably every tag you'll ever need!\n\nLink: https://github.com/HeDeAnTheonlyone/Taglib",
-                )
-            case "minecraft wiki":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Minecraft Wiki**"),
-                    description="Contains information about everything minecraft, including datapacking related features!\n\nLink: https://minecraft.wiki/",
-                )
-            case "cloudwolf":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Cloudwolf**"),
-                    description="Great Youtube channel with lots of tutorials and explanations on advanced datapacking!\n\nLink: https://www.youtube.com/@CloudWolfMinecraft",
-                )
-            case "crafting (thedestruc7i0n)":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Crafting (thedestruc7i0n)**"),
-                    description="Great looking, self explanatory generator for crafting recipes\n\nLink: https://crafting.thedestruc7i0n.ca/",
-                )
-            case "smithed":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Smithed**"),
-                    description="Great libaries, also has datapacking conventions and allows you to upload your own packs!\n\nLink: https://smithed.dev/",
-                )
-            case "minecraft tools":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Minecraft Tools**"),
-                    description="General minecraft tools, especially useful in datapacking because of it's tellraw generator!\n\nLink: https://minecraft.tools/",
-                )
-            case "minecraftjson":
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 minecraftjson**"),
-                    description="JSON generator for tellraws, titles and books!\n\nLink: https://www.minecraftjson.com/",
-                )
-            case _:
-                embed = disnake.Embed(
-                    color=disnake.Color.orange(),
-                    title=("**📖 Minecraft Wiki**"),
-                    description="Contains information about everything minecraft, including datapacking related features!\n\nLink: https://minecraft.wiki/",
-                )
+        res = next((item for item in RESOURCES if item["name"] == resource), None)
+        if not res:
+            return await inter.response.send_message(f"The resource `{resource}` does not exist.",ephemeral=True)
 
+        embed = disnake.Embed(
+            color=disnake.Colour.orange(), 
+            title=res["name"]
+        ).add_field("About",res["about"],inline=False).add_field("Link",res["link"],inline=False)
+            
         await inter.response.send_message(embed=embed)
         
         await dph.log("`/resource` Command", f"A user looked up the `{resource}` resource","orange",self)
