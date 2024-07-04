@@ -1,4 +1,4 @@
-`used_eye_of_ender.json` (located in your packs `advancements` folder, you can also add an nbt tag to the nbt field in `items` to make this only run when specific eoes are used)
+`used_eye_of_ender.json` (located in your packs `advancement` folder, you can also add an nbt tag to the nbt field in `items` to make this only run when specific eoes are used)
 
 ```json
 {
@@ -20,7 +20,7 @@
 }
 ```
 
-`rightclick_run` (located in your packs `functions` folder)
+`rightclick_run` (located in your packs `function` folder)
 
 ```hs
 # announces the use of the item in chat, feel free to replace this with whatever
