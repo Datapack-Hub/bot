@@ -44,6 +44,11 @@ COMMANDS = [
         "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `misode`\n- `mcstacker`\n- `taglib`\n- `minecraft wiki`\n- `cloudwolf`\n- `crafting`\n- `smithed`\n- `minecraft tools`\n- `minecraftjson`"
     },
     {
+        "command":"vanilla",
+        "short":"Shows a preview of any vanilla datapack file",
+        "long":"**About**\nShows a preview of any vanilla datapack file, using data from Misode's `mcmeta`.\n\n**Syntax:**\n `/vanilla path:<path to file>`"
+    },
+    {
         "command":"highlighter",
         "short":"Information about the automatic syntax highlighter for mcfunction",
         "long":"**About**\nInformation about the automatic syntax highlighter for mcfunction\n\n**Syntax:**\n `/highlighter`"
