@@ -1,7 +1,7 @@
+import aiohttp
 import disnake
-import dph
 from disnake.ext import commands
-import requests
+
 
 class VanillaCommand(commands.Cog):
     def __init__(self, bot):
@@ -9,8 +9,9 @@ class VanillaCommand(commands.Cog):
 
     @commands.slash_command(description="Returns any vanilla datapack file",)
     async def vanilla(self, inter: disnake.ApplicationCommandInteraction, path: str = commands.Param(description="The path to any vanilla data file.")):
-        req = requests.get("https://raw.githubusercontent.com/misode/mcmeta/data/data/minecraft/" + path)
-        text = req.text
+        async with aiohttp.ClientSession() as cs:
+            req = await cs.get("https://raw.githubusercontent.com/misode/mcmeta/data/data/minecraft/" + path)
+            text = await req.text()
         
         embed = disnake.Embed(
             title="PREVIEW: " + path,
