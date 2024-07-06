@@ -21,7 +21,7 @@ class OnButtonClick(commands.Cog):
             embed = disnake.Embed(
                 title="`mcfunction` Highlighter (ENABLED)",
                 description="The **`mcfunction` Highlighter** adds syntax highlighting to all **mcfunction code in codeblocks**. This is achvieved by **deleting** the message originally sent and **replacing it using a webhook** (with the original senders name and profile picture). \nYou always can **re-enable** this option at any time after disabling it!\n**Does not apply retroactively to already sent messages**",
-                color=disnake.Color.blue()
+                color=disnake.Colour.blue()
             )
             
             if inter.guild is None:
@@ -47,7 +47,7 @@ class OnButtonClick(commands.Cog):
             embed = disnake.Embed(
                 title="`mcfunction` Highlighter (DISABLED)",
                 description="The **`mcfunction` Highlighter** adds syntax highlighting to all **mcfunction code in codeblocks**. This is achvieved by **deleting** the message originally sent and **replacing it using a webhook** (with the original senders name and profile picture). \nYou can always **disable** this option at any time after enabling it!\n**Does not apply retroactively to already sent messages**",
-                color=disnake.Color.blue()
+                color=disnake.Colour.blue()
             )
                     
             async with open(file=f"{variables.full_path}/highlighter_servers.txt") as file:

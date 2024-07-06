@@ -112,7 +112,7 @@ class Highlighter:
 			elif word in possible_subcommands:
 				function_elements["subcommand"].append(word)
 				function_elements["text"].remove(word)
-		# ✨ Colorizing
+		# ✨ Colourizing
 		raw_nbt_thing = '|(?=\u001b)'
 		for type, tokens in function_elements.items():
 			for token in tokens:
