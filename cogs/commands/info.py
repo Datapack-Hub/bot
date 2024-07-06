@@ -57,7 +57,7 @@ class InfoCommand(commands.Cog, name="info"):
             description=current["about"]
         )
         
-        if current["image"] != None:
+        if current["image"] is not None:
             embed.set_image(current["image"])
             
         await inter.response.send_message(embed=embed)

@@ -7,10 +7,7 @@ from aiofiles import open
 
 parsed = os.listdir("./method")
         
-methods = []
-
-for name in parsed:
-    methods.append(name.replace(".md",""))
+methods = [name.replace(".md", "") for name in parsed]
     
 MethodsEnum = commands.option_enum(methods)
 
