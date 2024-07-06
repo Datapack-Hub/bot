@@ -3,12 +3,23 @@ import disnake
 from disnake.ext import commands
 
 
+def remove_prefix(path):
+    prefixes = ["/data/minecraft/", "/minecraft/", "data/minecraft/", "minecraft/", "/"]
+
+    for prefix in prefixes:
+        if path.startswith(prefix):
+            return path[len(prefix):]
+    
+    return path
+
 class VanillaCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.slash_command(description="Returns any vanilla datapack file",)
-    async def vanilla(self, inter: disnake.ApplicationCommandInteraction, path: str = commands.Param(description="The path to any vanilla data file.")):
+    async def vanilla(self, inter: disnake.ApplicationCommandInteraction, path: str = commands.Param(description="The path to any vanilla data file, starting from data/minecraft/.")):
+        path = remove_prefix(path)
+        
         async with aiohttp.ClientSession() as cs:
             req = await cs.get("https://raw.githubusercontent.com/misode/mcmeta/data/data/minecraft/" + path)
             text = await req.text()
