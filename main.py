@@ -18,6 +18,7 @@ import cogs.commands.resource as resource
 import cogs.commands.syntax as syntax
 import cogs.commands.template as template
 import cogs.commands.highlighter as highlighter_command
+import cogs.commands.vanilla as vanilla
 
 import cogs.listeners.on_button_click as on_button_click
 import cogs.listeners.on_guild_join as on_guild_join
@@ -58,6 +59,7 @@ bot.add_cog(help.HelpCommand(bot))
 bot.add_cog(ping.PingCommand(bot))
 bot.add_cog(resource.ResourceCommand(bot))
 bot.add_cog(highlighter_command.HighlighterCommand(bot))
+bot.add_cog(vanilla.VanillaCommand(bot))
 
 
 # Listeners
