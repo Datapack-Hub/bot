@@ -31,7 +31,7 @@ COMMANDS = [
     {
         "command":"info",
         "short":"Shows a quick guide about certain tips/tools you can use",
-        "long":"**About**\nShows a quick guide about certain tips/tools you can use\n\n**Syntax:**\n `/info info:<name>`\n\n**Available Guides**: \n- `logs default`\n- `me`\n- `editor`\n- `logs other`\n- `update rp 1.19.3+`\n- `update dp 1.21+`"
+        "long":"**About**\nShows a quick guide about certain tips/tools you can use\n\n**Syntax:**\n `/info info:<name>`\n\n**Available Guides**: \n- `Output Logs`\n- `Output Logs (other launchers)`\n- `Datapack Helper`\n- `Visual Studio Code`\n- `logs other`\n- `Updating Resource Packs Past 1.19.3`\n- `Updating Datapacks Past 1.21`"
     },
     {
         "command":"method",
@@ -41,7 +41,7 @@ COMMANDS = [
     {
         "command":"resource",
         "short":"Links to external datapack resources",
-        "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `misode`\n- `mcstacker`\n- `taglib`\n- `minecraft wiki`\n- `cloudwolf`\n- `crafting`\n- `smithed`\n- `minecraft tools`\n- `minecraftjson`"
+        "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `Misode`\n- `MCStacker`\n- `Taglib`\n- `Minecraft Wiki`\n- `Cloud Wolf`\n- `Crafting (TheDestruc7i0n)`\n- `Smithed`\n- `Minecraft Tools`\n- `MinecraftJson`\n- `mcmeta (vanilla files)`\n- `How to make a datapack`\n- `Worldgen guides`"
     },
     {
         "command":"highlighter",

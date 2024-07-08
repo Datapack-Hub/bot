@@ -15,7 +15,7 @@ RESOURCES = [
     },
     {
         "name":"Taglib",
-        "about":"Taglib by HeDeAn is a repopsitory containing loads of useful entity, block, and item tags for almost any use case.",
+        "about":"Taglib by HeDeAn is a repository containing loads of useful entity, block, and item tags for almost any use case.",
         "link":"https://github.com/HeDeAnTheonlyone/Taglib"
     },
     {
@@ -52,6 +52,16 @@ RESOURCES = [
         "name":"mcmeta (vanilla files)",
         "about":"mcmeta (by Misode) is a repository containing all of the vanilla assets, data, commands, and version data for Minecraft Java edition.",
         "link":"https://github.com/misode/mcmeta"
+    },
+    {
+        "name":"How to make a datapack",
+        "about":"Guide on getting started with Minecraft datapacks",
+        "link":"https://www.planetminecraft.com/blog/how-to-create-a-minecraft-data-pack/"
+    },
+    {
+        "name":"Worldgen guides",
+        "about":"Guide on making custom world generation using datapacks",
+        "link":"https://www.planetminecraft.com/blog/custom-world-generation-documentation/"
     }
 ]
 
