@@ -62,6 +62,11 @@ RESOURCES = [
         "name":"Worldgen guides",
         "about":"Guide on making custom world generation using datapacks",
         "link":"https://www.planetminecraft.com/blog/custom-world-generation-documentation/"
+    },
+    {
+        "name":"Structure generation guide",
+        "about":"Guide on making custom structures using datapacks",
+        "link":"https://www.planetminecraft.com/blog/custom-structure-gen-documentation/"
     }
 ]
 

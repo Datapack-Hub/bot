@@ -11,7 +11,7 @@ COMMANDS = [
     {
         "command":"invite",
         "short":"Shows invites to useful datapack related servers",
-        "long":"**About**\nShows invites to useful datapack related servers\n\n**Syntax:**\n `/invite invite:<server>`\n\n**Available invites:**\n - `datapack hub`\n- `minecraft commands`\n- `shader labs`\n- `bot`\n- `smithed`\n- `blockbench`\n- `optifine`\n- `fabric`\n- `minecraft`\n- `dataworld (fr)`\n- `animated java`\n- `datapack jam`"
+        "long":"**About**\nShows invites to useful datapack related servers\n\n**Syntax:**\n `/invite invite:<server>`\n\n**Available invites:**\n - `Datapack Hub`\n- `ShaderLABS`\n- `[BOT] Datapack Helper`\n- `Smithed`\n- `Blockbench`\n- `Optifine`\n- `Fabric Project`\n- `Minecraft`\n- `Animated Java`\n- `Datapack Jam`\n- `[FR] Dataworld`"
     },
     {
         "command":"packformat",
@@ -41,7 +41,7 @@ COMMANDS = [
     {
         "command":"resource",
         "short":"Links to external datapack resources",
-        "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `Misode`\n- `MCStacker`\n- `Taglib`\n- `Minecraft Wiki`\n- `Cloud Wolf`\n- `Crafting (TheDestruc7i0n)`\n- `Smithed`\n- `Minecraft Tools`\n- `MinecraftJson`\n- `mcmeta (vanilla files)`\n- `How to make a datapack`\n- `Worldgen guides`"
+        "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `Misode`\n- `MCStacker`\n- `Taglib`\n- `Minecraft Wiki`\n- `Cloud Wolf`\n- `Crafting (TheDestruc7i0n)`\n- `Smithed`\n- `Minecraft Tools`\n- `MinecraftJson`\n- `mcmeta (vanilla files)`\n- `How to make a datapack`\n- `Worldgen guides`\n- `Structure generation guide`"
     },
     {
         "command":"vanilla",
