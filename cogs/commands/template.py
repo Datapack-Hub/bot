@@ -34,7 +34,7 @@ class TemplateCommand(commands.Cog, name="template"):
                 async with open(datapack_path, "rb") as fp:
                     content = BytesIO(await fp.read())
                     await inter.response.send_message(
-                        "📁 Here is a basic datapack template for 1.20.6:",
+                        "📁 Here is a basic datapack template for 1.21:",
                         file=disnake.File(content, "Datapack Template UNZIP PLEASE.zip"),
                     )
 
@@ -48,7 +48,7 @@ class TemplateCommand(commands.Cog, name="template"):
                 async with open(resourcepack_path, "rb") as fp:
                     content = BytesIO(await fp.read())
                     await inter.response.send_message(
-                        "📁 Here is a basic resourcepack template for 1.20.6:",
+                        "📁 Here is a basic resourcepack template for 1.21:",
                         file=disnake.File(content, "Resourcepack Template UNZIP PLEASE.zip"),
                     )
 
