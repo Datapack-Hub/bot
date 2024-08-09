@@ -30,7 +30,7 @@ INFO = [
     },
     {
         "name": "Updating Datapacks Past 1.21",
-        "about": "1.21 renamed many folders that make up a Minecraft datapack, breaking virtually all datapacks from prior versions. Most plural folder names were renamed to their singular variant. For example, the `functions` folder in previous versions is now named `function`. The only folder that is still plural is `tags`.\nBelow is a list of all folder names changed in 1.21:\n`structures` -> `structure`\n`advancements` -> `advancement`\n`recipes` -> `recipe`\n`loot_tables` -> `loot_table`\n`predicates` -> `predicate`\n`item_modifiers` -> `item_modifier`\n`functions` -> `function`\n`tags/functions` -> `tags/function`\n`tags/items` -> `tags/item`\n`tags/blocks` -> `tags/block`\n`tags/entity_types` -> `tags/entity_type`\n`tags/fluids` -> `tags/fluid`\n`tags/game_events` -> `tags/game_event`",
+        "about": "1.21 renamed many folders that make up a Minecraft datapack, breaking virtually all datapacks from prior versions. Now, all folders which previously had plural names, except `tags`, now have singular names.\nBelow is a list of all folder names changed in 1.21:\n`structures` -> `structure`\n`advancements` -> `advancement`\n`recipes` -> `recipe`\n`loot_tables` -> `loot_table`\n`predicates` -> `predicate`\n`item_modifiers` -> `item_modifier`\n`functions` -> `function`\n`tags/functions` -> `tags/function`\n`tags/items` -> `tags/item`\n`tags/blocks` -> `tags/block`\n`tags/entity_types` -> `tags/entity_type`\n`tags/fluids` -> `tags/fluid`\n`tags/game_events` -> `tags/game_event`",
         "image": None
     }
 ]
@@ -57,7 +57,7 @@ class InfoCommand(commands.Cog, name="info"):
             description=current["about"]
         )
         
-        if current["image"] != None:
+        if current["image"] is not None:
             embed.set_image(current["image"])
             
         await inter.response.send_message(embed=embed)

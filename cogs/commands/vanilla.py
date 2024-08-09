@@ -1,7 +1,7 @@
+import aiohttp
 import disnake
-import dph
 from disnake.ext import commands
-import requests
+
 
 def remove_prefix(path):
     prefixes = ["/data/minecraft/", "/minecraft/", "data/minecraft/", "minecraft/", "/"]
@@ -20,8 +20,9 @@ class VanillaCommand(commands.Cog):
     async def vanilla(self, inter: disnake.ApplicationCommandInteraction, path: str = commands.Param(description="The path to any vanilla data file, starting from data/minecraft/.")):
         path = remove_prefix(path)
         
-        req = requests.get("https://raw.githubusercontent.com/misode/mcmeta/data/data/minecraft/" + path)
-        text = req.text
+        async with aiohttp.ClientSession() as cs:
+            req = await cs.get("https://raw.githubusercontent.com/misode/mcmeta/data/data/minecraft/" + path)
+            text = await req.text()
         
         embed = disnake.Embed(
             title="PREVIEW: " + path,
