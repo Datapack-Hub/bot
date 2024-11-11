@@ -32,6 +32,11 @@ INFO = [
         "name": "Updating Datapacks Past 1.21",
         "about": "1.21 renamed many folders that make up a Minecraft datapack, breaking virtually all datapacks from prior versions. Now, all folders which previously had plural names, except `tags`, now have singular names.\nBelow is a list of all folder names changed in 1.21:\n`structures` -> `structure`\n`advancements` -> `advancement`\n`recipes` -> `recipe`\n`loot_tables` -> `loot_table`\n`predicates` -> `predicate`\n`item_modifiers` -> `item_modifier`\n`functions` -> `function`\n`tags/functions` -> `tags/function`\n`tags/items` -> `tags/item`\n`tags/blocks` -> `tags/block`\n`tags/entity_types` -> `tags/entity_type`\n`tags/fluids` -> `tags/fluid`\n`tags/game_events` -> `tags/game_event`",
         "image": None
+    },
+    {
+        "name": "AI cannot make datapacks",
+        "about": "AI generators, such as ChatGPT, Gemini, Claude, and Copilot generally **cannot be used** to make datapacks. While it might look like it gives you good datapack code, in 90% of cases it will not work.There is not enough information online about datapacks in order for them to be accurate. \n\nIf you ask for help with an AI generated datapack, you will likely be asked to start again.",
+        "image": None
     }
 ]
 
