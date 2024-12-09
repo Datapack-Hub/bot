@@ -45,4 +45,4 @@ say I successfully used consumable component detection!
 ```
 
 ## How it works
-We've added a consumable component to our custom stick item, allowing it to be consumed like food. The player won't actually eat it, since `eat_seconds` is set to `999999999`, so it would take them over 30 years. The consumable component lets the player try to eat it, which can be detected using an advancement. That advancement runs a function which removes the advancement so it can be triggered again next tick, and runs whatever code you want to the item to trigger.
+We've added a consumable component to our custom stick item, allowing it to be consumed like food. The player won't actually eat it, since `consume_seconds` is set to `999999999`, so it would take them over 30 years. The consumable component lets the player try to eat it, which can be detected using an advancement. That advancement runs a function which removes the advancement so it can be triggered again next tick, and runs whatever code you want to the item to trigger.
