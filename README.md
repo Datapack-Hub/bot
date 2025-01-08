@@ -8,7 +8,7 @@ readme placholder -->
 [![Discord Server](https://img.shields.io/discord/935560260725379143?color=7289DA&label=Discord&logo=discord)](https://discord.datapackhub.net/)
 [![GitHub Issues](https://img.shields.io/github/issues/Datapack-Hub/bot)](https://github.com/Datapack-Hub/bot/issues)
 
-This bot is a utility bot for Minecraft datapack development. If your Discord server is about Minecraft Datapacks, this bot is for you! It has features such as: view vanilla files, automatic syntasx highlighting, access guides and wiki pages, view pack formats, templates, folder structures, and more!
+This bot is a utility bot for Minecraft datapack development. If your Discord server is about Minecraft Datapacks, this bot is for you! It has features such as: view vanilla files, automatic syntax highlighting, access guides and wiki pages, view pack formats, templates, folder structures, and more!
 
 Add the bot to your server: https://bot.datapackhub.net
 
