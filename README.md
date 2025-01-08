@@ -31,7 +31,9 @@ Contributions to this project are welcome! If you have ideas for new features, i
    > You may need to use `python3` instead of `python`
 
 ## Support and Issues
-If you encounter any issues or have questions about using the Datapack Hub Helper Bot, please check our [FAQ](https://discord.datapackhub.net/faq) for common solutions. If your issue persists or you need further assistance, you can open an issue on our [GitHub repository](https://github.com/Datapack-Hub/bot/issues).
+Any issues, concerns, ideas, or otherwise, you can contact a Datapack Hub staff member through our [Discord server](https://discord.datapackhub.net). You can also create an issue on our [GitHub repository](https://github.com/Datapack-Hub/bot/issues) if you're that kind of person.
+
+This bot is maintained by [Silabear](https://silabear.carrd.co/) but was created by [Flyrr](https://www.planetminecraft.com/member/flyrr/)
 
 ## License
 This project is licensed under the [MIT License](LICENSE.md).
