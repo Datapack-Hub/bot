@@ -1,1 +1,0 @@
-`weather (clear|rain|thunder) [<duration>]`

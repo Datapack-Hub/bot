@@ -1,1 +1,0 @@
-`playsound <sound> <source> <targets> [<pos>] [<volume>] [<pitch>] [<minVolume>]`

@@ -1,1 +1,0 @@
-`gamemode <gamemode> [<target>]`

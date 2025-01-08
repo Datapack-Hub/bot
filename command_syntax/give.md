@@ -1,1 +1,0 @@
-`give <target> <item> [<count>]`

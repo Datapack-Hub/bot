@@ -1,1 +1,0 @@
-`setblock <pos> <block> [destroy|keep|replace]`

@@ -1,1 +1,0 @@
-`stopsound <targets> [<source>] [<sound>]`

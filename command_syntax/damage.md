@@ -1,2 +1,0 @@
-`damage <target> <amount> [<damageType>] [at <location>]`
-`damage <target> <amount> [<damageType>] [by <entity>] [from <cause>]`

@@ -1,1 +1,0 @@
-`gamerule <rule name> [<value>]`

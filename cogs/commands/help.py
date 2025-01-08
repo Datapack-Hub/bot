@@ -1,103 +1,42 @@
+HELP = """
+Datapack Helper is a utility bot run by the team at **Datapack Hub** to help you with creating datapacks. With this bot, teaching people how to create datapacks (as well as making them yourself) is much quicker and easier.
+
+**Commands**:
+- `/dpwiki`: Access any wiki page or guide from the Datapack Wiki
+- `/folderstructure`: View the folder structure of a Minecraft datapack.
+- `/packformat`: View the pack format history for Minecraft data and resource packs.
+- `/info`: Quick access to FAQs including code editors, Minecraft logs, etc.
+- `/link`: View a list of useful links for creating datapacks, including discord servers, tools, and more.
+- `/template`: Get an empty datapack template for a specific version
+- `/vanilla`: View and open any vanilla Minecraft data file from the latest version.
+
+**Syntax Highlighter**
+Datapack Helper also provides **mcfunction syntax highlighting**. Simply send a code block with the `mcfunction` language specified, and it will be automatically coloured with [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>).
+"""
+
 import disnake
-import dph
 from disnake.ext import commands
+from command_data.links import LINKS
 
-COMMANDS = [
-    {
-        "command":"template",
-        "short":"Shows a template for datapacks or resource packs",
-        "long":"**About**\nSends a datapack/resource pack template.\nSyntax: `/template [type:datapack|resourcepack>]` (defaults to `datapack`)"
-    },
-    {
-        "command":"invite",
-        "short":"Shows invites to useful datapack related servers",
-        "long":"**About**\nShows invites to useful datapack related servers\n\n**Syntax:**\n `/invite invite:<server>`\n\n**Available invites:**\n - `Datapack Hub`\n- `ShaderLABS`\n- `[BOT] Datapack Helper`\n- `Smithed`\n- `Blockbench`\n- `Optifine`\n- `Fabric Project`\n- `Minecraft`\n- `Animated Java`\n- `Datapack Jam`\n- `[FR] Dataworld`"
-    },
-    {
-        "command":"packformat",
-        "short":"Shows the `pack_format` for a specific version",
-        "long":"**About**\nShows the `pack_format` (for use in `pack.mcmeta`) for a specific version(s)\n\n**Syntax:**\n `/packformat [version:latest|snapshots|releases|<minecraft version>]` "
-    },
-    {
-        "command":"folderstructure",
-        "short":"Shows the folder structure for datapacks/resource packs",
-        "long":"**About**\nShows the folder structure for datapacks/resource packs as a folder tree.\n\n**Syntax:**\n `/folderstructure [type:datapack|resourcepack]` (defaults to `datapack`)"
-    },
-    {
-        "command":"syntax",
-        "short":"Shows the syntax of any Minecraft command",
-        "long":"**About**\nShows the syntax of any Minecraft command\n\n**Syntax:**\n `/syntax command:<command>`"
-    },
-    {
-        "command":"info",
-        "short":"Shows a quick guide about certain tips/tools you can use",
-        "long":"**About**\nShows a quick guide about certain tips/tools you can use\n\n**Syntax:**\n `/info info:<name>`\n\n**Available Guides**: \n- `Output Logs`\n- `Output Logs (other launchers)`\n- `Datapack Helper`\n- `Visual Studio Code`\n- `logs other`\n- `Updating Resource Packs Past 1.19.3`\n- `Updating Datapacks Past 1.21`"
-    },
-    {
-        "command":"method",
-        "short":"Shows a full-size guide for certain common datapack concepts",
-        "long":"**About**\nShows a full-size guide for certain common datapack concepts\n\n**Syntax:**\n `/method method:<name>`\n\n**Available Guides**:\n- `random number`\n- `raycast`\n- `slowcast`\n- `rightclick detection`\n- `rightclick detection coas`\n- `rightclick detection EoE`\n- `rightclick detection`\n- `rightclick detection interaction`\n- `rightclick detection food`\n- `custom gui`\n- `custom item crafting recipe`\n- `array iteration`\n- `player id system`"
-    },
-    {
-        "command":"resource",
-        "short":"Links to external datapack resources",
-        "long":"**About**\nLinks to external datapack resources\n\n**Syntax:**\n `/resource resource:<name>`\n\n**Available Resources**:\n- `Misode`\n- `MCStacker`\n- `Taglib`\n- `Minecraft Wiki`\n- `Cloud Wolf`\n- `Crafting (TheDestruc7i0n)`\n- `Smithed`\n- `Minecraft Tools`\n- `MinecraftJson`\n- `mcmeta (vanilla files)`\n- `How to make a datapack`\n- `Worldgen guides`\n- `Structure generation guide`"
-    },
-    {
-        "command":"vanilla",
-        "short":"Shows a preview of any vanilla datapack file",
-        "long":"**About**\nShows a preview of any vanilla datapack file, using data from Misode's `mcmeta`.\n\n**Syntax:**\n `/vanilla path:<path to file>`"
-    },
-    {
-        "command":"highlighter",
-        "short":"Information about the automatic syntax highlighter for mcfunction",
-        "long":"**About**\nInformation about the automatic syntax highlighter for mcfunction\n\n**Syntax:**\n `/highlighter`"
-    },
-    {
-        "command":"ping",
-        "short":"Returns the ping of the bot",
-        "long":"**About**\nReturns the ping of the bot\n\n**Syntax:**\n `/ping`"
-    }
-]
-
-
-class HelpCommand(commands.Cog, name="help"):
+class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.slash_command(
-        title="Help",
-        description="Gives you information about any command this bot adds",
+        name="help",
+        description="Show a list of all the features in Datapack Helper.",
     )
     async def help(
-        self,
-        inter: disnake.ApplicationCommandInteraction,
-        command: str = commands.Param("*",choices=[item["command"] for item in COMMANDS]),
+        self, 
+        inter: disnake.ApplicationCommandInteraction
     ):
-        if command == "*":
-            content = "Datapack Helper is a bot run by the team at **Datapack Hub** to help you with your datapacking experience. With this bot, teaching people how to create datapacks (as well as making them yourself) is much quicker and easier.\n\n**Commands**:\n"
-            for cmd in COMMANDS:
-                content += f"- `/{cmd['command']}`: {cmd['short']}\n"
-            content += "\nYou can use `/help <command>` to find out more about a command."
-            
-            embed = disnake.Embed(
-                color=disnake.Colour.orange(), 
-                title="Datapack Helper", 
-                description=content,
-            )
-                
-            await inter.response.send_message(embed=embed)
-        else:
-            cmd = next((item for item in COMMANDS if item["command"] == command), None)
-            if not cmd:
-                return await inter.response.send_message(f"The command `{command}` does not exist.",ephemeral=True)
+        await inter.response.defer()
+        
+        embed = disnake.Embed(
+            title="Datapack Helper",
+            description=HELP,
+            color=disnake.Colour.orange()
+        )
 
-            embed = disnake.Embed(
-                color=disnake.Colour.orange(), 
-                title=f"About the command`/{command}`", 
-                description=cmd["long"],
-            )
-                
-            await inter.response.send_message(embed=embed)
-
-        await dph.log("`/help` Command", f"A user looked up help for `{command}`","orange",self)
+        # Send message
+        await inter.edit_original_message(embed=embed)

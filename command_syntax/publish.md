@@ -1,1 +1,0 @@
-`publish [<allowCommands>] [<gamemode>] [<port>]`

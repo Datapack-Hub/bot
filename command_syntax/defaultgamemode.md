@@ -1,1 +1,0 @@
-`defaultgamemode <gamemode>`

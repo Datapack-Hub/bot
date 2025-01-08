@@ -1,1 +1,0 @@
-`function <name> [<arguments>|with (block <sourcePos>|entity <source>|storage <source>) [<path>]]`
