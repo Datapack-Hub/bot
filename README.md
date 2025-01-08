@@ -8,59 +8,30 @@ readme placholder -->
 [![Discord Server](https://img.shields.io/discord/935560260725379143?color=7289DA&label=Discord&logo=discord)](https://discord.datapackhub.net/)
 [![GitHub Issues](https://img.shields.io/github/issues/Datapack-Hub/bot)](https://github.com/Datapack-Hub/bot/issues)
 
-## Contributing
+This bot is a utility bot for Minecraft datapack development. If your Discord server is about Minecraft Datapacks, this bot is for you! It has features such as: view vanilla files, automatic syntasx highlighting, access guides and wiki pages, view pack formats, templates, folder structures, and more!
 
+Add the bot to your server: https://bot.datapackhub.net
+
+## Contributing
 Contributions to this project are welcome! If you have ideas for new features, improvements, or bug fixes, please feel free to create a pull request. Be sure to review our contribution guidelines before getting started.
 
 ### Develop Locally
-
 1. Clone the repo and navigate to it using a terminal
-2. Install the dependencies using:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   > You may need to use `pip3` instead of `pip`
-
-3. Go to <https://discord.com/developers/applications>, create and set up a bot and invite it to a server
-4. Create a file in the root directory called `bot_token.py` and fill in your token:
-   
+2. Install the dependencies
+3. Go to <https://discord.com/developers/applications>, create and set up a test bot and invite it to a server
+4. Create a file in the root directory (same folder as `index.py`) called `variables.py` and fill in your token:
    ```py
-   token = "<DISCORD_BOT_TOKEN>"
+   TOKEN = "<DISCORD_BOT_TOKEN>"
    ```
-
-5. Create a file in the root directory called `variables.py` and fill it with ids of your bot and channels:
-   
-   ```py
-   full_path = "<file path to folder with bot>"
-   bot_id = <bot's discord id>
-
-   # GUILDS
-   main_guild = <main guild the bot will be active in>
-
-   # CHANNELS
-   logs_channel = <log channel id>
-
-   # ROLES
-   special_commands_roles = [<ids of roles that can run `>.<` commands>]
-
-   # OTHER
-   dev_bot_string = <string of characters that need to be unique to each version of the bot (dev, prod, etc) to avoid conflicts>
-   ```
-
 6. Start the bot using:
-   
    ```bash
-   python main.py
+   python index.py
    ```
    
    > You may need to use `python3` instead of `python`
 
 ## Support and Issues
-
 If you encounter any issues or have questions about using the Datapack Hub Helper Bot, please check our [FAQ](https://discord.datapackhub.net/faq) for common solutions. If your issue persists or you need further assistance, you can open an issue on our [GitHub repository](https://github.com/Datapack-Hub/bot/issues).
 
 ## License
-
 This project is licensed under the [MIT License](LICENSE.md).
