@@ -20,7 +20,11 @@ class VanillaCommand(commands.Cog):
         await inter.response.defer()
         
         if path not in VANILLA_FILES:
-            return await inter.edit_original_message("This file does not exist.")
+            matches = get_close_matches(path, VANILLA_FILES, n=25, cutoff=0.1)
+            path = matches[0]
+            
+            if not path:
+                return await inter.edit_original_message("Could not find the file.")
         
         # Get file
         req = requests.get("https://raw.githubusercontent.com/misode/mcmeta/data/" + path)
