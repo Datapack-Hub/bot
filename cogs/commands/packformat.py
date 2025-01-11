@@ -26,7 +26,8 @@ class PackFormatCommand(commands.Cog):
             pack_formats = pack_formats[:5]
         else:
             pack_formats = [next((item for item in pack_formats if item["id"] == version), None)]
-            if not pack_formats:
+            
+            if not pack_formats[0]:
                 return await inter.edit_original_message("This version does not exist.")
         
         # Output embed

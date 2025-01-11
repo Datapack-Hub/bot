@@ -14,7 +14,7 @@ def replace_code_blocks(message: disnake.Message, author: disnake.Member):
 
     edited_message = pattern.sub(replace_function, message)
     
-    edited_message += f"\n-# Syntax highlighted by <@1108074519308017734> using [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>)"
+    # edited_message += f"\n-# Syntax highlighted by <@1108074519308017734> using [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>)"
 
     return edited_message
 

@@ -8,7 +8,7 @@ client = commands.InteractionBot(
         name="out for your commands",
         type=disnake.ActivityType.watching,
     ),
-    test_guilds=[911644509249613864]
+    test_guilds=[911644509249613864, 1327329437125181450]
 )
 
 # Commands
@@ -43,6 +43,10 @@ async def on_ready():
 
 from cogs.events.on_message import OnMessage
 client.add_cog(OnMessage(client))
+
+# Misc Cogs
+from cogs.misc.admin import AdminCommands
+client.add_cog(AdminCommands(client))
 
 # Run the bot
 client.run(variables.TOKEN)
