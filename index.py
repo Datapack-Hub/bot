@@ -2,8 +2,12 @@ import disnake
 from disnake.ext import commands
 import variables
 
+# intents
+intents = disnake.Intents.default()
+intents.message_content = True
+
 client = commands.InteractionBot(
-    intents=disnake.Intents.all(),
+    intents=intents,
     activity=disnake.Activity(
         name="out for your commands",
         type=disnake.ActivityType.watching,
