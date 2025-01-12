@@ -31,6 +31,13 @@ class VanillaCommand(commands.Cog):
         
         if req.ok:
             content = req.text
+            if len(f"```json\n{content}```") > 3000: 
+                embed = disnake.Embed(
+                    title=path,
+                    description=f"This file is too big to show in discord! However, you can download it [here](https://raw.githubusercontent.com/misode/mcmeta/data/).",
+                    color=disnake.Colour.orange()
+                )
+                return await inter.edit_original_message(embed=embed)
             embed = disnake.Embed(
                 title=path,
                 description=f"```json\n{content}```",
