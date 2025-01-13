@@ -11,8 +11,7 @@ client = commands.InteractionBot(
     activity=disnake.Activity(
         name="out for your commands",
         type=disnake.ActivityType.watching,
-    ),
-    test_guilds=[911644509249613864, 1327329437125181450, 935560260725379143]
+    )
 )
 
 # Commands
