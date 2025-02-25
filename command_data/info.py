@@ -28,5 +28,10 @@ INFO = [
         "name": "AI can't make datapacks",
         "content": "AI generators, such as ChatGPT, Gemini, Claude, and Copilot generally **cannot be used** to make datapacks. While it might look like it gives you good datapack code, in 90% of cases it will not work. There is not enough information online about datapacks in order for them to be accurate. \n\nIf you ask for help with an AI generated datapack, you will likely be asked to start again.",
         "image": None
+    },
+    {
+        "name": "Incorrectly zipped datapack",
+        "content": "Your datapack ZIP file must contain the `data` folder and `pack.mcmeta` at the root (they must be the first two files you see when you open the zip file).\n\nIf, when you open the zip file, you see another folder (which contains `data` and `pack.mcmeta`), then you have zipped the folder incorrectly. This is because Minecraft expects to see `data` and `pack.mcmeta` at the root (as soon as it opens the zip), and if they are not there, it doesn't load your pack.\n\n[Click to view a tutorial video, if you still do not understand](https://dph.tixte.co/how-to-zip.mp4)",
+        "image": None
     }
 ]
