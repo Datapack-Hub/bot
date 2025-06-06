@@ -70,8 +70,8 @@ LINKS = [
         "link": "https://blockbench.net"
     },
     {
-        "name": "Tool: MinecraftTools Tellraw Editor",
-        "about": "MinecraftTools' Tellraw Editor is an intuitive editor for /tellraw commands and JSON text.",
-        "link": "https://minecraft.tools/tellraw.php"
+        "name": "Tool: Minecraft Text Editor",
+        "about": "Our Minecraft Text Editor lets you really easily create text components, tellraw commands, lore components, and more!",
+        "link": "https://text.datapackhub.net/"
     },
 ]
