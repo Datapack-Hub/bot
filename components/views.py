@@ -113,6 +113,6 @@ class AdminMessageView(discord.ui.View):
         container.add_text(f"-# <:icon:1404194547667439736> Datapack Helper Announcement")
             
         container.add_text(f"## {title}")
-        container.add_text(f"## {message}")
+        container.add_text(f"{message}")
         
         self.add_item(container)
