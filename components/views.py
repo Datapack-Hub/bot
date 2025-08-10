@@ -103,3 +103,16 @@ class HelpView(discord.ui.View):
         container.add_item(discord.ui.Button(label="Datapack Hub",url="https://discord.gg/aEXsdjjdu4"))
         
         self.add_item(container)
+        
+class AdminMessageView(discord.ui.View):
+    def __init__(self, title: str, message: str):
+        super().__init__(timeout=None)
+        
+        container = discord.ui.Container()
+        
+        container.add_text(f"-# <:icon:1404194547667439736> Datapack Helper Announcement")
+            
+        container.add_text(f"## {title}")
+        container.add_text(f"## {message}")
+        
+        self.add_item(container)

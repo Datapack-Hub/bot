@@ -1,5 +1,6 @@
 import discord
 import variables
+from components.views import AdminMessageView
 
 class AdminCommands(discord.Cog):
     def __init__(self, bot):
@@ -14,26 +15,14 @@ class AdminCommands(discord.Cog):
             title = msg.splitlines()[0]
             desc = "\n".join(msg.split('\n')[1:])
             
-            embed = discord.Embed(
-                title=title,
-                description=desc,
-                colour=discord.Colour.orange()
-            )
-            
-            embed.set_footer(text="This is an official message from Datapack Hub.")
+            msgview = AdminMessageView(title, desc)
             
             for server in self.bot.guilds:
                 if server.system_channel:
                     try:
-                        await server.system_channel.send(embed=embed)
+                        await server.system_channel.send(view=msgview)
                     except:
                         print("Failed to send the message to " + server.name)
-                elif server.owner:
-                    try:
-                        embed.set_footer(text="You are receiving this message because you own a server which this bot is in.")
-                        await server.owner.send(embed=embed)
-                    except:
-                        print("Failed to send the message to server owner " + server.owner.global_name)
         
         # Staff announce (to public updates channel of each guild, usually staff only)
         if message.content.startswith("dh!sannounce\n") and message.author.id in variables.ADMINS:
@@ -42,23 +31,11 @@ class AdminCommands(discord.Cog):
             title = msg.splitlines()[0]
             desc = "\n".join(msg.split('\n')[1:])
             
-            embed = discord.Embed(
-                title=title,
-                description=desc,
-                colour=discord.Colour.orange()
-            )
-            
-            embed.set_footer(text="This is an official message from Datapack Hub.")
+            msgview = AdminMessageView(title, desc)
             
             for server in self.bot.guilds:
                 if server.public_updates_channel:
                     try:
-                        await server.public_updates_channel.send(embed=embed)
+                        await server.public_updates_channel.send(view=msgview)
                     except:
                         print("Failed to send the message to " + server.name)
-                elif server.owner:
-                    try:
-                        embed.set_footer(text="You are receiving this message because you own a server which this bot is in.")
-                        await server.owner.send(embed=embed)
-                    except:
-                        print("Failed to send the message to server owner " + server.owner.global_name)
