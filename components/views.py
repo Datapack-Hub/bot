@@ -1,4 +1,5 @@
 import discord
+import variables
 
 class InfoView(discord.ui.View):
     def __init__(self, info: list[dict[str, object]]):
@@ -6,7 +7,7 @@ class InfoView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"-# <:icon:1404194547667439736> Datapack Development: Info")
+        container.add_text(f"-# {variables.icon_emoji} Datapack Development: Info")
         container.add_text(f"## {info['name']}")
         container.add_text(info['content'])
         
@@ -21,7 +22,7 @@ class LinkView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"-# <:icon:1404194547667439736> Datapack Development: Useful Link")
+        container.add_text(f"-# {variables.icon_emoji} Datapack Development: Useful Link")
         container.add_text(f"## {link['name']}")
         container.add_text(f"**About:** {link['about']}")
         container.add_text(f"**Link:** {link['link']}")
@@ -34,7 +35,7 @@ class LinkView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"-# <:icon:1404194547667439736> Datapack Development: Useful Link")
+        container.add_text(f"-# {variables.icon_emoji} Datapack Development: Useful Link")
         container.add_text(f"## {link['name']}")
         container.add_text(f"**About:** {link['about']}")
         container.add_text(f"**Link:** {link['link']}")
@@ -48,9 +49,9 @@ class WikiPage(discord.ui.View):
         container = discord.ui.Container()
         
         if wikipage['type'] == "wiki":
-            container.add_text(f"-# <:icon:1404194547667439736> Datapack Wiki Page")
+            container.add_text(f"-# {variables.icon_emoji} Datapack Wiki Page")
         else:
-            container.add_text(f"-# <:icon:1404194547667439736> Datapack Wiki Guide")
+            container.add_text(f"-# {variables.icon_emoji} Datapack Wiki Guide")
             
         container.add_text(f"## {wikipage['title']}")
         container.add_text(f"**Description:** {wikipage['description']}")
@@ -64,7 +65,7 @@ class PackFormatView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"-# <:icon:1404194547667439736> Minecraft Java Pack Format")
+        container.add_text(f"-# {variables.icon_emoji} Minecraft Java Pack Format")
             
         container.add_text(f"## Pack Format: `{version}`")
         container.add_text(out)
@@ -77,7 +78,7 @@ class VanillaFileView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"-# <:icon:1404194547667439736> Datapack Development: Vanilla File")
+        container.add_text(f"-# {variables.icon_emoji} Datapack Development: Vanilla File")
             
         container.add_text(f"## `{path}`")
         if len(f"```json\n{content}```") > 3000: 
@@ -95,7 +96,7 @@ class HelpView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"## <:icon:1404194547667439736> Datapack Helper")
+        container.add_text(f"## {variables.icon_emoji} Datapack Helper")
             
         container.add_text(content)
             
@@ -110,7 +111,7 @@ class AdminMessageView(discord.ui.View):
         
         container = discord.ui.Container()
         
-        container.add_text(f"-# <:icon:1404194547667439736> Datapack Helper Announcement")
+        container.add_text(f"-# {variables.icon_emoji} Datapack Helper Announcement")
             
         container.add_text(f"## {title}")
         container.add_text(f"{message}")
