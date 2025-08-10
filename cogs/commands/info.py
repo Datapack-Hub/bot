@@ -1,21 +1,20 @@
-import disnake
-from disnake.ext import commands
+import discord
 from command_data.info import INFO
+from components.views import InfoView
 
-class InfoCommand(commands.Cog):
+class InfoCommand(discord.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(
+    @discord.slash_command(
         name="info",
         description="Quick access to FAQs including code editors, Minecraft logs, etc.",
     )
     async def info(
         self, 
-        inter: disnake.ApplicationCommandInteraction, 
-        info: str = commands.Param(choices=sorted([item["name"] for item in INFO]))
+        inter: discord.ApplicationContext, 
+        info: str = discord.Option(choices=sorted([item["name"] for item in INFO]))
     ):
-        await inter.response.defer()
         
         # Get info
         res = next((item for item in INFO if item["name"] == info), None)
@@ -24,14 +23,5 @@ class InfoCommand(commands.Cog):
         if not res:
             return await inter.response.send_message(f"The info `{info}` does not exist.",ephemeral=True)
 
-        # Output embed
-        embed = disnake.Embed(
-            color=disnake.Colour.orange(), 
-            title=res["name"],
-            description=res["content"]
-        )
-        
-        if res["image"] is not None: embed.set_image(res["image"])
-
         # Send message
-        await inter.edit_original_message(embed=embed)
+        await inter.respond(view=InfoView(res))

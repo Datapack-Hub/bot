@@ -1,13 +1,12 @@
-import disnake
+import discord
 import variables
-from disnake.ext import commands
 
-class AdminCommands(commands.Cog):
+class AdminCommands(discord.Cog):
     def __init__(self, bot):
-        self.bot: commands.InteractionBot = bot
+        self.bot: discord.Bot = bot
                          
-    @commands.Cog.listener()
-    async def on_message(self, message: disnake.Message):
+    @discord.Cog.listener()
+    async def on_message(self, message: discord.Message):
         # Guilds announce (to system channel, ie general)
         if message.content.startswith("dh!gannounce\n") and message.author.id in variables.ADMINS:
             msg = message.content.replace("dh!gannounce\n","")
@@ -15,10 +14,10 @@ class AdminCommands(commands.Cog):
             title = msg.splitlines()[0]
             desc = "\n".join(msg.split('\n')[1:])
             
-            embed = disnake.Embed(
+            embed = discord.Embed(
                 title=title,
                 description=desc,
-                colour=disnake.Colour.orange()
+                colour=discord.Colour.orange()
             )
             
             embed.set_footer(text="This is an official message from Datapack Hub.")
@@ -43,10 +42,10 @@ class AdminCommands(commands.Cog):
             title = msg.splitlines()[0]
             desc = "\n".join(msg.split('\n')[1:])
             
-            embed = disnake.Embed(
+            embed = discord.Embed(
                 title=title,
                 description=desc,
-                colour=disnake.Colour.orange()
+                colour=discord.Colour.orange()
             )
             
             embed.set_footer(text="This is an official message from Datapack Hub.")

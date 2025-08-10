@@ -1,24 +1,23 @@
 from io import BytesIO
-import disnake
-from disnake.ext import commands
+import discord
 import variables
 from pathlib import Path
 from command_data.templates import DATAPACKS, RESOURCEPACKS
 
-class TemplateCommand(commands.Cog):
+class TemplateCommand(discord.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(
+    @discord.slash_command(
         name="template",
         description="View datapack or resource pack templates",
     )
     async def template(
         self, 
-        inter: disnake.ApplicationCommandInteraction, 
-        type: str = commands.Param(choices=["Datapack", "Resource Pack"])
+        inter: discord.ApplicationContext, 
+        type: str = discord.Option(choices=["Datapack", "Resource Pack"])
     ):
-        await inter.response.defer()
+        await inter.defer()
         
         if type == "Datapack":
             # Pick default template
@@ -26,9 +25,9 @@ class TemplateCommand(commands.Cog):
             
             template_path = Path(variables.__file__).resolve().parent / "static" / "templates" / default["file"]
             
-            await inter.edit_original_message(
+            await inter.respond(
                 content=f"**{type}** template for latest version `{default['versions']}`",
-                file=disnake.File(template_path, f"DP: {default['versions']}.zip"),
+                file=discord.File(template_path, f"DP: {default['versions']}.zip"),
                 view=DropDownView(DATAPACKS)
             )
         else:
@@ -37,22 +36,22 @@ class TemplateCommand(commands.Cog):
             
             template_path = Path(variables.__file__).resolve().parent / "static" / "templates" / default["file"]
             
-            await inter.edit_original_message(
+            await inter.respond(
                 content=f"**{type}** template for latest version `{default['versions']}`.",
-                file=disnake.File(template_path, f"Template: {default['versions']}.zip"),
+                file=discord.File(template_path, f"Template: {default['versions']}.zip"),
                 view=DropDownView(RESOURCEPACKS)
             )
 
-class VersionDropdown(disnake.ui.StringSelect):
+class VersionDropdown(discord.ui.Select):
     def __init__(self, data):
         self.data = data
 
         super().__init__(
             placeholder="Select a different Minecraft version",
-            options=[disnake.SelectOption(label=item["versions"], emoji="📂") for item in data]
+            options=[discord.SelectOption(label=item["versions"], emoji="📂") for item in data]
         )
 
-    async def callback(self, inter: disnake.MessageInteraction):
+    async def callback(self, inter: discord.MessageInteraction):
         selected = [i for i in self.data if i["versions"] == self.values[0]][0]
         
         template_path = Path(variables.__file__).resolve().parent / "static" / "templates" / selected["file"]
@@ -60,10 +59,10 @@ class VersionDropdown(disnake.ui.StringSelect):
         await inter.response.edit_message(
             content=f"Template for latest version `{selected['versions']}`.",
             attachments=[],
-            files=[disnake.File(template_path, f"Template: {selected['versions']}.zip")]
+            files=[discord.File(template_path, f"Template: {selected['versions']}.zip")]
         )
         
-class DropDownView(disnake.ui.View):
+class DropDownView(discord.ui.View):
     def __init__(self, data: list):
         super().__init__()
 

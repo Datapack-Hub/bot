@@ -1,11 +1,10 @@
-import disnake
+import discord
 import variables
-from disnake.ext import commands
 import re
 from static.highlighter.highlighter import Hl
 
 
-def replace_code_blocks(message: disnake.Message, author: disnake.Member):
+def replace_code_blocks(message: discord.Message, author: discord.Member):
     pattern = re.compile(r'```mcf(?:unction)?\n([\s\S]+?)```', re.DOTALL)
 
     def replace_function(match):
@@ -18,18 +17,18 @@ def replace_code_blocks(message: disnake.Message, author: disnake.Member):
 
     return edited_message
 
-class OnMessage(commands.Cog):
+class OnMessage(discord.Cog):
     def __init__(self, bot):
         self.bot = bot
                          
-    @commands.Cog.listener()
-    async def on_message(self, message: disnake.Message):
+    @discord.Cog.listener()
+    async def on_message(self, message: discord.Message):
         if re.findall(r'```mcf(?:unction)?\n([\s\S]+?)```',message.content) and (not message.author.bot):
             content = (message.content)
             if len(replace_code_blocks(content, message.author)) >= 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else: 
-                if message.channel.type == disnake.ChannelType.public_thread:
+                if message.channel.type == discord.ChannelType.public_thread:
                     hooks = await message.channel.parent.webhooks()
 
                     for hook in hooks:
@@ -41,9 +40,9 @@ class OnMessage(commands.Cog):
                     await message.delete()
 
                     try:
-                        await hook.send(replace_code_blocks(content, message.author),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none())
+                        await hook.send(replace_code_blocks(content, message.author),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=discord.AllowedMentions.none())
                     except:
-                        await hook.send(content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=disnake.AllowedMentions.none(),components=[disnake.ui.Button(style=disnake.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
+                        await hook.send(content,wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,thread=message.channel,allowed_mentions=discord.AllowedMentions.none(),components=[discord.ui.Button(style=discord.ButtonStyle.red,disabled=True,label="Syntax highlighting failed")])
                 else:
                     hooks = await message.channel.webhooks()
 
@@ -54,4 +53,4 @@ class OnMessage(commands.Cog):
                         hook = await message.channel.create_webhook(name=f"DPH Syntax Highlighter") #asd
 
                     await message.delete()
-                    await hook.send(replace_code_blocks(content, message.author),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=disnake.AllowedMentions.none())
+                    await hook.send(replace_code_blocks(content, message.author),wait=False,username=message.author.display_name,avatar_url=message.author.display_avatar.url,allowed_mentions=discord.AllowedMentions.none())

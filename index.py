@@ -1,17 +1,20 @@
-import disnake
-from disnake.ext import commands
+import discord
 import variables
 
 # intents
-intents = disnake.Intents.default()
+intents = discord.Intents.default()
 intents.message_content = True
 
-client = commands.InteractionBot(
+client = discord.Bot(
     intents=intents,
-    activity=disnake.Activity(
+    activity=discord.Activity(
         name="out for your commands",
-        type=disnake.ActivityType.watching,
-    )
+        type=discord.ActivityType.watching,
+    ),
+    default_command_integration_types={
+        discord.IntegrationType.guild_install,
+        discord.IntegrationType.user_install
+    }
 )
 
 # Commands

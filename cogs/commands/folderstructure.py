@@ -1,27 +1,26 @@
-import disnake
-from disnake.ext import commands
+import discord
 from command_data.folderstructures import DATAPACK, RESOURCEPACK
 
-class FolderStructureCommand(commands.Cog):
+class FolderStructureCommand(discord.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(
+    @discord.slash_command(
         name="folderstructure",
         description="View the structure of a datapack or resourcepack",
     )
     async def folderstructure(
         self, 
-        inter: disnake.ApplicationCommandInteraction, 
-        type: str = commands.Param(choices=["Datapack","Resource Pack"],default="Datapack")
+        inter: discord.ApplicationContext, 
+        type: str = discord.Option(choices=["Datapack","Resource Pack"],default="Datapack")
     ):
-        await inter.response.defer()
+        await inter.defer()
         
         if type == "Datapack":
-            await inter.edit_original_message(
+            await inter.respond(
                 content=f"```py{DATAPACK}```"
             )
         else:
-            await inter.edit_original_message(
+            await inter.respond(
                 content=f"```py{RESOURCEPACK}```"
             )
