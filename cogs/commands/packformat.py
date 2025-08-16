@@ -47,7 +47,7 @@ class PackFormatCommand(discord.Cog):
             if format["resource_pack_version"]["minor"] != 0:
                 rpv += "." + str(format["resource_pack_version"]["minor"])
             
-            out = f"**Datapack:** `{dpv}`\n**Resource Pack:** `{dpv}`"
+            out = f"**Datapack:** `{dpv}`\n**Resource Pack:** `{rpv}`"
         else:
             for format in pack_formats:
                 dpv = str(format["data_pack_version"]["major"])
