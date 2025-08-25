@@ -20,11 +20,11 @@ class DPWikiCommand(discord.Cog):
     def __init__(self, bot):
         self.bot = bot
         
-    dpwiki = discord.SlashCommandGroup(name="dpwiki")
+    dpwiki = discord.SlashCommandGroup(name="dpwiki", description="Quick link to pages from datapack.wiki (our wiki site)")
     
     @dpwiki.command(
         name="page",
-        description="VIew a wiki page from datapack.wiki"
+        description="View a wiki page from datapack.wiki"
     )
     async def page(
         self,

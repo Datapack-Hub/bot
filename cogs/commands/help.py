@@ -21,7 +21,7 @@ class HelpCommand(discord.Cog):
 
     @discord.slash_command(
         name="help",
-        description="Show a list of all the features in Datapack Helper.",
+        description="Show a list of all this bot's features.",
     )
     async def help(
         self, 

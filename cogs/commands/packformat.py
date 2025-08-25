@@ -16,7 +16,7 @@ class PackFormatCommand(discord.Cog):
 
     @discord.slash_command(
         name="packformat",
-        description="View pack format history",
+        description="View the data and resource pack pack_format for any version.",
     )
     async def packformat(
         self, 

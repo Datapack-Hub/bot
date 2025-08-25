@@ -10,7 +10,7 @@ class TemplateCommand(discord.Cog):
 
     @discord.slash_command(
         name="template",
-        description="View datapack or resource pack templates",
+        description="Download a pre-made template for datapacks and resource packs",
     )
     async def template(
         self, 
