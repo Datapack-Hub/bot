@@ -1,5 +1,7 @@
 import discord
+
 from command_data.folderstructures import DATAPACK, RESOURCEPACK
+
 
 class FolderStructureCommand(discord.Cog):
     def __init__(self, bot):
@@ -10,17 +12,13 @@ class FolderStructureCommand(discord.Cog):
         description="View the structure of a datapack or resourcepack",
     )
     async def folderstructure(
-        self, 
-        inter: discord.ApplicationContext, 
-        type: str = discord.Option(choices=["Datapack","Resource Pack"],default="Datapack")
+        self,
+        inter: discord.ApplicationContext,
+        type: discord.Option = discord.Option(choices=["Datapack", "Resource Pack"], default="Datapack"),
     ):
         await inter.defer()
-        
+
         if type == "Datapack":
-            await inter.respond(
-                content=f"```py{DATAPACK}```"
-            )
+            await inter.respond(content=f"```py{DATAPACK}```")
         else:
-            await inter.respond(
-                content=f"```py{RESOURCEPACK}```"
-            )
+            await inter.respond(content=f"```py{RESOURCEPACK}```")

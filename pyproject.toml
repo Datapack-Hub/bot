@@ -1,0 +1,20 @@
+[project]
+name = "bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.13.2",
+    "audioop-lts>=0.2.2",
+    "py-cord>=2.7.0rc2",
+    "requests>=2.32.5",
+    "ruff>=0.14.8",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "ASYNC", "FURB", "RUF", "PERF", "UP", "TRY", "PTH", "TID", "SIM"]
+ignore = ["E501"]
