@@ -86,7 +86,9 @@ class VanillaFileView(discord.ui.DesignerView):
         else:
             container.add_text(f"```json\n{content}```")
             
-        container.add_item(discord.ui.Button(label="View this file on Github",url=f"https://raw.githubusercontent.com/misode/mcmeta/data/{path}"))
+        container.add_item(discord.ui.ActionRow(
+            discord.ui.Button(label="View this file on Github",url=f"https://raw.githubusercontent.com/misode/mcmeta/data/{path}")
+        ))
         
         self.add_item(container)
         
@@ -100,8 +102,11 @@ class HelpView(discord.ui.DesignerView):
             
         container.add_text(content)
             
-        container.add_item(discord.ui.Button(label="GitHub",url="https://github.com/Datapack-Hub/bot"))
-        container.add_item(discord.ui.Button(label="Datapack Hub",url="https://discord.gg/aEXsdjjdu4"))
+        container.add_item(discord.ui.ActionRow(
+            discord.ui.Button(label="GitHub",url="https://github.com/Datapack-Hub/bot"),
+            discord.ui.Button(label="Datapack Hub",url="https://discord.gg/aEXsdjjdu4")
+        ))
+        
         
         self.add_item(container)
         
