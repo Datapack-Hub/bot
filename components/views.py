@@ -1,7 +1,7 @@
 import discord
 import variables
 
-class InfoView(discord.ui.View):
+class InfoView(discord.ui.DesignerView):
     def __init__(self, info: list[dict[str, object]]):
         super().__init__(timeout=None)
         
@@ -16,7 +16,7 @@ class InfoView(discord.ui.View):
         
         self.add_item(container)
         
-class LinkView(discord.ui.View):
+class LinkView(discord.ui.DesignerView):
     def __init__(self, link: list[dict[str, object]]):
         super().__init__(timeout=None)
         
@@ -29,7 +29,7 @@ class LinkView(discord.ui.View):
         
         self.add_item(container)
         
-class LinkView(discord.ui.View):
+class LinkView(discord.ui.DesignerView):
     def __init__(self, link: list[dict[str, object]]):
         super().__init__(timeout=None)
         
@@ -42,7 +42,7 @@ class LinkView(discord.ui.View):
         
         self.add_item(container)
         
-class WikiPage(discord.ui.View):
+class WikiPage(discord.ui.DesignerView):
     def __init__(self, wikipage: list[dict[str, object]]):
         super().__init__(timeout=None)
         
@@ -59,7 +59,7 @@ class WikiPage(discord.ui.View):
         
         self.add_item(container)
         
-class PackFormatView(discord.ui.View):
+class PackFormatView(discord.ui.DesignerView):
     def __init__(self, version: str, out: str):
         super().__init__(timeout=None)
         
@@ -72,7 +72,7 @@ class PackFormatView(discord.ui.View):
         
         self.add_item(container)
         
-class VanillaFileView(discord.ui.View):
+class VanillaFileView(discord.ui.DesignerView):
     def __init__(self, path: str, content: str):
         super().__init__(timeout=None)
         
@@ -90,7 +90,7 @@ class VanillaFileView(discord.ui.View):
         
         self.add_item(container)
         
-class HelpView(discord.ui.View):
+class HelpView(discord.ui.DesignerView):
     def __init__(self, content: str):
         super().__init__(timeout=None)
         
@@ -105,7 +105,7 @@ class HelpView(discord.ui.View):
         
         self.add_item(container)
         
-class AdminMessageView(discord.ui.View):
+class AdminMessageView(discord.ui.DesignerView):
     def __init__(self, title: str, message: str):
         super().__init__(timeout=None)
         
