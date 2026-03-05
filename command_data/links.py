@@ -74,4 +74,9 @@ LINKS = [
         "about": "Our Minecraft Text Editor lets you really easily create text components, tellraw commands, lore components, and more!",
         "link": "https://text.datapackhub.net/"
     },
+    {
+        "name": "Tool: Snowcapped",
+        "about": "A Minecraft dimension editor which exports a multi-noise dimension file and a spline configuration.",
+        "link": "https://snowcapped.jacobsjo.eu/"
+    }
 ]
