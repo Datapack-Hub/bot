@@ -65,6 +65,11 @@ LINKS = [
         "link": "https://misode.github.io"
     },
     {
+        "name": "Tool: MCStacker",
+        "about": "A Minecraft generator and converter for commands and loot tables with support for many Minecraft versions.",
+        "link": "https://misode.github.io"
+    },
+    {
         "name": "Tool: Blockbench",
         "about": "Blockbench is a model and texture editor for use in resource packs.",
         "link": "https://blockbench.net"
