@@ -1,7 +1,7 @@
 INFO = [
     {
         "name": "Logs",
-        "content": "When making or debugging Minecraft datapacks, it is useful to have the Minecraft logs open in order to view errors quickly.\n\n**To open the logs:**\n1. Enable the logs in the **Minecraft Launcher** (see image)\n2. Start Minecraft\n\nThe logs should open in a separate window. Datapack errors are shown in the when you `/reload` and are almost always in **red text** or yellow text.",
+        "content": "When making or debugging Minecraft datapacks, it is useful to have the Minecraft logs open in order to view errors quickly.\n\n**To open the logs:**\n1. Enable the logs in the **Minecraft Launcher** (see image)\n2. Start Minecraft\n\nThe logs should open in a separate window. Datapack errors are shown in the logs window when you `/reload` and are almost always in **red text** or yellow text.",
         "image": "https://media.discordapp.net/attachments/1129493191847071875/1129494068603396096/how-to-logs.png?width=1277&height=897"
     },
     {
