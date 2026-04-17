@@ -1,7 +1,7 @@
 INFO = [
     {
         "name": "Logs",
-        "content": "When making or debugging Minecraft datapacks, it is useful to have the Minecraft logs open in order to view errors quickly.\n\n**To open the logs:**\n1. Enable the logs in the **Minecraft Launcher** (see image)\n2. Start Minecraft\n\nThe logs should open in a separate window. Datapack errors are shown in the when you `/reload` and are almost always in **red text** or yellow text.",
+        "content": "When making or debugging Minecraft datapacks, it is useful to have the Minecraft logs open in order to view errors quickly.\n\n**To open the logs:**\n1. Enable the logs in the **Minecraft Launcher** (see image)\n2. Start Minecraft\n\nThe logs should open in a separate window. Datapack errors are shown in the logs window when you `/reload` and are almost always in **red text** or yellow text.",
         "image": "https://media.discordapp.net/attachments/1129493191847071875/1129494068603396096/how-to-logs.png?width=1277&height=897",
     },
     {
@@ -26,7 +26,7 @@ INFO = [
     },
     {
         "name": "AI can't make datapacks",
-        "content": "AI generators, such as ChatGPT, Gemini, Claude, and Copilot generally **cannot be used** to make datapacks. While it might look like it gives you good datapack code, in 90% of cases it will not work. There is not enough information online about datapacks in order for them to be accurate. \n\nIf you ask for help with an AI generated datapack, you will likely be asked to start again.",
+        "content": "LLMs and AI code generators, such as ChatGPT, Gemini, Claude, and Copilot generally **cannot be used** to make datapacks. While it might look like it gives you good datapack code, in 90% of cases it will not work. There is not enough information online about datapacks in order for them to be accurate. \n\nIf you ask for help with an AI generated datapack, you will likely be asked to start again.",
         "image": None,
     },
     {

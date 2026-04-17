@@ -4,7 +4,7 @@ import variables
 
 
 class InfoView(discord.ui.DesignerView):
-    def __init__(self, info: dict[str, str | None]):
+    def __init__(self, info: dict[str, object]):
         super().__init__(timeout=None)
 
         container = discord.ui.Container()
@@ -14,7 +14,7 @@ class InfoView(discord.ui.DesignerView):
         container.add_text(f"{info['content']}")
 
         if info["image"] is not None:
-            gallery = discord.ui.MediaGallery().add_item(url=info["image"])
+            gallery = discord.ui.MediaGallery().add_item(url=str(info["image"]))
 
             container.add_item(gallery)
 
@@ -22,7 +22,7 @@ class InfoView(discord.ui.DesignerView):
 
 
 class LinkView(discord.ui.DesignerView):
-    def __init__(self, link: dict[str, str]):
+    def __init__(self, link: dict[str, object]):
         super().__init__(timeout=None)
 
         container = discord.ui.Container()

@@ -49,6 +49,7 @@ client.add_cog(DPWikiCommand(client))
 
 logger.info("Command cogs added.")
 
+
 # Events
 @client.event
 async def on_ready():
