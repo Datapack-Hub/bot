@@ -14,7 +14,7 @@ def replace_code_blocks(message: str):
 
     edited_message = pattern.sub(replace_function, message)
 
-    # edited_message += f"\n-# Syntax highlighted by <@1108074519308017734> using [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>)"
+    # edited_message += "\n-# Syntax highlighted by <@1108074519308017734> using [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>)"
 
     return edited_message
 
@@ -25,7 +25,9 @@ class OnMessage(discord.Cog):
 
     @discord.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if re.findall(r"```mcf(?:unction)?\n([\s\S]+?)```", message.content) and (not message.author.bot):
+        if re.findall(r"```mcf(?:unction)?\n([\s\S]+?)```", message.content, re.IGNORECASE) and (
+            not message.author.bot
+        ):
             content = message.content
             if len(replace_code_blocks(content)) >= 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
