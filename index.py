@@ -1,5 +1,20 @@
 import discord
+
 import variables
+from cogs.commands.dpwiki import DPWikiCommand
+from cogs.commands.folderstructure import FolderStructureCommand
+from cogs.commands.help import HelpCommand
+from cogs.commands.info import InfoCommand
+from cogs.commands.link import LinkCommand
+from cogs.commands.packformat import PackFormatCommand
+from cogs.commands.template import TemplateCommand
+from cogs.commands.vanilla import VanillaCommand
+from cogs.events.on_message import OnMessage
+from cogs.misc.admin import AdminCommands
+from utils.log import setup_logger
+
+# Logger setup
+logger = setup_logger(__name__)
 
 # intents
 intents = discord.Intents.default()
@@ -13,46 +28,42 @@ client = discord.Bot(
     ),
     default_command_integration_types={
         discord.IntegrationType.guild_install,
-        discord.IntegrationType.user_install
-    }
+        discord.IntegrationType.user_install,
+    },
 )
+logger.info("Setting up bot...")
+
 
 # Commands
-from cogs.commands.link import LinkCommand
+
+logger.info("Adding command cogs...")
+
 client.add_cog(LinkCommand(client))
-
-from cogs.commands.template import TemplateCommand
 client.add_cog(TemplateCommand(client))
-
-from cogs.commands.info import InfoCommand
 client.add_cog(InfoCommand(client))
-
-from cogs.commands.folderstructure import FolderStructureCommand
 client.add_cog(FolderStructureCommand(client))
-
-from cogs.commands.vanilla import VanillaCommand
 client.add_cog(VanillaCommand(client))
-
-from cogs.commands.packformat import PackFormatCommand
 client.add_cog(PackFormatCommand(client))
-
-from cogs.commands.help import HelpCommand
 client.add_cog(HelpCommand(client))
-
-from cogs.commands.dpwiki import DPWikiCommand
 client.add_cog(DPWikiCommand(client))
+
+logger.info("Command cogs added.")
+
 
 # Events
 @client.event
 async def on_ready():
-    print("Bot is ready!")
+    logger.info("Bot is ready!")
 
-from cogs.events.on_message import OnMessage
+
+logger.info("Adding event cogs...")
 client.add_cog(OnMessage(client))
 
 # Misc Cogs
-from cogs.misc.admin import AdminCommands
 client.add_cog(AdminCommands(client))
+logger.info("Event cogs added.")
 
+logger.info("Bot setup complete.")
+logger.info("Logging in...")
 # Run the bot
 client.run(variables.TOKEN)

@@ -16,6 +16,11 @@ LINKS = [
         "link": "https://discord.gg/gkp6UqEUph",
     },
     {
+        "name": "Invite: Minecraft Commands",
+        "about": "Minecraft Commands is a large Discord server with a focus on Minecraft commands, datapacks, resource packs, and more.",
+        "link": "https://discord.gg/QAFXFtZ",
+    },
+    {
         "name": "Invite: Blockbench",
         "about": "The Blockbench Discord is a server for support using the Blockbench app, as well as for 3D models, animation, and more.",
         "link": "https://discord.gg/blockbench",
