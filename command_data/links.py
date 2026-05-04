@@ -65,16 +65,26 @@ LINKS = [
     {
         "name": "Tool: Misode",
         "about": "Misode's Datapack Generators are useful when creating files such as loot tables, predicates, advancement, worldgen files, and more!",
-        "link": "https://misode.github.io",
+        "link": "https://misode.github.io/",
+    },
+    {
+        "name": "Tool: MCStacker",
+        "about": "A Minecraft generator and converter for commands and loot tables with support for many Minecraft versions.",
+        "link": "https://mcstacker.net/",
     },
     {
         "name": "Tool: Blockbench",
         "about": "Blockbench is a model and texture editor for use in resource packs.",
-        "link": "https://blockbench.net",
+        "link": "https://blockbench.net/",
     },
     {
         "name": "Tool: Minecraft Text Editor",
         "about": "Our Minecraft Text Editor lets you really easily create text components, tellraw commands, lore components, and more!",
         "link": "https://text.datapackhub.net/",
+    },
+    {
+        "name": "Tool: Snowcapped",
+        "about": "A Minecraft dimension editor which exports a multi-noise dimension file and a spline configuration.",
+        "link": "https://snowcapped.jacobsjo.eu/",
     },
 ]
