@@ -29,6 +29,10 @@ class OnMessage(discord.Cog):
             not message.author.bot
         ):
             content = message.content
+            
+            if content.startswith("\\```mcf"):
+                return
+            
             if len(replace_code_blocks(content)) >= 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else:
@@ -86,10 +90,26 @@ class OnMessage(discord.Cog):
                         hook = await message.channel.create_webhook(name="DPH Syntax Highlighter")  # type: ignore #asd
 
                     await message.delete()
-                    await hook.send(
-                        replace_code_blocks(content),
-                        wait=False,
-                        username=message.author.display_name,
-                        avatar_url=message.author.display_avatar.url,
-                        allowed_mentions=discord.AllowedMentions.none(),
-                    )
+                    try:
+                        await hook.send(
+                            replace_code_blocks(content),
+                            wait=False,
+                            username=message.author.display_name,
+                            avatar_url=message.author.display_avatar.url,
+                            allowed_mentions=discord.AllowedMentions.none(),
+                        )
+                    except:
+                        await hook.send(
+                            content,
+                            wait=False,
+                            username=message.author.display_name,
+                            avatar_url=message.author.display_avatar.url,
+                            allowed_mentions=discord.AllowedMentions.none(),
+                            view=discord.ui.View(
+                                discord.ui.Button(
+                                    style=discord.ButtonStyle.red,
+                                    disabled=True,
+                                    label="Syntax highlighting failed",
+                                )
+                            ),
+                        )
