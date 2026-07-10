@@ -93,14 +93,9 @@ class OnMessage(discord.Cog):
 
                     await message.delete()
                     try:
+                        hook_msg = ""
                         if reply_reference is None:
-                            await hook.send(
-                                replace_code_blocks(content),
-                                wait=False,
-                                username=message.author.display_name,
-                                avatar_url=message.author.display_avatar.url,
-                                allowed_mentions=discord.AllowedMentions.none(),
-                            )
+                            hook_msg = replace_code_blocks(content)
                         else:
                             if reply_reference.message_id is None:
                                 raise ValueError()
@@ -108,13 +103,15 @@ class OnMessage(discord.Cog):
                             reply_message = await message.channel.fetch_message(reply_reference.message_id)
                             reply_jump = reply_message.jump_url
                             reply_author = reply_message.author
-                            await hook.send(
-                                f"-# [↪ Replying to {reply_author.display_name}]({reply_jump})\n{replace_code_blocks(content)}",
-                                wait=False,
-                                username=message.author.display_name,
-                                avatar_url=message.author.display_avatar.url,
-                                allowed_mentions=discord.AllowedMentions.none(),
-                            )
+                            hook_msg = f"-# [↪ Replying to {reply_author.display_name}]({reply_jump})\n{replace_code_blocks(content)}"
+
+                        await hook.send(
+                            hook_msg,
+                            wait=False,
+                            username=message.author.display_name,
+                            avatar_url=message.author.display_avatar.url,
+                            allowed_mentions=discord.AllowedMentions.none(),
+                        )
                     except:
                         await hook.send(
                             content,
