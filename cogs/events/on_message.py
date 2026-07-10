@@ -29,10 +29,10 @@ class OnMessage(discord.Cog):
             not message.author.bot
         ):
             content = message.content
-            
+
             if content.startswith("\\```mcf"):
                 return
-            
+
             if len(replace_code_blocks(content)) >= 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else:
@@ -89,15 +89,32 @@ class OnMessage(discord.Cog):
                     else:
                         hook = await message.channel.create_webhook(name="DPH Syntax Highlighter")  # type: ignore #asd
 
+                    reply_reference = message.reference
+
                     await message.delete()
                     try:
-                        await hook.send(
-                            replace_code_blocks(content),
-                            wait=False,
-                            username=message.author.display_name,
-                            avatar_url=message.author.display_avatar.url,
-                            allowed_mentions=discord.AllowedMentions.none(),
-                        )
+                        if reply_reference is None:
+                            await hook.send(
+                                replace_code_blocks(content),
+                                wait=False,
+                                username=message.author.display_name,
+                                avatar_url=message.author.display_avatar.url,
+                                allowed_mentions=discord.AllowedMentions.none(),
+                            )
+                        else:
+                            if reply_reference.message_id is None:
+                                raise ValueError()
+
+                            reply_message = await message.channel.fetch_message(reply_reference.message_id)
+                            reply_jump = reply_message.jump_url
+                            reply_author = reply_message.author
+                            await hook.send(
+                                f"-# [↪ Replying to {reply_author.display_name}]({reply_jump})\n{replace_code_blocks(content)}",
+                                wait=False,
+                                username=message.author.display_name,
+                                avatar_url=message.author.display_avatar.url,
+                                allowed_mentions=discord.AllowedMentions.none(),
+                            )
                     except:
                         await hook.send(
                             content,
