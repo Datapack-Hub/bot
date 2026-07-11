@@ -14,7 +14,7 @@ def replace_code_blocks(message: str):
 
     edited_message = pattern.sub(replace_function, message)
 
-    # edited_message += f"\n-# Syntax highlighted by <@1108074519308017734> using [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>)"
+    # edited_message += "\n-# Syntax highlighted by <@1108074519308017734> using [bth123's highlighter](<https://github.com/bth123/mcf-ansi-highlighter>)"
 
     return edited_message
 
@@ -25,8 +25,14 @@ class OnMessage(discord.Cog):
 
     @discord.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if re.findall(r"```mcf(?:unction)?\n([\s\S]+?)```", message.content) and (not message.author.bot):
+        if re.findall(r"```mcf(?:unction)?\n([\s\S]+?)```", message.content, re.IGNORECASE) and (
+            not message.author.bot
+        ):
             content = message.content
+
+            if content.startswith("\\```mcf"):
+                return
+
             if len(replace_code_blocks(content)) >= 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else:
@@ -83,11 +89,41 @@ class OnMessage(discord.Cog):
                     else:
                         hook = await message.channel.create_webhook(name="DPH Syntax Highlighter")  # type: ignore #asd
 
+                    reply_reference = message.reference
+
                     await message.delete()
-                    await hook.send(
-                        replace_code_blocks(content),
-                        wait=False,
-                        username=message.author.display_name,
-                        avatar_url=message.author.display_avatar.url,
-                        allowed_mentions=discord.AllowedMentions.none(),
-                    )
+                    try:
+                        hook_msg = ""
+                        if reply_reference is None:
+                            hook_msg = replace_code_blocks(content)
+                        else:
+                            if reply_reference.message_id is None:
+                                raise ValueError()
+
+                            reply_message = await message.channel.fetch_message(reply_reference.message_id)
+                            reply_jump = reply_message.jump_url
+                            reply_author = reply_message.author
+                            hook_msg = f"-# [↪ Replying to {reply_author.display_name}]({reply_jump})\n{replace_code_blocks(content)}"
+
+                        await hook.send(
+                            hook_msg,
+                            wait=False,
+                            username=message.author.display_name,
+                            avatar_url=message.author.display_avatar.url,
+                            allowed_mentions=discord.AllowedMentions.none(),
+                        )
+                    except:
+                        await hook.send(
+                            content,
+                            wait=False,
+                            username=message.author.display_name,
+                            avatar_url=message.author.display_avatar.url,
+                            allowed_mentions=discord.AllowedMentions.none(),
+                            view=discord.ui.View(
+                                discord.ui.Button(
+                                    style=discord.ButtonStyle.red,
+                                    disabled=True,
+                                    label="Syntax highlighting failed",
+                                )
+                            ),
+                        )

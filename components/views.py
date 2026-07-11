@@ -4,7 +4,7 @@ import variables
 
 
 class InfoView(discord.ui.DesignerView):
-    def __init__(self, info: dict[str, object]):
+    def __init__(self, info: dict[str, str]):
         super().__init__(timeout=None)
 
         container = discord.ui.Container()
@@ -14,7 +14,7 @@ class InfoView(discord.ui.DesignerView):
         container.add_text(f"{info['content']}")
 
         if info["image"] is not None:
-            gallery = discord.ui.MediaGallery().add_item(url=str(info["image"]))
+            gallery = discord.ui.MediaGallery().add_item(url=info["image"])
 
             container.add_item(gallery)
 
@@ -22,7 +22,7 @@ class InfoView(discord.ui.DesignerView):
 
 
 class LinkView(discord.ui.DesignerView):
-    def __init__(self, link: dict[str, object]):
+    def __init__(self, link: dict[str, str]):
         super().__init__(timeout=None)
 
         container = discord.ui.Container()
@@ -36,7 +36,7 @@ class LinkView(discord.ui.DesignerView):
 
 
 class WikiPage(discord.ui.DesignerView):
-    def __init__(self, wiki_page: dict[str, object]):
+    def __init__(self, wiki_page: dict[str, str]):
         super().__init__(timeout=None)
 
         container = discord.ui.Container()
@@ -47,8 +47,9 @@ class WikiPage(discord.ui.DesignerView):
             container.add_text(f"-# {variables.ICON_EMOJI} Datapack Wiki Guide")
 
         container.add_text(f"## {wiki_page['title']}")
-        container.add_text(f"**Description:** {wiki_page['description']}")
-        container.add_text(f"**Link:** {wiki_page['url']}")
+        container.add_text(wiki_page["description"])
+        container.add_separator(divider=False)
+        container.add_item(discord.ui.ActionRow(discord.ui.Button(label="View on Datapack Wiki", url=wiki_page["url"])))
 
         self.add_item(container)
 
