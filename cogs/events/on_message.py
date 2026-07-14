@@ -6,7 +6,7 @@ from static.highlighter.highlighter import Hl
 
 
 def replace_code_blocks(message: str):
-    pattern = re.compile(r"```mcf(?:unction)?\n([\s\S]+?)```", re.DOTALL)
+    pattern = re.compile(r"```mcf(?:unction)?\n([\s\S]+?)```", re.DOTALL | re.IGNORECASE)
 
     def replace_function(match: re.Match[str]) -> str:
         code_block_content = match.group(1).strip()
@@ -30,7 +30,7 @@ class OnMessage(discord.Cog):
         ):
             content = message.content
 
-            if content.startswith("\\```mcf"):
+            if content.lower().startswith("\\```mcf"): # the "unction" is implied
                 return
 
             if len(replace_code_blocks(content)) >= 2000:
