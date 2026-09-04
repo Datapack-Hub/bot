@@ -11,12 +11,12 @@ async def generate_dpwiki_data():
         return  # already populated
 
     logger = setup_logger("dpwiki_data")
-    async with aiohttp.ClientSession() as session, session.get("https://wiki.datapackhub.net/search.json") as req:
+    async with aiohttp.ClientSession() as session, session.get("https://datapack.wiki/search.json") as req:
         if req.status == 200:
             for page in await req.json():
                 out = {
                     "title": page["title"],
-                    "url": "https://wiki.datapackhub.net" + page["url"],
+                    "url": "https://datapack.wiki" + page["url"],
                     "description": page["description"],
                 }
 

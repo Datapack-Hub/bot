@@ -5,11 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "aiohttp>=3.13.5",
-    "audioop-lts>=0.2.2",
-    "py-cord>=2.8.0",
+    "py-cord[speed]>=2.8.1",
     "requests>=2.34.2",
-    "ruff>=0.15.17",
+    "ruff>=0.16.6",
 ]
 
 [tool.ruff]
@@ -17,4 +15,4 @@ line-length = 120
 
 [tool.ruff.lint]
 select = ["E", "F", "ASYNC", "FURB", "RUF", "PERF", "UP", "TRY", "PTH", "TID", "SIM", "S"]
-ignore = ["E501", "ASYNC240", "S105"]
+ignore = ["E501", "S105"]

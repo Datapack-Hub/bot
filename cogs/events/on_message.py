@@ -30,7 +30,7 @@ class OnMessage(discord.Cog):
         ):
             content = message.content
 
-            if content.lower().startswith("\\```mcf"): # the "unction" is implied
+            if content.lower().startswith("\\```mcf"):  # the "unction" is implied
                 return
 
             if len(replace_code_blocks(content)) >= 2000:

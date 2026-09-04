@@ -1,12 +1,12 @@
 INFO = [
     {
         "name": "Logs",
-        "content": "When making or debugging Minecraft datapacks, it is useful to have the Minecraft logs open in order to view errors quickly.\n\n**To open the logs:**\n1. Enable the logs in the **Minecraft Launcher** (see image)\n2. Start Minecraft\n\nThe logs should open in a separate window. Datapack errors are shown in the logs window when you `/reload` and are almost always in **red text** or yellow text.",
+        "content": "When making or debugging Minecraft datapacks, it is useful to have the Minecraft logs open in order to view errors quickly.\n\n**To open the logs:**\n1. Enable the logs in the **Minecraft Launcher** (see image)\n2. Start Minecraft\n\nThe logs should open in a separate window. Datapack errors are shown in the logs window when you `/reload` and are almost always in **red text** or yellow text.\n\nWhen sharing your logs with others, using a service like [mclo.gs](https://mclo.gs/) is recommended; many help platforms have character limits, tools like these allow you to share your logs without worrying about character limits, highlight errors, hide usernames, and make it easy to share client information.",
         "image": "https://media.discordapp.net/attachments/1129493191847071875/1129494068603396096/how-to-logs.png?width=1277&height=897",
     },
     {
         "name": "Logs (non-vanilla)",
-        "content": "Opening the Minecraft logs is a bit different on other launchers. **We suggest you use the vanilla Minecraft launcher when making datapacks**. However, if you need to use a modded launcher, this is a guide for the most common ones:\n\n- **Prism Launcher**: `Rightclick Instance` > `Edit` > `Settings` > `Console Settings: Show console while the game is running?`\n- **Multi MC**: `Rightclick Instance` > `Edit Instance` > `Settings` > `Console Settings: Show console while the game is running?`\n- **Lunar Client**: `Settings` > `Open Logs in File Explorer`",
+        "content": "Opening the Minecraft logs is a bit different on other launchers. **We suggest you use the vanilla Minecraft launcher when making datapacks**. However, if you need to use a modded launcher, this is a guide for the most common ones:\n\n- **Prism Launcher**: `Rightclick Instance` > `Edit` > `Settings` > `Console Settings: Show console while the game is running?`\n- **Multi MC**: `Rightclick Instance` > `Edit Instance` > `Settings` > `Console Settings: Show console while the game is running?`\n- **Lunar Client**: `Settings` > `Open Logs in File Explorer`\n\nWhen sharing your logs with others, using a service like [mclo.gs](https://mclo.gs/) is recommended; many help platforms have character limits, tools like these allow you to share your logs without worrying about character limits, highlight errors, hide usernames, and make it easy to share client information.",
         "image": None,
     },
     {

@@ -50,6 +50,11 @@ LINKS = [
         "about": "Join DataWorld, a French-only Discord server, to get help with datapacks.",
         "link": "https://discord.gg/5y5FBz5",
     },
+    {
+        "name": "Invite: Beet (and Bolt)",
+        "about": "The beet project is a development kit that tries to unify data pack and resource pack tooling into a single pipeline.",
+        "link": "https://discord.gg/98MdSGMm8j",
+    },
     # Bots
     {
         "name": "Bot: Datapack Helper",
