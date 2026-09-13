@@ -219,7 +219,7 @@
 			"subcommands": []
 		},
 		"setblock": {
-			"subcommands": []
+			"subcommands": ["destroy", "keep", "replace"]
 		},
 		"setidletimeout": {
 			"subcommands": []
@@ -262,6 +262,9 @@
 		},
 		"tellraw": {
 			"subcommands": []
+		},
+		"test": {
+			"subcommands": ["clearall", "clearthat", "clearthese", "create", "locate", "pos", "resetclosest", "resetthat", "resetthese", "run", "runclosest", "runfailed", "runmultiple", "runthat", "runthese", "stop", "verify"]
 		},
 		"tick": {
 			"subcommands": ["query", "rate", "freeze", "step", "stop", "unfreeze", "sprint"]

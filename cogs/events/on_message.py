@@ -30,10 +30,13 @@ class OnMessage(discord.Cog):
         ):
             content = message.content
 
+            # escaping if the user wants to demonstrate usage
             if content.lower().startswith("\\```mcf"):  # the "unction" is implied
                 return
 
-            if len(replace_code_blocks(content)) >= 2000:
+            final_content = replace_code_blocks(content)
+
+            if len(final_content) > 2000:
                 await message.reply("_**ERROR**: Can't apply syntax highlighting due to message length limitations_")
             else:
                 if (
@@ -56,7 +59,7 @@ class OnMessage(discord.Cog):
 
                     try:
                         await hook.send(
-                            replace_code_blocks(content),
+                            final_content,
                             wait=False,
                             username=message.author.display_name,
                             avatar_url=message.author.display_avatar.url,
@@ -95,7 +98,7 @@ class OnMessage(discord.Cog):
                     try:
                         hook_msg = ""
                         if reply_reference is None:
-                            hook_msg = replace_code_blocks(content)
+                            hook_msg = final_content
                         else:
                             if reply_reference.message_id is None:
                                 raise ValueError()
@@ -103,7 +106,7 @@ class OnMessage(discord.Cog):
                             reply_message = await message.channel.fetch_message(reply_reference.message_id)
                             reply_jump = reply_message.jump_url
                             reply_author = reply_message.author
-                            hook_msg = f"-# [↪ Replying to {reply_author.display_name}]({reply_jump})\n{replace_code_blocks(content)}"
+                            hook_msg = f"-# [↪ Replying to {reply_author.display_name}]({reply_jump})\n{final_content}"
 
                         await hook.send(
                             hook_msg,

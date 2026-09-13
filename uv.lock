@@ -179,7 +179,7 @@ dependencies = [
 requires-dist = [
     { name = "py-cord", extras = ["speed"], specifier = ">=2.8.1" },
     { name = "requests", specifier = ">=2.34.2" },
-    { name = "ruff", specifier = ">=0.16.1" },
+    { name = "ruff", specifier = ">=0.16.6" },
 ]
 
 [[package]]

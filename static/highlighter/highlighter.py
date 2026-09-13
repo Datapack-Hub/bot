@@ -9,14 +9,14 @@ path = Path(variables.__file__).resolve().parent / "static" / "highlighter" / "d
 
 class Hl:
     class Database:
-        with path.open(encoding="utf-8") as db:
+        with path.open("r", encoding="utf-8") as db:
             database_content = loads(db.read())
-        color_codes = database_content["color_codes"]
+        color_codes: dict[str, str] = database_content["color_codes"]
         commands = database_content["commands"]
-        color_classes = database_content["color_classes"]
+        color_classes: dict[str, str] = database_content["color_classes"]
 
     @staticmethod
-    def lex(func):
+    def lex(func: str):
         state = {
             "mode": "normal",
             "history": ["normal"],
@@ -69,12 +69,12 @@ class Hl:
                     need_to_reset = False
 
         # Setting up vars
-        closed_bracktes = {"{": "}", "[": "]"}
+        closed_brackets = {"{": "}", "[": "]"}
         tokens = []
         clear_tokens = []
         curr_token = ""
         opened_brackets = 0
-        # Magec
+        # Magic
         for idx, char in enumerate(func):
             next_char = func[idx + 1 : idx + 2]
             prev_tokens = tokens[::-1]
@@ -103,7 +103,7 @@ class Hl:
                         is_comment = [True] if prev_tokens == [] else [i == "\n" for i in prev_tokens if i not in " \t"]
                         next_word = next_chars.split(" ")[0]
                         if is_comment[0] and not any(
-                            True for command in ["define", "declare", "alias"] if command == next_word
+                            [True for command in ["define", "declare", "alias"] if command == next_word]
                         ):
                             switch_mode("comment")
                             reset_token()
@@ -145,7 +145,7 @@ class Hl:
                         opened_brackets = 1
                     if need_to_reset:
                         reset_token(need_to_append_char)
-                # Exiting component stte if it closed
+                # Exiting component state if it closed
                 if char == "]":
                     switch_mode("back")
             elif state["mode"] == "nbt":
@@ -157,10 +157,10 @@ class Hl:
                     global_check()
                     if need_to_reset:
                         reset_token(need_to_append_char)
-                # Exiting nbt stte if it closed
+                # Exiting nbt state if it closed
                 if char == state["nbt_type"]:
                     opened_brackets += 1
-                elif char == closed_bracktes[state["nbt_type"]]:
+                elif char == closed_brackets[state["nbt_type"]]:
                     opened_brackets -= 1
                     if opened_brackets == 0:
                         switch_mode("back")
@@ -186,35 +186,46 @@ class Hl:
         return (tokens, clear_tokens)
 
     @staticmethod
-    def optimize_len(func):
+    def optimize_len(func: str):
+        
+        # removing redundant ANSI color codes
         optimized = ""
         ansi_codes_re = r"(\[([0-5];)?[034][0-7]?m){1,2}"
         splitted = func.split("\u001b")
-        #
         prev_color = splitted[0].split("m")[0] + "m"
         for element in splitted[1:]:
             matches = search(ansi_codes_re, element)
             if matches is not None:
                 optimized += "\u001b" + element if prev_color != matches.group(0) else element.replace(prev_color, "")
                 prev_color = matches.group(0)
-        return optimized
+
+        # splitting long lines into multiple lines to avoid Discord's 1000 character ansi parsing limit (why?)
+        splitted_optimized = optimized.split("\u001b")
+        length = 0
+        for index, element in enumerate(splitted_optimized):
+            length += len(element) + 1
+
+            if length > 1000:
+                splitted_optimized[index - 1] += "\n"
+                length = 0
+        return "\u001b".join(splitted_optimized)
 
     @staticmethod
-    def highlight(func, theme="default"):
-        # Shotcuts
-        colors = Hl.Database.color_codes  # if theme == "default" else theme
+    def highlight(func: str):
+        # Shortcuts
+        colors = Hl.Database.color_codes
         commands = Hl.Database.commands
         # Setting up vars
         possible_subcommands = []
         bracket_index = 0
         highlighted = ""
-        # Магія ✨
+
         lexed = Hl.lex(func)
         tokens = lexed[0]
         clear_tokens = lexed[1]
         clear_tokens.append("")
         clear_index = 0
-        #
+
         for index, token in enumerate(tokens):
             prev_tokens = tokens[index::-1]
             fut_tokens = tokens[index + 1 :]
@@ -226,11 +237,11 @@ class Hl:
                 edited_content = comment_content[:]
                 comment_type = "link-comment" if len(token) >= 2 and token[1] in "#>" else "comment"
                 # path and @this stuff
-                pathes = findall(r"#[a-zA-z_\-]+:[a-zA-z_\-/]", comment_content)
-                decaorator_maybe_idkhonestly = findall(r"@\w+", comment_content)
-                for path in pathes:
+                paths = findall(r"#[a-zA-z_\-]+:[a-zA-z_\-/]", comment_content)
+                decorator_maybe = findall(r"@\w+", comment_content)
+                for path in paths:
                     edited_content = comment_content.replace(path, colors["path"] + path + colors[comment_type])
-                for i in decaorator_maybe_idkhonestly:
+                for i in decorator_maybe:
                     edited_content = edited_content.replace(i, colors["subcommand"] + i + colors[comment_type])
                 #
                 highlighted += (
@@ -253,16 +264,9 @@ class Hl:
                     token = token.replace(
                         macro,
                         macro.replace("$", colors["macro"] + "$")
-                        .replace(
-                            "(",
-                            colors[f"bracket{bracket_index % 3}"] + "(" + colors["text"],
-                        )
-                        .replace(
-                            ")",
-                            colors[f"bracket{bracket_index % 3}"] + ")" + colors["string"],
-                        ),
+                        .replace("(", colors[f"bracket{bracket_index % 3}"] + "(" + colors["text"])
+                        .replace(")", colors[f"bracket{bracket_index % 3}"] + ")" + colors["string"]),
                     )
-                #
                 highlighted += colors["string"] + token
             elif token == "..":
                 highlighted += colors["range"] + token
@@ -281,12 +285,11 @@ class Hl:
                 bracket_index -= 1
                 highlighted += colors[f"bracket{bracket_index % 3}"] + token
             elif match(
-                r"^(~-?[0-9]*\.?[0-9]*|\^-?[0-9]*\.?[0-9]*|-?[0-9]+\.?[0-9]*[bsdf]?|-?\.?[0-9]+[bsdf]?)$",
-                token,
+                r"^(~-?[0-9]*\.?[0-9]*|\^-?[0-9]*\.?[0-9]*|-?[0-9]+\.?[0-9]*[bsdf]?|-?\.?[0-9]+[bsdf]?)$", token
             ):
                 highlighted += colors["number"] + token
             elif match(r"\$\([0-9A-z-_\.]+\)", token):
-                highlighted += f"{colors['macro']}${colors[f'bracket{bracket_index % 3}']}({colors['text']}{token[2:-1]}{colors[f'bracket{bracket_index}']})"
+                highlighted += colors["macro"] + token
             elif token == "\\":
                 highlighted += colors["backslash"] + token
             elif token in " \t\n":
@@ -299,14 +302,3 @@ class Hl:
                         text_type = "value"
                 highlighted += colors[text_type] + token
         return Hl.optimize_len(highlighted)
-
-    def ansi2html(self, function):
-        color_classes = Hl.Database.color_classes
-        ansi_codes_re = r"(([30][0-7]?)(;(4[0-7]))?m)"
-        converted = ""
-        function_elements = function.replace("\n", "<br>").split("\u001b[")[1:]
-        for element in function_elements:
-            matches = search(ansi_codes_re, element)
-            if matches is not None:
-                converted += f'<span class="ansi_{color_classes[matches.group(2)]}{" " + color_classes[matches.group(4)] if matches.group(4) is not None else ""}">{element.replace(matches.group(1), "")}</span>'
-        return f"<pre>{converted}</pre>"
