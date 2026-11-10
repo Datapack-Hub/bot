@@ -25,8 +25,8 @@ INFO = [
         "image": None,
     },
     {
-        "name": "AI can't make datapacks",
-        "content": "LLMs and AI code generators, such as ChatGPT, Gemini, Claude, and Copilot generally **cannot be used** to make datapacks. While it might look like it gives you good datapack code, in 90% of cases it will not work. There is not enough information online about datapacks in order for them to be accurate. \n\nIf you ask for help with an AI generated datapack, you will likely be asked to start again.",
+        "name": "AI can't really make datapacks",
+        "content": "LLMs and AI code generators, such as ChatGPT, Gemini, Claude, and Copilot generally **can't be used** to make datapacks. While it might look like it gives you good datapack code, in 90% of cases it will not work. There is not enough information online about datapacks in order for them to be consistently accurate without loads of additional context and training. \n\nIf you ask for help with an AI generated datapack, you will likely be asked to start again.",
         "image": None,
     },
     {
